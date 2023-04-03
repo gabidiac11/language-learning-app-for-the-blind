@@ -1,0 +1,1 @@
+export const StoryPage = () => <div>StoryPage</div>
