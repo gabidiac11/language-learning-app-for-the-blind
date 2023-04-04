@@ -7,7 +7,7 @@ import {
 } from "./../../auth/firebase-auth";
 import GoogleIcon from "@mui/icons-material/Google";
 import { withEnter } from "./../../utils";
-import "./index.css";
+import "./index.scss";
 
 export const Register = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="view">
+    <div className="view register-page">
       <div className="form">
         <TextField
           type="text"

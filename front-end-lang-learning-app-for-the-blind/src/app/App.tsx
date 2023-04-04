@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Login, Register } from "./../pages/auth-pages";
 import { DashboardPage, StoryPage } from "./../pages/autheticated";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

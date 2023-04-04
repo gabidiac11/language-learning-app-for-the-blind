@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import { AppContextProvider } from "./context/AppContext";
@@ -8,7 +7,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import axios from "axios";
 import { BASE_URL } from "./constants";
-import "./index.css";
+import "./index.scss";
 
 axios.defaults.baseURL = BASE_URL;
 

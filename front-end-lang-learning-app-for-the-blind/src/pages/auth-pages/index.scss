@@ -1,0 +1,25 @@
+.login-page {
+  .buttons {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .button {
+    max-width: 400px;
+    margin: 20px 0px;
+  }
+}
+
+.register-page {
+  .form {
+    display: flex;
+    flex-direction: column;
+    .text-box {
+      margin-bottom: 30px;
+    }
+    
+    .form-button {
+      margin-bottom: 20px;
+    }
+  }
+}

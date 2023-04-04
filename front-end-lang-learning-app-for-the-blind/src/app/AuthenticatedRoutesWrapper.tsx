@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { PropsWithChildren, useEffect, useRef } from "react";
 import { firebaseAuth } from "./../auth/firebase-auth";
 import { useAuthState } from "react-firebase-hooks/auth";
