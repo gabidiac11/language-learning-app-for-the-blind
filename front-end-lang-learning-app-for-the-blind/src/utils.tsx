@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getMessageFromUnkError = (error: unknown) => {
   if ((error as Error) != undefined) return (error as Error).message;
 
@@ -10,10 +12,7 @@ export const withEnter = (e: React.KeyboardEvent, onEnter: () => void) => {
   }
 };
 
-export const dateToString = (date: Date) => {
-  const yyyy = date.getFullYear();
-  const mm = date.getMonth() + 1;
-  const dd = date.getDate();
-
-  return `${yyyy}-${mm < 10 ? "0" + mm : mm}-${dd < 10 ? "0" + dd : dd}`;
-};
+export const getFormattedTimestamp = (timestamp: number):string => {
+  const formattedDate = moment(timestamp).format('MMMM D, YYYY');
+  return formattedDate;
+}

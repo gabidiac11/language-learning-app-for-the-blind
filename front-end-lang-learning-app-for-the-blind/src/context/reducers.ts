@@ -4,10 +4,7 @@ import initialState from "./initialState";
 export default (state: StateType, action: StateAction): StateType => {
   switch (action.type) {
     case StateActionType.Init:
-      return {
-        ...initialState,
-        ...action.payload,
-      };
+      return JSON.parse(JSON.stringify(initialState));
     case StateActionType.SetLanguage:
       return {
         ...state,

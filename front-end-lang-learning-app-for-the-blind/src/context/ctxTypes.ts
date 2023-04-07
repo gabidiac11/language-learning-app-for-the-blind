@@ -11,7 +11,6 @@ export enum StateActionType {
 export type StateAction =
   | {
       type: StateActionType.Init;
-      payload: StateType;
     }
   | {
       type: StateActionType.SetLanguage;
@@ -27,7 +26,6 @@ export type UserStory = {
   name: string;
   
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  locked: boolean;
   storyDependentOnIds: number[];
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
@@ -36,6 +34,10 @@ export type UserStory = {
   numOfTotalBlocks: number;
   numOfStoryQuestionsCompleted: number;
   numOfTotalStoryQuestions: number;
+
+  timeUnlocked?: number;
+  timeStarted?: number;
+  timeCompleted?: number;
 };
 
 //building block:
@@ -64,7 +66,7 @@ export type BuilingBlock = {
   name: string;
   
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
-  blockDependentOnIds: number[];
+  blockDependentOnIds?: number[];
   
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
@@ -100,15 +102,15 @@ export type Epilogue = {
 
   // the questions asked are about what is happening in the story tale
   questions: EpilogueQuestion[];
-
-  completed: boolean;
 };
 
 export type EpilogueProgress = {
+  id: number;
   epilogue: Epilogue;
-  completed: boolean;
-  questionProgressItems: EpilogueQuestionProgress[]
-  locked: boolean;
+  questionProgressItems: EpilogueQuestionProgress[];
+  timeUnlocked?: number;
+  timeStarted?: number;
+  timeCompleted?: number;
 };
 
 export type EpilogueQuestionProgress = {
