@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 
-export const useAppContextState = () => {
+export const useAppStateContext = () => {
   return useContext(AppContext).state;
 };

@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import { AppContext } from "../AppContext";
-import { StateActionType } from "./../index";
+import { StateActionType } from "../ctxTypes";
 
 
 export const useContextActions = () => {
