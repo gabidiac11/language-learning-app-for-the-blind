@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import "./DashboardStoryItem.scss";
+import "./StoryCard.scss";
 
 import { UserStory } from "../../../../context";
 import { useLayoutEffect, useState } from "react";
@@ -26,7 +26,7 @@ const computeSubheader = (userStory: UserStory): string => {
   return `🔒 Locked`;
 };
 
-export const DashboardStoryItem = (props: { userStory: UserStory }) => {
+export const StoryCard = (props: { userStory: UserStory }) => {
   const [subheader, setSubheader] = useState(computeSubheader(props.userStory));
 
   const { userStory } = props;
@@ -36,8 +36,10 @@ export const DashboardStoryItem = (props: { userStory: UserStory }) => {
   }, [props.userStory]);
 
   return (
+    // TODO: see what to do with this width: response stuff here?
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader title={props.userStory.name} subheader={subheader} />
+      {/* TODO: see what to do with the card */}
       <CardMedia
         component="img"
         height="194"
