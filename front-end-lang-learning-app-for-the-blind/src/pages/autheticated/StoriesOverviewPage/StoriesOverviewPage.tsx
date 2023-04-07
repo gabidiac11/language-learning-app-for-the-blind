@@ -1,14 +1,14 @@
 import { useAppStateContext } from "../../../context/hooks/useAppStateContext";
-import { DashboardStoryItem } from "./DashboardStoryItem/DashboardStoryItem";
-import "./Dashboard.scss";
+import { StoryCard } from "./StoryCard/StoryCard";
+import "./StoriesOverviewPage.scss";
 
-export const DashboardPage = () => {
+export const StoriesOverviewPage = () => {
   const { userStories } = useAppStateContext();
 
   return (
     <div className="dashboard-page-wrapper">
       {userStories.map((userStory) => (
-        <DashboardStoryItem userStory={userStory} />
+        <StoryCard userStory={userStory} />
       ))}
     </div>
   );

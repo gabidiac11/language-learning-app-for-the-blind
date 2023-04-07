@@ -1,6 +1,6 @@
 import './App.scss';
 import { Login, Register } from "./../pages/auth-pages";
-import { DashboardPage, StoryPage } from "./../pages/autheticated";
+import { StoriesOverviewPage } from "./../pages/autheticated";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -49,8 +49,9 @@ const App = () => {
         ) : (
           <AuthenticatedRoutesWrapper>
             <Routes>
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/book/:id" element={<StoryPage />} />
+              <Route path="/dashboard" element={<StoriesOverviewPage />} />
+              {/* TODO: add route for story page */}
+              {/* <Route path="/book/:id" element={<StoryPage />} /> */}
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>
