@@ -24,6 +24,8 @@ export type UserStory = {
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
+
+  imageUrl: string;
   
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
   storyDependentOnIds: number[];
@@ -48,9 +50,12 @@ export type BuildingBlockProgress = {
   locked: boolean;
   
   // a building block is completed if all wordProgressItems are have score equal to 100
-  completed: boolean;
-  block: BuilingBlock;
+  timeUnlocked?: number;
+  timeStarted?: number;
+  timeCompleted?: number;
+
   wordProgressItems: WordProgress[];
+  block: BuildingBlock;
 };
 
 export type WordProgress = {
@@ -61,9 +66,10 @@ export type WordProgress = {
   score: number;
 };
 
-export type BuilingBlock = {
+export type BuildingBlock = {
   id: number;
   name: string;
+  imageUrl: string,
   
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
   blockDependentOnIds?: number[];

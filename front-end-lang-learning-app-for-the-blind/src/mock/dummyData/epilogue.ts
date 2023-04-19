@@ -1,7 +1,8 @@
-import { Epilogue } from "../ctxTypes";
+import { Epilogue } from "../../context/ctxTypes";
+import { genId } from "../mockUtils";
 
-const epilogue: Epilogue = {
-  id: 1,
+const epilogue = (): Epilogue => ({
+  id: genId(),
   name: "Anna's family",
   textStoryTale: `"Семья Анны"
 
@@ -14,7 +15,7 @@ const epilogue: Epilogue = {
     Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.`,
   questions: [
     {
-      id: 101,
+      id: genId(),
       text: "Who does Anna live with?",
       options: [
         "Anna's mom and dad",
@@ -25,25 +26,25 @@ const epilogue: Epilogue = {
       correctOption: "Anna's mom and dad",
     },
     {
-      id: 102,
+      id: genId(),
       text: "What is Anna's mom's name?",
       options: ["Kate", "Ivan", "Alexander", "Anna"],
       correctOption: "Kate",
     },
     {
-      id: 103,
+      id: genId(),
       text: "What does Anna like to cook?",
       options: ["Pancakes", "Meat on the grill", "Salad", "Pizza"],
       correctOption: "Pancakes",
     },
     {
-      id: 104,
+      id: genId(),
       text: "What does Anna's dad usually cook?",
       options: ["Pancakes", "Meat on the grill", "Salad", "Pizza"],
       correctOption: "Meat on the grill",
     },
     {
-      id: 105,
+      id: genId(),
       text: "What does Anna's brother help her do?",
       options: [
         "Stir the batter",
@@ -54,25 +55,25 @@ const epilogue: Epilogue = {
       correctOption: "Stir the batter",
     },
     {
-      id: 106,
+      id: genId(),
       text: "What language does Anna like to study?",
       options: ["English", "Russian", "Spanish", "French"],
       correctOption: "Russian",
     },
     {
-      id: 107,
+      id: genId(),
       text: "Who does Anna say 'you' to?",
       options: ["Her mom and dad", "Her brother", "Her friends", "Her teacher"],
       correctOption: "Her brother",
     },
     {
-      id: 108,
+      id: genId(),
       text: "What pronoun do Anna's mom and dad use to refer to other people?",
       options: ["I", "You", "They", "We"],
       correctOption: "They",
     },
     {
-      id: 109,
+      id: genId(),
       text: "What does Anna usually do when she comes home from school?",
       options: [
         "Watch TV",
@@ -83,7 +84,7 @@ const epilogue: Epilogue = {
       correctOption: "Do homework and help her mom",
     },
     {
-      id: 1010,
+      id: genId(),
       text: "What do Anna and her family do after they eat dinner?",
       options: [
         "Watch TV",
@@ -94,6 +95,6 @@ const epilogue: Epilogue = {
       correctOption: "Talk about their day",
     },
   ],
-};
+});
 
 export default epilogue;

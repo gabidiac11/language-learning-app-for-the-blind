@@ -1,140 +1,143 @@
-import { BuilingBlock } from "../ctxTypes";
+import { BuildingBlock } from "../../context/ctxTypes";
+import { genId } from "../mockUtils";
 
-const buildingBlocks: BuilingBlock[] = [
+const buildingBlocks = (): BuildingBlock[] => [
   {
-    id: 1,
+    id: genId(),
     name: "Pronouns",
+    imageUrl:
+      "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 1,
+        id: genId(),
         text: "Меня",
         shortTranslation: "me",
         longTranslation:
           "Used when referring to oneself as the object of a verb or preposition.",
       },
       {
-        id: 2,
+        id: genId(),
         text: "Я",
         shortTranslation: "I",
         longTranslation:
           "Used when referring to oneself as the subject of a verb.",
       },
       {
-        id: 3,
+        id: genId(),
         text: "со своей",
         shortTranslation: "with my",
         longTranslation:
           "Used to indicate possession of something by the speaker.",
       },
       {
-        id: 4,
+        id: genId(),
         text: "Моя",
         shortTranslation: "my",
         longTranslation:
           "Used to indicate possession of something by a female speaker.",
       },
       {
-        id: 5,
+        id: genId(),
         text: "Мой",
         shortTranslation: "my",
         longTranslation:
           "Used to indicate possession of something by a male speaker.",
       },
       {
-        id: 6,
+        id: genId(),
         text: "меня",
         shortTranslation: "me",
         longTranslation:
           "Used when referring to oneself as the object of a verb or preposition.",
       },
       {
-        id: 7,
+        id: genId(),
         text: "Мы",
         shortTranslation: "we",
         longTranslation:
           "Used when referring to oneself and others as the subject of a verb.",
       },
       {
-        id: 8,
+        id: genId(),
         text: "мне",
         shortTranslation: "to me",
         longTranslation:
           "Used when referring to oneself as the recipient of an action.",
       },
       {
-        id: 9,
+        id: genId(),
         text: "о себе",
         shortTranslation: "about myself",
         longTranslation: "Used when referring to oneself in a general sense.",
       },
       {
-        id: 10,
+        id: genId(),
         text: "ты",
         shortTranslation: "you",
         longTranslation: "Used when addressing one person informally.",
       },
       {
-        id: 11,
+        id: genId(),
         text: "к брату",
         shortTranslation: "to brother",
         longTranslation:
           "Used when referring to one's brother in the vocative case.",
       },
       {
-        id: 12,
+        id: genId(),
         text: "другу",
         shortTranslation: "to friend",
         longTranslation:
           "Used when referring to a male friend in the vocative case.",
       },
       {
-        id: 15,
+        id: genId(),
         text: "они",
         shortTranslation: "they",
         longTranslation:
           "Used when referring to more than one person or thing as the subject of a verb.",
       },
       {
-        id: 16,
+        id: genId(),
         text: "маме",
         shortTranslation: "to mom",
         longTranslation:
           "Used when referring to one's mother as the recipient of an action.",
       },
       {
-        id: 17,
+        id: genId(),
         text: "мы",
         shortTranslation: "we",
         longTranslation:
           "Used when referring to oneself and others as the subject of a verb.",
       },
       {
-        id: 18,
+        id: genId(),
         text: "все",
         shortTranslation: "all",
         longTranslation:
           "Used to refer to the entirety of a group of people or things.",
       },
       {
-        id: 19,
+        id: genId(),
         text: "ними",
         shortTranslation: "with them",
         longTranslation: "Used to indicate possession of something by a group.",
       },
       {
-        id: 20,
+        id: genId(),
         text: "нашем",
         shortTranslation: "our",
         longTranslation: "Belonging to us",
       },
       {
-        id: 21,
+        id: genId(),
         text: "мою",
         shortTranslation: "my",
         longTranslation: "Belonging to me",
       },
       {
-        id: 45,
+        id: genId(),
         text: "вместе",
         shortTranslation: "together",
         longTranslation:
@@ -143,84 +146,86 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 2,
+    id: genId(),
     name: "Family",
+    imageUrl:
+      "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 22,
+        id: genId(),
         text: "семьей",
         shortTranslation: "family",
         longTranslation:
           "A group consisting of parents and children living together in a household",
       },
       {
-        id: 23,
+        id: genId(),
         text: "мамой",
         shortTranslation: "mom",
         longTranslation: "One's mother",
       },
       {
-        id: 24,
+        id: genId(),
         text: "папой",
         shortTranslation: "dad",
         longTranslation: "One's father",
       },
       {
-        id: 14,
+        id: genId(),
         text: "папа",
         shortTranslation: "dad",
         longTranslation: "Used when referring to one's father.",
       },
       {
-        id: 25,
+        id: genId(),
         text: "братом",
         shortTranslation: "brother",
         longTranslation: "A male sibling",
       },
       {
-        id: 26,
+        id: genId(),
         text: "мама",
         shortTranslation: "mom",
         longTranslation: "One's mother",
       },
       {
-        id: 27,
+        id: genId(),
         text: "зовут",
         shortTranslation: "called",
         longTranslation: "Used to refer to the name or title of someone",
       },
       {
-        id: 28,
+        id: genId(),
         text: "брат",
         shortTranslation: "brother",
         longTranslation: "A male sibling",
       },
       {
-        id: 29,
+        id: genId(),
         text: "младше",
         shortTranslation: "younger",
         longTranslation: "Being at an earlier age",
       },
       {
-        id: 30,
+        id: genId(),
         text: "на два года",
         shortTranslation: "two years younger",
         longTranslation: "Being two years younger than someone else",
       },
       {
-        id: 31,
+        id: genId(),
         text: "любим",
         shortTranslation: "favorite",
         longTranslation: "Preferred over all others of the same kind",
       },
       {
-        id: 32,
+        id: genId(),
         text: "людях",
         shortTranslation: "people",
         longTranslation: "Human beings in general or considered collectively",
       },
       {
-        id: 33,
+        id: genId(),
         text: "рада",
         shortTranslation: "happy",
         longTranslation: "Feeling or showing pleasure or contentment",
@@ -228,29 +233,31 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 3,
+    id: genId(),
     name: "Names",
+    imageUrl:
+      "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 34,
+        id: genId(),
         text: "Анна",
         shortTranslation: "Anna",
         longTranslation: "A female given name",
       },
       {
-        id: 35,
+        id: genId(),
         text: "Катя",
         shortTranslation: "Katya",
         longTranslation: "A female given name",
       },
       {
-        id: 36,
+        id: genId(),
         text: "Иван",
         shortTranslation: "Ivan",
         longTranslation: "A male given name",
       },
       {
-        id: 366,
+        id: genId(),
         text: "Александр",
         shortTranslation: "Alexander",
         longTranslation:
@@ -259,74 +266,76 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 4,
+    id: genId(),
     name: "Temporal words",
+    imageUrl:
+      "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 37,
+        id: genId(),
         text: "Часто",
         shortTranslation: "often",
         longTranslation: "Frequently; many times",
       },
       {
-        id: 38,
+        id: genId(),
         text: "года",
         shortTranslation: "years",
         longTranslation: "A period of 365 or 366 days",
       },
       {
-        id: 39,
+        id: genId(),
         text: "каждый день",
         shortTranslation: "every day",
         longTranslation: "Happening or done every day",
       },
       {
-        id: 40,
+        id: genId(),
         text: "Потом",
         shortTranslation: "then",
         longTranslation: "At a time following an earlier time",
       },
       {
-        id: 104,
+        id: genId(),
         text: "день",
         shortTranslation: "day",
         longTranslation:
           "A period of 24 hours, starting and ending at midnight",
       },
       {
-        id: 105,
+        id: genId(),
         text: "дне",
         shortTranslation: "during the day",
         longTranslation: "Used to indicate a time period during the day",
       },
       {
-        id: 106,
+        id: genId(),
         text: "время",
         shortTranslation: "time",
         longTranslation:
           "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future",
       },
       {
-        id: 107,
+        id: genId(),
         text: "обычно",
         shortTranslation: "usually",
         longTranslation: "In the normal or customary manner or order of things",
       },
       {
-        id: 41,
+        id: genId(),
         text: "языку",
         shortTranslation: "language",
         longTranslation:
           "Refers to the Russian language or any other language being studied or spoken",
       },
       {
-        id: 42,
+        id: genId(),
         text: "когда",
         shortTranslation: "when",
         longTranslation: "Used to ask or indicate a time or occasion",
       },
       {
-        id: 44,
+        id: genId(),
         text: "всегда",
         shortTranslation: "always",
         longTranslation:
@@ -335,46 +344,48 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 5,
+    id: genId(),
     name: "Places",
+    imageUrl:
+      "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 46,
+        id: genId(),
         text: "в парке",
         shortTranslation: "in the park",
         longTranslation:
           "Indicates a location inside a park or a visit to a park",
       },
       {
-        id: 47,
+        id: genId(),
         text: "на гриле",
         shortTranslation: "on the grill",
         longTranslation:
           "Refers to food being cooked or grilled on a grill or barbecue",
       },
       {
-        id: 48,
+        id: genId(),
         text: "домой",
         shortTranslation: "home",
         longTranslation:
           "Indicates a destination or direction towards one's place of residence or dwelling",
       },
       {
-        id: 49,
+        id: genId(),
         text: "за стол",
         shortTranslation: "at the table",
         longTranslation:
           "Refers to a location at a table or a gathering around a table",
       },
       {
-        id: 50,
+        id: genId(),
         text: "школе",
         shortTranslation: "at school",
         longTranslation:
           "Indicates a location or activity taking place in a school or educational setting",
       },
       {
-        id: 43,
+        id: genId(),
         text: "уроки",
         shortTranslation: "lessons",
         longTranslation:
@@ -383,159 +394,161 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 6,
+    id: genId(),
     name: "Verbs",
+    imageUrl:
+      "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 51,
+        id: genId(),
         text: "зовут",
         shortTranslation: "is called",
         longTranslation: "Used to introduce or ask for someone's name",
       },
       {
-        id: 52,
+        id: genId(),
         text: "живу",
         shortTranslation: "live",
         longTranslation:
           "Indicates a present tense state of living in a particular place or residence",
       },
       {
-        id: 53,
+        id: genId(),
         text: "гуляем",
         shortTranslation: "take a walk",
         longTranslation:
           "Refers to a leisurely walk or stroll, often with company or in a particular location",
       },
       {
-        id: 54,
+        id: genId(),
         text: "играем",
         shortTranslation: "play",
         longTranslation:
           "Refers to playing a game or engaging in a fun or recreational activity",
       },
       {
-        id: 55,
+        id: genId(),
         text: "готовим",
         shortTranslation: "cook",
         longTranslation: "Refers to the act of preparing or cooking food",
       },
       {
-        id: 56,
+        id: genId(),
         text: "люблю готовить",
         shortTranslation: "love to cook",
         longTranslation:
           "Expresses a strong preference or enjoyment for the act of cooking",
       },
       {
-        id: 57,
+        id: genId(),
         text: "готовит",
         shortTranslation: "cooks",
         longTranslation: "Refers to the act of cooking food",
       },
       {
-        id: 58,
+        id: genId(),
         text: "помогает",
         shortTranslation: "helps",
         longTranslation:
           "Indicates the act of providing assistance or support to someone",
       },
       {
-        id: 59,
+        id: genId(),
         text: "учусь",
         shortTranslation: "study",
         longTranslation:
           "Refers to the act of learning or acquiring knowledge or skills",
       },
       {
-        id: 61,
+        id: genId(),
         text: "занимаюсь",
         shortTranslation: "practice, engage in",
         longTranslation:
           "To spend time regularly doing a particular activity or improving a particular skill",
       },
       {
-        id: 62,
+        id: genId(),
         text: "нравится учиться",
         shortTranslation: "like to learn",
         longTranslation:
           "To find pleasure or satisfaction in learning something new or acquiring knowledge",
       },
       {
-        id: 63,
+        id: genId(),
         text: "говорю",
         shortTranslation: "speak",
         longTranslation:
           "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas",
       },
       {
-        id: 64,
+        id: genId(),
         text: "обращаюсь",
         shortTranslation: "address",
         longTranslation:
           "To speak or write to someone in a particular way, especially formally or respectfully",
       },
       {
-        id: 65,
+        id: genId(),
         text: "говорят",
         shortTranslation: "say, speak",
         longTranslation:
           "To utter words so as to convey information, an opinion, a feeling or intention",
       },
       {
-        id: 66,
+        id: genId(),
         text: "возвращаюсь",
         shortTranslation: "return, come back",
         longTranslation:
           "To go or come back to a place or person, especially to where one was before",
       },
       {
-        id: 67,
+        id: genId(),
         text: "делаю",
         shortTranslation: "do, make",
         longTranslation: "To perform or execute a task, action or activity",
       },
       {
-        id: 68,
+        id: genId(),
         text: "помогаю",
         shortTranslation: "help, assist",
         longTranslation:
           "To make it easier or possible for someone to do something, by offering assistance or support",
       },
       {
-        id: 69,
+        id: genId(),
         text: "садимся",
         shortTranslation: "sit down",
         longTranslation:
           "To take a seat, especially on a chair or other piece of furniture",
       },
       {
-        id: 70,
+        id: genId(),
         text: "едим",
         shortTranslation: "eat",
         longTranslation: "To put food into one's mouth and chew and swallow it",
       },
       {
-        id: 71,
+        id: genId(),
         text: "проводить",
         shortTranslation: "conduct, hold",
         longTranslation: "To organize or host an event or activity",
       },
       {
-        id: 72,
+        id: genId(),
         text: "еду",
         shortTranslation: "go, travel",
         longTranslation:
           "To travel or move in a particular direction or to a particular place",
       },
       {
-        id: 73,
+        id: genId(),
         text: "говорят",
         shortTranslation: "say, speak",
         longTranslation:
           "To utter words so as to convey information, an opinion, a feeling or intention",
       },
       {
-        id: 74,
+        id: genId(),
         text: "блины",
         shortTranslation: "pancakes",
         longTranslation:
@@ -544,42 +557,44 @@ const buildingBlocks: BuilingBlock[] = [
     ],
   },
   {
-    id: 7,
+    id: genId(),
     name: "Connection words",
+    imageUrl:
+      "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     words: [
       {
-        id: 75,
+        id: genId(),
         text: "в",
         shortTranslation: "in, at, to",
         longTranslation: "Preposition indicating location or direction.",
       },
       {
-        id: 76,
+        id: genId(),
         text: "и",
         shortTranslation: "and",
         longTranslation: "Conjunction used to connect words or phrases.",
       },
       {
-        id: 77,
+        id: genId(),
         text: "или",
         shortTranslation: "or",
         longTranslation: "Conjunction used to present alternatives.",
       },
       {
-        id: 78,
+        id: genId(),
         text: "о",
         shortTranslation: "about",
         longTranslation:
           "Preposition used to indicate a subject of conversation or discussion.",
       },
       {
-        id: 79,
+        id: genId(),
         text: "за",
         shortTranslation: "behind, for",
         longTranslation: "Preposition indicating location or purpose.",
       },
       {
-        id: 80,
+        id: genId(),
         text: "с",
         shortTranslation: "with, from, of",
         longTranslation:

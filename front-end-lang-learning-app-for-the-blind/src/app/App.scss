@@ -22,6 +22,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  .child {
+    .sub-child {
+      font-size: 10;
+    }
+  }
+}
+
+.sub-child .App-header .child {
+  font-size: 10;
 }
 
 .App-link {
