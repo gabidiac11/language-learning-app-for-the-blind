@@ -1,25 +1,25 @@
-import { EpilogueQuestionProgress } from "..";
+import { EpilogueQuestionProgress } from "../../context";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
   UserStory,
   WordProgress,
-} from "../ctxTypes";
+} from "../../context/ctxTypes";
+import { genId } from "../mockUtils";
 import buildingBlocks from "./buidingBlocks";
 import epilogue from "./epilogue";
 
-let indexWordProgress = 1;
-let indexBuildingBlockProgress = 1;
 const generateBuildingProgress = () => {
-  const progressBlocks = buildingBlocks.map((buildingBlock) => {
+  const progressBlocks = buildingBlocks().map((buildingBlock) => {
     const item: BuildingBlockProgress = {
-      id: indexWordProgress++,
+      id: genId(),
       locked: false,
-      completed: false,
+      timeUnlocked: new Date().getTime(),
+
       block: buildingBlock,
       wordProgressItems: buildingBlock.words.map((wordItem) => {
         const wordProgress: WordProgress = {
-          id: indexBuildingBlockProgress++,
+          id: genId(),
           word: wordItem,
           score: 0,
         };
@@ -32,14 +32,13 @@ const generateBuildingProgress = () => {
   return progressBlocks;
 };
 
-let questionProgressEpilogueIndex = 1;
 const generateEpilogueProgress = () => {
   const epilogueProgress: EpilogueProgress = {
     id: 1,
-    epilogue: epilogue,
-    questionProgressItems: epilogue.questions.map((question) => {
+    epilogue: epilogue(),
+    questionProgressItems: epilogue().questions.map((question) => {
       const questionProgress: EpilogueQuestionProgress = {
-        id: questionProgressEpilogueIndex++,
+        id: genId(),
         completed: false,
         question: question,
       };
@@ -49,14 +48,16 @@ const generateEpilogueProgress = () => {
   return epilogueProgress;
 };
 
-export const dummyStoryData: UserStory = {
+export const dummyStoryData = (): UserStory => ({
   id: 1,
   name: "My family",
+  imageUrl:
+    "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   storyDependentOnIds: [],
   buildingBlocksProgressItems: generateBuildingProgress(),
   epilogueProgress: generateEpilogueProgress(),
   numOfBlocksCompleted: 0,
-  numOfTotalBlocks: buildingBlocks.length,
+  numOfTotalBlocks: buildingBlocks().length,
   numOfStoryQuestionsCompleted: 0,
-  numOfTotalStoryQuestions: epilogue.questions.length,
-};
+  numOfTotalStoryQuestions: epilogue().questions.length,
+});

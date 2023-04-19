@@ -1,26 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './app/App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app/App";
+import reportWebVitals from "./reportWebVitals";
 import { AppContextProvider } from "./context/AppContext";
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import axios from "axios";
 import { BASE_URL } from "./constants";
+
+import axiosInstance from "./axiosInstance";
+import "./mock/mock";
+
 import "./index.scss";
 
-axios.defaults.baseURL = BASE_URL;
+axiosInstance.defaults.baseURL = BASE_URL;
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <AppContextProvider>
-      {/* TODO: repair this */}
-      {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
-        <App />
-      {/* </LocalizationProvider> */}
+      <App />
     </AppContextProvider>
   </React.StrictMode>
 );

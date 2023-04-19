@@ -1,37 +1,22 @@
-import './App.scss';
+import "./App.scss";
 import { Login, Register } from "./../pages/auth-pages";
 import { StoriesOverviewPage } from "./../pages/autheticated";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
-import { firebaseAuth } from "../auth/firebase-auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import { useEffect } from "react";
 import Header from "../pages/page-components/Header";
-import axios from "axios";
 import AuthenticatedRoutesWrapper from "./AuthenticatedRoutesWrapper";
+import { StoryPage } from "../pages/autheticated/StoryPage/StoryPage";
+import { Loader } from "../pages/page-components/Loader";
+import { useAuthInit } from "../auth/authHooks";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, isVerifying] = useAuthState(firebaseAuth);
-
-  useEffect(() => {
-    axios.defaults.headers.common["Authorization"] = `Basic ${
-      user?.refreshToken || ""
-    }`;
-
-    console.log({ user });
-
-    setIsLoading(isVerifying);
-  }, [user, isVerifying]);
+  const { user, isLoading } = useAuthInit();
 
   if (isLoading) {
     return (
       <div className="view">
-        <Box sx={{ width: "100%" }}>
-          <LinearProgress />
-        </Box>
+        <Loader />
       </div>
     );
   }
@@ -49,9 +34,9 @@ const App = () => {
         ) : (
           <AuthenticatedRoutesWrapper>
             <Routes>
-              <Route path="/dashboard" element={<StoriesOverviewPage />} />
+              <Route path="/stories" element={<StoriesOverviewPage />} />
               {/* TODO: add route for story page */}
-              {/* <Route path="/book/:id" element={<StoryPage />} /> */}
+              <Route path="/stories/:id" element={<StoryPage />} />
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>
@@ -61,11 +46,11 @@ const App = () => {
   );
 };
 
-const DefaultRouteRedirection = (props:{ isAuth?: boolean }) => {
+const DefaultRouteRedirection = (props: { isAuth?: boolean }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    props.isAuth && navigate("/dashboard", { replace: true });
+    props.isAuth && navigate("/stories", { replace: true });
     !props.isAuth && navigate("/login", { replace: true });
   }, [props.isAuth]);
 
