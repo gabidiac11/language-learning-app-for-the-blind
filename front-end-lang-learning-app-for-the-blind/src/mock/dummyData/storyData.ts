@@ -5,7 +5,7 @@ import {
   UserStory,
   WordProgress,
 } from "../../context/ctxTypes";
-import { genId } from "../mockUtils";
+import { genId } from "../mockContext";
 import buildingBlocks from "./buidingBlocks";
 import epilogue from "./epilogue";
 
@@ -13,9 +13,6 @@ const generateBuildingProgress = () => {
   const progressBlocks = buildingBlocks().map((buildingBlock) => {
     const item: BuildingBlockProgress = {
       id: genId(),
-      locked: false,
-      timeUnlocked: new Date().getTime(),
-
       block: buildingBlock,
       wordProgressItems: buildingBlock.words.map((wordItem) => {
         const wordProgress: WordProgress = {
@@ -34,7 +31,7 @@ const generateBuildingProgress = () => {
 
 const generateEpilogueProgress = () => {
   const epilogueProgress: EpilogueProgress = {
-    id: 1,
+    id: genId(),
     epilogue: epilogue(),
     questionProgressItems: epilogue().questions.map((question) => {
       const questionProgress: EpilogueQuestionProgress = {
@@ -48,16 +45,23 @@ const generateEpilogueProgress = () => {
   return epilogueProgress;
 };
 
-export const dummyStoryData = (): UserStory => ({
-  id: 1,
-  name: "My family",
-  imageUrl:
-    "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  storyDependentOnIds: [],
-  buildingBlocksProgressItems: generateBuildingProgress(),
-  epilogueProgress: generateEpilogueProgress(),
-  numOfBlocksCompleted: 0,
-  numOfTotalBlocks: buildingBlocks().length,
-  numOfStoryQuestionsCompleted: 0,
-  numOfTotalStoryQuestions: epilogue().questions.length,
-});
+export const dummyInitialUserStoryData = (): UserStory => {
+  const buildingBlocksProgressItems = generateBuildingProgress();
+  const epilogueProgress = generateEpilogueProgress();
+
+  const story = {
+    id: genId(),
+    name: "My family",
+    //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
+    imageUrl:
+      "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    storyDependentOnIds: [],
+    buildingBlocksProgressItems,
+    epilogueProgress,
+    numOfBlocksCompleted: 0,
+    numOfTotalBlocks: buildingBlocksProgressItems.length,
+    numOfStoryQuestionsCompleted: 0,
+    numOfTotalStoryQuestions: epilogueProgress.questionProgressItems.length,
+  }
+  return story;
+};

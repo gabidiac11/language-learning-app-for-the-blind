@@ -6,18 +6,27 @@ import Typography from "@mui/material/Typography";
 import { UserStory } from "../../../../context";
 import { ItemProgressSummary } from "../../../page-components/ItemProgressSummary";
 import "./StoryCard.scss";
+import { useNavigate } from "react-router";
 
 export const StoryCard = (props: { userStory: UserStory }) => {
   const { userStory } = props;
+  const disabled = !userStory.timeUnlocked;
+
+  const navigate = useNavigate();
 
   return (
     // TODO: see what to do with this width: response stuff here?
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, margin: "20px" }} className={!disabled ? "cursor-point" : "disabled"} onClick={() => {
+      if(disabled) {
+        //TODO: add audio saying it's diabled because it's locked
+        return;
+      };
+      navigate(`/stories/${userStory.id}`);
+    }}>
       <CardHeader
         title={props.userStory.name}
         subheader={<ItemProgressSummary {...props.userStory} />}
       />
-      {/* TODO: see what to do with the card */}
       <CardMedia
         component="img"
         height="194"

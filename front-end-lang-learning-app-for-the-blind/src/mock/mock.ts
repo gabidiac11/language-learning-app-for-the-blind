@@ -1,23 +1,68 @@
 import { axiosMockAdapterInstance } from "../axiosInstance";
-import { dummyStoryData } from "./dummyData/storyData";
-import { initId } from "./mockUtils";
+import { UserStory } from "../context";
 
-initId();
+import { mockContext } from "./mockContext";
 
-const objExistsInLocal = (key: string) => {
-  const value = localStorage.getItem(key);
-  const exists = !!value && typeof value === "object";
-  return exists;
-};
-
-axiosMockAdapterInstance.onGet("userStories/:userId").reply((config) => {
-  const { userId } = config.params;
-  const lsKey = `userStories_${userId}`;
-  if (!objExistsInLocal(lsKey)) {
-    const userStory = dummyStoryData();
-    localStorage.setItem(lsKey, JSON.stringify([userStory]));
+axiosMockAdapterInstance.onGet("userStories").reply(async (config) => {
+  log(`Mock request at ${config.url}`);
+  const userId = config?.headers?.["user-id"] ?? "";
+  if (!userId) {
+    return [400, { message: "Bad useId" }];
   }
 
-  const data = localStorage.getItem(lsKey);
+  let data: UserStory[];
+  const existingUser = mockContext
+    .getCtx()
+    .userStories.find((i) => i.userId === userId);
+  if (existingUser) {
+    data = existingUser.stories;
+  } else {
+    data = mockContext.addAndGetInitializingUserAndStories(userId);
+  }
+  mockContext.SaveContext();
+
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve({});
+    }, 1000)
+  );
   return [200, data];
 });
+
+axiosMockAdapterInstance.onGet(/userStories\/(.+)/).reply(async (config) => {
+  log(`Mock request at ${config.url}`);
+
+  const userId = config?.headers?.["user-id"] ?? "";
+  if (!userId) {
+    return [400, { message: "Bad useId" }];
+  }
+
+  const [, storyId] = config?.url?.match(/userStories\/(.+)/) || [];
+  if (!storyId) {
+    return [400, { message: "Story id should not be empty" }];
+  }
+
+  let data: UserStory[];
+  const existingUser = mockContext
+    .getCtx()
+    .userStories.find((i) => i.userId === userId);
+  if (!existingUser) {
+    return [400, { message: "User doesn't exist" }];
+  }
+
+  const existingStory = existingUser.stories.find(story => story.id == Number(storyId));
+  if (!existingStory) {
+    return [400, { message: `User doesn't have any story with id:${Number(storyId)}` }];
+  }
+
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve({});
+    }, 1000)
+  );
+  return [200, existingStory];
+});
+
+function log(value: any) {
+  console.log(value);
+}

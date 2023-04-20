@@ -41,10 +41,9 @@ const BuildingBlockItem = (blockProgress: BuildingBlockProgress) => {
 };
 
 export const StoryPage = () => {
-  const { user } = useAppUser();
   const { id } = useParams<{ id: string }>();
   const { data, loading, error, retry } = useFetchData<UserStory>(
-    `userStory/${id}/${user?.uid}`
+    `userStories/${id}`
   );
 
   return (

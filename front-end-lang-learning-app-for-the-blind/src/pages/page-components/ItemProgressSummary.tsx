@@ -18,7 +18,7 @@ export const ItemProgressSummary = (
         return `✨ Started on ${getFormattedTimestamp(userStory.timeStarted)}`;
       }
       if (userStory.timeUnlocked) {
-        return `🚩 Unlocked on ${getFormattedTimestamp(
+        return `👉 Unlocked on ${getFormattedTimestamp(
           userStory.timeUnlocked
         )}`;
       }

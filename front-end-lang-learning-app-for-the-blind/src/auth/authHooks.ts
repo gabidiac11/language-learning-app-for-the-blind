@@ -11,6 +11,7 @@ export const useAuthInit = () => {
     axiosInstance.defaults.headers.common["Authorization"] = `Basic ${
       user?.refreshToken || ""
     }`;
+    axiosInstance.defaults.headers.common["user-id"] = user?.uid;
 
     console.log({ user });
 
