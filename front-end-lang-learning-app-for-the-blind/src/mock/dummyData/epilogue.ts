@@ -1,5 +1,5 @@
 import { Epilogue } from "../../context/ctxTypes";
-import { genId } from "../mockUtils";
+import { genId } from "../mockContext";
 
 const epilogue = (): Epilogue => ({
   id: genId(),

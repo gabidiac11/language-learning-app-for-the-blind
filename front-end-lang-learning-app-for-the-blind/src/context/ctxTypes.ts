@@ -46,9 +46,6 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: number;
   
-  // a building block is locked if the blocks dependent on are not completed;
-  locked: boolean;
-  
   // a building block is completed if all wordProgressItems are have score equal to 100
   timeUnlocked?: number;
   timeStarted?: number;
