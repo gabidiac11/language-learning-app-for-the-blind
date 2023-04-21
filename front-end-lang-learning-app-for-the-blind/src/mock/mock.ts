@@ -1,68 +1,133 @@
+import { AxiosRequestConfig } from "axios";
 import { axiosMockAdapterInstance } from "../axiosInstance";
 import { UserStory } from "../context";
 
 import { mockContext } from "./mockContext";
 
-axiosMockAdapterInstance.onGet("userStories").reply(async (config) => {
-  log(`Mock request at ${config.url}`);
-  const userId = config?.headers?.["user-id"] ?? "";
-  if (!userId) {
-    return [400, { message: "Bad useId" }];
-  }
+axiosMockAdapterInstance.onGet("userStories").reply(async (config) =>
+  withUser(config, async (userId) => {
+    let data: UserStory[];
+    const existingUser = mockContext
+      .getCtx()
+      .userStories.find((i) => i.userId === userId);
+    if (existingUser) {
+      data = existingUser.stories;
+    } else {
+      data = mockContext.addAndGetInitializingUserAndStories(userId);
+    }
+    mockContext.SaveContext();
 
-  let data: UserStory[];
-  const existingUser = mockContext
-    .getCtx()
-    .userStories.find((i) => i.userId === userId);
-  if (existingUser) {
-    data = existingUser.stories;
-  } else {
-    data = mockContext.addAndGetInitializingUserAndStories(userId);
-  }
-  mockContext.SaveContext();
+    await new Promise((resolve) =>
+      setTimeout(() => {
+        resolve({});
+      }, 1000)
+    );
+    return [200, data];
+  })
+);
 
-  await new Promise((resolve) =>
-    setTimeout(() => {
-      resolve({});
-    }, 1000)
-  );
-  return [200, data];
-});
+axiosMockAdapterInstance.onGet(/^userStories\/(.+)/).reply(async (config) =>
+  withUser(config, async (userId) => {
+    const [, storyId] = config?.url?.match(/userStories\/(.+)/) || [];
+    if (!storyId) {
+      return [400, { message: "Story id should not be empty" }];
+    }
 
-axiosMockAdapterInstance.onGet(/userStories\/(.+)/).reply(async (config) => {
-  log(`Mock request at ${config.url}`);
+    const existingUser = mockContext
+      .getCtx()
+      .userStories.find((i) => i.userId === userId);
+    if (!existingUser) {
+      return [400, { message: "User doesn't exist" }];
+    }
 
-  const userId = config?.headers?.["user-id"] ?? "";
-  if (!userId) {
-    return [400, { message: "Bad useId" }];
-  }
+    const existingStory = existingUser.stories.find(
+      (story) => story.id == Number(storyId)
+    );
+    if (!existingStory) {
+      return [
+        400,
+        { message: `User ${userId} doesn't have any story with id ${Number(storyId)}` },
+      ];
+    }
 
-  const [, storyId] = config?.url?.match(/userStories\/(.+)/) || [];
-  if (!storyId) {
-    return [400, { message: "Story id should not be empty" }];
-  }
+    await new Promise((resolve) =>
+      setTimeout(() => {
+        resolve({});
+      }, 1000)
+    );
+    return [200, existingStory];
+  })
+);
 
-  let data: UserStory[];
-  const existingUser = mockContext
-    .getCtx()
-    .userStories.find((i) => i.userId === userId);
-  if (!existingUser) {
-    return [400, { message: "User doesn't exist" }];
-  }
+axiosMockAdapterInstance.onGet(/^blocks\/(.+)/).reply(async (config) =>
+  withUser(config, async (userId) => {
+    const [, blockId] = config?.url?.match(/blocks\/(.+)/) || [];
+    if (!blockId) {
+      return [400, { message: "Block id should not be empty" }];
+    }
 
-  const existingStory = existingUser.stories.find(story => story.id == Number(storyId));
-  if (!existingStory) {
-    return [400, { message: `User doesn't have any story with id:${Number(storyId)}` }];
-  }
+    const existingUser = mockContext
+      .getCtx()
+      .userStories.find((i) => i.userId === userId);
+    if (!existingUser) {
+      return [401, { message: "User doesn't exist" }];
+    }
 
-  await new Promise((resolve) =>
-    setTimeout(() => {
-      resolve({});
-    }, 1000)
-  );
-  return [200, existingStory];
-});
+    const existingBlock = existingUser.stories
+      .flatMap((s) => s.buildingBlocksProgressItems)
+      .find((bp) => bp.id === Number(blockId));
+    if (!existingBlock) {
+      return [
+        403,
+        { message: `User ${userId} doesn't have any block with id:${Number(blockId)}` },
+      ];
+    }
+
+    await new Promise((resolve) =>
+      setTimeout(() => {
+        resolve({});
+      }, 500)
+    );
+    return [200, existingBlock];
+  })
+);
 
 function log(value: any) {
-  console.log(value);
+  console.log(`Mock: ${value}`);
+}
+
+async function withUser(
+  config: AxiosRequestConfig,
+  callback: (userId: string) => Promise<any[]>
+) {
+  const userId = config?.headers?.["user-id"] ?? "";
+  if (!userId) {
+    const failedAuthorisedResponse = await withLog(config, () =>
+      Promise.resolve([401, { message: "User is not authorised." }])
+    );
+    return failedAuthorisedResponse;
+  }
+
+  const authorisedLoggedResponse = await withLog(config, () =>
+    callback(userId)
+  );
+  return authorisedLoggedResponse;
+}
+
+async function withLog(
+  config: AxiosRequestConfig,
+  callback: () => Promise<any[]>
+) {
+  log(`Started ${config.method?.toUpperCase()} /${config.url}`);
+
+  const response = await callback();
+
+  const possibleErrorMessage =
+    response[0] !== 200 && response[0] !== 201
+      ? ` Message: '${response[1].message}'`
+      : "";
+  log(
+    `Finished [${response[0]}]${possibleErrorMessage} at ${config.method?.toUpperCase()} /${config.url}`
+  );
+  return response;
 }

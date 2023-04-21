@@ -1,28 +1,29 @@
-import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { UserStory } from "../../../../context";
 import { ItemProgressSummary } from "../../../page-components/ItemProgressSummary";
-import "./StoryCard.scss";
 import { useNavigate } from "react-router";
+import { useCallback } from "react";
+import CardBlock from "../../../page-components/CardBlock/CardBlock";
+import "./StoryCard.scss";
 
 export const StoryCard = (props: { userStory: UserStory }) => {
+  const navigate = useNavigate();
   const { userStory } = props;
   const disabled = !userStory.timeUnlocked;
-
-  const navigate = useNavigate();
+  
+  const navigateToStory = useCallback(() => {
+    if (disabled) {
+      //TODO: add audio saying it's diabled because it's locked
+      return;
+    }
+    navigate(`/stories/${userStory.id}`);
+  }, [userStory, disabled]);
 
   return (
-    // TODO: see what to do with this width: response stuff here?
-    <Card sx={{ maxWidth: 345, margin: "20px" }} className={!disabled ? "cursor-point" : "disabled"} onClick={() => {
-      if(disabled) {
-        //TODO: add audio saying it's diabled because it's locked
-        return;
-      };
-      navigate(`/stories/${userStory.id}`);
-    }}>
+    <CardBlock disabled={disabled} onClick={navigateToStory}>
       <CardHeader
         title={props.userStory.name}
         subheader={<ItemProgressSummary {...props.userStory} />}
@@ -31,6 +32,7 @@ export const StoryCard = (props: { userStory: UserStory }) => {
         component="img"
         height="194"
         image={props.userStory.imageUrl}
+        // TODO: what alt to use here -> should devine some property for this one
         alt="Russian family"
       />
       <CardContent>
@@ -40,6 +42,6 @@ export const StoryCard = (props: { userStory: UserStory }) => {
           {`${userStory.numOfStoryQuestionsCompleted} completed out of ${userStory.numOfTotalStoryQuestions} story questions.`}
         </Typography>
       </CardContent>
-    </Card>
+    </CardBlock>
   );
 };

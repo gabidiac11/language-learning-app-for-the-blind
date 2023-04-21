@@ -9,6 +9,7 @@ import AuthenticatedRoutesWrapper from "./AuthenticatedRoutesWrapper";
 import { StoryPage } from "../pages/autheticated/StoryPage/StoryPage";
 import { Loader } from "../pages/page-components/Loader";
 import { useAuthInit } from "../auth/authHooks";
+import BlockPage from "../pages/autheticated/BlockPage/BlockPage";
 
 const App = () => {
   const { user, isLoading } = useAuthInit();
@@ -37,6 +38,7 @@ const App = () => {
               <Route path="/stories" element={<StoriesOverviewPage />} />
               {/* TODO: add route for story page */}
               <Route path="/stories/:id" element={<StoryPage />} />
+              <Route path="/blocks/:id" element={<BlockPage />} />
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>

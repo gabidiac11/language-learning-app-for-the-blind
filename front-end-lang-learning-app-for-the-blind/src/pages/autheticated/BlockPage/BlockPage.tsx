@@ -3,12 +3,12 @@ import useFetchData from "../../../app-hooks/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 import { Loader } from "../../page-components/Loader";
-import BuildingBlockItem from "./BuildingBlockItem";
+import BuildingBlockItem from "../StoryPage/BuildingBlockItem";
 
-export const StoryPage = () => {
+const BlockPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, loading, error, retry } = useFetchData<UserStory>(
-    `userStories/${id}`
+  const { data, loading, error, retry } = useFetchData<BuildingBlockProgress>(
+    `blocks/${id}`
   );
 
   return (
@@ -17,14 +17,16 @@ export const StoryPage = () => {
         {loading && <Loader />}
         {!error && data && (
           <div className="view-content">
-            {data.buildingBlocksProgressItems.map(
-              (blockProgress: BuildingBlockProgress) => (
-                <BuildingBlockItem key={blockProgress.id} {...blockProgress} />
-              )
-            )}
+            <ul>
+              {data.block.words.map((w) => (
+                <li key={w.id}>{`${w.text} -> ${w.shortTranslation}`}</li>
+              ))}
+            </ul>
           </div>
         )}
       </ErrorBoundary>
     </div>
   );
 };
+
+export default BlockPage;
