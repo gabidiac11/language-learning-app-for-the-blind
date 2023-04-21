@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import axiosInstance from "../axiosInstance";
 
 const useFetchData = <T>(url: string) => {
@@ -6,6 +6,8 @@ const useFetchData = <T>(url: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
   const [retryFlag, setRetryFlag] = useState<number>();
+
+  const urlRef = useRef<string>();
 
   const fetchData = useCallback(async () => {
     try {
@@ -21,7 +23,11 @@ const useFetchData = <T>(url: string) => {
   const retry = useCallback(() => setRetryFlag((retryFlag ?? 0) + 1), []);
 
   useEffect(() => {
-    fetchData();
+    // some mental stuff happens that react is firing this twice for no reason
+    if (urlRef.current != url) {
+      urlRef.current = url;
+      fetchData();
+    }
   }, [fetchData]);
 
   useEffect(() => {
@@ -29,7 +35,7 @@ const useFetchData = <T>(url: string) => {
       return;
     }
     fetchData();
-  }, [retryFlag]);
+  }, [retryFlag, fetchData]);
 
   return { data, loading, error, retry };
 };
