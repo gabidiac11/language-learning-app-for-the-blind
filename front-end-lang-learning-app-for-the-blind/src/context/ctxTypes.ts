@@ -51,6 +51,8 @@ export type BuildingBlockProgress = {
   timeStarted?: number;
   timeCompleted?: number;
 
+  timeSummaryCompleted?: number;
+
   wordProgressItems: WordProgress[];
   block: BuildingBlock;
 };

@@ -8,6 +8,7 @@ function completeAllBlocks(userStory: UserStory) {
   userStory.buildingBlocksProgressItems.forEach((bp) => {
     bp.timeUnlocked = new Date().getTime();
     bp.timeStarted = new Date().getTime();
+    bp.timeSummaryCompleted = new Date().getTime();
     bp.timeCompleted = new Date().getTime();
     bp.wordProgressItems.forEach((wordProgress) => {
       wordProgress.score = 100;
@@ -54,11 +55,15 @@ export function generateDiverseStories() {
     new Date().getTime();
   startedStory.buildingBlocksProgressItems[1].timeStarted =
     new Date().getTime();
+  startedStory.buildingBlocksProgressItems[1].timeSummaryCompleted =
+    new Date().getTime();
   startedStory.buildingBlocksProgressItems[1].wordProgressItems[0].score = 50;
   // block - completed:
   startedStory.buildingBlocksProgressItems[2].timeUnlocked =
     new Date().getTime();
   startedStory.buildingBlocksProgressItems[2].timeStarted =
+    new Date().getTime();
+  startedStory.buildingBlocksProgressItems[2].timeSummaryCompleted =
     new Date().getTime();
   startedStory.buildingBlocksProgressItems[2].timeCompleted =
     new Date().getTime();

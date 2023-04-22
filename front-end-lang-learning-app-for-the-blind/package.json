@@ -55,6 +55,7 @@
     ]
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.21.4"
+    "axios-mock-adapter": "^1.21.4",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

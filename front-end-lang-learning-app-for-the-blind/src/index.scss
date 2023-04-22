@@ -78,12 +78,17 @@ code {
   padding: 60px 40px;
 }
 
-.view-content {
+.view-content.view-items {
   display: flex;
   flex-wrap: wrap;
   width: auto;
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 // UTILS
 .cursor-point {

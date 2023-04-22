@@ -9,7 +9,9 @@ import AuthenticatedRoutesWrapper from "./AuthenticatedRoutesWrapper";
 import { StoryPage } from "../pages/autheticated/StoryPage/StoryPage";
 import { Loader } from "../pages/page-components/Loader";
 import { useAuthInit } from "../auth/authHooks";
-import BlockPage from "../pages/autheticated/BlockPage/BlockPage";
+import BlockIntroduction from "../pages/autheticated/BlockPage/BlockIntroduction/BlockIntroduction";
+import BlockStartPage from "../pages/autheticated/BlockPage/BlockStartPage";
+import BlockQuiz from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuiz";
 
 const App = () => {
   const { user, isLoading } = useAuthInit();
@@ -36,9 +38,13 @@ const App = () => {
           <AuthenticatedRoutesWrapper>
             <Routes>
               <Route path="/stories" element={<StoriesOverviewPage />} />
-              {/* TODO: add route for story page */}
               <Route path="/stories/:id" element={<StoryPage />} />
-              <Route path="/blocks/:id" element={<BlockPage />} />
+
+              {/* // TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
+              <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
+              <Route path="/blocks/:id/introduction" element={<BlockIntroduction />} />
+              <Route path="/blocks/:id" element={<BlockStartPage />} />
+
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>
