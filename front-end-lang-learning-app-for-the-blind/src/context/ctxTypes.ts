@@ -76,6 +76,7 @@ export type BuildingBlock = {
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
   words: Word[];
+  quizStates?: QuizState[];
 };
 
 export type Word = {
@@ -134,3 +135,40 @@ export type EpilogueQuestion = {
   options: string[];
   correctOption: string;
 };
+
+
+// QUIZ
+export enum RoundOutcome {
+  Hit,
+  Miss,
+  Unset,
+  Excluded,
+}
+
+export type RoundWord = {
+  wordProgress: WordProgress;
+  outcomes: RoundOutcome[];
+};
+
+export type QuizState = {
+  availableRoundWords: RoundWord[];
+  currentRoundWords: RoundWord[];
+  roundCount: number;
+  timeCompleted?: number;
+};
+
+
+
+// API types:
+export type QuizOption = {
+  // this id is mapped to a word id - to avoid exposing the correct option
+  proxyId: number;
+  text: string;
+}
+export type QuizResponse = {
+  quizCompleted: boolean;
+  question: string;
+  options: QuizOption[];
+  // id to the correct answer from previous question
+  privousQuestionCorrectWordProxyId?: number;
+}

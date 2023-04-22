@@ -17,7 +17,7 @@ export const getFormattedTimestamp = (timestamp: number): string => {
   return formattedDate;
 };
 
-export const shuffleArray = (array: Array<any>) => {
+export const getShuffledArray = <T>(array: T[]):T[] => {
   const shuffledArray = [...array];
   for (let i = shuffledArray.length - 1; i > 0; i--) {
     // Math.random() returns a float from [0, 1) -> 

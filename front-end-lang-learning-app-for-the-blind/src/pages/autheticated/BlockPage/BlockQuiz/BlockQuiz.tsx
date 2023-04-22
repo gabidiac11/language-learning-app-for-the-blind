@@ -1,3 +1,23 @@
+import { Button } from "@mui/material";
+import { useRef } from "react";
+import { useParams } from "react-router";
+import useFetchData, {
+  UseFetchDataOptions,
+} from "../../../../api/useFetchData";
+import {
+  BuildingBlockProgress,
+  QuizOption,
+  QuizResponse,
+  Word,
+  WordProgress,
+} from "../../../../context";
+import { getShuffledArray } from "../../../../utils";
+import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
+
+const fetchOptioons: UseFetchDataOptions = {
+  method: "POST",
+};
+
 const BlockQuiz = () => {
   //TODO: restrict page if introduction not finished
   //TODO: start a session in the backend
@@ -10,12 +30,43 @@ const BlockQuiz = () => {
   //TODO: make question wrongly answer more frequent than the others -> need to do a call to server to calculate that
   //TODO:
   return (
-    <div>
-      <div>question</div>
-      <div>bad variant</div>
-      <div>bad variant</div>
-      <div>bad variant</div>
-      <div>good variant</div>
+    <div className="view">
+      {/* <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+        {intialQuizResponse && <div className="view-content"></div>}
+      </ErrorBoundary> */}
+    </div>
+  );
+};
+
+const BlockQuizQuestion = (props: {
+  wordProgress: WordProgress;
+  allWords: Word[];
+  onChoose: (word: Word) => void;
+}) => {
+  const { id: blockProgressId } = useParams<{ id: string }>();
+  const { data, loading, error, retry } = useFetchData<QuizResponse>(
+    `blocks/${blockProgressId}/start-or-continue-quiz`
+  );
+
+  const onChoose = (option: QuizOption) => {};
+
+  return (
+    <div className="view">
+      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+        <div className="view-content">
+          <>
+            <h3>What does 'props.wordProgress.word.text' mean? </h3>
+            {data?.options.map((option) => (
+              <div key={option.proxyId}>
+                {/* TODO: see how you wrap the text */}
+                <Button onClick={() => onChoose(option)}>
+                  <h5>{option.text}</h5>
+                </Button>
+              </div>
+            ))}
+          </>
+        </div>
+      </ErrorBoundary>
     </div>
   );
 };

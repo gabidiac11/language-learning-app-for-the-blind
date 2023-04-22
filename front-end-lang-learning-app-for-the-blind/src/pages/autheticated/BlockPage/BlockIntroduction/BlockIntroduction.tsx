@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress, Word } from "../../../../context";
-import { shuffleArray } from "../../../../utils";
+import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import { Loader } from "../../../page-components/Loader";
 import "./BlockIntroduction.scss";
@@ -35,7 +35,7 @@ const BlockIntroduction = () => {
 
   useLayoutEffect(() => {
     if (data) {
-      data.block.words = shuffleArray(data.block.words);
+      data.block.words = getShuffledArray(data.block.words);
       setIndexWord(0);
     }
   }, [data]);

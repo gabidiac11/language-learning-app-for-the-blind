@@ -3,7 +3,6 @@ import "./StoriesOverviewPage.scss";
 import useFetchData from "../../../api/useFetchData";
 import { UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import { Loader } from "../../page-components/Loader";
 
 export const StoriesOverviewPage = () => {
   const { data, loading, error, retry } =
