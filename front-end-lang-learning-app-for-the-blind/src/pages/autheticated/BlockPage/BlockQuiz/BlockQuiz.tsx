@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import useFetchData, {
   UseFetchDataOptions,
@@ -19,6 +19,12 @@ const fetchOptioons: UseFetchDataOptions = {
 };
 
 const BlockQuiz = () => {
+  const { id: blockProgressId } = useParams<{ id: string }>();
+  const { data: initialResponse, loading, error, retry } = useFetchData<QuizResponse>(
+    `blocks/${blockProgressId}/start-or-continue-quiz`
+  );
+  const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
+
   //TODO: restrict page if introduction not finished
   //TODO: start a session in the backend
   //TODO: stop watch for fairly long time
@@ -29,26 +35,31 @@ const BlockQuiz = () => {
   //
   //TODO: make question wrongly answer more frequent than the others -> need to do a call to server to calculate that
   //TODO:
+
+  useEffect(() => {
+    setCurrentQuestion(initialResponse)
+  }, [initialResponse]);
+
   return (
     <div className="view">
-      {/* <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        {intialQuizResponse && <div className="view-content"></div>}
-      </ErrorBoundary> */}
+      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+        {currentQuestion && <BlockQuizQuestion currentQuestion={currentQuestion} />}
+
+      </ErrorBoundary> 
     </div>
   );
 };
 
 const BlockQuizQuestion = (props: {
-  wordProgress: WordProgress;
-  allWords: Word[];
-  onChoose: (word: Word) => void;
+  currentQuestion: QuizResponse;
+  onChoose: (currentQuestion: QuizResponse, option: QuizOption) => void;
 }) => {
   const { id: blockProgressId } = useParams<{ id: string }>();
   const { data, loading, error, retry } = useFetchData<QuizResponse>(
     `blocks/${blockProgressId}/start-or-continue-quiz`
   );
 
-  const onChoose = (option: QuizOption) => {};
+  const onChoose = (option: QuizOption) => on;
 
   return (
     <div className="view">
