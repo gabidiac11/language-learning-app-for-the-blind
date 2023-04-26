@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import useFetchData, {
   UseFetchDataOptions,
@@ -14,14 +14,24 @@ import {
 import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 
-const fetchOptioons: UseFetchDataOptions = {
-  method: "POST",
-};
+
+type UseFetchDataOptionsQuizRequest = {
+  proxyId: number;
+}
 
 const BlockQuiz = () => {
   const { id: blockProgressId } = useParams<{ id: string }>();
-  const { data: initialResponse, loading, error, retry } = useFetchData<QuizResponse>(
-    `blocks/${blockProgressId}/start-or-continue-quiz`
+  const [fetchOptions, setFetchOptions] = useState<UseFetchDataOptions>({
+    method: "POST",
+  })
+  const {
+    data: initialResponse,
+    loading,
+    error,
+    retry,
+  } = useFetchData<QuizResponse>(
+    `blocks/${blockProgressId}/start-or-continue-quiz`,
+    fetchOptions
   );
   const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
 
@@ -36,49 +46,69 @@ const BlockQuiz = () => {
   //TODO: make question wrongly answer more frequent than the others -> need to do a call to server to calculate that
   //TODO:
 
+  const onChoose = useCallback((option: QuizOption) => {
+    setFetchOptions()
+    /**
+     * TODO:
+     * create new options and trigger new post
+     * {
+     *  questionId: ....
+     *  proxyIdOption: ...
+     * }
+     * 
+     * receive:
+     * {
+     *  proxyIdCorrect: ...
+     *  ...the other stuff from QuizResponse - meaning the next question
+     * }
+     * 
+     * POST:
+     * find question
+     * set status from unset to Miss/Hit
+     * if all current questions were answered: 
+     *  if is finale -> return isFinale in response together with the other stuff
+     *  else -> safe history questions and compiled next set of questions with the probability algorithm
+     * return response detailed earlier with correct id and next question
+     */
+  }, []);
+
   useEffect(() => {
-    setCurrentQuestion(initialResponse)
+    setCurrentQuestion(initialResponse);
   }, [initialResponse]);
 
   return (
     <div className="view">
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        {currentQuestion && <BlockQuizQuestion currentQuestion={currentQuestion} />}
-
-      </ErrorBoundary> 
+        <div className="view-content">
+          {currentQuestion && (
+            <BlockQuizQuestion
+              currentQuestion={currentQuestion}
+              onChoose={onChoose}
+            />
+          )}
+        </div>
+      </ErrorBoundary>
     </div>
   );
 };
 
 const BlockQuizQuestion = (props: {
   currentQuestion: QuizResponse;
-  onChoose: (currentQuestion: QuizResponse, option: QuizOption) => void;
+  onChoose: (option: QuizOption) => void;
 }) => {
-  const { id: blockProgressId } = useParams<{ id: string }>();
-  const { data, loading, error, retry } = useFetchData<QuizResponse>(
-    `blocks/${blockProgressId}/start-or-continue-quiz`
-  );
-
-  const onChoose = (option: QuizOption) => on;
-
   return (
-    <div className="view">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        <div className="view-content">
-          <>
-            <h3>What does 'props.wordProgress.word.text' mean? </h3>
-            {data?.options.map((option) => (
-              <div key={option.proxyId}>
-                {/* TODO: see how you wrap the text */}
-                <Button onClick={() => onChoose(option)}>
-                  <h5>{option.text}</h5>
-                </Button>
-              </div>
-            ))}
-          </>
+    <>
+      <h3>{props.currentQuestion.question}</h3>
+      {/* <h3>What does '{props.currentQuestion.question}' mean? </h3> */}
+      {props.currentQuestion.options.map((option) => (
+        <div key={option.proxyId}>
+          {/* TODO: see how you wrap the text */}
+          <Button onClick={() => props.onChoose(option)}>
+            <h5>{option.text}</h5>
+          </Button>
         </div>
-      </ErrorBoundary>
-    </div>
+      ))}
+    </>
   );
 };
 

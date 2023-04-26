@@ -158,7 +158,6 @@ export type QuizState = {
 };
 
 
-
 // API types:
 export type QuizOption = {
   // this id is mapped to a word id - to avoid exposing the correct option
