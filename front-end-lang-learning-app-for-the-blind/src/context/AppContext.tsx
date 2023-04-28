@@ -1,5 +1,5 @@
 import React, { createContext, PropsWithChildren, useReducer } from "react";
-import { StateType } from "./ctxTypes";
+import { StateType } from "./contextTypes/ctxTypes";
 import initialState from "./initialState";
 import mainReducer from "./reducers";
 

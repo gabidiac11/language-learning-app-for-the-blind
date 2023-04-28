@@ -4,7 +4,7 @@ import {
   EpilogueProgress,
   UserStory,
   WordProgress,
-} from "../../context/ctxTypes";
+} from "../../context/contextTypes/ctxTypes";
 import { genId } from "../mockContext";
 import buildingBlocks from "./buidingBlocks";
 import epilogue from "./epilogue";

@@ -1,4 +1,4 @@
-import { BuildingBlock } from "../../context/ctxTypes";
+import { BuildingBlock } from "../../context/contextTypes/ctxTypes";
 import { genId } from "../mockContext";
 
 const buildingBlocks = (): BuildingBlock[] => [
