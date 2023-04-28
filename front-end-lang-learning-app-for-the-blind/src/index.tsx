@@ -6,7 +6,7 @@ import { AppContextProvider } from "./context/AppContext";
 import { BASE_URL } from "./constants";
 
 import axiosInstance from "./axiosInstance";
-import "./mock/mock";
+import "./mock";
 
 import "./index.scss";
 

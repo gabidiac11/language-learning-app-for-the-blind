@@ -1,4 +1,4 @@
-import { StateAction, StateActionType, StateType } from "./ctxTypes";
+import { StateAction, StateActionType, StateType } from "./contextTypes/ctxTypes";
 import initialState from "./initialState";
 
 export default (state: StateType, action: StateAction): StateType => {

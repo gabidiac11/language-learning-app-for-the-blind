@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { AxiosError } from "axios";
 import React, { useEffect } from "react";
 import { Loader } from "../Loader";
 
@@ -23,7 +24,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
     error && console.error(error);
   }, [error]);
 
-  if(loading) {
+  if (loading) {
     return <Loader />;
   }
 
@@ -51,14 +52,40 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   return <>{children}</>;
 };
 
+const getErrorToString = (error: unknown) => {
+  if (!error) {
+    return null;
+  }
+  const errorAsAxios = error as AxiosError;
+  if (errorAsAxios?.isAxiosError) {
+    const responseErrorMessage =
+      (errorAsAxios.response?.data as { message?: string })?.message ?? "";
+
+    const message = (
+      <p>
+        {errorAsAxios.message}
+        {responseErrorMessage ? ":" : ""}
+        {responseErrorMessage && <><br></br>{responseErrorMessage}</>}
+      </p>
+    );
+    return message;
+  }
+
+  const errorMessage = (error as { message?: string })?.message;
+  if (errorMessage) {
+    return <p>{errorMessage}</p>;
+  }
+  return null;
+};
+
 // TODO: add some @mui materials here for a prettier look
 const DefaultDisplayedApiError = (props: { error: unknown }) => {
-  const errorWithMessage = props.error as { message?: string };
+  const errorMessage = getErrorToString(props.error);
   console.log(typeof props.error, "type of error");
   return (
     <div>
       <p>Operation failed</p>
-      <p>{errorWithMessage?.message && errorWithMessage.message}</p>
+      {errorMessage && errorMessage}
     </div>
   );
 };
