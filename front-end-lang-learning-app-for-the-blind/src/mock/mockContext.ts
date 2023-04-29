@@ -61,16 +61,21 @@ class MockContext {
 
   // WARNING: references are changing with the ctx, be sure to use this with care
   public SaveContext() {
-    localStorage.setItem(MockContext.ctxKey, JSON.stringify(this.ctx));
+    localStorage_setItem(MockContext.ctxKey, JSON.stringify(this.ctx));
     this.ctx = JSON.parse(localStorage.getItem(MockContext.ctxKey) ?? "");
   }
 
   private initLocalStorage() {
     if (!localStorage.getItem(MockContext.ctxKey)) {
-      localStorage.setItem(MockContext.ctxKey, JSON.stringify(this.ctx));
+      localStorage_setItem(MockContext.ctxKey, JSON.stringify(this.ctx));
     }
     this.ctx = JSON.parse(localStorage.getItem(MockContext.ctxKey) ?? "");
   }
+}
+
+function localStorage_setItem(key: string, value: string) {
+  localStorage.setItem(key, value);
+  console.log("Save context", JSON.parse(localStorage.getItem(key) ?? ""));
 }
 
 const mockContext = MockContext.instance;

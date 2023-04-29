@@ -13,17 +13,17 @@ import { genId, MockContext, mockContext } from "../../mockContext";
 import { Result } from "../mockEndpointHelpers";
 
 // TODO: move these to configs
-const MISS_PROB_INC = 20;
-const EXCLUDED_PROB_INC = 10;
+const MISS_PROB_INC = 25;
+const EXCLUDED_PROB_INC = 5;
 const HIT_PROB_DEC = 10;
 
 // TODO: move this to config
-const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 5;
+const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 3;
 
 // It means:
-//if I have [hit, skip, skip, hit] - how many skips between 
+//if I have [hit, skip, skip, hit] - how many skips between
 // hits to consider these hits pseudo-consecutive and conclude that the word was leant
-const MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR = 3; 
+const MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR = 10;
 
 class QuizService {
   private _blockProgress: BuildingBlockProgress;
@@ -291,23 +291,54 @@ class QuizService {
       }
     });
 
-    const newWordOutcomes: WordOutcome[] = wordIdToProbability.map((item) => {
+    // generate outcomes
+    let newWordOutcomes: WordOutcome[] = [];
+    do {
+      log("Start generating outcomes with probabilities:", wordIdToProbability);
+      newWordOutcomes =
+        this.createOutcomesBasedOnProbability(wordIdToProbability);
+      log("Outcomes generated:", newWordOutcomes);
+      if (
+        newWordOutcomes.filter((o) => o.outcome !== RoundOutcome.Excluded)
+          .length === 0
+      ) {
+        log(
+          "Probability didn't generate any included qestions -> increase all probabilities"
+        );
+        wordIdToProbability.forEach((item) => {
+          item.prob + 10;
+        });
+      }
+    } while (
+      newWordOutcomes.filter((o) => o.outcome !== RoundOutcome.Excluded)
+        .length === 0
+    );
+
+    const newWordOutcomesShuffled = getShuffledArray(newWordOutcomes);
+    qs.wordOutcomes = [...qs.wordOutcomes, ...newWordOutcomesShuffled];
+    this.saveContext();
+  }
+
+  private createOutcomesBasedOnProbability(
+    wordIdToProbability: { wordProgressId: number; prob: number }[]
+  ): WordOutcome[] {
+    const results = wordIdToProbability.map((item) => {
       if (this.randomBinary(item.prob / 100)) {
         const newOutcome = this.generateWordOutcomeQuestion(
           item.wordProgressId,
           RoundOutcome.Unset
         );
+        newOutcome.prababilityInclusion = item.prob;
         return newOutcome;
       }
       const newOutcome = this.generateWordOutcomeQuestion(
         item.wordProgressId,
         RoundOutcome.Excluded
       );
+      newOutcome.prababilityInclusion = item.prob;
       return newOutcome;
     });
-    const newWordOutcomesShuffled = getShuffledArray(newWordOutcomes);
-
-    qs.wordOutcomes = [...qs.wordOutcomes, ...newWordOutcomesShuffled];
+    return results;
   }
 
   private blockQuizCanBeCompleted(): boolean {
@@ -320,16 +351,18 @@ class QuizService {
      *  - n = 2; [M, M, M, H, E, E, E, H] => is finale? Yes, because last there are 2 consecutive hits in     [M, M, M, H, E, E, E, H].filter(a=>a!=E) = [M, M, M, H, H]
      *  - n = 2; [M, M, M, H, E, M, E, E, H] => is finale? No, because last there NO 2 consecutive hits in [M, M, M, H, E, M, E, E, H].filter(a=>a!=E) = [M, M, M, H, M, H]
      *
-     * n pseodo-consecutive hits without m length exclusion sequences
+     * n pseodo-consecutive hits without ending with a >m lengthed exclusion sequence 
      * Ex:
      *  - n = 2, m = 2
-     *    [M, M, M, H, E, E, E, H] => is finale? No, because there 3 E'S between last 2 H's
+     *    [M, M, M, H, E, H, E, E, E] => is finale? No, because there 3 E'S at the end of the outcome sequence
      *  - n = 2, m = 5
-     *    same example -> is finale? Yes, because there are 3 < 5 sequances between the last 2 H's
+     *    same example -> is finale? Yes, because there are 3 < 5
      *
      */
     const wordIsFinished = (wp: WordProgress) => {
-      const outcomes = qs.wordOutcomes.map((o) => o.outcome);
+      const outcomes = qs.wordOutcomes
+        .filter((o) => o.idWordProgress === wp.id)
+        .map((o) => o.outcome);
       console.log(
         `Start evaluation word ${wp.word.text}, with outcomes`,
         outcomes
@@ -343,15 +376,35 @@ class QuizService {
         return false;
       }
 
+      if (outcomes[outcomes.length - 1] === RoundOutcome.Excluded) {
+        const getNumOfExcludedLastSeq = () => {
+          let count = 1;
+          for (let i = outcomes.length - 2; i >= 0; i--) {
+            const current = outcomes[i];
+
+            // ignore exclusions
+            if (current !== RoundOutcome.Excluded) {
+              return count;
+            }
+            count++;
+          }
+          return count;
+        };
+        const countExclusions = getNumOfExcludedLastSeq();
+        if (MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR < countExclusions) {
+          console.log(
+            `Word not finished. To countExclusions(=${countExclusions}) < maxLengthAllowedPerExclusionSequence(=${MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR})`
+          );
+          return false;
+        }
+      }
+
       let hitCount = 0;
-      let exclusionsCount = 0;
-      let maxExclusionsCount = 0;
       for (let i = outcomes.length - 1; i >= 0; i--) {
         const current = outcomes[i];
 
-        // count the excluded outcome sequence
+        // ignore exclusions
         if (current === RoundOutcome.Excluded) {
-          exclusionsCount++;
           continue;
         }
 
@@ -360,22 +413,13 @@ class QuizService {
           break;
         }
 
-        // count the consecutive hits; this means the current exclusion sequence is done -> reset sequence of excluded sequence
+        // count the pseudo-consecutive hits
         if (current === RoundOutcome.Hit) {
-          maxExclusionsCount =
-            exclusionsCount > maxExclusionsCount
-              ? exclusionsCount
-              : maxExclusionsCount;
-          exclusionsCount = 0;
           hitCount++;
         }
       }
-      maxExclusionsCount =
-        exclusionsCount > maxExclusionsCount
-          ? exclusionsCount
-          : maxExclusionsCount;
 
-      console.log(`Word has:`, { maxExcCount: maxExclusionsCount, hitCount });
+      console.log(`Word has:`, { hitCount });
 
       if (hitCount < NUM_OF_REQUIRED_CONSECUTIVE_HITS) {
         console.log(
@@ -383,18 +427,11 @@ class QuizService {
         );
         return false;
       }
-      if (
-        maxExclusionsCount < MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR
-      ) {
-        console.log(
-          `Word not finished. To maxExcCount(=${maxExclusionsCount}) < maxLengthAllowedPerExclusionSequence(=${MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR})`
-        );
-        return false;
-      }
       console.log(`Word finished.`);
       return true;
     };
-    const allFinished = this._blockProgress.wordProgressItems.every(wordIsFinished);
+    const allFinished =
+      this._blockProgress.wordProgressItems.every(wordIsFinished);
     return allFinished;
   }
   //< --END-- >< ---------------- CRUD ACTIONS ---------------- >< --END-->
@@ -421,7 +458,7 @@ class QuizService {
       );
     }
 
-    let count = 0;
+    let count = 1;
     const targetOutcome = outcomes[outcomes.length - 1];
     for (let i = outcomes.length - 2; i >= 0; i--) {
       if (outcomes[i] !== targetOutcome) {
@@ -473,10 +510,17 @@ class QuizService {
     idWordProgress: number,
     outcome: RoundOutcome
   ): WordOutcome {
+    const word = this._blockProgress.wordProgressItems.find(
+      (w) => w.id === idWordProgress
+    );
+
     const newWordOutcome: WordOutcome = {
       id: genId(),
       idWordProgress,
       outcome,
+      // these are for tracing - not intended for usage
+      wordTxt: word?.word.text ?? "",
+      prababilityInclusion: 0
     };
     if (newWordOutcome.outcome != RoundOutcome.Excluded) {
       newWordOutcome.question = this.generateQuestion(idWordProgress);
@@ -496,8 +540,18 @@ class QuizService {
   }
 
   private randomBinary(p: number) {
-    return Math.random() < p ? true : false;
+    const rand = Math.random();
+    console.log({ rand, p });
+    return rand <= p ? true : false;
   }
 }
 
+function log(value: string, obj?: any) {
+  if (obj) {
+    const _obj = JSON.parse(JSON.stringify(obj));
+    console.log(value, _obj);
+    return;
+  }
+  console.log(value);
+}
 export default QuizService;
