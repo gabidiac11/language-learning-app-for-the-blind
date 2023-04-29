@@ -13,6 +13,9 @@ import { genId, MockContext, mockContext } from "../../mockContext";
 import { log, Result } from "../mockEndpointHelpers";
 import ProgressService from "./ProgressService";
 
+
+
+// TODO: refine the algoritm...
 // TODO: move these to configs
 const MISS_PROB_INC = 30;
 const EXCLUDED_PROB_INC = 10;
@@ -243,7 +246,7 @@ class QuizService {
     const qs = this.getMostRecentQuiz();
     if (this.blockQuizCanBeCompleted()) {
       qs.timeCompleted = new Date().getTime();
-      
+
       const progressService = new ProgressService();
       progressService.setBlockComplete(this._blockProgress.id);
       this.saveContext();

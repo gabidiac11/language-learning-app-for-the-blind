@@ -43,6 +43,15 @@ axiosMockAdapterInstance.onPost(/^blocks\/(.+)\/quiz$/).reply(async (config) =>
       ];
     }
 
+    if (!existingBlock.timeUnlocked) {
+      return [
+        403,
+        {
+          message: `Block '${existingBlock.block.name}' is locked.`,
+        },
+      ];
+    }
+
     wait();
 
     const quizService = new QuizService(userId, Number(blockId));
@@ -96,6 +105,15 @@ axiosMockAdapterInstance
         ];
       }
 
+      if (!existingBlock.timeUnlocked) {
+        return [
+          403,
+          {
+            message: `Block '${existingBlock.block.name}' is locked.`,
+          },
+        ];
+      }
+
       const quiz = mockContext
         .getCtx()
         .quizStates?.[blockId]?.quizStates?.find(
@@ -116,7 +134,9 @@ axiosMockAdapterInstance
       const blockProgressUnlockedItems: BuildingBlockProgress[] = [];
       existingBlock.block.dependentOnIds
         ?.map((id) =>
-          storyOfTheBlock.buildingBlocksProgressItems.find((i) => i.block.id === id)
+          storyOfTheBlock.buildingBlocksProgressItems.find(
+            (i) => i.block.id === id
+          )
         )
         .forEach((item) => {
           if (item) {
