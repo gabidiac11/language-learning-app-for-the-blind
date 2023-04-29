@@ -1,4 +1,4 @@
-import { UserStory } from "../../context";
+import { BuildingBlockProgress, UserStory } from "../../context";
 import { dummyInitialUserStoryData } from "./storyData";
 
 function completeAllBlocks(userStory: UserStory) {
@@ -125,7 +125,7 @@ export function generateDiverseStories() {
   });
   updateNumOfStuffForStory(finishedStory);
 
-  return [
+  const stories = [
     lockedStory,
     unlockStory,
     startedStory,
@@ -133,4 +133,109 @@ export function generateDiverseStories() {
     startedStoryWithEpilogueStarted,
     finishedStory,
   ];
+
+  // GUARD IF ALL BLOCKS and stories ARE ACCESIBLE
+  quardStories(stories);
+
+  return stories;
+}
+
+type ItemDependence = {
+  id: number;
+  dependentOnIds?: number[];
+  timeUnlocked?: number;
+  entity: UserStory | BuildingBlockProgress;
+};
+
+function quardStories(stories: UserStory[]) {
+  stories.forEach((story) => {
+    if(!story.timeUnlocked) {
+      console.log(`SKIPPED. Checking if blocks accessible for -locked- story ${story.name}`);
+      return;
+    }
+
+    console.log(`Checking if blocks accessible for story ${story.name}`);
+    const blocksAdapted = story.buildingBlocksProgressItems.map(
+      (item) =>
+        ({
+          id: item.block.id,
+          dependentOnIds: item.block.dependentOnIds,
+          timeUnlocked: item.timeUnlocked,
+          entity: item
+        } as ItemDependence)
+    );
+    guardIfAllItemsAccesible(blocksAdapted);
+  });
+
+  // TODO: do the same for stories
+}
+
+/**
+ * all items (blocks or stories) should be linked to each other
+ * using BFS algorithm we're doing a search from starter nodes - which are the items unlocked from the begining
+ * @param itemsTargeted 
+ */
+function guardIfAllItemsAccesible(itemsTargeted: ItemDependence[]) {
+  const queue = itemsTargeted.filter((item) => !!item.timeUnlocked);
+  const visited = queue.map((i) => i.id);
+
+  // create parent vector and assign root blooks (the one unblocked from the start)
+  const accessible: {
+    parent: "NONE" | "ROOT" | ItemDependence;
+    childBp: ItemDependence;
+  }[] = itemsTargeted.map((item) => ({ parent: "NONE", childBp: item }));
+  queue.forEach((item) => {
+    const accessItem = accessible.find((i) => i.childBp.id === item.id);
+    if (accessItem) accessItem.parent = "ROOT";
+  });
+
+  let currentItem = queue.shift();
+  while (currentItem) {
+    const dependentIds = currentItem.dependentOnIds;
+    if (!dependentIds) {
+      currentItem = queue.shift();
+      continue;
+    }
+
+    const dependentItems: ItemDependence[] = [];
+    dependentIds.forEach((dependentId) => {
+      const found = itemsTargeted.find((bp) => bp.id === dependentId);
+      if (found) {
+        dependentItems.push(found);
+      }
+    });
+
+    dependentItems.forEach((dependentItem) => {
+      if (!visited.some((id) => dependentItem.id === id)) {
+        if (!currentItem)
+          throw Error("Tagert item should not be null or undefined");
+
+        visited.push(dependentItem.id);
+        queue.push(dependentItem);
+
+        // update parent
+        const accessItem = accessible.find(
+          (i) => i.childBp.id === dependentItem.id
+        );
+        if (accessItem) accessItem.parent = currentItem;
+      }
+    });
+
+    currentItem = queue.shift();
+  }
+  const allAreAccesible = accessible.some(
+    (accessItem) => accessItem.parent !== "NONE"
+  );
+  if (!allAreAccesible) {
+    console.log(`Not all items are accesible`, {
+      accessible,
+      blockProgressItems: itemsTargeted,
+    });
+    throw Error(`Not all items are accesible`);
+  }
+
+  console.log(`All items are accesible`, {
+    accessible,
+    blockProgressItems: itemsTargeted,
+  });
 }

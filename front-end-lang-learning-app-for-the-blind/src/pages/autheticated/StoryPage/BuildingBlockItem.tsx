@@ -6,7 +6,11 @@ import CardBlock from "../../page-components/CardBlock/CardBlock";
 import { ItemProgressSummary } from "../../page-components/ItemProgressSummary";
 import "./StoryPage.scss";
 
-const BuildingBlockItem = (blockProgress: BuildingBlockProgress) => {
+const BuildingBlockItem = (props: {
+  blockProgress: BuildingBlockProgress;
+  dependentNames?: string[];
+}) => {
+  const { blockProgress } = props;
   const navigate = useNavigate();
   const disabled = !blockProgress.timeUnlocked;
 
@@ -22,7 +26,12 @@ const BuildingBlockItem = (blockProgress: BuildingBlockProgress) => {
     <CardBlock disabled={disabled} onClick={navigateToStory}>
       <CardHeader
         title={blockProgress.block.name}
-        subheader={<ItemProgressSummary {...blockProgress} />}
+        subheader={
+          <ItemProgressSummary
+            dependentNames={props.dependentNames}
+            item={blockProgress}
+          />
+        }
       />
       <CardMedia
         component="img"

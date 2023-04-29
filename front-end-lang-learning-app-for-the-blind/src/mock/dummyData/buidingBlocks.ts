@@ -1,8 +1,111 @@
 import { BuildingBlock } from "../../context/contextTypes/ctxTypes";
 import { genId } from "../mockContext";
 
-const buildingBlocks = (): BuildingBlock[] => [
-  {
+const buildingBlocks = (): BuildingBlock[] => {
+  const familyBlock: BuildingBlock = {
+    id: genId(),
+    name: "Family",
+    imageUrl:
+      "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    words: [
+      {
+        id: genId(),
+        text: "семьей",
+        shortTranslation: "family",
+        longTranslation:
+          "A group consisting of parents and children living together in a household",
+      },
+      {
+        id: genId(),
+        text: "мамой",
+        shortTranslation: "mom",
+        longTranslation: "One's mother",
+      },
+      {
+        id: genId(),
+        text: "папа",
+        shortTranslation: "dad",
+        longTranslation: "Used when referring to one's father.",
+      },
+      {
+        id: genId(),
+        text: "братом",
+        shortTranslation: "brother",
+        longTranslation: "A male sibling",
+      },
+      //TODO: add more words for ungle, sister and stuff
+      {
+        id: genId(),
+        text: "зовут",
+        shortTranslation: "called",
+        longTranslation: "Used to refer to the name or title of someone",
+      },
+      {
+        id: genId(),
+        text: "младше",
+        shortTranslation: "younger",
+        longTranslation: "Being at an earlier age",
+      },
+      {
+        id: genId(),
+        text: "на два года",
+        shortTranslation: "two years younger",
+        longTranslation: "Being two years younger than someone else",
+      },
+      {
+        id: genId(),
+        text: "любим",
+        shortTranslation: "favorite",
+        longTranslation: "Preferred over all others of the same kind",
+      },
+      {
+        id: genId(),
+        text: "людях",
+        shortTranslation: "people",
+        longTranslation: "Human beings in general or considered collectively",
+      },
+      {
+        id: genId(),
+        text: "рада",
+        shortTranslation: "happy",
+        longTranslation: "Feeling or showing pleasure or contentment",
+      },
+    ],
+  };
+  const namesBlock: BuildingBlock = {
+    id: genId(),
+    name: "Names",
+    imageUrl:
+      "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    words: [
+      {
+        id: genId(),
+        text: "Анна",
+        shortTranslation: "Anna",
+        longTranslation: "A female given name",
+      },
+      {
+        id: genId(),
+        text: "Катя",
+        shortTranslation: "Katya",
+        longTranslation: "A female given name",
+      },
+      {
+        id: genId(),
+        text: "Иван",
+        shortTranslation: "Ivan",
+        longTranslation: "A male given name",
+      },
+      {
+        id: genId(),
+        text: "Александр",
+        shortTranslation: "Alexander",
+        longTranslation:
+          'A male given name of Greek origin, meaning "defender of the people."',
+      },
+    ],
+  };
+  const pronumsBlock: BuildingBlock = {
     id: genId(),
     name: "Pronouns",
     imageUrl:
@@ -144,128 +247,9 @@ const buildingBlocks = (): BuildingBlock[] => [
           "Indicates a state of being with one or more other people or things",
       },
     ],
-  },
-  {
-    id: genId(),
-    name: "Names",
-    imageUrl:
-      "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    words: [
-      {
-        id: genId(),
-        text: "Анна",
-        shortTranslation: "Anna",
-        longTranslation: "A female given name",
-      },
-      {
-        id: genId(),
-        text: "Катя",
-        shortTranslation: "Katya",
-        longTranslation: "A female given name",
-      },
-      {
-        id: genId(),
-        text: "Иван",
-        shortTranslation: "Ivan",
-        longTranslation: "A male given name",
-      },
-      {
-        id: genId(),
-        text: "Александр",
-        shortTranslation: "Alexander",
-        longTranslation:
-          'A male given name of Greek origin, meaning "defender of the people."',
-      },
-    ],
-  },
-  {
-    id: genId(),
-    name: "Family",
-    imageUrl:
-      "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    words: [
-      {
-        id: genId(),
-        text: "семьей",
-        shortTranslation: "family",
-        longTranslation:
-          "A group consisting of parents and children living together in a household",
-      },
-      {
-        id: genId(),
-        text: "мамой",
-        shortTranslation: "mom",
-        longTranslation: "One's mother",
-      },
-      {
-        id: genId(),
-        text: "папой",
-        shortTranslation: "dad",
-        longTranslation: "One's father",
-      },
-      {
-        id: genId(),
-        text: "папа",
-        shortTranslation: "dad",
-        longTranslation: "Used when referring to one's father.",
-      },
-      {
-        id: genId(),
-        text: "братом",
-        shortTranslation: "brother",
-        longTranslation: "A male sibling",
-      },
-      {
-        id: genId(),
-        text: "мама",
-        shortTranslation: "mom (vocative case)",
-        longTranslation: "One's mother",
-      },
-      {
-        id: genId(),
-        text: "зовут",
-        shortTranslation: "called",
-        longTranslation: "Used to refer to the name or title of someone",
-      },
-      {
-        id: genId(),
-        text: "брат",
-        shortTranslation: "brother",
-        longTranslation: "A male sibling",
-      },
-      {
-        id: genId(),
-        text: "младше",
-        shortTranslation: "younger",
-        longTranslation: "Being at an earlier age",
-      },
-      {
-        id: genId(),
-        text: "на два года",
-        shortTranslation: "two years younger",
-        longTranslation: "Being two years younger than someone else",
-      },
-      {
-        id: genId(),
-        text: "любим",
-        shortTranslation: "favorite",
-        longTranslation: "Preferred over all others of the same kind",
-      },
-      {
-        id: genId(),
-        text: "людях",
-        shortTranslation: "people",
-        longTranslation: "Human beings in general or considered collectively",
-      },
-      {
-        id: genId(),
-        text: "рада",
-        shortTranslation: "happy",
-        longTranslation: "Feeling or showing pleasure or contentment",
-      },
-    ],
-  },
-  {
+  };
+  
+  const temporalsBlock: BuildingBlock = {
     id: genId(),
     name: "Temporal words",
     imageUrl:
@@ -342,8 +326,8 @@ const buildingBlocks = (): BuildingBlock[] => [
           "Indicates that something happens without exception or failure",
       },
     ],
-  },
-  {
+  };
+  const placesBlock: BuildingBlock = {
     id: genId(),
     name: "Places",
     imageUrl:
@@ -392,8 +376,8 @@ const buildingBlocks = (): BuildingBlock[] => [
           "Classes or sessions in which a teacher instructs a student on a particular subject or topic",
       },
     ],
-  },
-  {
+  };
+  const verbsBlock: BuildingBlock = {
     id: genId(),
     name: "Verbs",
     imageUrl:
@@ -555,8 +539,8 @@ const buildingBlocks = (): BuildingBlock[] => [
           "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings",
       },
     ],
-  },
-  {
+  };
+  const connectionWords: BuildingBlock = {
     id: genId(),
     name: "Connection words",
     imageUrl:
@@ -601,7 +585,34 @@ const buildingBlocks = (): BuildingBlock[] => [
           "Preposition indicating accompaniment, source, or possession.",
       },
     ],
-  },
-];
+  };
+
+  // family unlocks -> pronons and names 
+  familyBlock.dependentOnIds = [namesBlock.id, pronumsBlock.id];
+
+  // pronums unlocks -> temporal
+  pronumsBlock.dependentOnIds = [temporalsBlock.id];
+
+  // temporal unlocks -> places
+  temporalsBlock.dependentOnIds = [placesBlock.id];
+
+  // places unlocks -> verbs
+  placesBlock.dependentOnIds = [verbsBlock.id];
+
+  // verbs unlocks -> connection words
+  verbsBlock.dependentOnIds = [connectionWords.id];
+
+  const blocks = [
+    familyBlock,
+    namesBlock,
+    pronumsBlock,
+    temporalsBlock,
+    placesBlock,
+    verbsBlock,
+    connectionWords,
+  ];
+  
+  return blocks;
+};
 
 export default buildingBlocks;

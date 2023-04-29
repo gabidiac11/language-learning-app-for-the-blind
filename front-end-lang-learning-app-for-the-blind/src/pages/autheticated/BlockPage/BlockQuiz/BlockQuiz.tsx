@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useFetchData from "../../../../api/useFetchData";
 import {
   UseFetchDataOptionsQuizRequest,
@@ -11,7 +11,6 @@ import {
   QuizResponseComplete,
 } from "../../../../context/contextTypes/quizTypes";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import BlockQuizCompleted from "./BlockQuizCompleted";
 import BlockQuizQuestion from "./BlockQuizQuestion";
 import "./BlockQuiz.scss";
 
@@ -23,6 +22,7 @@ const requestIntialQuestionFetchOption: UseFetchDataOptionsQuizRequest = {
 };
 
 const BlockQuiz = () => {
+  const navigate = useNavigate();
   const { id: blockProgressId } = useParams<{ id: string }>();
   const [fetchOptions, setFetchOptions] =
     useState<UseFetchDataOptionsQuizRequest>(requestIntialQuestionFetchOption);
@@ -69,8 +69,12 @@ const BlockQuiz = () => {
       return;
     }
 
-    if ((response.data as QuizResponseComplete)?.quizCompleted) {
+    const dataAsQuizComplete = response.data as QuizResponseComplete;
+    if (dataAsQuizComplete?.quizCompleted) {
       setQuizCompleted(true);
+      navigate(
+        `/blocks/${blockProgressId}/quiz/${dataAsQuizComplete.quizId}/completed`
+      );
       return;
     }
 
@@ -88,9 +92,15 @@ const BlockQuiz = () => {
 
   return (
     <div className="view quiz-view">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading} preserveChildren={preserveChildren}>
+      <ErrorBoundary
+        error={error}
+        onRetry={retry}
+        //TODO: retest completion to check the redirect
+        loading={loading || !!quizCompleted}
+        preserveChildren={preserveChildren}
+      >
         <div className="view-content">
-          {!quizCompleted && currentQuestion && (
+          {currentQuestion && (
             <BlockQuizQuestion
               key={currentQuestion.questionId}
               currentQuestion={currentQuestion}
@@ -99,7 +109,6 @@ const BlockQuiz = () => {
               onNext={getToNextQuestion}
             />
           )}
-          {quizCompleted && <BlockQuizCompleted />}
         </div>
       </ErrorBoundary>
     </div>

@@ -49,13 +49,13 @@ export const dummyInitialUserStoryData = (): UserStory => {
   const buildingBlocksProgressItems = generateBuildingProgress();
   const epilogueProgress = generateEpilogueProgress();
 
-  const story = {
+  const story:UserStory = {
     id: genId(),
     name: "My family",
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    storyDependentOnIds: [],
+    dependentOnIds: [],
     buildingBlocksProgressItems,
     epilogueProgress,
     numOfBlocksCompleted: 0,
