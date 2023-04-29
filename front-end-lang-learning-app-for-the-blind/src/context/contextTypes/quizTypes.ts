@@ -32,6 +32,9 @@ export type WordOutcome = {
   outcome: RoundOutcome;
   idWordProgress: number;
   question?: QuizQuestion;
+  // intended for tracing - not usage
+  wordTxt: string;
+  prababilityInclusion: number;
 };
 
 export type QuizState = {

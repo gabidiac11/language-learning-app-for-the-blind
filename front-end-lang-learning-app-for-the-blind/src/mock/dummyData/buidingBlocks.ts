@@ -147,6 +147,39 @@ const buildingBlocks = (): BuildingBlock[] => [
   },
   {
     id: genId(),
+    name: "Names",
+    imageUrl:
+      "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    words: [
+      {
+        id: genId(),
+        text: "Анна",
+        shortTranslation: "Anna",
+        longTranslation: "A female given name",
+      },
+      {
+        id: genId(),
+        text: "Катя",
+        shortTranslation: "Katya",
+        longTranslation: "A female given name",
+      },
+      {
+        id: genId(),
+        text: "Иван",
+        shortTranslation: "Ivan",
+        longTranslation: "A male given name",
+      },
+      {
+        id: genId(),
+        text: "Александр",
+        shortTranslation: "Alexander",
+        longTranslation:
+          'A male given name of Greek origin, meaning "defender of the people."',
+      },
+    ],
+  },
+  {
+    id: genId(),
     name: "Family",
     imageUrl:
       "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -229,39 +262,6 @@ const buildingBlocks = (): BuildingBlock[] => [
         text: "рада",
         shortTranslation: "happy",
         longTranslation: "Feeling or showing pleasure or contentment",
-      },
-    ],
-  },
-  {
-    id: genId(),
-    name: "Names",
-    imageUrl:
-      "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    words: [
-      {
-        id: genId(),
-        text: "Анна",
-        shortTranslation: "Anna",
-        longTranslation: "A female given name",
-      },
-      {
-        id: genId(),
-        text: "Катя",
-        shortTranslation: "Katya",
-        longTranslation: "A female given name",
-      },
-      {
-        id: genId(),
-        text: "Иван",
-        shortTranslation: "Ivan",
-        longTranslation: "A male given name",
-      },
-      {
-        id: genId(),
-        text: "Александр",
-        shortTranslation: "Alexander",
-        longTranslation:
-          'A male given name of Greek origin, meaning "defender of the people."',
       },
     ],
   },
