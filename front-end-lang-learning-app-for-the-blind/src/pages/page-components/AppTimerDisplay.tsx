@@ -21,7 +21,7 @@ const AppTimerDisplay = (props: { limit: number; onTimeOut: () => void }) => {
       clearInterval(timeRef.current);
     };
   }, [increaseCounter]);
-  return <>{counter}</>;
+  return <>{props.limit - counter}</>;
 };
 
 export default AppTimerDisplay;

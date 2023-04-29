@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import { useCallback } from "react";
+import { Button, Typography } from "@mui/material";
+import { useCallback, useState } from "react";
 import {
   QuizOption,
   QuizResponseNextQuestion,
@@ -12,35 +12,49 @@ const BlockQuizQuestion = (props: {
   onNext: () => void;
   onChoose: (option: QuizOption) => void;
 }) => {
-  const getCorrectOptionTxt = useCallback(() => {
-    const correctOption = props.currentQuestion.options.find(
-      (i) => i.id === props.correctOptionId
-    );
-    if (correctOption) {
-      return correctOption.text;
-    }
-    return "error";
-  }, [props.correctOptionId, props.currentQuestion]);
+  const [selected, setSelected] = useState<QuizOption>();
+  
+  const onChoose = useCallback(
+    (option: QuizOption) => {
+      setSelected(option);
+      props.onChoose(option);
+    },
+    [props.onChoose]
+  );
 
   return (
     <>
-      <h3>{props.currentQuestion.questionText}</h3>
+      <Typography variant="h5" mb={5} align="center">{props.currentQuestion.questionText}</Typography>
       {props.currentQuestion.options.map((option) => (
         <div key={option.id}>
           {/* TODO: see how you wrap the text */}
           <Button
             variant="contained"
-            style={{ minWidth: "70vw", margin: "10px 0", textAlign: "left" }}
-            onClick={() => props.onChoose(option)}
+            className="quiz-question-option"
+            disabled={!!selected}
+            onClick={() => onChoose(option)}
           >
-            <span>{option.text}</span>
+            {(() => {
+              if (!selected || !props.correctOptionId) {
+                return "";
+              }
+              if (option.id === props.correctOptionId) {
+                return <Typography className="mark">✔️</Typography>;
+              }
+              if (option.id === selected.id) {
+                return <Typography className="mark">❌</Typography>;
+              }
+            })()}
+            <Typography variant="body1">{option.text}</Typography>
           </Button>
         </div>
       ))}
       {props.correctOptionId && (
         <div>
-          Correct answer is '{getCorrectOptionTxt()}'. Loading next question in{" "}
-          <AppTimerDisplay limit={5} onTimeOut={props.onNext} />
+          <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
+            Loading next question in{" "}
+            <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
+          </Typography>
         </div>
       )}
     </>
