@@ -13,6 +13,7 @@ import {
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import BlockQuizCompleted from "./BlockQuizCompleted";
 import BlockQuizQuestion from "./BlockQuizQuestion";
+import "./BlockQuiz.scss";
 
 const requestIntialQuestionFetchOption: UseFetchDataOptionsQuizRequest = {
   method: "POST",
@@ -38,6 +39,7 @@ const BlockQuiz = () => {
     useState<QuizResponseNextQuestion>();
   const [nextQuestion, setNextQuestion] = useState<QuizResponseNextQuestion>();
   const [quizCompleted, setQuizCompleted] = useState<boolean>();
+  const [preserveChildren, setPreserveChildren] = useState<boolean>();
 
   const onChoose = useCallback(
     (option: QuizOption) => {
@@ -78,17 +80,19 @@ const BlockQuiz = () => {
     )?.questionRequested;
     if (intialQuestionRequest_WasMade) {
       setCurrentQuestion(nextQuestionResponseData);
+      setPreserveChildren(true);
       return;
     }
     setNextQuestion(nextQuestionResponseData);
   }, [response]);
 
   return (
-    <div className="view">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+    <div className="view quiz-view">
+      <ErrorBoundary error={error} onRetry={retry} loading={loading} preserveChildren={preserveChildren}>
         <div className="view-content">
           {!quizCompleted && currentQuestion && (
             <BlockQuizQuestion
+              key={currentQuestion.questionId}
               currentQuestion={currentQuestion}
               correctOptionId={nextQuestion?.previouslyQuestion_CorrectOptionId}
               onChoose={onChoose}

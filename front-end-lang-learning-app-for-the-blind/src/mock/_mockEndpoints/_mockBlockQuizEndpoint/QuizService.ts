@@ -242,6 +242,7 @@ class QuizService {
       qs.timeCompleted = new Date().getTime();
       this._blockProgress.timeCompleted = new Date().getTime();
       //TODO: here to propagate unlock other blocks dependent on this one
+      //TODO: unlock epiloque if case all done
       this.saveContext();
       return;
     }

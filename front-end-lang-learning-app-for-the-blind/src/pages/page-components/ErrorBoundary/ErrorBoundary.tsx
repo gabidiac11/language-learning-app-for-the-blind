@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { AxiosError } from "axios";
 import React, { useEffect } from "react";
-import { Loader } from "../Loader";
+import { Loader, OverLayLoader } from "../Loader";
 
 import "./ErrorBoundary.scss";
 
@@ -11,6 +11,7 @@ type ErrorBoundaryProps = {
   children: React.ReactNode;
   displayedError?: string | React.ReactNode;
   loading: boolean;
+  preserveChildren?: boolean;
 };
 
 const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
@@ -19,10 +20,20 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   onRetry,
   children,
   displayedError,
+  preserveChildren,
 }) => {
   useEffect(() => {
     error && console.error(error);
   }, [error]);
+
+  if (loading && preserveChildren) {
+    return (
+      <>
+        {children}
+        <OverLayLoader />
+      </>
+    );
+  }
 
   if (loading) {
     return <Loader />;
@@ -65,7 +76,12 @@ const getErrorToString = (error: unknown) => {
       <p>
         {errorAsAxios.message}
         {responseErrorMessage ? ":" : ""}
-        {responseErrorMessage && <><br></br>{responseErrorMessage}</>}
+        {responseErrorMessage && (
+          <>
+            <br></br>
+            {responseErrorMessage}
+          </>
+        )}
       </p>
     );
     return message;

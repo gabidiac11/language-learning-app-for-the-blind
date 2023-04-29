@@ -185,7 +185,7 @@ const buildingBlocks = (): BuildingBlock[] => [
       {
         id: genId(),
         text: "мама",
-        shortTranslation: "mom",
+        shortTranslation: "mom (vocative case)",
         longTranslation: "One's mother",
       },
       {

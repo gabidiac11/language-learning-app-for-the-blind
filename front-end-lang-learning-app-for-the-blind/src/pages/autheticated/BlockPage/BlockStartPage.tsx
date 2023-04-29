@@ -25,7 +25,7 @@ const BlockStartPage = () => {
             <h3>
               {!!data.timeSummaryCompleted && (
                 <Link to={`/blocks/${blockProgressId}/quiz`}>
-                  Quiz
+                  Quiz {!!data.timeCompleted && "✔️"}
                 </Link>
               )}
               {!data.timeSummaryCompleted &&
