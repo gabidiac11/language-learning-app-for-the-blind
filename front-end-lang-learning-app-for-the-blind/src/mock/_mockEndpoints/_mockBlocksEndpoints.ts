@@ -66,6 +66,15 @@ axiosMockAdapterInstance
         ];
       }
 
+      if(!existingBlock.timeUnlocked) {
+        return [
+          403,
+          {
+            message: `Block '${existingBlock.block.name}' is locked.`,
+          },
+        ];
+      }
+
       existingBlock.timeSummaryCompleted = new Date().getTime();
       mockContext.SaveContext();
 
