@@ -41,15 +41,11 @@ const BlockIntroduction = () => {
   }, [data]);
 
   return (
-    <div className="view">
+    <div className="view block-summary-view">
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
         {!error && data && blockProgressId && (
           <div className="view-content">
             <h1> {data.block.name} </h1>
-            {data.timeSummaryCompleted && (
-              <ButtonContinueToQuiz blockProgressId={data.id} />
-            )}
-
             {!learningSitCompleted && indexWord !== undefined && (
               <BlockWordSummary
                 key={data.block.words[indexWord].id}
@@ -59,6 +55,9 @@ const BlockIntroduction = () => {
             )}
             {learningSitCompleted && (
               <BlockWordsSummariesCompleted block={data} />
+            )}
+            {data.timeSummaryCompleted && (
+              <ButtonContinueToQuiz blockProgressId={data.id} />
             )}
           </div>
         )}

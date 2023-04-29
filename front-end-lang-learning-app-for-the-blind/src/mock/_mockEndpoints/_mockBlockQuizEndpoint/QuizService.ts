@@ -10,15 +10,17 @@ import {
 } from "../../../context/contextTypes/quizTypes";
 import { getShuffledArray } from "../../../utils";
 import { genId, MockContext, mockContext } from "../../mockContext";
-import { Result } from "../mockEndpointHelpers";
+import { log, Result } from "../mockEndpointHelpers";
+import ProgressService from "./ProgressService";
 
 // TODO: move these to configs
-const MISS_PROB_INC = 25;
-const EXCLUDED_PROB_INC = 5;
-const HIT_PROB_DEC = 10;
+const MISS_PROB_INC = 30;
+const EXCLUDED_PROB_INC = 10;
+const HIT_PROB_DEC = 20;
 
 // TODO: move this to config
-const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 3;
+// const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 3;
+const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 1;
 
 // It means:
 //if I have [hit, skip, skip, hit] - how many skips between
@@ -80,6 +82,7 @@ class QuizService {
     if (this.blockLastQuizIsFinished()) {
       return {
         data: {
+          quizId: this.getMostRecentQuiz().id,
           quizCompleted: true,
         },
       };
@@ -240,9 +243,9 @@ class QuizService {
     const qs = this.getMostRecentQuiz();
     if (this.blockQuizCanBeCompleted()) {
       qs.timeCompleted = new Date().getTime();
-      this._blockProgress.timeCompleted = new Date().getTime();
-      //TODO: here to propagate unlock other blocks dependent on this one
-      //TODO: unlock epiloque if case all done
+      
+      const progressService = new ProgressService();
+      progressService.setBlockComplete(this._blockProgress.id);
       this.saveContext();
       return;
     }
@@ -541,17 +544,9 @@ class QuizService {
 
   private randomBinary(p: number) {
     const rand = Math.random();
-    console.log({ rand, p });
+    log("randomBinary", { rand, p });
     return rand <= p ? true : false;
   }
 }
 
-function log(value: string, obj?: any) {
-  if (obj) {
-    const _obj = JSON.parse(JSON.stringify(obj));
-    console.log(value, _obj);
-    return;
-  }
-  console.log(value);
-}
 export default QuizService;

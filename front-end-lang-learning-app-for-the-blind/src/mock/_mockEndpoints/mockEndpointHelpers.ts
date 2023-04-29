@@ -1,11 +1,12 @@
 import { AxiosRequestConfig } from "axios";
 
 export function log(value: any, obj?: any) {
-  if(obj) {
-    console.log(`Mock: ${value}`, obj);
+  if (obj) {
+    const _obj = JSON.parse(JSON.stringify(obj));
+    console.log(value, _obj);
     return;
   }
-  console.log(`Mock: ${value}`);
+  console.log(value);
 }
 
 export async function withUser<T>(
@@ -46,7 +47,9 @@ export async function withLog(
   log(
     `Finished [${
       response[0]
-    }]${possibleErrorMessage} at ${config.method?.toUpperCase()} /${config.url}`,
+    }]${possibleErrorMessage} at ${config.method?.toUpperCase()} /${
+      config.url
+    }`,
     response?.[1]
   );
   return response;

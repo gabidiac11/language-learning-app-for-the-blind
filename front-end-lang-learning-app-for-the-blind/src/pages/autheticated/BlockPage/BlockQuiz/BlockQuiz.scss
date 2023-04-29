@@ -1,4 +1,5 @@
 .quiz-view {
+  align-items: center;
   .view-content {
     width: 70vw;
     max-width: 840px;
@@ -13,11 +14,13 @@
       .mark {
         padding: 0 5px;
       }
-      &:disabled {
-        // color: white;
-        // box-shadow: none;
-        // background-color: rgba(25, 118, 210, 0.5);
-      }
+    }
+  }
+
+  .quiz-view-content-complete {
+    .success-icon {
+      width: 70px;
+      height: 70px;
     }
   }
 }

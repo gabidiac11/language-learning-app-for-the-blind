@@ -2,7 +2,7 @@ import { axiosMockAdapterInstance } from "../../axiosInstance";
 import { mockContext } from "../mockContext";
 import { withUser, wait } from "./mockEndpointHelpers";
 
-axiosMockAdapterInstance.onGet(/^blocks\/(.+)$/).reply(async (config) =>
+axiosMockAdapterInstance.onGet(/^blocks\/([\d]+)$/).reply(async (config) =>
   withUser(config, async (userId) => {
     const existingUser = mockContext
       .getCtx()

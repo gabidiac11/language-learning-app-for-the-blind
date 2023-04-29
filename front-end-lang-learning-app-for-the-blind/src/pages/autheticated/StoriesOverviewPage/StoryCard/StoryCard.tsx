@@ -26,7 +26,8 @@ export const StoryCard = (props: { userStory: UserStory }) => {
     <CardBlock disabled={disabled} onClick={navigateToStory}>
       <CardHeader
         title={props.userStory.name}
-        subheader={<ItemProgressSummary {...props.userStory} />}
+        // TODO: add dependent story on the summary
+        subheader={<ItemProgressSummary item={props.userStory} />}
       />
       <CardMedia
         component="img"

@@ -1,5 +1,5 @@
 import { UseFetchDataOptions } from "../../api/useFetchData";
-import { BuildingBlockProgress, Word, WordProgress } from "./ctxTypes";
+import { BuildingBlockProgress, EpilogueProgress, WordProgress } from "./ctxTypes";
 
 // QUIZ
 export enum RoundOutcome {
@@ -70,6 +70,7 @@ export type QuizResponseNextQuestion = {
 };
 export type QuizResponseComplete = {
   quizCompleted: boolean;
+  quizId: number;
   previouslyQuestion_CorrectOptionId?: number;
 };
 export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
@@ -91,5 +92,12 @@ export type QuizRequestBody =
 export interface UseFetchDataOptionsQuizRequest extends UseFetchDataOptions {
   method: "POST";
   body: QuizRequestBody;
+}
+
+export type QuizCompletedResponse = {
+  epilogueProgressUnlocked?: EpilogueProgress;
+  blockProgressUnlockedItems?: BuildingBlockProgress[];
+  blockCompleted: BuildingBlockProgress;
+  blockCompletedStoryRefId: number;
 }
 // < --END-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --END-->

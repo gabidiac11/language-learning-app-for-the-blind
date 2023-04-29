@@ -12,6 +12,7 @@ import { useAuthInit } from "../auth/authHooks";
 import BlockIntroduction from "../pages/autheticated/BlockPage/BlockIntroduction/BlockIntroduction";
 import BlockStartPage from "../pages/autheticated/BlockPage/BlockStartPage";
 import BlockQuiz from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuiz";
+import BlockQuizCompleted from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuizCompleted";
 
 const App = () => {
   const { user, isLoading } = useAuthInit();
@@ -43,6 +44,7 @@ const App = () => {
               {/* // TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
               <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
               <Route path="/blocks/:id/introduction" element={<BlockIntroduction />} />
+              <Route path="/blocks/:id/quiz/:quizId/completed" element={<BlockQuizCompleted />} />
               <Route path="/blocks/:id" element={<BlockStartPage />} />
 
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />

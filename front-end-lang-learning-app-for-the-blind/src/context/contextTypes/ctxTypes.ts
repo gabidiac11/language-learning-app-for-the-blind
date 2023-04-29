@@ -28,7 +28,7 @@ export type UserStory = {
   imageUrl: string;
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  storyDependentOnIds: number[];
+  dependentOnIds: number[];
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
   epilogueProgress: EpilogueProgress;
@@ -71,7 +71,7 @@ export type BuildingBlock = {
   imageUrl: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
-  blockDependentOnIds?: number[];
+  dependentOnIds?: number[];
 
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
