@@ -1,26 +1,32 @@
-import { useCallback, useLayoutEffect, useState } from "react";
-import { BuildingBlockProgress, UserStory } from "../../context";
+import { useLayoutEffect, useState } from "react";
+import {
+  BuildingBlockProgress,
+  EpilogueProgress,
+  UserStory,
+} from "../../context";
 import { getFormattedTimestamp } from "../../utils";
 
+type SummaryTargetItem = UserStory | BuildingBlockProgress | EpilogueProgress;
+
 const computeText = (
-  userStory: UserStory | BuildingBlockProgress,
+  targetItem: SummaryTargetItem,
   dependentNames?: string[]
 ): string => {
-  if (userStory.timeCompleted) {
-    return `🏆 Completed on ${getFormattedTimestamp(userStory.timeCompleted)}`;
+  if (targetItem.timeCompleted) {
+    return `🏆 Completed on ${getFormattedTimestamp(targetItem.timeCompleted)}`;
   }
-  if (userStory.timeStarted) {
-    return `✨ Started on ${getFormattedTimestamp(userStory.timeStarted)}`;
+  if (targetItem.timeStarted) {
+    return `✨ Started on ${getFormattedTimestamp(targetItem.timeStarted)}`;
   }
-  if (userStory.timeUnlocked) {
-    return `👉 Unlocked on ${getFormattedTimestamp(userStory.timeUnlocked)}`;
+  if (targetItem.timeUnlocked) {
+    return `👉 Unlocked on ${getFormattedTimestamp(targetItem.timeUnlocked)}`;
   }
-  const names = dependentNames?.map(n => `'${n}'`).join(",") ?? "";
+  const names = dependentNames?.map((n) => `'${n}'`).join(",") ?? "";
   return `🔒 Locked` + (names ? `- complete ${names}` : "");
 };
 
 export const ItemProgressSummary = (props: {
-  item: UserStory | BuildingBlockProgress;
+  item: SummaryTargetItem;
   dependentNames?: string[];
 }) => {
   const [text, setText] = useState("");
