@@ -83,8 +83,8 @@ const DisplayBlockProgressUnlockedItems = (props: {
         <Chip label="Blocks unlocked" />
       </Divider>
       <div
-        style={{ padding: "20px 0px", justifyContent: "center" }}
-        className="view-items"
+        // TOOD: test if still looks good
+        className="view-items-section"
       >
         {props.blocks.map((blockProgress: BuildingBlockProgress) => (
           <BuildingBlockItem
