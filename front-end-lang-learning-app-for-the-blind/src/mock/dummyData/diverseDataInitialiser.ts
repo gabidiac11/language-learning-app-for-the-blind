@@ -1,4 +1,8 @@
-import { BuildingBlockProgress, UserStory } from "../../context";
+import {
+  BuildingBlockProgress,
+  EpilogueQuestionAnswer,
+  UserStory,
+} from "../../context";
 import { dummyInitialUserStoryData } from "./storyData";
 
 function completeAllBlocks(userStory: UserStory) {
@@ -28,15 +32,18 @@ function updateNumOfStuffForStory(userStory: UserStory) {
     ).length;
 }
 
-export function generateDiverseStories() {
+export function generateDiverseStories(): [
+  UserStory[],
+  EpilogueQuestionAnswer[]
+] {
   // story - locked:
   // ############################################################################################################################################################################################################################################################
-  const lockedStory = dummyInitialUserStoryData();
+  const [lockedStory, lockedStoryEpilogueAnswers] = dummyInitialUserStoryData();
   lockedStory.name += " - LOCKED";
 
   // story - unlocked with 1 block unlocked:
   // ############################################################################################################################################################################################################################################################
-  const unlockStory = dummyInitialUserStoryData();
+  const [unlockStory, unlockStoryEpilogueAnswers] = dummyInitialUserStoryData();
   unlockStory.timeUnlocked = new Date().getTime();
   unlockStory.buildingBlocksProgressItems[0].timeUnlocked =
     new Date().getTime();
@@ -44,7 +51,8 @@ export function generateDiverseStories() {
 
   // story - started with 1 block unlocked, 1 started, 1 completed:
   // ############################################################################################################################################################################################################################################################
-  const startedStory = dummyInitialUserStoryData();
+  const [startedStory, startedStoryEpilogueAnswers] =
+    dummyInitialUserStoryData();
   startedStory.timeUnlocked = new Date().getTime();
   startedStory.timeStarted = new Date().getTime();
   // block - unlocked:
@@ -78,8 +86,13 @@ export function generateDiverseStories() {
 
   // story - started with all blocks completed, epilogue unlocked
   // ############################################################################################################################################################################################################################################################
-  const startedStoryWithEpilogueUnlocked = dummyInitialUserStoryData();
+  const [
+    startedStoryWithEpilogueUnlocked,
+    startedStoryWithEpilogueUnlockedEpilogueAnswers,
+  ] = dummyInitialUserStoryData();
   completeAllBlocks(startedStoryWithEpilogueUnlocked);
+
+  //TODO: add summary states for epilogue
 
   // epilogue - unlocked:
   startedStoryWithEpilogueUnlocked.epilogueProgress.timeUnlocked =
@@ -90,7 +103,10 @@ export function generateDiverseStories() {
 
   // story - started with all blocks completed, 1 epilogue question completed:
   // ############################################################################################################################################################################################################################################################
-  const startedStoryWithEpilogueStarted = dummyInitialUserStoryData();
+  const [
+    startedStoryWithEpilogueStarted,
+    startedStoryWithEpilogueStartedEpilogueAnswers,
+  ] = dummyInitialUserStoryData();
   completeAllBlocks(startedStoryWithEpilogueStarted);
 
   // epilogue - started:
@@ -108,7 +124,8 @@ export function generateDiverseStories() {
 
   // story - completed:
   // ############################################################################################################################################################################################################################################################
-  const finishedStory = dummyInitialUserStoryData();
+  const [finishedStory, finishedStoryEpilogueAnswers] =
+    dummyInitialUserStoryData();
   completeAllBlocks(finishedStory);
   finishedStory.timeCompleted = new Date().getTime();
 
@@ -137,7 +154,16 @@ export function generateDiverseStories() {
   // GUARD IF ALL BLOCKS and stories ARE ACCESIBLE
   quardStories(stories);
 
-  return stories;
+  const epilogueAnswers = [
+    ...lockedStoryEpilogueAnswers,
+    ...unlockStoryEpilogueAnswers,
+    ...startedStoryEpilogueAnswers,
+    ...startedStoryWithEpilogueUnlockedEpilogueAnswers,
+    ...startedStoryWithEpilogueStartedEpilogueAnswers,
+    ...finishedStoryEpilogueAnswers,
+  ];
+
+  return [stories, epilogueAnswers];
 }
 
 type ItemDependence = {
@@ -149,8 +175,10 @@ type ItemDependence = {
 
 function quardStories(stories: UserStory[]) {
   stories.forEach((story) => {
-    if(!story.timeUnlocked) {
-      console.log(`SKIPPED. Checking if blocks accessible for -locked- story ${story.name}`);
+    if (!story.timeUnlocked) {
+      console.log(
+        `SKIPPED. Checking if blocks accessible for -locked- story ${story.name}`
+      );
       return;
     }
 
@@ -161,7 +189,7 @@ function quardStories(stories: UserStory[]) {
           id: item.block.id,
           dependentOnIds: item.block.dependentOnIds,
           timeUnlocked: item.timeUnlocked,
-          entity: item
+          entity: item,
         } as ItemDependence)
     );
     guardIfAllItemsAccesible(blocksAdapted);
@@ -173,7 +201,7 @@ function quardStories(stories: UserStory[]) {
 /**
  * all items (blocks or stories) should be linked to each other
  * using BFS algorithm we're doing a search from starter nodes - which are the items unlocked from the begining
- * @param itemsTargeted 
+ * @param itemsTargeted
  */
 function guardIfAllItemsAccesible(itemsTargeted: ItemDependence[]) {
   const queue = itemsTargeted.filter((item) => !!item.timeUnlocked);

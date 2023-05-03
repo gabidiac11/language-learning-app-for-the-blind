@@ -113,6 +113,7 @@ export type EpilogueProgress = {
   id: number;
   epilogue: Epilogue;
   questionProgressItems: EpilogueQuestionProgress[];
+  timeSummaryCompleted?: number;
   timeUnlocked?: number;
   timeStarted?: number;
   timeCompleted?: number;
@@ -130,7 +131,21 @@ export type EpilogueQuestion = {
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
   text: string;
+  options: EpilogueOption[];
+};
 
-  options: string[];
-  correctOption: string;
+export type EpilogueQuestionAnswer = {
+  id: number;
+  questionId: number;
+  correctOptionId: number;
+};
+
+export type EpilogueOption = {
+  id: number;
+  text: string;
+};
+
+export type StoryDataEntities = {
+  userStory: UserStory;
+  epilogueAnswers: EpilogueQuestionAnswer[];
 };

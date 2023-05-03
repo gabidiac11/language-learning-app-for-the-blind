@@ -1,12 +1,9 @@
-import { fontStyle } from "@mui/system";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress, Word } from "../../../../context";
 import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import { Loader } from "../../../page-components/Loader";
 import "./BlockIntroduction.scss";
 import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 import ButtonContinueToQuiz from "./ButtonContinueToQuiz";

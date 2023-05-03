@@ -1,4 +1,4 @@
-import { UserStory } from "../context";
+import { EpilogueQuestionAnswer, UserStory } from "../context";
 import { BlockQuizStates, QuizState } from "../context/contextTypes/quizTypes";
 import * as storyInitializer from "./dummyData/diverseDataInitialiser";
 
@@ -10,6 +10,7 @@ export type Context = {
   quizStates: {
     [buildingBlockId: string]: BlockQuizStates;
   };
+  epilogueAnswers: EpilogueQuestionAnswer[];
 };
 
 class MockContext {
@@ -18,7 +19,11 @@ class MockContext {
 
   static instance = new MockContext();
 
-  private ctx = { userStories: [], quizStates: {} } as Context;
+  private ctx = {
+    userStories: [],
+    quizStates: {},
+    epilogueAnswers: [],
+  } as Context;
   private constructor() {
     this.initId();
     this.initLocalStorage();
@@ -42,10 +47,17 @@ class MockContext {
   }
 
   public addAndGetInitializingUserAndStories(userId: string) {
-    const stories = storyInitializer.generateDiverseStories();
-    const record = { userId, stories };
-    this.ctx.userStories.push(record);
-    return record.stories;
+    const [stories, epilogueAnswers] =
+      storyInitializer.generateDiverseStories();
+    
+    const storiesRecord: {
+      userId: string;
+      stories: UserStory[];
+    } = { userId, stories };
+    this.ctx.userStories.push(storiesRecord);
+
+    this.ctx.epilogueAnswers = epilogueAnswers;
+    return storiesRecord.stories;
   }
 
   public addQuizState(qs: QuizState) {
