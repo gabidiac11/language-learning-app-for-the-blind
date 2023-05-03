@@ -47,6 +47,9 @@ const App = () => {
               <Route path="/blocks/:id/quiz/:quizId/completed" element={<BlockQuizCompleted />} />
               <Route path="/blocks/:id" element={<BlockStartPage />} />
 
+              <Route path="/epilogue/:id/quiz" element={<BlockQuizCompleted />} />
+              <Route path="/epilogue/:id/introduction" element={<BlockQuizCompleted />} />
+              <Route path="/epilogue/:id" element={<BlockQuizCompleted />} />
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>

@@ -23,8 +23,6 @@ code {
   overflow: auto;
 }
 
-
-
 .form {
   padding-top: 60px;
 }
@@ -88,10 +86,12 @@ code {
   justify-content: center;
 }
 
-.view-items {
+.view-items-section {
   display: flex;
   flex-wrap: wrap;
   width: auto;
+  padding: 20px 0;
+  justify-content: center;
 }
 
 .flex {

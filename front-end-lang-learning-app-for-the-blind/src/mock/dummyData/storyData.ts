@@ -1,13 +1,15 @@
 import { EpilogueQuestionProgress } from "../../context";
 import {
   BuildingBlockProgress,
+  Epilogue,
   EpilogueProgress,
+  EpilogueQuestionAnswer,
   UserStory,
   WordProgress,
 } from "../../context/contextTypes/ctxTypes";
 import { genId } from "../mockContext";
 import buildingBlocks from "./buidingBlocks";
-import epilogue from "./epilogue";
+import genEpilogue from "./epilogue";
 
 const generateBuildingProgress = () => {
   const progressBlocks = buildingBlocks().map((buildingBlock) => {
@@ -29,11 +31,15 @@ const generateBuildingProgress = () => {
   return progressBlocks;
 };
 
-const generateEpilogueProgress = () => {
+const generateEpilogueProgress = (): [
+  EpilogueProgress,
+  EpilogueQuestionAnswer[]
+] => {
+  const [epilogue, epilogueQuestionAnswers] = genEpilogue();
   const epilogueProgress: EpilogueProgress = {
     id: genId(),
-    epilogue: epilogue(),
-    questionProgressItems: epilogue().questions.map((question) => {
+    epilogue: epilogue,
+    questionProgressItems: epilogue.questions.map((question) => {
       const questionProgress: EpilogueQuestionProgress = {
         id: genId(),
         completed: false,
@@ -42,14 +48,18 @@ const generateEpilogueProgress = () => {
       return questionProgress;
     }),
   };
-  return epilogueProgress;
+  return [epilogueProgress, epilogueQuestionAnswers];
 };
 
-export const dummyInitialUserStoryData = (): UserStory => {
+export const dummyInitialUserStoryData = (): [
+  UserStory,
+  EpilogueQuestionAnswer[]
+] => {
   const buildingBlocksProgressItems = generateBuildingProgress();
-  const epilogueProgress = generateEpilogueProgress();
+  const [epilogueProgress, epilogueQuestionAnswers] =
+    generateEpilogueProgress();
 
-  const story:UserStory = {
+  const story: UserStory = {
     id: genId(),
     name: "My family",
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
@@ -62,6 +72,6 @@ export const dummyInitialUserStoryData = (): UserStory => {
     numOfTotalBlocks: buildingBlocksProgressItems.length,
     numOfStoryQuestionsCompleted: 0,
     numOfTotalStoryQuestions: epilogueProgress.questionProgressItems.length,
-  }
-  return story;
+  };
+  return [story, epilogueQuestionAnswers];
 };
