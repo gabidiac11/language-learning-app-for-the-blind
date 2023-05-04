@@ -13,6 +13,7 @@ import BlockIntroduction from "../pages/autheticated/BlockPage/BlockIntroduction
 import BlockStartPage from "../pages/autheticated/BlockPage/BlockStartPage";
 import BlockQuiz from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuiz";
 import BlockQuizCompleted from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuizCompleted";
+import EpilogueStartPage from "../pages/autheticated/EpiloguePage/EpilogueStartPage";
 
 
 // TODO: on-off button for voice navigation
@@ -52,7 +53,7 @@ const App = () => {
 
               <Route path="/epilogue/:id/quiz" element={<BlockQuizCompleted />} />
               <Route path="/epilogue/:id/introduction" element={<BlockQuizCompleted />} />
-              <Route path="/epilogue/:id" element={<BlockQuizCompleted />} />
+              <Route path="/epilogue/:id" element={<EpilogueStartPage />} />
               <Route path="*" element={<DefaultRouteRedirection isAuth />} />
             </Routes>
           </AuthenticatedRoutesWrapper>

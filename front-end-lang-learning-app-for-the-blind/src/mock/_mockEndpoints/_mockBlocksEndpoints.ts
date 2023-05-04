@@ -8,12 +8,12 @@ axiosMockAdapterInstance.onGet(/^blocks\/([\d]+)$/).reply(async (config) =>
       .getCtx()
       .userStories.find((i) => i.userId === userId);
     if (!existingUser) {
-      return [401, { message: "User doesn't exist" }];
+      return [401, { message: "User doesn't exist." }];
     }
 
     const [, blockId] = config?.url?.match(/blocks\/(.+)/) || [];
     if (!blockId) {
-      return [400, { message: "Block id should not be empty" }];
+      return [400, { message: "Block id should not be empty." }];
     }
 
     const existingBlock = existingUser.stories
@@ -23,9 +23,7 @@ axiosMockAdapterInstance.onGet(/^blocks\/([\d]+)$/).reply(async (config) =>
       return [
         403,
         {
-          message: `User ${userId} doesn't have any block with id:${Number(
-            blockId
-          )}`,
+          message: `User doesn't have any block with given id.`,
         },
       ];
     }
@@ -59,9 +57,7 @@ axiosMockAdapterInstance
         return [
           403,
           {
-            message: `User ${userId} doesn't have any block with id:${Number(
-              blockId
-            )}`,
+            message: `User doesn't have any block with given id`,
           },
         ];
       }

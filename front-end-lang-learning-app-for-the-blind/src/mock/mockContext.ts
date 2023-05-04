@@ -24,6 +24,7 @@ class MockContext {
     quizStates: {},
     epilogueAnswers: [],
   } as Context;
+
   private constructor() {
     this.initId();
     this.initLocalStorage();
@@ -46,6 +47,7 @@ class MockContext {
     return this.ctx;
   }
 
+    // TODO: seed should be done after user creates account, because this runs only on /stories GET 
   public addAndGetInitializingUserAndStories(userId: string) {
     const [stories, epilogueAnswers] =
       storyInitializer.generateDiverseStories();

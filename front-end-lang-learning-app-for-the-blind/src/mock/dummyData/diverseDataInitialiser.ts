@@ -111,7 +111,9 @@ export function generateDiverseStories(): [
 
   // epilogue - started:
   startedStoryWithEpilogueStarted.epilogueProgress.timeUnlocked =
-    new Date().getTime();
+  new Date().getTime();
+  startedStoryWithEpilogueStarted.epilogueProgress.timeSummaryCompleted =
+  new Date().getTime();
   startedStoryWithEpilogueStarted.epilogueProgress.timeStarted =
     new Date().getTime();
   startedStoryWithEpilogueStarted.epilogueProgress.questionProgressItems[0].completed =
@@ -134,6 +136,7 @@ export function generateDiverseStories(): [
   finishedStory.numOfStoryQuestionsCompleted =
     finishedStory.epilogueProgress.questionProgressItems.length;
 
+  finishedStory.epilogueProgress.timeSummaryCompleted = new Date().getTime();
   finishedStory.epilogueProgress.timeUnlocked = new Date().getTime();
   finishedStory.epilogueProgress.timeStarted = new Date().getTime();
   finishedStory.epilogueProgress.timeCompleted = new Date().getTime();
