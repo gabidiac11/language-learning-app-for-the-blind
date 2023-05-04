@@ -32,7 +32,7 @@ axiosMockAdapterInstance.onGet(/^userStories\/(.+)/).reply(async (config) =>
 
     const [, storyId] = config?.url?.match(/userStories\/(.+)/) || [];
     if (!storyId) {
-      return [400, { message: "Story id should not be empty" }];
+      return [400, { message: "Story id should not be empty." }];
     }
 
     const existingStory = existingUser.stories.find(
@@ -42,9 +42,7 @@ axiosMockAdapterInstance.onGet(/^userStories\/(.+)/).reply(async (config) =>
       return [
         400,
         {
-          message: `User ${userId} doesn't have any story with id ${Number(
-            storyId
-          )}`,
+          message: `User doesn't have any story with given id.`,
         },
       ];
     }
