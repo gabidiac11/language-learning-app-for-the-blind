@@ -14,6 +14,9 @@ import BlockStartPage from "../pages/autheticated/BlockPage/BlockStartPage";
 import BlockQuiz from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuiz";
 import BlockQuizCompleted from "../pages/autheticated/BlockPage/BlockQuiz/BlockQuizCompleted";
 
+
+// TODO: on-off button for voice navigation
+
 const App = () => {
   const { user, isLoading } = useAuthInit();
 
