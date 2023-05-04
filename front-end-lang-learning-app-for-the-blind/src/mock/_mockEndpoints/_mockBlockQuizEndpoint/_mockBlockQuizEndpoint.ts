@@ -36,9 +36,7 @@ axiosMockAdapterInstance.onPost(/^blocks\/(.+)\/quiz$/).reply(async (config) =>
       return [
         403,
         {
-          message: `User ${userId} doesn't have any block with id:${Number(
-            blockId
-          )}.`,
+          message: `User doesn't have any block with given id.`,
         },
       ];
     }
@@ -98,9 +96,7 @@ axiosMockAdapterInstance
         return [
           403,
           {
-            message: `User ${userId} doesn't have any block with id:${Number(
-              blockId
-            )}.`,
+            message: `User doesn't have any block with given id.`,
           },
         ];
       }
