@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ButtonContinueToQuiz = (props: { epilogueProgressId: number }) => {
+const ButtonContinueToEpilogueQuiz = (props: { epilogueProgressId: number }) => {
   return (
     <div style={{ margin: "20px 0" }}>
       <Link to={`/epilogue/${props.epilogueProgressId}/quiz`}>Continue to quiz</Link>
@@ -8,4 +8,4 @@ const ButtonContinueToQuiz = (props: { epilogueProgressId: number }) => {
   );
 };
 
-export default ButtonContinueToQuiz;
+export default ButtonContinueToEpilogueQuiz;

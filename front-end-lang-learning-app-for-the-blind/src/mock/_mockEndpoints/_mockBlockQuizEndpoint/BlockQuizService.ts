@@ -4,14 +4,14 @@ import {
   QuizQuestion,
   QuizRequestBodyAnswer,
   QuizResponse,
-  QuizState,
+  QuizBlockState,
   RoundOutcome,
   WordOutcome,
 } from "../../../context/contextTypes/quizTypes";
 import { getShuffledArray } from "../../../utils";
 import { genId, MockContext, mockContext } from "../../mockContext";
 import { log, Result } from "../mockEndpointHelpers";
-import ProgressService from "./ProgressService";
+import ProgressService from "../ProgressService";
 
 
 
@@ -30,7 +30,7 @@ const NUM_OF_REQUIRED_CONSECUTIVE_HITS = 1;
 // hits to consider these hits pseudo-consecutive and conclude that the word was leant
 const MAX_ALLOWED_LEN_OF_EXCLUSION_SEQUENCE_SEPARATOR = 10;
 
-class QuizService {
+class BlockQuizService {
   private _blockProgress: BuildingBlockProgress;
   private _userId: string;
   private _context: MockContext;
@@ -178,13 +178,13 @@ class QuizService {
   }
   private blockHasAnyQuizState(): boolean {
     const hasAnyQuiz =
-      !!this._context.getCtx().quizStates?.[this._blockProgress.id]?.quizStates
+      !!this._context.getCtx().blockQuizStates?.[this._blockProgress.id]?.quizStates
         ?.length;
     return hasAnyQuiz;
   }
   private blockLastQuizIsFinished(): boolean {
     const quizStates =
-      this._context.getCtx().quizStates?.[this._blockProgress.id]?.quizStates;
+      this._context.getCtx().blockQuizStates?.[this._blockProgress.id]?.quizStates;
     const lastIndex = (quizStates?.length ?? 1) - 1;
 
     const lastIsFinished = !!quizStates?.[lastIndex]?.timeCompleted;
@@ -193,9 +193,9 @@ class QuizService {
   // < --END-- >< ---------------- VALIDATIONS ---------------- >< --END-->
 
   //< --START-- >< ---------------- GET NON-NULL STUFF ---------------- >< --START-->
-  private getMostRecentQuiz(): QuizState {
+  private getMostRecentQuiz(): QuizBlockState {
     const quizStates =
-      this._context.getCtx().quizStates?.[this._blockProgress.id]?.quizStates;
+      this._context.getCtx().blockQuizStates?.[this._blockProgress.id]?.quizStates;
     const lastIndex = (quizStates?.length ?? 1) - 1;
     const lastQuiz = quizStates?.[lastIndex];
     if (!lastQuiz) {
@@ -227,7 +227,7 @@ class QuizService {
 
   //< --START-- >< ---------------- CRUD ACTIONS ---------------- >< --START-->
   private createAndAddNewQuizState() {
-    const qs: QuizState = {
+    const qs: QuizBlockState = {
       id: genId(),
       blockProgressId: this._blockProgress.id,
       wordOutcomes: this._blockProgress.wordProgressItems.map((wp) => {
@@ -236,7 +236,7 @@ class QuizService {
       }),
       timeCompleted: undefined,
     };
-    this._context.addQuizState(qs);
+    this._context.addBlockQuizState(qs);
     this.saveContext();
 
     return qs;
@@ -452,7 +452,7 @@ class QuizService {
    */
   private getLastGroupFromOutcomeSequence(
     idWordProgress: number,
-    qs: QuizState
+    qs: QuizBlockState
   ) {
     const outcomes = qs.wordOutcomes
       .filter((q) => q.idWordProgress == idWordProgress)
@@ -493,6 +493,12 @@ class QuizService {
       );
     }
     const correctOption = convertToOption(correctWord);
+
+    //TODO: delete this or make this env-based
+    window.cheat_correctBlockOptions = {
+      ...(window.cheat_correctBlockOptions ?? {}),
+      [correctOption.id]: true,
+    };
 
     const wrongWords: WordProgress[] = getShuffledArray(
       this._blockProgress.wordProgressItems.filter(
@@ -552,4 +558,4 @@ class QuizService {
   }
 }
 
-export default QuizService;
+export default BlockQuizService;

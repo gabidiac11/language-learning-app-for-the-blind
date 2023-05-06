@@ -34,8 +34,6 @@ export type UserStory = {
   epilogueProgress: EpilogueProgress;
   numOfBlocksCompleted: number;
   numOfTotalBlocks: number;
-  numOfStoryQuestionsCompleted: number;
-  numOfTotalStoryQuestions: number;
 
   timeUnlocked?: number;
   timeStarted?: number;
@@ -46,7 +44,9 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: number;
 
-  // a building block is completed if all wordProgressItems are have score equal to 100
+  isStarter: boolean;
+
+  // a building block is completed if a quiz state associated is completed
   timeUnlocked?: number;
   timeStarted?: number;
   timeCompleted?: number;
@@ -60,9 +60,6 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: number;
   word: Word;
-
-  //from 0 to 100:
-  score: number;
 };
 
 export type BuildingBlock = {
@@ -122,7 +119,6 @@ export type EpilogueProgress = {
 export type EpilogueQuestionProgress = {
   id: number;
   question: EpilogueQuestion;
-  completed: boolean;
 };
 
 export type EpilogueQuestion = {

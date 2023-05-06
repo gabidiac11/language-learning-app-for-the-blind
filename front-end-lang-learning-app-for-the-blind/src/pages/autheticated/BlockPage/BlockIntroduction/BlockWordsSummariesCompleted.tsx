@@ -3,7 +3,7 @@ import useFetchData, {
 } from "../../../../api/useFetchData";
 import { BuildingBlockProgress } from "../../../../context";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import ButtonContinueToQuiz from "../../EpiloguePage/ButtonContinueToQuiz";
+import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
 
 const fetchOptioons: UseFetchDataOptions = {
   method: "POST",
@@ -25,7 +25,7 @@ const BlockWordsSummariesCompleted = (props: {
         {props.block.timeSummaryCompleted
           ? "You again completed the words introduction"
           : "You completed the words introduction. You can now start the word practice quiz."}
-        <ButtonContinueToQuiz epilogueProgressId={props.block.id} />
+        <ButtonContinueToBlockQuiz blockProgressId={props.block.id} />
       </div>
     </ErrorBoundary>
   );

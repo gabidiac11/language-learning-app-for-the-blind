@@ -9,11 +9,14 @@ import { useCallback } from "react";
 import CardBlock from "../../../page-components/CardBlock/CardBlock";
 import "./StoryCard.scss";
 
-export const StoryCard = (props: { userStory: UserStory }) => {
+export const StoryCard = (props: {
+  userStory: UserStory;
+  dependentNames?:  string[];
+}) => {
   const navigate = useNavigate();
   const { userStory } = props;
   const disabled = !userStory.timeUnlocked;
-  
+
   const navigateToStory = useCallback(() => {
     if (disabled) {
       //TODO: add audio saying it's diabled because it's locked
@@ -27,7 +30,7 @@ export const StoryCard = (props: { userStory: UserStory }) => {
       <CardHeader
         title={props.userStory.name}
         // TODO: add dependent story on the summary
-        subheader={<ItemProgressSummary item={props.userStory} />}
+        subheader={<ItemProgressSummary dependentNames={props.dependentNames} item={props.userStory} />}
       />
       <CardMedia
         component="img"
@@ -40,7 +43,10 @@ export const StoryCard = (props: { userStory: UserStory }) => {
         <Typography variant="body2" color="text.secondary">
           {`${userStory.numOfBlocksCompleted} completed out of ${userStory.numOfTotalBlocks} building blocks.`}
           <br></br>
-          {`${userStory.numOfStoryQuestionsCompleted} completed out of ${userStory.numOfTotalStoryQuestions} story questions.`}
+          {/* TODO: add for all statuses indication: completed, etc. */}
+          {`Epilogue ${
+            userStory.epilogueProgress.timeUnlocked ? "unlocked" : "locked"
+          }`}
         </Typography>
       </CardContent>
     </CardBlock>

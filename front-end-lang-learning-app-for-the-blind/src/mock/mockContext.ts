@@ -1,5 +1,10 @@
 import { EpilogueQuestionAnswer, UserStory } from "../context";
-import { BlockQuizStates, QuizState } from "../context/contextTypes/quizTypes";
+import {
+  BlockQuizStates,
+  EpilogueQuizStates,
+  QuizBlockState,
+  QuizEpilogueState,
+} from "../context/contextTypes/quizTypes";
 import * as storyInitializer from "./dummyData/diverseDataInitialiser";
 
 export type Context = {
@@ -7,8 +12,11 @@ export type Context = {
     userId: string;
     stories: UserStory[];
   }[];
-  quizStates: {
+  blockQuizStates: {
     [buildingBlockId: string]: BlockQuizStates;
+  };
+  epilogueQuizStates: {
+    [epilogueProgressId: string]: EpilogueQuizStates;
   };
   epilogueAnswers: EpilogueQuestionAnswer[];
 };
@@ -21,7 +29,8 @@ class MockContext {
 
   private ctx = {
     userStories: [],
-    quizStates: {},
+    epilogueQuizStates: {},
+    blockQuizStates: {},
     epilogueAnswers: [],
   } as Context;
 
@@ -47,11 +56,11 @@ class MockContext {
     return this.ctx;
   }
 
-    // TODO: seed should be done after user creates account, because this runs only on /stories GET 
+  // TODO: seed should be done after user creates the account, because this runs only on /stories GET
   public addAndGetInitializingUserAndStories(userId: string) {
     const [stories, epilogueAnswers] =
       storyInitializer.generateDiverseStories();
-    
+
     const storiesRecord: {
       userId: string;
       stories: UserStory[];
@@ -62,15 +71,26 @@ class MockContext {
     return storiesRecord.stories;
   }
 
-  public addQuizState(qs: QuizState) {
-    const existingStates: BlockQuizStates = this.ctx.quizStates[
+  public addBlockQuizState(qs: QuizBlockState) {
+    const existingStates: BlockQuizStates = this.ctx.blockQuizStates[
       qs.blockProgressId
     ] ?? {
       progressBlockId: qs.blockProgressId,
       quizStates: [],
     };
     existingStates.quizStates.push(qs);
-    this.ctx.quizStates[qs.blockProgressId] = existingStates;
+    this.ctx.blockQuizStates[qs.blockProgressId] = existingStates;
+  }
+
+  public addEpilogueQuizState(qs: QuizEpilogueState) {
+    const existingStates: EpilogueQuizStates = this.ctx.epilogueQuizStates[
+      qs.epilogueProgressId
+    ] ?? {
+      progressBlockId: qs.epilogueProgressId,
+      quizStates: [],
+    };
+    existingStates.quizStates.push(qs);
+    this.ctx.epilogueQuizStates[qs.epilogueProgressId] = existingStates;
   }
 
   // WARNING: references are changing with the ctx, be sure to use this with care
