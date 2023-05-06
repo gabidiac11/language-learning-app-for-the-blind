@@ -1,23 +1,4 @@
-export type StateType = {
-  language: string;
-  userStories: UserStory[];
-};
-
-export enum StateActionType {
-  Init,
-  SetLanguage,
-}
-
-export type StateAction =
-  | {
-      type: StateActionType.Init;
-    }
-  | {
-      type: StateActionType.SetLanguage;
-      payload: string;
-    };
-
-export type UserStory = {
+export type Story = {
   id: number;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
@@ -29,39 +10,14 @@ export type UserStory = {
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
   dependentOnIds: number[];
+  isStarter?: boolean;
 
-  buildingBlocksProgressItems: BuildingBlockProgress[];
-  epilogueProgress: EpilogueProgress;
-  numOfBlocksCompleted: number;
-  numOfTotalBlocks: number;
-
-  timeUnlocked?: number;
-  timeStarted?: number;
-  timeCompleted?: number;
+  buildingBlocks: BuildingBlock[];
+  epilogue: Epilogue;
+  epilogueQuestionAnswers: EpilogueQuestionAnswer[];
 };
 
 //building block:
-export type BuildingBlockProgress = {
-  id: number;
-
-  isStarter: boolean;
-
-  // a building block is completed if a quiz state associated is completed
-  timeUnlocked?: number;
-  timeStarted?: number;
-  timeCompleted?: number;
-
-  timeSummaryCompleted?: number;
-
-  wordProgressItems: WordProgress[];
-  block: BuildingBlock;
-};
-
-export type WordProgress = {
-  id: number;
-  word: Word;
-};
-
 export type BuildingBlock = {
   id: number;
   name: string;
@@ -69,6 +25,9 @@ export type BuildingBlock = {
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
   dependentOnIds?: number[];
+
+  // means it will be unlock first when a story is unlocked
+  isStarter?: boolean;
 
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
@@ -106,19 +65,10 @@ export type Epilogue = {
   questions: EpilogueQuestion[];
 };
 
-export type EpilogueProgress = {
-  id: number;
-  epilogue: Epilogue;
-  questionProgressItems: EpilogueQuestionProgress[];
-  timeSummaryCompleted?: number;
-  timeUnlocked?: number;
-  timeStarted?: number;
-  timeCompleted?: number;
-};
-
 export type EpilogueQuestionProgress = {
   id: number;
-  question: EpilogueQuestion;
+  questionId: number;
+  question?: EpilogueQuestion;
 };
 
 export type EpilogueQuestion = {
