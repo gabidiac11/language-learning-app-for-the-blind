@@ -1,0 +1,5008 @@
+[
+  {
+    "id": 2457,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [
+      2646,
+      2835,
+      3024,
+      3213
+    ],
+    "buildingBlocks": [
+      {
+        "id": 2269,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2270,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 2271,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 2272,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 2273,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 2274,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 2275,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 2276,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 2277,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 2278,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 2279,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          2280,
+          2285
+        ]
+      },
+      {
+        "id": 2280,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2281,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2282,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2283,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 2284,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 2285,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2286,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2287,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 2288,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 2289,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 2290,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 2291,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2292,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2293,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 2294,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 2295,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 2296,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 2297,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 2298,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 2299,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 2300,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2301,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 2302,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 2303,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 2304,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 2305,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          2306
+        ]
+      },
+      {
+        "id": 2306,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2307,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 2308,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 2309,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 2310,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 2311,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 2312,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 2313,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 2314,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 2315,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 2316,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 2317,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          2318
+        ]
+      },
+      {
+        "id": 2318,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2319,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 2320,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 2321,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 2322,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 2323,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 2324,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          2325
+        ]
+      },
+      {
+        "id": 2325,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2326,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 2327,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 2328,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 2329,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 2330,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 2331,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 2332,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 2333,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 2334,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 2335,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 2336,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 2337,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 2338,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 2339,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2340,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 2341,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 2342,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 2343,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 2344,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 2345,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 2346,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 2347,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2348,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          2349
+        ]
+      },
+      {
+        "id": 2349,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2350,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 2351,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 2352,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 2353,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 2354,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 2355,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 2356,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 2357,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 2410,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 2409,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 2408,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 2407,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 2362,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 2415,
+              "text": "Kate"
+            },
+            {
+              "id": 2413,
+              "text": "Ivan"
+            },
+            {
+              "id": 2412,
+              "text": "Alexander"
+            },
+            {
+              "id": 2414,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 2367,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 2420,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2417,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2419,
+              "text": "Salad"
+            },
+            {
+              "id": 2418,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2372,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 2423,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2422,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2424,
+              "text": "Salad"
+            },
+            {
+              "id": 2425,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2377,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 2429,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 2428,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 2427,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 2430,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 2382,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 2433,
+              "text": "Russian"
+            },
+            {
+              "id": 2434,
+              "text": "English"
+            },
+            {
+              "id": 2432,
+              "text": "Spanish"
+            },
+            {
+              "id": 2435,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 2387,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 2437,
+              "text": "Her brother"
+            },
+            {
+              "id": 2438,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 2439,
+              "text": "Her friends"
+            },
+            {
+              "id": 2440,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 2392,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 2444,
+              "text": "They"
+            },
+            {
+              "id": 2443,
+              "text": "I"
+            },
+            {
+              "id": 2445,
+              "text": "You"
+            },
+            {
+              "id": 2442,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 2397,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 2447,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 2450,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2448,
+              "text": "Play video games"
+            },
+            {
+              "id": 2449,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 2402,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 2454,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 2452,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2453,
+              "text": "Play board games"
+            },
+            {
+              "id": 2455,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 2411,
+        "questionId": 2357,
+        "correctOptionId": 2410
+      },
+      {
+        "id": 2416,
+        "questionId": 2362,
+        "correctOptionId": 2415
+      },
+      {
+        "id": 2421,
+        "questionId": 2367,
+        "correctOptionId": 2420
+      },
+      {
+        "id": 2426,
+        "questionId": 2372,
+        "correctOptionId": 2423
+      },
+      {
+        "id": 2431,
+        "questionId": 2377,
+        "correctOptionId": 2429
+      },
+      {
+        "id": 2436,
+        "questionId": 2382,
+        "correctOptionId": 2433
+      },
+      {
+        "id": 2441,
+        "questionId": 2387,
+        "correctOptionId": 2437
+      },
+      {
+        "id": 2446,
+        "questionId": 2392,
+        "correctOptionId": 2444
+      },
+      {
+        "id": 2451,
+        "questionId": 2397,
+        "correctOptionId": 2447
+      },
+      {
+        "id": 2456,
+        "questionId": 2402,
+        "correctOptionId": 2454
+      }
+    ],
+    "isStarter": true
+  },
+  {
+    "id": 2646,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [
+      3402
+    ],
+    "buildingBlocks": [
+      {
+        "id": 2458,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2459,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 2460,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 2461,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 2462,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 2463,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 2464,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 2465,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 2466,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 2467,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 2468,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          2469,
+          2474
+        ]
+      },
+      {
+        "id": 2469,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2470,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2471,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2472,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 2473,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 2474,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2475,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2476,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 2477,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 2478,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 2479,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 2480,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2481,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2482,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 2483,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 2484,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 2485,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 2486,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 2487,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 2488,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 2489,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2490,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 2491,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 2492,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 2493,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 2494,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          2495
+        ]
+      },
+      {
+        "id": 2495,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2496,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 2497,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 2498,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 2499,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 2500,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 2501,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 2502,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 2503,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 2504,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 2505,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 2506,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          2507
+        ]
+      },
+      {
+        "id": 2507,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2508,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 2509,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 2510,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 2511,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 2512,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 2513,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          2514
+        ]
+      },
+      {
+        "id": 2514,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2515,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 2516,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 2517,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 2518,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 2519,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 2520,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 2521,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 2522,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 2523,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 2524,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 2525,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 2526,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 2527,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 2528,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2529,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 2530,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 2531,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 2532,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 2533,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 2534,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 2535,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 2536,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2537,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          2538
+        ]
+      },
+      {
+        "id": 2538,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2539,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 2540,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 2541,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 2542,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 2543,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 2544,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 2545,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 2546,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 2599,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 2597,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 2598,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 2596,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 2551,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 2602,
+              "text": "Kate"
+            },
+            {
+              "id": 2601,
+              "text": "Ivan"
+            },
+            {
+              "id": 2604,
+              "text": "Alexander"
+            },
+            {
+              "id": 2603,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 2556,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 2609,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2608,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2606,
+              "text": "Salad"
+            },
+            {
+              "id": 2607,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2561,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 2612,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2613,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2611,
+              "text": "Salad"
+            },
+            {
+              "id": 2614,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2566,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 2617,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 2619,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 2618,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 2616,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 2571,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 2624,
+              "text": "Russian"
+            },
+            {
+              "id": 2622,
+              "text": "English"
+            },
+            {
+              "id": 2621,
+              "text": "Spanish"
+            },
+            {
+              "id": 2623,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 2576,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 2629,
+              "text": "Her brother"
+            },
+            {
+              "id": 2628,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 2627,
+              "text": "Her friends"
+            },
+            {
+              "id": 2626,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 2581,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 2632,
+              "text": "They"
+            },
+            {
+              "id": 2633,
+              "text": "I"
+            },
+            {
+              "id": 2634,
+              "text": "You"
+            },
+            {
+              "id": 2631,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 2586,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 2638,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 2637,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2639,
+              "text": "Play video games"
+            },
+            {
+              "id": 2636,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 2591,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 2643,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 2644,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2641,
+              "text": "Play board games"
+            },
+            {
+              "id": 2642,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 2600,
+        "questionId": 2546,
+        "correctOptionId": 2599
+      },
+      {
+        "id": 2605,
+        "questionId": 2551,
+        "correctOptionId": 2602
+      },
+      {
+        "id": 2610,
+        "questionId": 2556,
+        "correctOptionId": 2609
+      },
+      {
+        "id": 2615,
+        "questionId": 2561,
+        "correctOptionId": 2612
+      },
+      {
+        "id": 2620,
+        "questionId": 2566,
+        "correctOptionId": 2617
+      },
+      {
+        "id": 2625,
+        "questionId": 2571,
+        "correctOptionId": 2624
+      },
+      {
+        "id": 2630,
+        "questionId": 2576,
+        "correctOptionId": 2629
+      },
+      {
+        "id": 2635,
+        "questionId": 2581,
+        "correctOptionId": 2632
+      },
+      {
+        "id": 2640,
+        "questionId": 2586,
+        "correctOptionId": 2638
+      },
+      {
+        "id": 2645,
+        "questionId": 2591,
+        "correctOptionId": 2643
+      }
+    ]
+  },
+  {
+    "id": 2835,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [],
+    "buildingBlocks": [
+      {
+        "id": 2647,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2648,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 2649,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 2650,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 2651,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 2652,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 2653,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 2654,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 2655,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 2656,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 2657,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          2658,
+          2663
+        ]
+      },
+      {
+        "id": 2658,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2659,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2660,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2661,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 2662,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 2663,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2664,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2665,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 2666,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 2667,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 2668,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 2669,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2670,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2671,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 2672,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 2673,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 2674,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 2675,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 2676,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 2677,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 2678,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2679,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 2680,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 2681,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 2682,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 2683,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          2684
+        ]
+      },
+      {
+        "id": 2684,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2685,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 2686,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 2687,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 2688,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 2689,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 2690,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 2691,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 2692,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 2693,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 2694,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 2695,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          2696
+        ]
+      },
+      {
+        "id": 2696,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2697,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 2698,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 2699,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 2700,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 2701,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 2702,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          2703
+        ]
+      },
+      {
+        "id": 2703,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2704,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 2705,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 2706,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 2707,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 2708,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 2709,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 2710,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 2711,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 2712,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 2713,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 2714,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 2715,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 2716,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 2717,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2718,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 2719,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 2720,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 2721,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 2722,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 2723,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 2724,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 2725,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2726,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          2727
+        ]
+      },
+      {
+        "id": 2727,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2728,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 2729,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 2730,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 2731,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 2732,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 2733,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 2734,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 2735,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 2788,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 2787,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 2786,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 2785,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 2740,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 2791,
+              "text": "Kate"
+            },
+            {
+              "id": 2790,
+              "text": "Ivan"
+            },
+            {
+              "id": 2792,
+              "text": "Alexander"
+            },
+            {
+              "id": 2793,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 2745,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 2797,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2795,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2798,
+              "text": "Salad"
+            },
+            {
+              "id": 2796,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2750,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 2801,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2802,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2803,
+              "text": "Salad"
+            },
+            {
+              "id": 2800,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2755,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 2807,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 2806,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 2808,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 2805,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 2760,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 2813,
+              "text": "Russian"
+            },
+            {
+              "id": 2810,
+              "text": "English"
+            },
+            {
+              "id": 2812,
+              "text": "Spanish"
+            },
+            {
+              "id": 2811,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 2765,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 2816,
+              "text": "Her brother"
+            },
+            {
+              "id": 2815,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 2817,
+              "text": "Her friends"
+            },
+            {
+              "id": 2818,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 2770,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 2820,
+              "text": "They"
+            },
+            {
+              "id": 2822,
+              "text": "I"
+            },
+            {
+              "id": 2823,
+              "text": "You"
+            },
+            {
+              "id": 2821,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 2775,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 2826,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 2825,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2827,
+              "text": "Play video games"
+            },
+            {
+              "id": 2828,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 2780,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 2830,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 2832,
+              "text": "Watch TV"
+            },
+            {
+              "id": 2831,
+              "text": "Play board games"
+            },
+            {
+              "id": 2833,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 2789,
+        "questionId": 2735,
+        "correctOptionId": 2788
+      },
+      {
+        "id": 2794,
+        "questionId": 2740,
+        "correctOptionId": 2791
+      },
+      {
+        "id": 2799,
+        "questionId": 2745,
+        "correctOptionId": 2797
+      },
+      {
+        "id": 2804,
+        "questionId": 2750,
+        "correctOptionId": 2801
+      },
+      {
+        "id": 2809,
+        "questionId": 2755,
+        "correctOptionId": 2807
+      },
+      {
+        "id": 2814,
+        "questionId": 2760,
+        "correctOptionId": 2813
+      },
+      {
+        "id": 2819,
+        "questionId": 2765,
+        "correctOptionId": 2816
+      },
+      {
+        "id": 2824,
+        "questionId": 2770,
+        "correctOptionId": 2820
+      },
+      {
+        "id": 2829,
+        "questionId": 2775,
+        "correctOptionId": 2826
+      },
+      {
+        "id": 2834,
+        "questionId": 2780,
+        "correctOptionId": 2830
+      }
+    ]
+  },
+  {
+    "id": 3024,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [],
+    "buildingBlocks": [
+      {
+        "id": 2836,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2837,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 2838,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 2839,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 2840,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 2841,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 2842,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 2843,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 2844,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 2845,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 2846,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          2847,
+          2852
+        ]
+      },
+      {
+        "id": 2847,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2848,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2849,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 2850,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 2851,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 2852,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2853,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2854,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 2855,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 2856,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 2857,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 2858,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 2859,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2860,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 2861,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 2862,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 2863,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 2864,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 2865,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 2866,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 2867,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 2868,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 2869,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 2870,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 2871,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 2872,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          2873
+        ]
+      },
+      {
+        "id": 2873,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2874,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 2875,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 2876,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 2877,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 2878,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 2879,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 2880,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 2881,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 2882,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 2883,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 2884,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          2885
+        ]
+      },
+      {
+        "id": 2885,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2886,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 2887,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 2888,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 2889,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 2890,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 2891,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          2892
+        ]
+      },
+      {
+        "id": 2892,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2893,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 2894,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 2895,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 2896,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 2897,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 2898,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 2899,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 2900,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 2901,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 2902,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 2903,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 2904,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 2905,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 2906,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2907,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 2908,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 2909,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 2910,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 2911,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 2912,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 2913,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 2914,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 2915,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          2916
+        ]
+      },
+      {
+        "id": 2916,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 2917,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 2918,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 2919,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 2920,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 2921,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 2922,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 2923,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 2924,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 2977,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 2974,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 2975,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 2976,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 2929,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 2982,
+              "text": "Kate"
+            },
+            {
+              "id": 2980,
+              "text": "Ivan"
+            },
+            {
+              "id": 2981,
+              "text": "Alexander"
+            },
+            {
+              "id": 2979,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 2934,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 2986,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2985,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2987,
+              "text": "Salad"
+            },
+            {
+              "id": 2984,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2939,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 2992,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 2991,
+              "text": "Pancakes"
+            },
+            {
+              "id": 2989,
+              "text": "Salad"
+            },
+            {
+              "id": 2990,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 2944,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 2996,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 2995,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 2994,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 2997,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 2949,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 2999,
+              "text": "Russian"
+            },
+            {
+              "id": 3000,
+              "text": "English"
+            },
+            {
+              "id": 3001,
+              "text": "Spanish"
+            },
+            {
+              "id": 3002,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 2954,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 3006,
+              "text": "Her brother"
+            },
+            {
+              "id": 3007,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 3004,
+              "text": "Her friends"
+            },
+            {
+              "id": 3005,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 2959,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 3012,
+              "text": "They"
+            },
+            {
+              "id": 3009,
+              "text": "I"
+            },
+            {
+              "id": 3010,
+              "text": "You"
+            },
+            {
+              "id": 3011,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 2964,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 3015,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 3014,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3017,
+              "text": "Play video games"
+            },
+            {
+              "id": 3016,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 2969,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 3022,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 3019,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3020,
+              "text": "Play board games"
+            },
+            {
+              "id": 3021,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 2978,
+        "questionId": 2924,
+        "correctOptionId": 2977
+      },
+      {
+        "id": 2983,
+        "questionId": 2929,
+        "correctOptionId": 2982
+      },
+      {
+        "id": 2988,
+        "questionId": 2934,
+        "correctOptionId": 2986
+      },
+      {
+        "id": 2993,
+        "questionId": 2939,
+        "correctOptionId": 2992
+      },
+      {
+        "id": 2998,
+        "questionId": 2944,
+        "correctOptionId": 2996
+      },
+      {
+        "id": 3003,
+        "questionId": 2949,
+        "correctOptionId": 2999
+      },
+      {
+        "id": 3008,
+        "questionId": 2954,
+        "correctOptionId": 3006
+      },
+      {
+        "id": 3013,
+        "questionId": 2959,
+        "correctOptionId": 3012
+      },
+      {
+        "id": 3018,
+        "questionId": 2964,
+        "correctOptionId": 3015
+      },
+      {
+        "id": 3023,
+        "questionId": 2969,
+        "correctOptionId": 3022
+      }
+    ]
+  },
+  {
+    "id": 3213,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [],
+    "buildingBlocks": [
+      {
+        "id": 3025,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3026,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 3027,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 3028,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 3029,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 3030,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 3031,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 3032,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 3033,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 3034,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 3035,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          3036,
+          3041
+        ]
+      },
+      {
+        "id": 3036,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3037,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 3038,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 3039,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 3040,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 3041,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3042,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 3043,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 3044,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 3045,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 3046,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 3047,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 3048,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 3049,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 3050,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 3051,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 3052,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 3053,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 3054,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 3055,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 3056,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 3057,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 3058,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 3059,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 3060,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 3061,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          3062
+        ]
+      },
+      {
+        "id": 3062,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3063,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 3064,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 3065,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 3066,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 3067,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 3068,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 3069,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 3070,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 3071,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 3072,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 3073,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          3074
+        ]
+      },
+      {
+        "id": 3074,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3075,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 3076,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 3077,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 3078,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 3079,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 3080,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          3081
+        ]
+      },
+      {
+        "id": 3081,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3082,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 3083,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 3084,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 3085,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 3086,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 3087,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 3088,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 3089,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 3090,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 3091,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 3092,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 3093,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 3094,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 3095,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 3096,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 3097,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 3098,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 3099,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 3100,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 3101,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 3102,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 3103,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 3104,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          3105
+        ]
+      },
+      {
+        "id": 3105,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3106,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 3107,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 3108,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 3109,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 3110,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 3111,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 3112,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 3113,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 3164,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 3165,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 3166,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 3163,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 3118,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 3170,
+              "text": "Kate"
+            },
+            {
+              "id": 3168,
+              "text": "Ivan"
+            },
+            {
+              "id": 3169,
+              "text": "Alexander"
+            },
+            {
+              "id": 3171,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 3123,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 3174,
+              "text": "Pancakes"
+            },
+            {
+              "id": 3175,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 3176,
+              "text": "Salad"
+            },
+            {
+              "id": 3173,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 3128,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 3178,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 3181,
+              "text": "Pancakes"
+            },
+            {
+              "id": 3180,
+              "text": "Salad"
+            },
+            {
+              "id": 3179,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 3133,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 3184,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 3186,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 3185,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 3183,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 3138,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 3188,
+              "text": "Russian"
+            },
+            {
+              "id": 3190,
+              "text": "English"
+            },
+            {
+              "id": 3189,
+              "text": "Spanish"
+            },
+            {
+              "id": 3191,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 3143,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 3195,
+              "text": "Her brother"
+            },
+            {
+              "id": 3194,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 3196,
+              "text": "Her friends"
+            },
+            {
+              "id": 3193,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 3148,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 3199,
+              "text": "They"
+            },
+            {
+              "id": 3200,
+              "text": "I"
+            },
+            {
+              "id": 3198,
+              "text": "You"
+            },
+            {
+              "id": 3201,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 3153,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 3203,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 3206,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3204,
+              "text": "Play video games"
+            },
+            {
+              "id": 3205,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 3158,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 3208,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 3210,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3211,
+              "text": "Play board games"
+            },
+            {
+              "id": 3209,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 3167,
+        "questionId": 3113,
+        "correctOptionId": 3164
+      },
+      {
+        "id": 3172,
+        "questionId": 3118,
+        "correctOptionId": 3170
+      },
+      {
+        "id": 3177,
+        "questionId": 3123,
+        "correctOptionId": 3174
+      },
+      {
+        "id": 3182,
+        "questionId": 3128,
+        "correctOptionId": 3178
+      },
+      {
+        "id": 3187,
+        "questionId": 3133,
+        "correctOptionId": 3184
+      },
+      {
+        "id": 3192,
+        "questionId": 3138,
+        "correctOptionId": 3188
+      },
+      {
+        "id": 3197,
+        "questionId": 3143,
+        "correctOptionId": 3195
+      },
+      {
+        "id": 3202,
+        "questionId": 3148,
+        "correctOptionId": 3199
+      },
+      {
+        "id": 3207,
+        "questionId": 3153,
+        "correctOptionId": 3203
+      },
+      {
+        "id": 3212,
+        "questionId": 3158,
+        "correctOptionId": 3208
+      }
+    ]
+  },
+  {
+    "id": 3402,
+    "name": "My family",
+    "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dependentOnIds": [],
+    "buildingBlocks": [
+      {
+        "id": 3214,
+        "name": "Family",
+        "imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3215,
+            "text": "семьей",
+            "shortTranslation": "family",
+            "longTranslation": "A group consisting of parents and children living together in a household"
+          },
+          {
+            "id": 3216,
+            "text": "мамой",
+            "shortTranslation": "mom",
+            "longTranslation": "One's mother"
+          },
+          {
+            "id": 3217,
+            "text": "папа",
+            "shortTranslation": "dad",
+            "longTranslation": "Used when referring to one's father."
+          },
+          {
+            "id": 3218,
+            "text": "братом",
+            "shortTranslation": "brother",
+            "longTranslation": "A male sibling"
+          },
+          {
+            "id": 3219,
+            "text": "зовут",
+            "shortTranslation": "called",
+            "longTranslation": "Used to refer to the name or title of someone"
+          },
+          {
+            "id": 3220,
+            "text": "младше",
+            "shortTranslation": "younger",
+            "longTranslation": "Being at an earlier age"
+          },
+          {
+            "id": 3221,
+            "text": "на два года",
+            "shortTranslation": "two years younger",
+            "longTranslation": "Being two years younger than someone else"
+          },
+          {
+            "id": 3222,
+            "text": "любим",
+            "shortTranslation": "favorite",
+            "longTranslation": "Preferred over all others of the same kind"
+          },
+          {
+            "id": 3223,
+            "text": "людях",
+            "shortTranslation": "people",
+            "longTranslation": "Human beings in general or considered collectively"
+          },
+          {
+            "id": 3224,
+            "text": "рада",
+            "shortTranslation": "happy",
+            "longTranslation": "Feeling or showing pleasure or contentment"
+          }
+        ],
+        "isStarter": true,
+        "dependentOnIds": [
+          3225,
+          3230
+        ]
+      },
+      {
+        "id": 3225,
+        "name": "Names",
+        "imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3226,
+            "text": "Анна",
+            "shortTranslation": "Anna",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 3227,
+            "text": "Катя",
+            "shortTranslation": "Katya",
+            "longTranslation": "A female given name"
+          },
+          {
+            "id": 3228,
+            "text": "Иван",
+            "shortTranslation": "Ivan",
+            "longTranslation": "A male given name"
+          },
+          {
+            "id": 3229,
+            "text": "Александр",
+            "shortTranslation": "Alexander",
+            "longTranslation": "A male given name of Greek origin, meaning \"defender of the people.\""
+          }
+        ]
+      },
+      {
+        "id": 3230,
+        "name": "Pronouns",
+        "imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3231,
+            "text": "Меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 3232,
+            "text": "Я",
+            "shortTranslation": "I",
+            "longTranslation": "Used when referring to oneself as the subject of a verb."
+          },
+          {
+            "id": 3233,
+            "text": "со своей",
+            "shortTranslation": "with my",
+            "longTranslation": "Used to indicate possession of something by the speaker."
+          },
+          {
+            "id": 3234,
+            "text": "Моя",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a female speaker."
+          },
+          {
+            "id": 3235,
+            "text": "Мой",
+            "shortTranslation": "my",
+            "longTranslation": "Used to indicate possession of something by a male speaker."
+          },
+          {
+            "id": 3236,
+            "text": "меня",
+            "shortTranslation": "me",
+            "longTranslation": "Used when referring to oneself as the object of a verb or preposition."
+          },
+          {
+            "id": 3237,
+            "text": "Мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 3238,
+            "text": "мне",
+            "shortTranslation": "to me",
+            "longTranslation": "Used when referring to oneself as the recipient of an action."
+          },
+          {
+            "id": 3239,
+            "text": "о себе",
+            "shortTranslation": "about myself",
+            "longTranslation": "Used when referring to oneself in a general sense."
+          },
+          {
+            "id": 3240,
+            "text": "ты",
+            "shortTranslation": "you",
+            "longTranslation": "Used when addressing one person informally."
+          },
+          {
+            "id": 3241,
+            "text": "к брату",
+            "shortTranslation": "to brother",
+            "longTranslation": "Used when referring to one's brother in the vocative case."
+          },
+          {
+            "id": 3242,
+            "text": "другу",
+            "shortTranslation": "to friend",
+            "longTranslation": "Used when referring to a male friend in the vocative case."
+          },
+          {
+            "id": 3243,
+            "text": "они",
+            "shortTranslation": "they",
+            "longTranslation": "Used when referring to more than one person or thing as the subject of a verb."
+          },
+          {
+            "id": 3244,
+            "text": "маме",
+            "shortTranslation": "to mom",
+            "longTranslation": "Used when referring to one's mother as the recipient of an action."
+          },
+          {
+            "id": 3245,
+            "text": "мы",
+            "shortTranslation": "we",
+            "longTranslation": "Used when referring to oneself and others as the subject of a verb."
+          },
+          {
+            "id": 3246,
+            "text": "все",
+            "shortTranslation": "all",
+            "longTranslation": "Used to refer to the entirety of a group of people or things."
+          },
+          {
+            "id": 3247,
+            "text": "ними",
+            "shortTranslation": "with them",
+            "longTranslation": "Used to indicate possession of something by a group."
+          },
+          {
+            "id": 3248,
+            "text": "нашем",
+            "shortTranslation": "our",
+            "longTranslation": "Belonging to us"
+          },
+          {
+            "id": 3249,
+            "text": "мою",
+            "shortTranslation": "my",
+            "longTranslation": "Belonging to me"
+          },
+          {
+            "id": 3250,
+            "text": "вместе",
+            "shortTranslation": "together",
+            "longTranslation": "Indicates a state of being with one or more other people or things"
+          }
+        ],
+        "dependentOnIds": [
+          3251
+        ]
+      },
+      {
+        "id": 3251,
+        "name": "Temporal words",
+        "imageUrl": "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3252,
+            "text": "Часто",
+            "shortTranslation": "often",
+            "longTranslation": "Frequently; many times"
+          },
+          {
+            "id": 3253,
+            "text": "года",
+            "shortTranslation": "years",
+            "longTranslation": "A period of 365 or 366 days"
+          },
+          {
+            "id": 3254,
+            "text": "каждый день",
+            "shortTranslation": "every day",
+            "longTranslation": "Happening or done every day"
+          },
+          {
+            "id": 3255,
+            "text": "Потом",
+            "shortTranslation": "then",
+            "longTranslation": "At a time following an earlier time"
+          },
+          {
+            "id": 3256,
+            "text": "день",
+            "shortTranslation": "day",
+            "longTranslation": "A period of 24 hours, starting and ending at midnight"
+          },
+          {
+            "id": 3257,
+            "text": "дне",
+            "shortTranslation": "during the day",
+            "longTranslation": "Used to indicate a time period during the day"
+          },
+          {
+            "id": 3258,
+            "text": "время",
+            "shortTranslation": "time",
+            "longTranslation": "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future"
+          },
+          {
+            "id": 3259,
+            "text": "обычно",
+            "shortTranslation": "usually",
+            "longTranslation": "In the normal or customary manner or order of things"
+          },
+          {
+            "id": 3260,
+            "text": "языку",
+            "shortTranslation": "language",
+            "longTranslation": "Refers to the Russian language or any other language being studied or spoken"
+          },
+          {
+            "id": 3261,
+            "text": "когда",
+            "shortTranslation": "when",
+            "longTranslation": "Used to ask or indicate a time or occasion"
+          },
+          {
+            "id": 3262,
+            "text": "всегда",
+            "shortTranslation": "always",
+            "longTranslation": "Indicates that something happens without exception or failure"
+          }
+        ],
+        "dependentOnIds": [
+          3263
+        ]
+      },
+      {
+        "id": 3263,
+        "name": "Places",
+        "imageUrl": "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3264,
+            "text": "в парке",
+            "shortTranslation": "in the park",
+            "longTranslation": "Indicates a location inside a park or a visit to a park"
+          },
+          {
+            "id": 3265,
+            "text": "на гриле",
+            "shortTranslation": "on the grill",
+            "longTranslation": "Refers to food being cooked or grilled on a grill or barbecue"
+          },
+          {
+            "id": 3266,
+            "text": "домой",
+            "shortTranslation": "home",
+            "longTranslation": "Indicates a destination or direction towards one's place of residence or dwelling"
+          },
+          {
+            "id": 3267,
+            "text": "за стол",
+            "shortTranslation": "at the table",
+            "longTranslation": "Refers to a location at a table or a gathering around a table"
+          },
+          {
+            "id": 3268,
+            "text": "школе",
+            "shortTranslation": "at school",
+            "longTranslation": "Indicates a location or activity taking place in a school or educational setting"
+          },
+          {
+            "id": 3269,
+            "text": "уроки",
+            "shortTranslation": "lessons",
+            "longTranslation": "Classes or sessions in which a teacher instructs a student on a particular subject or topic"
+          }
+        ],
+        "dependentOnIds": [
+          3270
+        ]
+      },
+      {
+        "id": 3270,
+        "name": "Verbs",
+        "imageUrl": "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3271,
+            "text": "зовут",
+            "shortTranslation": "is called",
+            "longTranslation": "Used to introduce or ask for someone's name"
+          },
+          {
+            "id": 3272,
+            "text": "живу",
+            "shortTranslation": "live",
+            "longTranslation": "Indicates a present tense state of living in a particular place or residence"
+          },
+          {
+            "id": 3273,
+            "text": "гуляем",
+            "shortTranslation": "take a walk",
+            "longTranslation": "Refers to a leisurely walk or stroll, often with company or in a particular location"
+          },
+          {
+            "id": 3274,
+            "text": "играем",
+            "shortTranslation": "play",
+            "longTranslation": "Refers to playing a game or engaging in a fun or recreational activity"
+          },
+          {
+            "id": 3275,
+            "text": "готовим",
+            "shortTranslation": "cook",
+            "longTranslation": "Refers to the act of preparing or cooking food"
+          },
+          {
+            "id": 3276,
+            "text": "люблю готовить",
+            "shortTranslation": "love to cook",
+            "longTranslation": "Expresses a strong preference or enjoyment for the act of cooking"
+          },
+          {
+            "id": 3277,
+            "text": "готовит",
+            "shortTranslation": "cooks",
+            "longTranslation": "Refers to the act of cooking food"
+          },
+          {
+            "id": 3278,
+            "text": "помогает",
+            "shortTranslation": "helps",
+            "longTranslation": "Indicates the act of providing assistance or support to someone"
+          },
+          {
+            "id": 3279,
+            "text": "учусь",
+            "shortTranslation": "study",
+            "longTranslation": "Refers to the act of learning or acquiring knowledge or skills"
+          },
+          {
+            "id": 3280,
+            "text": "занимаюсь",
+            "shortTranslation": "practice, engage in",
+            "longTranslation": "To spend time regularly doing a particular activity or improving a particular skill"
+          },
+          {
+            "id": 3281,
+            "text": "нравится учиться",
+            "shortTranslation": "like to learn",
+            "longTranslation": "To find pleasure or satisfaction in learning something new or acquiring knowledge"
+          },
+          {
+            "id": 3282,
+            "text": "говорю",
+            "shortTranslation": "speak",
+            "longTranslation": "To use one's voice to articulate speech sounds in order to express thoughts, feelings, or ideas"
+          },
+          {
+            "id": 3283,
+            "text": "обращаюсь",
+            "shortTranslation": "address",
+            "longTranslation": "To speak or write to someone in a particular way, especially formally or respectfully"
+          },
+          {
+            "id": 3284,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 3285,
+            "text": "возвращаюсь",
+            "shortTranslation": "return, come back",
+            "longTranslation": "To go or come back to a place or person, especially to where one was before"
+          },
+          {
+            "id": 3286,
+            "text": "делаю",
+            "shortTranslation": "do, make",
+            "longTranslation": "To perform or execute a task, action or activity"
+          },
+          {
+            "id": 3287,
+            "text": "помогаю",
+            "shortTranslation": "help, assist",
+            "longTranslation": "To make it easier or possible for someone to do something, by offering assistance or support"
+          },
+          {
+            "id": 3288,
+            "text": "садимся",
+            "shortTranslation": "sit down",
+            "longTranslation": "To take a seat, especially on a chair or other piece of furniture"
+          },
+          {
+            "id": 3289,
+            "text": "едим",
+            "shortTranslation": "eat",
+            "longTranslation": "To put food into one's mouth and chew and swallow it"
+          },
+          {
+            "id": 3290,
+            "text": "проводить",
+            "shortTranslation": "conduct, hold",
+            "longTranslation": "To organize or host an event or activity"
+          },
+          {
+            "id": 3291,
+            "text": "еду",
+            "shortTranslation": "go, travel",
+            "longTranslation": "To travel or move in a particular direction or to a particular place"
+          },
+          {
+            "id": 3292,
+            "text": "говорят",
+            "shortTranslation": "say, speak",
+            "longTranslation": "To utter words so as to convey information, an opinion, a feeling or intention"
+          },
+          {
+            "id": 3293,
+            "text": "блины",
+            "shortTranslation": "pancakes",
+            "longTranslation": "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings"
+          }
+        ],
+        "dependentOnIds": [
+          3294
+        ]
+      },
+      {
+        "id": 3294,
+        "name": "Connection words",
+        "imageUrl": "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "words": [
+          {
+            "id": 3295,
+            "text": "в",
+            "shortTranslation": "in, at, to",
+            "longTranslation": "Preposition indicating location or direction."
+          },
+          {
+            "id": 3296,
+            "text": "и",
+            "shortTranslation": "and",
+            "longTranslation": "Conjunction used to connect words or phrases."
+          },
+          {
+            "id": 3297,
+            "text": "или",
+            "shortTranslation": "or",
+            "longTranslation": "Conjunction used to present alternatives."
+          },
+          {
+            "id": 3298,
+            "text": "о",
+            "shortTranslation": "about",
+            "longTranslation": "Preposition used to indicate a subject of conversation or discussion."
+          },
+          {
+            "id": 3299,
+            "text": "за",
+            "shortTranslation": "behind, for",
+            "longTranslation": "Preposition indicating location or purpose."
+          },
+          {
+            "id": 3300,
+            "text": "с",
+            "shortTranslation": "with, from, of",
+            "longTranslation": "Preposition indicating accompaniment, source, or possession."
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "id": 3301,
+      "name": "Anna's family",
+      "textStoryTale": "\"Семья Анны\"\n  \n      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.\n  \n      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.\n  \n      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю \"я\", когда говорю о себе, и \"ты\", когда обращаюсь к брату или другу. Моя мама и папа говорят \"они\" о других людях.\n  \n      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.",
+      "questions": [
+        {
+          "id": 3302,
+          "text": "Who does Anna live with?",
+          "options": [
+            {
+              "id": 3355,
+              "text": "Anna's mom and dad"
+            },
+            {
+              "id": 3352,
+              "text": "Anna's brother and sister"
+            },
+            {
+              "id": 3354,
+              "text": "Anna's grandparents"
+            },
+            {
+              "id": 3353,
+              "text": "Anna's aunt and uncle"
+            }
+          ]
+        },
+        {
+          "id": 3307,
+          "text": "What is Anna's mom's name?",
+          "options": [
+            {
+              "id": 3358,
+              "text": "Kate"
+            },
+            {
+              "id": 3359,
+              "text": "Ivan"
+            },
+            {
+              "id": 3357,
+              "text": "Alexander"
+            },
+            {
+              "id": 3360,
+              "text": "Anna"
+            }
+          ]
+        },
+        {
+          "id": 3312,
+          "text": "What does Anna like to cook?",
+          "options": [
+            {
+              "id": 3362,
+              "text": "Pancakes"
+            },
+            {
+              "id": 3364,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 3365,
+              "text": "Salad"
+            },
+            {
+              "id": 3363,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 3317,
+          "text": "What does Anna's dad usually cook?",
+          "options": [
+            {
+              "id": 3370,
+              "text": "Meat on the grill"
+            },
+            {
+              "id": 3368,
+              "text": "Pancakes"
+            },
+            {
+              "id": 3367,
+              "text": "Salad"
+            },
+            {
+              "id": 3369,
+              "text": "Pizza"
+            }
+          ]
+        },
+        {
+          "id": 3322,
+          "text": "What does Anna's brother help her do?",
+          "options": [
+            {
+              "id": 3374,
+              "text": "Stir the batter"
+            },
+            {
+              "id": 3375,
+              "text": "Chop vegetables"
+            },
+            {
+              "id": 3373,
+              "text": "Make the salad dressing"
+            },
+            {
+              "id": 3372,
+              "text": "Set the table"
+            }
+          ]
+        },
+        {
+          "id": 3327,
+          "text": "What language does Anna like to study?",
+          "options": [
+            {
+              "id": 3378,
+              "text": "Russian"
+            },
+            {
+              "id": 3379,
+              "text": "English"
+            },
+            {
+              "id": 3377,
+              "text": "Spanish"
+            },
+            {
+              "id": 3380,
+              "text": "French"
+            }
+          ]
+        },
+        {
+          "id": 3332,
+          "text": "Who does Anna say 'you' to?",
+          "options": [
+            {
+              "id": 3382,
+              "text": "Her brother"
+            },
+            {
+              "id": 3384,
+              "text": "Her mom and dad"
+            },
+            {
+              "id": 3385,
+              "text": "Her friends"
+            },
+            {
+              "id": 3383,
+              "text": "Her teacher"
+            }
+          ]
+        },
+        {
+          "id": 3337,
+          "text": "What pronoun do Anna's mom and dad use to refer to other people?",
+          "options": [
+            {
+              "id": 3388,
+              "text": "They"
+            },
+            {
+              "id": 3390,
+              "text": "I"
+            },
+            {
+              "id": 3387,
+              "text": "You"
+            },
+            {
+              "id": 3389,
+              "text": "We"
+            }
+          ]
+        },
+        {
+          "id": 3342,
+          "text": "What does Anna usually do when she comes home from school?",
+          "options": [
+            {
+              "id": 3394,
+              "text": "Do homework and help her mom"
+            },
+            {
+              "id": 3395,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3393,
+              "text": "Play video games"
+            },
+            {
+              "id": 3392,
+              "text": "Go out with friends"
+            }
+          ]
+        },
+        {
+          "id": 3347,
+          "text": "What do Anna and her family do after they eat dinner?",
+          "options": [
+            {
+              "id": 3398,
+              "text": "Talk about their day"
+            },
+            {
+              "id": 3399,
+              "text": "Watch TV"
+            },
+            {
+              "id": 3400,
+              "text": "Play board games"
+            },
+            {
+              "id": 3397,
+              "text": "Read books"
+            }
+          ]
+        }
+      ]
+    },
+    "epilogueQuestionAnswers": [
+      {
+        "id": 3356,
+        "questionId": 3302,
+        "correctOptionId": 3355
+      },
+      {
+        "id": 3361,
+        "questionId": 3307,
+        "correctOptionId": 3358
+      },
+      {
+        "id": 3366,
+        "questionId": 3312,
+        "correctOptionId": 3362
+      },
+      {
+        "id": 3371,
+        "questionId": 3317,
+        "correctOptionId": 3370
+      },
+      {
+        "id": 3376,
+        "questionId": 3322,
+        "correctOptionId": 3374
+      },
+      {
+        "id": 3381,
+        "questionId": 3327,
+        "correctOptionId": 3378
+      },
+      {
+        "id": 3386,
+        "questionId": 3332,
+        "correctOptionId": 3382
+      },
+      {
+        "id": 3391,
+        "questionId": 3337,
+        "correctOptionId": 3388
+      },
+      {
+        "id": 3396,
+        "questionId": 3342,
+        "correctOptionId": 3394
+      },
+      {
+        "id": 3401,
+        "questionId": 3347,
+        "correctOptionId": 3398
+      }
+    ]
+  }
+]

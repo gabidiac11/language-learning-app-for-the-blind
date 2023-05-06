@@ -3,14 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import { AppContextProvider } from "./context/AppContext";
-import { BASE_URL } from "./constants";
-
-import axiosInstance from "./axiosInstance";
-import "./mock";
-
 import "./index.scss";
-
-axiosInstance.defaults.baseURL = BASE_URL;
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

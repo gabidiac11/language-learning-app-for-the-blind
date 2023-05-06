@@ -1,6 +1,8 @@
 import { UseFetchDataOptions } from "../../api/useFetchData";
 import { BuildingBlockProgress, EpilogueProgress, UserStory, WordProgress } from "./ctxTypes";
 
+// TODO: delete what is not used by the frontend
+
 // QUIZ
 export enum RoundOutcome {
   Hit,
