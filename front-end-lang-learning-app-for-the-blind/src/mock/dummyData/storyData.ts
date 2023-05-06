@@ -11,16 +11,17 @@ import { genId } from "../mockContext";
 import buildingBlocks from "./buidingBlocks";
 import genEpilogue from "./epilogue";
 
-const generateBuildingProgress = () => {
-  const progressBlocks = buildingBlocks().map((buildingBlock) => {
+const generateBuildingProgress = ():BuildingBlockProgress[] => {
+  const [blocks, starterIds] = buildingBlocks();
+  const progressBlocks = blocks.map((buildingBlock) => {
     const item: BuildingBlockProgress = {
       id: genId(),
       block: buildingBlock,
+      isStarter: starterIds.some(id => id === buildingBlock.id),
       wordProgressItems: buildingBlock.words.map((wordItem) => {
         const wordProgress: WordProgress = {
           id: genId(),
           word: wordItem,
-          score: 0,
         };
         return wordProgress;
       }),
@@ -42,7 +43,6 @@ const generateEpilogueProgress = (): [
     questionProgressItems: epilogue.questions.map((question) => {
       const questionProgress: EpilogueQuestionProgress = {
         id: genId(),
-        completed: false,
         question: question,
       };
       return questionProgress;
@@ -70,8 +70,6 @@ export const dummyInitialUserStoryData = (): [
     epilogueProgress,
     numOfBlocksCompleted: 0,
     numOfTotalBlocks: buildingBlocksProgressItems.length,
-    numOfStoryQuestionsCompleted: 0,
-    numOfTotalStoryQuestions: epilogueProgress.questionProgressItems.length,
   };
   return [story, epilogueQuestionAnswers];
 };

@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import useFetchData, { UseFetchDataOptions } from "../../../api/useFetchData";
 import { EpilogueProgress } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import ButtonContinueToQuiz from "./ButtonContinueToQuiz";
+import ButtonContinueToEpilogueQuiz from "./EpilogueQuiz/ButtonContinueToEpilogueQuiz";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import "./EpiloguePage.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -31,7 +31,7 @@ const EpilogueStartPage = () => {
             <StoryListener epilogueProgress={data} reload={retry}/>
 
             {data.timeSummaryCompleted && (
-              <ButtonContinueToQuiz epilogueProgressId={data.id} />
+              <ButtonContinueToEpilogueQuiz epilogueProgressId={data.id} />
             )}
           </div>
         )}

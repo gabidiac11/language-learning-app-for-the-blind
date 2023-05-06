@@ -1,7 +1,7 @@
 import { axiosMockAdapterInstance } from "../../../axiosInstance";
 import { BuildingBlockProgress } from "../../../context";
 import {
-  QuizCompletedResponse,
+  QuizBlockCompletedResponse,
   QuizRequestBody,
   QuizRequestBodyAnswer,
   QuizRequestBodyIntialQuestion,
@@ -9,7 +9,7 @@ import {
 } from "../../../context/contextTypes/quizTypes";
 import { mockContext } from "../../mockContext";
 import { withUser, wait, processResultOfT } from "../mockEndpointHelpers";
-import QuizService from "./QuizService";
+import BlockQuizService from "./BlockQuizService";
 
 axiosMockAdapterInstance.onPost(/^blocks\/(.+)\/quiz$/).reply(async (config) =>
   withUser<QuizRequestBody>(config, async (userId, data) => {
@@ -52,7 +52,7 @@ axiosMockAdapterInstance.onPost(/^blocks\/(.+)\/quiz$/).reply(async (config) =>
 
     wait();
 
-    const quizService = new QuizService(userId, Number(blockId));
+    const quizService = new BlockQuizService(userId, Number(blockId));
     if ((data as QuizRequestBodyIntialQuestion).questionRequested) {
       const responseBody = quizService.getResumedQuestionFromQuiz();
       return processResultOfT<QuizResponse>(responseBody);
@@ -112,7 +112,7 @@ axiosMockAdapterInstance
 
       const quiz = mockContext
         .getCtx()
-        .quizStates?.[blockId]?.quizStates?.find(
+        .blockQuizStates?.[blockId]?.quizStates?.find(
           (q) => q.id === Number(quizId)
         );
       if (!quiz) {
@@ -140,7 +140,7 @@ axiosMockAdapterInstance
           }
         });
 
-      const data: QuizCompletedResponse = {
+      const data: QuizBlockCompletedResponse = {
         epilogueProgressUnlocked: undefined, // todo: check for this one
         blockProgressUnlockedItems: blockProgressUnlockedItems,
         blockCompleted: existingBlock,

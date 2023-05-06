@@ -7,14 +7,21 @@ const MOCK = "https://mock/api/";
 export const BASE_URL = (() => {
   // TODO: use based on environment
   // switch (STAGE) {
-    // case "local":
-      // return LOCAL;
-      return MOCK;
+  // case "local":
+  // return LOCAL;
+  return MOCK;
 
-    // case "dev":
-    //   return LIVE;
+  // case "dev":
+  //   return LIVE;
 
-    // default:
-    //   return LIVE;
+  // default:
+  //   return LIVE;
   // }
 })();
+
+declare global {
+  interface Window {
+    cheat_correctEpilogueOptions?: { [key: string]: true };
+    cheat_correctBlockOptions?: { [key: string]: true };
+  }
+}

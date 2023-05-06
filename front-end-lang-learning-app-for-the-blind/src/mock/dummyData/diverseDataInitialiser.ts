@@ -14,22 +14,14 @@ function completeAllBlocks(userStory: UserStory) {
     bp.timeStarted = new Date().getTime();
     bp.timeSummaryCompleted = new Date().getTime();
     bp.timeCompleted = new Date().getTime();
-    bp.wordProgressItems.forEach((wordProgress) => {
-      wordProgress.score = 100;
-    });
   });
   userStory.numOfBlocksCompleted = userStory.buildingBlocksProgressItems.length;
 }
 
 function updateNumOfStuffForStory(userStory: UserStory) {
   userStory.numOfBlocksCompleted = userStory.buildingBlocksProgressItems.filter(
-    (bp) => bp.wordProgressItems.every((wp) => wp.score == 100)
+    (bp) => !!bp.timeCompleted
   ).length;
-
-  userStory.numOfStoryQuestionsCompleted =
-    userStory.epilogueProgress.questionProgressItems.filter(
-      (qp) => qp.completed
-    ).length;
 }
 
 export function generateDiverseStories(): [
@@ -65,7 +57,6 @@ export function generateDiverseStories(): [
     new Date().getTime();
   startedStory.buildingBlocksProgressItems[1].timeSummaryCompleted =
     new Date().getTime();
-  startedStory.buildingBlocksProgressItems[1].wordProgressItems[0].score = 50;
   // block - completed:
   startedStory.buildingBlocksProgressItems[2].timeUnlocked =
     new Date().getTime();
@@ -75,11 +66,6 @@ export function generateDiverseStories(): [
     new Date().getTime();
   startedStory.buildingBlocksProgressItems[2].timeCompleted =
     new Date().getTime();
-  startedStory.buildingBlocksProgressItems[2].wordProgressItems.forEach(
-    (wordProgress) => {
-      wordProgress.score = 100;
-    }
-  );
   startedStory.name +=
     " - STARTED #1 - 1 block unlocked, 1 started, 1 completed";
   updateNumOfStuffForStory(startedStory);
@@ -101,7 +87,7 @@ export function generateDiverseStories(): [
     " - STARTED #2 - all blocks completed, epilogue unlocked";
   updateNumOfStuffForStory(startedStoryWithEpilogueUnlocked);
 
-  // story - started with all blocks completed, 1 epilogue question completed:
+  // story - started with all blocks completed:
   // ############################################################################################################################################################################################################################################################
   const [
     startedStoryWithEpilogueStarted,
@@ -111,17 +97,14 @@ export function generateDiverseStories(): [
 
   // epilogue - started:
   startedStoryWithEpilogueStarted.epilogueProgress.timeUnlocked =
-  new Date().getTime();
+    new Date().getTime();
   startedStoryWithEpilogueStarted.epilogueProgress.timeSummaryCompleted =
-  new Date().getTime();
+    new Date().getTime();
   startedStoryWithEpilogueStarted.epilogueProgress.timeStarted =
     new Date().getTime();
-  startedStoryWithEpilogueStarted.epilogueProgress.questionProgressItems[0].completed =
-    true;
 
-  startedStoryWithEpilogueStarted.numOfStoryQuestionsCompleted = 1;
   startedStoryWithEpilogueStarted.name +=
-    " - STARTED #2 - all blocks completed, 1 epilogue question completed";
+    " - STARTED #2 - all blocks completed";
   updateNumOfStuffForStory(startedStoryWithEpilogueStarted);
 
   // story - completed:
@@ -133,30 +116,36 @@ export function generateDiverseStories(): [
 
   finishedStory.numOfBlocksCompleted =
     finishedStory.buildingBlocksProgressItems.length;
-  finishedStory.numOfStoryQuestionsCompleted =
-    finishedStory.epilogueProgress.questionProgressItems.length;
 
   finishedStory.epilogueProgress.timeSummaryCompleted = new Date().getTime();
   finishedStory.epilogueProgress.timeUnlocked = new Date().getTime();
   finishedStory.epilogueProgress.timeStarted = new Date().getTime();
   finishedStory.epilogueProgress.timeCompleted = new Date().getTime();
-  finishedStory.epilogueProgress.questionProgressItems.forEach((q) => {
-    q.completed = true;
-  });
   updateNumOfStuffForStory(finishedStory);
 
   const stories = [
-    lockedStory,
-    unlockStory,
-    startedStory,
-    startedStoryWithEpilogueUnlocked,
-    startedStoryWithEpilogueStarted,
     finishedStory,
+    startedStoryWithEpilogueStarted,
+    startedStoryWithEpilogueUnlocked,
+    startedStory,
+    unlockStory,
+    lockedStory,
   ];
 
-  // GUARD IF ALL BLOCKS and stories ARE ACCESIBLE
-  quardStories(stories);
+  // ADD dependencies between stories
+  finishedStory.dependentOnIds = [
+    startedStoryWithEpilogueStarted.id,
+    startedStoryWithEpilogueUnlocked.id,
+    startedStory.id,
+    unlockStory.id,
+  ];
+  startedStoryWithEpilogueStarted.dependentOnIds = [lockedStory.id];
 
+  // GUARD IF ALL BLOCKS and stories ARE ACCESIBLE
+  quardStoriesDependencyTree(stories);
+  quardStoryBuildingBlocksDependencyTree(stories);
+
+  // put together all epilogue answers
   const epilogueAnswers = [
     ...lockedStoryEpilogueAnswers,
     ...unlockStoryEpilogueAnswers,
@@ -176,7 +165,29 @@ type ItemDependence = {
   entity: UserStory | BuildingBlockProgress;
 };
 
-function quardStories(stories: UserStory[]) {
+/**
+ * make sure the dependencies between stories are forming a conex graph where every node is accessible
+ * @param stories
+ */
+function quardStoriesDependencyTree(stories: UserStory[]) {
+  console.log(`Checking if all stories are accessible.`);
+  const storiesAdapted = stories.map(
+    (story) =>
+      ({
+        id: story.id,
+        dependentOnIds: story.dependentOnIds,
+        timeUnlocked: story.timeUnlocked,
+        entity: story,
+      } as ItemDependence)
+  );
+  guardIfAllItemsAccesible(storiesAdapted);
+}
+
+/**
+ * make sure the dependency between blocks forms a conex graph where every node is accessible
+ * @param stories
+ */
+function quardStoryBuildingBlocksDependencyTree(stories: UserStory[]) {
   stories.forEach((story) => {
     if (!story.timeUnlocked) {
       console.log(
@@ -197,8 +208,6 @@ function quardStories(stories: UserStory[]) {
     );
     guardIfAllItemsAccesible(blocksAdapted);
   });
-
-  // TODO: do the same for stories
 }
 
 /**

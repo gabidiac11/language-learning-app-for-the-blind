@@ -1,5 +1,5 @@
 import { UseFetchDataOptions } from "../../api/useFetchData";
-import { BuildingBlockProgress, EpilogueProgress, WordProgress } from "./ctxTypes";
+import { BuildingBlockProgress, EpilogueProgress, UserStory, WordProgress } from "./ctxTypes";
 
 // QUIZ
 export enum RoundOutcome {
@@ -37,7 +37,7 @@ export type WordOutcome = {
   prababilityInclusion: number;
 };
 
-export type QuizState = {
+export type QuizBlockState = {
   id: number;
   blockProgressId: number;
   wordOutcomes: WordOutcome[];
@@ -55,8 +55,33 @@ export type BlockQuizStates = {
   progressBlockId: number;
   // if one of the quiz states is completed -> the block is completed
   // if the user wants to redu a building block he can do so, but won't modify the block progress, but actually continue the last uncompleted quiz state or start a new one
-  quizStates: QuizState[];
+  quizStates: QuizBlockState[];
 };
+
+//< --START-- >< ---------------- TYPES EPILOGUE ---------------- >< --START-->
+export type EpilogueQuestionOutcome = {
+  id: number;
+  outcome: RoundOutcome;
+  idQuestionProgress: number;
+  question?: QuizQuestion;
+  // intended for tracing - not usage
+  wordTxt: string;
+  prababilityInclusion: number;
+};
+
+export type QuizEpilogueState = {
+  id: number;
+  epilogueProgressId: number;
+  outcomes: EpilogueQuestionOutcome[];
+  timeCompleted?: number;
+};
+
+export type EpilogueQuizStates = {
+    progressBlockId: number;
+    // if one of the quiz states is completed -> the epilogue is completed
+    // if the user wants to redu a EPILOGUE he can do so, but won't modify the progress, but actually continue the last uncompleted quiz state or start a new one
+    quizStates: QuizEpilogueState[];
+}
 
 //< --START-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --START-->
 
@@ -94,10 +119,11 @@ export interface UseFetchDataOptionsQuizRequest extends UseFetchDataOptions {
   body: QuizRequestBody;
 }
 
-export type QuizCompletedResponse = {
+export type QuizBlockCompletedResponse = {
   epilogueProgressUnlocked?: EpilogueProgress;
   blockProgressUnlockedItems?: BuildingBlockProgress[];
-  blockCompleted: BuildingBlockProgress;
+  blockCompleted?: BuildingBlockProgress;
   blockCompletedStoryRefId: number;
+  userStoriesUnlocked?: UserStory[];
 }
 // < --END-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --END-->

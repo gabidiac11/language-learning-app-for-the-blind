@@ -1,7 +1,7 @@
 import { BuildingBlock } from "../../context/contextTypes/ctxTypes";
 import { genId } from "../mockContext";
 
-const buildingBlocks = (): BuildingBlock[] => {
+const buildingBlocks = (): [blocks: BuildingBlock[], starterIds: number[]] => {
   const familyBlock: BuildingBlock = {
     id: genId(),
     name: "Family",
@@ -248,7 +248,7 @@ const buildingBlocks = (): BuildingBlock[] => {
       },
     ],
   };
-  
+
   const temporalsBlock: BuildingBlock = {
     id: genId(),
     name: "Temporal words",
@@ -587,7 +587,7 @@ const buildingBlocks = (): BuildingBlock[] => {
     ],
   };
 
-  // family unlocks -> pronons and names 
+  // family unlocks -> pronons and names
   familyBlock.dependentOnIds = [namesBlock.id, pronumsBlock.id];
 
   // pronums unlocks -> temporal
@@ -611,8 +611,8 @@ const buildingBlocks = (): BuildingBlock[] => {
     verbsBlock,
     connectionWords,
   ];
-  
-  return blocks;
+
+  return [blocks, [familyBlock.id]];
 };
 
 export default buildingBlocks;

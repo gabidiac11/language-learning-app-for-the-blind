@@ -4,9 +4,9 @@ import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress, Word } from "../../../../context";
 import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
+import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
 import "./BlockIntroduction.scss";
 import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
-import ButtonContinueToQuiz from "../../EpiloguePage/ButtonContinueToQuiz";
 
 const BlockIntroduction = () => {
   //TODO: should have something explaining what this page is (later)
@@ -54,7 +54,7 @@ const BlockIntroduction = () => {
               <BlockWordsSummariesCompleted block={data} />
             )}
             {data.timeSummaryCompleted && (
-              <ButtonContinueToQuiz epilogueProgressId={data.id} />
+              <ButtonContinueToBlockQuiz blockProgressId={data.id} />
             )}
           </div>
         )}
