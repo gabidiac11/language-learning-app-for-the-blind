@@ -1,98 +1,51 @@
-import { Story } from "../Data/ctx.story.types";
+import UserStoryService from "../BusinessLogic/UserStoryService";
 import { UserStory } from "../Data/ctx.userStory.types";
-import { Database } from "../Data/database";
-import { LessonStoryToUserStoryConvertor } from "../Data/Seed/diverseDataInitialiser";
 import { log } from "../logger";
 import BaseController from "./BaseController";
 import Result from "./Result";
 
 export default class StoriesController extends BaseController {
-  private _db: Database;
-  public static inject = [Database.name];
-  constructor(db: Database) {
+  public static inject = [UserStoryService.name];
+  
+  private _userStoryService: UserStoryService;
+  constructor(userStoryService: UserStoryService) {
     super();
-    this._db = db;
+    this._userStoryService = userStoryService;
   }
+
   // TODO: add id generation with guid
   public async getStories(userId: string): Promise<Result<UserStory[]>> {
-    const existsResult = await this._db.exists(`userStories/${userId}`);
-    if(existsResult.isError()) {
-      return existsResult.As<UserStory[]>();
+    const hasUserStoriesResult: Result<boolean> =
+      await this._userStoryService.hasUserStoriesAssign(userId);
+    if (hasUserStoriesResult.isError()) {
+      return hasUserStoriesResult.As<UserStory[]>();
     }
 
-    if (existsResult.data) {
-      const storiesResult = await this.queryUserStories(userId);
+    const hasUserStoryAssign = hasUserStoriesResult.data;
+    if (hasUserStoryAssign) {
+      log(`User ${userId} does have user stories. Will query user stories...`);
+      const storiesResult = await this._userStoryService.queryUserStories(
+        userId
+      );
       return storiesResult;
     }
-    log(`User ${userId} doesn't have user stories. Will create...`);
 
-    const initResult = await this.initializeUserStories(userId);
+    // TODO: I should think about how can we initialize user stories at an earlier time -> maybe event on user registration?
+    log(`User ${userId} doesn't have user stories. Will create...`);
+    const initResult = await this._userStoryService.initializeUserStories(
+      userId
+    );
     if (initResult.isError()) {
       return initResult.As<UserStory[]>();
     }
 
-    const result =  await this.queryUserStories(userId);
+    log(
+      `User ${userId} has been assign user stories. Will query user stories...`
+    );
+    const result = await this._userStoryService.queryUserStories(userId);
     if (result.isError()) {
       return result;
     }
     return Result.Success(result.data, 200);
-  }
-  async initializeUserStories(userId: string): Promise<Result<boolean>> {
-    const lessonStoriesResult = await this._db.get<Story[]>("lessonStories/");
-    if (lessonStoriesResult.isError()) {
-      return lessonStoriesResult.As<boolean>();
-    }
-
-    const convertor = new LessonStoryToUserStoryConvertor();
-    const userStoriesResult = await convertor.createUserStories(
-      lessonStoriesResult.data
-    );
-    if (userStoriesResult.isError()) {
-      return userStoriesResult.As<boolean>();
-    }
-
-    await this._db.set<UserStory[]>(
-      userStoriesResult.data,
-      `userStories/${userId}`
-    );
-
-    return Result.Success<boolean>(true);
-  }
-
-  // TODO: make this reusable into another class
-  async queryUserStories(userId: string): Promise<Result<UserStory[]>> {
-    const storiesResult = await this._db.get<UserStory[]>(
-      `userStories/${userId}`
-    );
-    if (storiesResult.isError()) {
-      return storiesResult;
-    }
-
-    const lessonStoriesResult = await this._db.get<Story[]>("lessonStories/");
-    if (lessonStoriesResult.isError()) {
-      return lessonStoriesResult.As<UserStory[]>();
-    }
-
-    // fill in associated data
-    const lessons = lessonStoriesResult.data;
-    for (let userStory of storiesResult.data) {
-      const lessonStory = lessons.find((s) => s.id === userStory.storyId);
-      userStory.buildingBlocksProgressItems.forEach((bp) => {
-        bp.block = lessonStory.buildingBlocks.find(
-          (block) => block.id === bp.blockId
-        );
-        bp.wordProgressItems.forEach(wordProgress => {
-          wordProgress.word = bp.block.words.find(item => item.id);
-        });
-      });
-      userStory.epilogueProgress.epilogue = lessonStory.epilogue;
-      userStory.epilogueProgress.questionProgressItems.forEach((item) => {
-        item.question = lessonStory.epilogue.questions.find(
-          (q) => q.id === item.questionId
-        );
-      });
-    }
-
-    return storiesResult;
   }
 }

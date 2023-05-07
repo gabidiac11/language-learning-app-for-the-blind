@@ -10,7 +10,7 @@ import { log } from "./logger";
 import { config } from "dotenv";
 import Result from "./Controllers/Result";
 import StoriesController from "./Controllers/StoriesController";
-import Authenticator from "./BusinessLogic/Quiz/AuthenticatorMiddleware";
+import Authenticator from "./BusinessLogic/AuthenticatorMiddleware";
 import { UserStory } from "./Data/ctx.userStory.types";
 
 // (async () => {
