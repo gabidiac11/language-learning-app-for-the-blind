@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      // "command": "server/node_modules/typescript/lib/tsc.js",
+      // "command": "tsc -p ./server; node ./server/dist/app.js",
+      "command": "tsc -p ./server",
+      "args": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$tsc"
+    }
+  ],
+  //helps with debugger to run build before running
+  "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared"
+  }
+}
