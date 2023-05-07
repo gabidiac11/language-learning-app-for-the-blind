@@ -168,9 +168,6 @@ export class DiverseStateUserStoryDecorator {
     // story - started with all blocks completed, epilogue unlocked
     // ############################################################################################################################################################################################################################################################
     this.completeAllBlocks(startedStoryWithEpilogueUnlocked);
-
-    //TODO: add summary states for epilogue
-
     // epilogue - unlocked:
     startedStoryWithEpilogueUnlocked.epilogueProgress.timeUnlocked =
       new Date().getTime();
@@ -196,6 +193,7 @@ export class DiverseStateUserStoryDecorator {
 
     // story - completed:
     // ############################################################################################################################################################################################################################################################
+    this.completeAllBlocks(finishedStory);
     finishedStory.timeCompleted = new Date().getTime();
 
     finishedStory.numOfBlocksCompleted =

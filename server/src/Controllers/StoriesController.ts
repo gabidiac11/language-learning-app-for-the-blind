@@ -15,7 +15,12 @@ export default class StoriesController extends BaseController {
   }
   // TODO: add id generation with guid
   public async getStories(userId: string): Promise<Result<UserStory[]>> {
-    if (this._db.exists(`userStories/${userId}`)) {
+    const existsResult = await this._db.exists(`userStories/${userId}`);
+    if(existsResult.isError()) {
+      return existsResult.As<UserStory[]>();
+    }
+
+    if (existsResult.data) {
       const storiesResult = await this.queryUserStories(userId);
       return storiesResult;
     }
@@ -26,8 +31,7 @@ export default class StoriesController extends BaseController {
       return initResult.As<UserStory[]>();
     }
 
-    const result = await this._db.get<UserStory[]>(`userStories/${userId}`);
-    // TODO: decorate these stories with the content references like epilogue, block, epilogue question
+    const result =  await this.queryUserStories(userId);
     if (result.isError()) {
       return result;
     }
@@ -55,6 +59,7 @@ export default class StoriesController extends BaseController {
     return Result.Success<boolean>(true);
   }
 
+  // TODO: make this reusable into another class
   async queryUserStories(userId: string): Promise<Result<UserStory[]>> {
     const storiesResult = await this._db.get<UserStory[]>(
       `userStories/${userId}`
@@ -63,7 +68,7 @@ export default class StoriesController extends BaseController {
       return storiesResult;
     }
 
-    const lessonStoriesResult = await this._db.get<Story[]>("lessonStory");
+    const lessonStoriesResult = await this._db.get<Story[]>("lessonStories/");
     if (lessonStoriesResult.isError()) {
       return lessonStoriesResult.As<UserStory[]>();
     }
@@ -76,6 +81,9 @@ export default class StoriesController extends BaseController {
         bp.block = lessonStory.buildingBlocks.find(
           (block) => block.id === bp.blockId
         );
+        bp.wordProgressItems.forEach(wordProgress => {
+          wordProgress.word = bp.block.words.find(item => item.id);
+        });
       });
       userStory.epilogueProgress.epilogue = lessonStory.epilogue;
       userStory.epilogueProgress.questionProgressItems.forEach((item) => {

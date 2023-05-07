@@ -40,7 +40,25 @@ class Database {
   }
 
   public async set<T>(item: T, path: string) {
+    removeUndefined(item);
     await set(ref(this.db, path), item);
+  }
+}
+
+/**
+ * recursively remove undefined value from JSON because google firestore accept only null's over undefined's
+ * there is a good case for using null as it's more evident what all json structures should look like, but for now we'll use this solution
+ * @param value 
+ */
+function removeUndefined(value: any) {
+  if (!!value && typeof value === "object") {
+    for (let prop in value) {
+      if (value[prop] === undefined) {
+        delete value[prop];
+      } else {
+        removeUndefined(value[prop]);
+      }
+    }
   }
 }
 
