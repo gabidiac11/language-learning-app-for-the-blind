@@ -19,6 +19,17 @@
       "program": "${workspaceFolder}/server/dist/app.js",
       "envFile": "${workspaceFolder}/server/.env",
       "args": []
+    },
+    {
+      "name": "Debug Node.js (with build)",
+      "type": "node",
+      "request": "launch",
+      "url": "http://localhost:5001",
+      "runtimeArgs": [],
+      "envFile": "${workspaceFolder}/server/.env",
+      "sourceMaps": true,
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/server/dist/app.js",
     }
   ]
 }

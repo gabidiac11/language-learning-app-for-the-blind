@@ -44,7 +44,7 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: number;
 
-  isStarter: boolean;
+  isStarter?: boolean;
 
   // a building block is completed if a quiz state associated is completed
   timeUnlocked?: number;
