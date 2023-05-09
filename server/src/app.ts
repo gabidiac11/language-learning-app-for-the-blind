@@ -1,26 +1,25 @@
-require("dotenv").config();
+require("dotenv").config(); // TODO: see if this affects the build from react and its variables
 
 import bodyParser from "body-parser";
 import path from "path";
-import express, { Response, Request } from "express";
+import express from "express";
 import fs from "fs";
 import diContainer from "./diContainer";
-import Seeder from "./Data/Seed/Seeder";
 import { log } from "./logger";
-import { config } from "dotenv";
-import Result from "./Controllers/Result";
-import UserStoriesController from "./Controllers/StoriesController";
-import Authenticator from "./BusinessLogic/AuthenticatorMiddleware";
-import { UserStory } from "./Data/ctx.userStory.types";
+import { executeActionAsync } from "./ApiSupport/apiActionHelpers";
+import getControllers from "./ApiSupport/getControllers";
 
-// TODO: uncomment
-// (async () => {
-//   /**
-//    * @type {Seeder}
-//    */
-//   const seeder = await diContainer.get("Seeder");
-//   seeder.seedIfNeeded();
-// })();
+if (process.env.SEED === "true") {
+  (async () => {
+    /**
+     * @type {Seeder}
+     */
+    const seeder = await diContainer.get("Seeder");
+    seeder.seedIfNeeded();
+  })();
+} else {
+  log("No seed for this environment.");
+}
 
 const app = express();
 
@@ -29,7 +28,10 @@ app.use(express.urlencoded());
 
 app.use(
   express.static(
-    path.join(__dirname, "../../front-end-lang-learning-app-for-the-blind/build")
+    path.join(
+      __dirname,
+      "../../front-end-lang-learning-app-for-the-blind/build"
+    )
   )
 );
 
@@ -47,18 +49,13 @@ app.use("/api/*", (req, res, next) => {
   next();
 });
 
-const storiesController = diContainer.get(
-  UserStoriesController.name
-) as UserStoriesController;
-const authenticator = diContainer.get(Authenticator.name) as Authenticator;
+const [storiesController] = getControllers(diContainer);
 
 app.get("/api/userStories", async (req, res) => {
-  const authResult = await authenticator.isAuth(req);
-  if (authResult.isError()) {
-    return processResultOfT(authResult, req, res);
-  }
-  const result = await storiesController.getStories(authResult.data);
-  return processResultOfT<UserStory[]>(result, req, res);
+  await executeActionAsync(
+    { req, res },
+    storiesController.getStories.bind(storiesController)
+  );
 });
 
 app.get("/api/*", (req, res) => {
@@ -72,35 +69,14 @@ app.get("/*", function (req, res) {
     "index.html"
   );
   if (!fs.existsSync(pathName)) {
+    log(`Path to frontend is not great.`);
     return res.status(404).send({ message: "Route not found." });
   }
+  log(`Path to frontend...`);
   res.sendFile(pathName);
 });
 
 const port = process.env.ENV_NAME === "demo" ? 5001 : process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}!`));
-
-
-function processResultOfT<T>(result: Result<T>, req: Request, res: Response) {
-  let statusCode = 0;
-  let data: any;
-
-  if (result.isError()) {
-    statusCode = result.statusCode ?? 400;
-    data = result.errors
-      ? { messages: result.errors }
-      : { messages: ["Something went wrong."] };
-  } else {
-    statusCode = result.statusCode ?? 200;
-    data = result.data ?? {};
-  }
-
-  log(
-    `Finished [${statusCode}] at [${req.url}] with result ${JSON.stringify(
-      data
-    ).slice(0, 100)}`
-  );
-  return res.status(statusCode).send(data);
-}
 
 module.exports = app;

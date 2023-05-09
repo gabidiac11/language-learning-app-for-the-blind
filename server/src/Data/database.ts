@@ -1,7 +1,7 @@
 import { getDatabase, ref } from "@firebase/database";
 import { firebaseApp } from "./firebase-app";
 import { get, set } from "@firebase/database";
-import Result from "../Controllers/Result";
+import Result from "../ApiSupport/Result";
 import { log } from "../logger";
 
 class Database {

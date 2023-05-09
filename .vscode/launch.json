@@ -12,15 +12,6 @@
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Debug Node.js",
-      "type": "node",
-      "request": "launch",
-      "url": "http://localhost:5001",
-      "program": "${workspaceFolder}/server/dist/app.js",
-      "envFile": "${workspaceFolder}/server/.env",
-      "args": []
-    },
-    {
       "name": "Debug Node.js (with build)",
       "type": "node",
       "request": "launch",
