@@ -9,10 +9,11 @@ import Seeder from "./Data/Seed/Seeder";
 import { log } from "./logger";
 import { config } from "dotenv";
 import Result from "./Controllers/Result";
-import StoriesController from "./Controllers/StoriesController";
+import UserStoriesController from "./Controllers/StoriesController";
 import Authenticator from "./BusinessLogic/AuthenticatorMiddleware";
 import { UserStory } from "./Data/ctx.userStory.types";
 
+// TODO: uncomment
 // (async () => {
 //   /**
 //    * @type {Seeder}
@@ -47,8 +48,8 @@ app.use("/api/*", (req, res, next) => {
 });
 
 const storiesController = diContainer.get(
-  StoriesController.name
-) as StoriesController;
+  UserStoriesController.name
+) as UserStoriesController;
 const authenticator = diContainer.get(Authenticator.name) as Authenticator;
 
 app.get("/api/userStories", async (req, res) => {
