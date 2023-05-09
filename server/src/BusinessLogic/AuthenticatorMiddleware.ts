@@ -1,7 +1,6 @@
 import Result from "../Controllers/Result";
 import { Request } from "express";
 import * as admin from "firebase-admin";
-import { firebaseApp } from "../Data/firebase-app";
 import { log } from "../logger";
 
 export default class Authenticator {

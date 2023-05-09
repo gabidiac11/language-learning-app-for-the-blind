@@ -4,7 +4,7 @@ import { log } from "../logger";
 import BaseController from "./BaseController";
 import Result from "./Result";
 
-export default class StoriesController extends BaseController {
+export default class UserStoriesController extends BaseController {
   public static inject = [UserStoryService.name];
   
   private _userStoryService: UserStoryService;
