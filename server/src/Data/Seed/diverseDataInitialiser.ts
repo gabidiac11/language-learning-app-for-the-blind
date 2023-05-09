@@ -1,4 +1,4 @@
-import Result from "../../Controllers/Result";
+import Result from "../../ApiSupport/Result";
 import { genId } from "../ContextFileBased/FileStorageContext";
 import {
   BuildingBlock,

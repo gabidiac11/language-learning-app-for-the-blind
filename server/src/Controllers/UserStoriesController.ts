@@ -2,19 +2,27 @@ import UserStoryService from "../BusinessLogic/UserStoryService";
 import { UserStory } from "../Data/ctx.userStory.types";
 import { log } from "../logger";
 import BaseController from "./BaseController";
-import Result from "./Result";
+import Result from "../ApiSupport/Result";
+import { Request } from "express";
+import { Authenticator } from "../ApiSupport/authentication";
 
 export default class UserStoriesController extends BaseController {
-  public static inject = [UserStoryService.name];
-  
+  public static inject = [Authenticator.name, UserStoryService.name];
+
   private _userStoryService: UserStoryService;
-  constructor(userStoryService: UserStoryService) {
-    super();
+  constructor(
+    authenticator: Authenticator,
+    userStoryService: UserStoryService
+  ) {
+    super(authenticator);
     this._userStoryService = userStoryService;
   }
 
   // TODO: add id generation with guid
-  public async getStories(userId: string): Promise<Result<UserStory[]>> {
+  public async getStories(req: Request): Promise<Result<UserStory[]>> {
+    await this.authenticateAsync<UserStory[]>(req);
+    const userId = this.getUser().uid;
+
     const hasUserStoriesResult: Result<boolean> =
       await this._userStoryService.hasUserStoriesAssign(userId);
     if (hasUserStoriesResult.isError()) {

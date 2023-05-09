@@ -1,4 +1,4 @@
-import Result from "../Controllers/Result";
+import Result from "../ApiSupport/Result";
 import { Story } from "../Data/ctx.story.types";
 import { UserStory } from "../Data/ctx.userStory.types";
 import { Database } from "../Data/database";
