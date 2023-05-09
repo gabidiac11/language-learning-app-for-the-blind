@@ -21,11 +21,11 @@ import EpilogueQuizCompleted from "../pages/autheticated/EpiloguePage/EpilogueQu
 // TODO: on-off button for voice navigation
 
 const App = () => {
-  const { user, isLoading, token } = useAuthInit();
+  const { user, isLoading, isVerifying } = useAuthInit();
 
-  if (isLoading || !token) {
+  if (isLoading || isVerifying) {
     return (
-      <div className="view">
+      <div className="view loading-auth">
         <Loader />
       </div>
     );
