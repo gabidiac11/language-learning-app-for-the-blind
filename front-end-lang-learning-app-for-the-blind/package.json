@@ -2,8 +2,6 @@
   "name": "front-end-lang-learning-app-for-the-blind",
   "version": "0.1.0",
   "author": "Gabriel P. Diac",
-  "homepage": ".",
-  "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

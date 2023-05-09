@@ -8,7 +8,6 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbJvC-f_CBX0Hl_2IqEAAddfglKDEKW7w",
