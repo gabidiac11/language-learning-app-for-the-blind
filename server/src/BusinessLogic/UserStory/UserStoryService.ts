@@ -1,8 +1,8 @@
-import Result from "../ApiSupport/Result";
-import { Story } from "../Data/ctx.story.types";
-import { UserStory } from "../Data/ctx.userStory.types";
-import { Database } from "../Data/database";
-import { LessonStoryToUserStoryConvertor } from "../Data/Seed/diverseDataInitialiser";
+import Result from "../../ApiSupport/Result";
+import { Story } from "../../Data/ctx.story.types";
+import { UserStory } from "../../Data/ctx.userStory.types";
+import { Database } from "../../Data/database";
+import { UserStoriesCreator } from "./UserStoriesCreator";
 
 export default class UserStoryService {
   private _db: Database;
@@ -124,7 +124,7 @@ export default class UserStoryService {
       throw "No lessons found. Seeding needs to be done.";
     }
 
-    const convertor = new LessonStoryToUserStoryConvertor();
+    const convertor = new UserStoriesCreator();
     const userStoriesResult = await convertor.createUserStories(
       lessonStoriesResult.data
     );
