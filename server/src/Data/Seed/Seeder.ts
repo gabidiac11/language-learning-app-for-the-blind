@@ -6,6 +6,7 @@ import { log } from "../../logger";
 import { Story } from "../ctx.story.types";
 import { Database } from "../database";
 import guardStories from "./storiesValidationGuard";
+import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
 
 export default class Seeder {
   static get inject() {
@@ -33,17 +34,18 @@ export default class Seeder {
   }
 
   private async addStories(stories: Story[]) {
-    await set(this._db.ref("lessonStories/"), stories);
+    await this._db.setArray<Story>(stories, "lessonStories/");
   }
 
   private async isSeedNeeded(): Promise<boolean> {
-    const lessonStoriesRef = this._db.ref("lessonStories/");
-    // return true;
-    const snapshot = await get(lessonStoriesRef);
-    if (!snapshot.exists()) {
-      return true;
+    const existsResult = await this._db.exists("lessonStories/");
+    if (existsResult.isError()) {
+      log(
+        `[Seeder] Error accessing seeding data.` +
+          getStringifiedError(existsResult)
+      );
     }
-    return false;
+    return existsResult.data;
   }
 
   private async readSeedData(): Promise<Story[]> {

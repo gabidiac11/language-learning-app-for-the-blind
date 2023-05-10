@@ -3,7 +3,6 @@ import admin from "firebase-admin";
 
 import { firebaseConfig } from "../constants";
 
-
 const firebaseApp = initializeApp(firebaseConfig);
 
 admin.initializeApp(firebaseConfig);

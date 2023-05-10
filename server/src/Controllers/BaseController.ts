@@ -15,12 +15,7 @@ export default class BaseController {
       this._user = authResult.data;
       return;
     }
-
-    const error: ApiError<T> = {
-      isThisApiError: true,
-      result: authResult.As<T>(),
-    };
-    throw error;
+    throw ApiError.ErrorResult(authResult.As<T>());
   }
 
   protected getUser(): AppUser {
@@ -28,5 +23,14 @@ export default class BaseController {
       throw "Controller accessed 'User' while not doing prior authentication.";
     }
     return this._user;
+  }
+
+  protected getParam<T>(req: Request, key: string): string {
+    const value = req.params?.[key];
+    if (!value) {
+      throw ApiError.Error<T>(`Request parameter ${key} should not be null.`, 400);
+    }
+
+    return value;
   }
 }
