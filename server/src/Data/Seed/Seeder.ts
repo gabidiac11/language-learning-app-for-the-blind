@@ -1,4 +1,3 @@
-import { get, set } from "@firebase/database";
 import { readFileSync } from "fs";
 import path from "path";
 import { environment } from "../../constants";
@@ -45,7 +44,7 @@ export default class Seeder {
           getStringifiedError(existsResult)
       );
     }
-    return existsResult.data;
+    return !existsResult.data;
   }
 
   private async readSeedData(): Promise<Story[]> {

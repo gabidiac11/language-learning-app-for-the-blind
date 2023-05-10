@@ -100,6 +100,9 @@ export default class UserStoryService {
     if (lessonStoriesResult.isError()) {
       return lessonStoriesResult.As<boolean>();
     }
+    if(!lessonStoriesResult.data) {
+      throw "No lessons found. Seeding needs to be done.";
+    }
 
     const convertor = new LessonStoryToUserStoryConvertor();
     const userStoriesResult = await convertor.createUserStories(
