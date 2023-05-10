@@ -1,4 +1,5 @@
-require("dotenv").config(); // TODO: see if this affects the build from react and its variables
+import dotenv = require("dotenv");
+dotenv.config(); // TODO: see if this affects the build from react and its variables
 
 import bodyParser from "body-parser";
 import path from "path";
@@ -8,17 +9,15 @@ import diContainer from "./diContainer";
 import { log } from "./logger";
 import { executeActionAsync } from "./ApiSupport/apiActionHelpers";
 import getControllers from "./ApiSupport/getControllers";
+import Seeder from "./Data/Seed/Seeder";
 
 if (process.env.SEED === "true") {
   (async () => {
-    /**
-     * @type {Seeder}
-     */
-    const seeder = await diContainer.get("Seeder");
+    const seeder = await diContainer.get("Seeder") as Seeder;
     seeder.seedIfNeeded();
   })();
 } else {
-  log("No seed for this environment.");
+  log("No seed tried for this environment.");
 }
 
 const app = express();
@@ -55,6 +54,13 @@ app.get("/api/userStories", async (req, res) => {
   await executeActionAsync(
     { req, res },
     storiesController.getStories.bind(storiesController)
+  );
+});
+
+app.get("/api/userStories/:id", async (req, res) => {
+  await executeActionAsync(
+    { req, res },
+    storiesController.getStory.bind(storiesController)
   );
 });
 

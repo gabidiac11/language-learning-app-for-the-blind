@@ -22,14 +22,12 @@ export default class UserStoryService {
    * @returns 
    */
   public async queryUserStories(userId: string): Promise<Result<UserStory[]>> {
-    const storiesResult = await this._db.get<UserStory[]>(
-      `userStories/${userId}`
-    );
+    const storiesResult = await this._db.getArray<UserStory>(`userStories/${userId}`);
     if (storiesResult.isError()) {
       return storiesResult;
     }
 
-    const lessonStoriesResult = await this._db.get<Story[]>("lessonStories/");
+    const lessonStoriesResult = await this._db.getArray<Story>("lessonStories/");
     if (lessonStoriesResult.isError()) {
       return lessonStoriesResult.As<UserStory[]>();
     }
@@ -38,6 +36,29 @@ export default class UserStoryService {
 
     return storiesResult;
   }
+
+    /**
+   * returns a single user story with queried information from the lesson stories associated
+   * @param userId 
+   * @returns 
+   */
+    public async queryUserStory(userId: string): Promise<Result<UserStory[]>> {
+      const storiesResult = await this._db.getArray<UserStory>(
+        `userStories/${userId}`
+      );
+      if (storiesResult.isError()) {
+        return storiesResult;
+      }
+  
+      const lessonStoriesResult = await this._db.getArray<Story>("lessonStories/");
+      if (lessonStoriesResult.isError()) {
+        return lessonStoriesResult.As<UserStory[]>();
+      }
+  
+      this.fillInLessonStoryDataToUserStories(storiesResult.data, lessonStoriesResult.data);
+  
+      return storiesResult;
+    }
 
   /**
    * a user story is a decorator for a lesson story, with information about the particular user progress. 
@@ -50,7 +71,7 @@ export default class UserStoryService {
     userStories: UserStory[],
     lessonStories: Story[]
   ) {
-    for (let userStory of userStories) {
+    for (const userStory of userStories) {
       const lessonStory = lessonStories.find((s) => s.id === userStory.storyId);
       userStory.buildingBlocksProgressItems.forEach((bp) => {
         bp.block = lessonStory.buildingBlocks.find(
@@ -75,7 +96,7 @@ export default class UserStoryService {
    * @returns 
    */
   public async initializeUserStories(userId: string): Promise<Result<boolean>> {
-    const lessonStoriesResult = await this._db.get<Story[]>("lessonStories/");
+    const lessonStoriesResult = await this._db.getArray<Story>("lessonStories/");
     if (lessonStoriesResult.isError()) {
       return lessonStoriesResult.As<boolean>();
     }
@@ -88,7 +109,7 @@ export default class UserStoryService {
       return userStoriesResult.As<boolean>();
     }
 
-    await this._db.set<UserStory[]>(
+    await this._db.setArray<UserStory>(
       userStoriesResult.data,
       `userStories/${userId}`
     );

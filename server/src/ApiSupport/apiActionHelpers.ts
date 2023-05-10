@@ -9,7 +9,7 @@ export function processResultOfT<T>(
   res: Response
 ) {
   let statusCode = 0;
-  let data: any;
+  let data: unknown;
 
   if (result.isError()) {
     statusCode = result.statusCode ?? 400;
@@ -41,7 +41,7 @@ export async function executeActionAsync<T>(
     log(loggableMessage);
 
     const apiError = error as ApiError<T>;
-    if (apiError.isThisApiError) {
+    if (apiError?.isThisApiError) {
       return processResultOfT<T>(apiError.result, req, res);
     }
 
