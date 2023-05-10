@@ -21,6 +21,19 @@ const withDelayIfDemoEnv = (originalPromise: Promise<any>) => {
   return newPromise;
 };
 
+const computeAxiosPromise = (
+  fetchOptions: UseFetchDataOptions | undefined,
+  url: string
+) => {
+  if (!fetchOptions) {
+    return axiosInstance.get(url);
+  }
+  if (fetchOptions.method === "POST") {
+    return axiosInstance.post(url, fetchOptions.body);
+  }
+  return axiosInstance.get(url);
+};
+
 const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
   const [data, setData] = useState<T>();
   const [dataWithHttpResponse, setDataWithHttpResponse] = useState<{
@@ -46,21 +59,15 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
   }, []);
 
   const fetchData = useCallback(async () => {
-    const computeAxiosPromise = () => {
-      if (!fetchOptions) {
-        return axiosInstance.get(url);
-      }
-      if (fetchOptions.method === "POST") {
-        return axiosInstance.post(url, fetchOptions.body);
-      }
-      return axiosInstance.get(url);
-    };
-
     try {
       setLoading(true);
       const _fetchOptions = fetchOptions;
-      const response = await withDelayIfDemoEnv(computeAxiosPromise());
+
+      const response = await withDelayIfDemoEnv(
+        computeAxiosPromise(fetchOptions, url)
+      );
       setData(response.data);
+      setError(undefined);
       setDataWithHttpResponse({
         data: response.data as T,
         httpInfo: {

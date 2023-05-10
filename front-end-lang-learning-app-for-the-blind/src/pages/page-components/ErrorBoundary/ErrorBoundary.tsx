@@ -65,11 +65,13 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
 
 // TODO: some refactoring are needed here
 const getResponseErrorToString = (error: unknown) => {
+  console.error({ error }, "Error while fetching.");
+  
   if (!error) {
     return null;
   }
+
   const errorAsAxios = error as AxiosError;
-  console.error({error}, "Error while fetching.")
   if (errorAsAxios?.isAxiosError) {
     const responseErrorMessage = (() => {
       const messageTry1 =
@@ -79,7 +81,7 @@ const getResponseErrorToString = (error: unknown) => {
       const dataErrorTypeError = errorAsAxios.response?.data as {
         messages?: string[];
       };
-      if (Array.isArray(dataErrorTypeError.messages)) {
+      if (Array.isArray(dataErrorTypeError?.messages)) {
         return dataErrorTypeError.messages?.map((m) => String(m)).join(",");
       }
       return "";

@@ -62,40 +62,7 @@ export default class UserStoriesController extends BaseController {
     const userId = this.getUser().uid;
     const userStoryId = this.getParam<UserStory>(req, "id");
 
-    
-
-    throw "Not implemented";
-    // const hasUserStoriesResult: Result<boolean> =
-    //   await this._userStoryService.hasUserStoriesAssign(userId);
-    // if (hasUserStoriesResult.isError()) {
-    //   return hasUserStoriesResult.As<UserStory[]>();
-    // }
-
-    // const hasUserStoryAssign = hasUserStoriesResult.data;
-    // if (hasUserStoryAssign) {
-    //   log(`User ${userId} does have user stories. Will query user stories...`);
-    //   const storiesResult = await this._userStoryService.queryUserStories(
-    //     userId
-    //   );
-    //   return storiesResult;
-    // }
-
-    // // TODO: I should think about how can we initialize user stories at an earlier time -> maybe event on user registration?
-    // log(`User ${userId} doesn't have user stories. Will create...`);
-    // const initResult = await this._userStoryService.initializeUserStories(
-    //   userId
-    // );
-    // if (initResult.isError()) {
-    //   return initResult.As<UserStory[]>();
-    // }
-
-    // log(
-    //   `User ${userId} has been assign user stories. Will query user stories...`
-    // );
-    // const result = await this._userStoryService.queryUserStories(userId);
-    // if (result.isError()) {
-    //   return result;
-    // }
-    // return Result.Success(result.data, 200);
+    const result = await this._userStoryService.queryUserStory(userId, userStoryId);
+    return result;
   }
 }
