@@ -37,7 +37,7 @@ class Database {
 
   public async setArray<T>(items: T[], path: string) {
     const badItems = items.filter(
-      (item) => !(item as { id: string | number }).id
+      (item) => !(item as unknown as { id: string | number }).id
     );
     if (badItems.length) {
       throw (
@@ -49,14 +49,14 @@ class Database {
     const obj = items.reduce(
       (valueObj, currentItem) => ({
         ...valueObj,
-        [(currentItem as { id: string | number }).id]: currentItem,
+        [(currentItem as unknown as { id: string | number }).id]: currentItem,
       }),
       {}
     );
     await this.set<{ [id: string | number]: T }>(obj, path);
   }
 
-  private async get<T>(path: string): Promise<Result<T>> {
+  public async get<T>(path: string): Promise<Result<T>> {
     try {
       const snapshot = await get(ref(this.db, path));
       if (!snapshot.exists()) {
