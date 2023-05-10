@@ -63,16 +63,29 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   return <>{children}</>;
 };
 
-const getErrorToString = (error: unknown) => {
+// TODO: some refactoring are needed here
+const getResponseErrorToString = (error: unknown) => {
   if (!error) {
     return null;
   }
   const errorAsAxios = error as AxiosError;
+  console.error({error}, "Error while fetching.")
   if (errorAsAxios?.isAxiosError) {
-    const responseErrorMessage =
-      (errorAsAxios.response?.data as { message?: string })?.message ?? "";
+    const responseErrorMessage = (() => {
+      const messageTry1 =
+        (errorAsAxios.response?.data as { message?: string })?.message ?? "";
+      if (messageTry1) return messageTry1;
 
-    const message = (
+      const dataErrorTypeError = errorAsAxios.response?.data as {
+        messages?: string[];
+      };
+      if (Array.isArray(dataErrorTypeError.messages)) {
+        return dataErrorTypeError.messages?.map((m) => String(m)).join(",");
+      }
+      return "";
+    })();
+
+    return (
       <p>
         {errorAsAxios.message}
         {responseErrorMessage ? ":" : ""}
@@ -84,7 +97,6 @@ const getErrorToString = (error: unknown) => {
         )}
       </p>
     );
-    return message;
   }
 
   const errorMessage = (error as { message?: string })?.message;
@@ -96,8 +108,7 @@ const getErrorToString = (error: unknown) => {
 
 // TODO: add some @mui materials here for a prettier look
 const DefaultDisplayedApiError = (props: { error: unknown }) => {
-  const errorMessage = getErrorToString(props.error);
-  console.log(typeof props.error, "type of error");
+  const errorMessage = getResponseErrorToString(props.error);
   return (
     <div>
       <p>Operation failed</p>

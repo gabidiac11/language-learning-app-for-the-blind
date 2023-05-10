@@ -7,12 +7,8 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const mmm = useAuthState(firebaseAuth);
-  const [loading, hasError, error] = mmm;
-
-  useEffect(() => {
-      if(hasError) console.log("error occured while logging in", {hasError, loading,  error, mmm});
-  }, [hasError])
+  const authState = useAuthState(firebaseAuth);
+  const [user, , error] = authState;
 
   return (
     <div className="view login-page">
@@ -30,19 +26,16 @@ export const Login = () => {
           >
             Login with Google
           </Button>
-          <Link
-            to={"/register"}
-            color="primary"
-          >
+          <Link to={"/register"} color="primary">
             Or register
           </Link>
         </div>
 
-        {loading && <>Loading...</>}
-        {hasError && <>{error?.message ?? "An unexpected error happen"}...</>}
+        {user && <>Loading...</>}
+        {error && <>{error?.message ?? "An unexpected error happen"}...</>}
       </div>
     </div>
   );
-}
+};
 
 export default Login;

@@ -204,7 +204,8 @@ export class DiverseStateUserStoryDecorator {
     finishedStory.epilogueProgress.timeStarted = new Date().getTime();
     finishedStory.epilogueProgress.timeCompleted = new Date().getTime();
     this.updateNumOfStuffForStory(finishedStory);
-
+    finishedStory.name += " - COMPLETED";
+    
     const stories = [
       finishedStory,
       startedStoryWithEpilogueStarted,

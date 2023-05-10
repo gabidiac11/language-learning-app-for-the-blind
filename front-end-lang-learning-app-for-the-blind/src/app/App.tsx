@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import Header from "../pages/page-components/Header";
-import AuthenticatedRoutesWrapper from "./AuthenticatedRoutesWrapper";
+import WithTokenRefreshInterval from "./WithTokenRefreshInterval";
 import { StoryPage } from "../pages/autheticated/StoryPage/StoryPage";
 import { Loader } from "../pages/page-components/Loader";
 import { useAuthInit } from "../auth/authHooks";
@@ -16,14 +16,14 @@ import BlockQuizCompleted from "../pages/autheticated/BlockPage/BlockQuiz/BlockQ
 import EpilogueStartPage from "../pages/autheticated/EpiloguePage/EpilogueStartPage";
 import EpilogueQuiz from "../pages/autheticated/EpiloguePage/EpilogueQuiz/EpilogueQuiz";
 import EpilogueQuizCompleted from "../pages/autheticated/EpiloguePage/EpilogueQuiz/EpilogueQuizCompleted";
-
+import WithToken from "./WithToken";
 
 // TODO: on-off button for voice navigation
 
 const App = () => {
-  const { user, isLoading, isVerifying } = useAuthInit();
+  const { user, isVerifying } = useAuthInit();
 
-  if (isLoading || isVerifying) {
+  if (isVerifying) {
     return (
       <div className="view loading-auth">
         <Loader />
@@ -42,23 +42,34 @@ const App = () => {
             <Route path="*" element={<DefaultRouteRedirection />} />
           </Routes>
         ) : (
-          <AuthenticatedRoutesWrapper>
-            <Routes>
-              <Route path="/stories" element={<StoriesOverviewPage />} />
-              <Route path="/stories/:id" element={<StoryPage />} />
+          <WithToken>
+            <WithTokenRefreshInterval>
+              <Routes>
+                <Route path="/stories" element={<StoriesOverviewPage />} />
+                <Route path="/stories/:id" element={<StoryPage />} />
 
-              {/* // TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
-              <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
-              <Route path="/blocks/:id/introduction" element={<BlockIntroduction />} />
-              <Route path="/blocks/:id/quiz/:quizId/completed" element={<BlockQuizCompleted />} />
-              <Route path="/blocks/:id" element={<BlockStartPage />} />
+                {/* // TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
+                <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
+                <Route
+                  path="/blocks/:id/introduction"
+                  element={<BlockIntroduction />}
+                />
+                <Route
+                  path="/blocks/:id/quiz/:quizId/completed"
+                  element={<BlockQuizCompleted />}
+                />
+                <Route path="/blocks/:id" element={<BlockStartPage />} />
 
-              <Route path="/epilogue/:id/quiz" element={<EpilogueQuiz />} />
-              <Route path="/epilogue/:id/quiz/:quizId/completed" element={<EpilogueQuizCompleted />} />
-              <Route path="/epilogue/:id" element={<EpilogueStartPage />} />
-              <Route path="*" element={<DefaultRouteRedirection isAuth />} />
-            </Routes>
-          </AuthenticatedRoutesWrapper>
+                <Route path="/epilogue/:id/quiz" element={<EpilogueQuiz />} />
+                <Route
+                  path="/epilogue/:id/quiz/:quizId/completed"
+                  element={<EpilogueQuizCompleted />}
+                />
+                <Route path="/epilogue/:id" element={<EpilogueStartPage />} />
+                <Route path="*" element={<DefaultRouteRedirection isAuth />} />
+              </Routes>
+            </WithTokenRefreshInterval>
+          </WithToken>
         )}
       </BrowserRouter>
     </div>
