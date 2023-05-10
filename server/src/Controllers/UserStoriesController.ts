@@ -1,4 +1,4 @@
-import UserStoryService from "../BusinessLogic/UserStoryService";
+import UserStoryService from "../BusinessLogic/UserStory/UserStoryService";
 import { UserStory } from "../Data/ctx.userStory.types";
 import { log } from "../logger";
 import BaseController from "./BaseController";
