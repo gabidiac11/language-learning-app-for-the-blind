@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 export const getMessageFromUnkError = (error: unknown) => {
   if ((error as Error) != undefined) return (error as Error).message;
 
@@ -20,3 +22,5 @@ export const getShuffledArray = <T>(array: T[]):T[] => {
   }
   return shuffledArray;
 };
+
+export const genUid = () => randomUUID();

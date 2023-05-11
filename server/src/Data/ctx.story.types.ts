@@ -1,5 +1,5 @@
 export type Story = {
-  id: number;
+  id: string;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -9,7 +9,7 @@ export type Story = {
   imageUrl: string;
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: number[];
+  dependentOnIds: string[];
   isStarter?: boolean;
 
   buildingBlocks: BuildingBlock[];
@@ -19,12 +19,12 @@ export type Story = {
 
 //building block:
 export type BuildingBlock = {
-  id: number;
+  id: string;
   name: string;
   imageUrl: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
-  dependentOnIds?: number[];
+  dependentOnIds?: string[];
 
   // means it will be unlock first when a story is unlocked
   isStarter?: boolean;
@@ -35,7 +35,7 @@ export type BuildingBlock = {
 };
 
 export type Word = {
-  id: number;
+  id: string;
 
   // the text is the actual word in Russian
   text: string;
@@ -49,7 +49,7 @@ export type Word = {
 
 // epilogue:
 export type Epilogue = {
-  id: number;
+  id: string;
 
   // the name of the story tale; short and descriptive - needs to be a word from the building blocks completed from the current and the previous stories
   name: string;
@@ -66,13 +66,13 @@ export type Epilogue = {
 };
 
 export type EpilogueQuestionProgress = {
-  id: number;
-  questionId: number;
+  id: string;
+  questionId: string;
   question?: EpilogueQuestion;
 };
 
 export type EpilogueQuestion = {
-  id: number;
+  id: string;
 
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
@@ -81,12 +81,12 @@ export type EpilogueQuestion = {
 };
 
 export type EpilogueQuestionAnswer = {
-  id: number;
-  questionId: number;
-  correctOptionId: number;
+  id: string;
+  questionId: string;
+  correctOptionId: string;
 };
 
 export type EpilogueOption = {
-  id: number;
+  id: string;
   text: string;
 };

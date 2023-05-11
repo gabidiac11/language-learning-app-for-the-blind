@@ -5,7 +5,7 @@ import { Epilogue, EpilogueQuestionAnswer } from "../../ctx.story.types";
 
 const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]> => {
   const epilogue: Epilogue = {
-    id: await genId(),
+    id: genId(),
     name: "Anna's family",
     textStoryTale: `"Семья Анны"
   
@@ -18,103 +18,103 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
       Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.`,
     questions: [
       {
-        id: await genId(),
+        id: genId(),
         text: "Who does Anna live with?",
         options: [
-          { id: await genId(), text: "Anna's mom and dad" },
-          { id: await genId(), text: "Anna's brother and sister" },
-          { id: await genId(), text: "Anna's grandparents" },
-          { id: await genId(), text: "Anna's aunt and uncle" },
+          { id: genId(), text: "Anna's mom and dad" },
+          { id: genId(), text: "Anna's brother and sister" },
+          { id: genId(), text: "Anna's grandparents" },
+          { id: genId(), text: "Anna's aunt and uncle" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What is Anna's mom's name?",
         options: [
-          { id: await genId(), text: "Kate" },
-          { id: await genId(), text: "Ivan" },
-          { id: await genId(), text: "Alexander" },
-          { id: await genId(), text: "Anna" },
+          { id: genId(), text: "Kate" },
+          { id: genId(), text: "Ivan" },
+          { id: genId(), text: "Alexander" },
+          { id: genId(), text: "Anna" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What does Anna like to cook?",
         options: [
-          { id: await genId(), text: "Pancakes" },
-          { id: await genId(), text: "Meat on the grill" },
-          { id: await genId(), text: "Salad" },
-          { id: await genId(), text: "Pizza" },
+          { id: genId(), text: "Pancakes" },
+          { id: genId(), text: "Meat on the grill" },
+          { id: genId(), text: "Salad" },
+          { id: genId(), text: "Pizza" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What does Anna's dad usually cook?",
         options: [
-          { id: await genId(), text: "Meat on the grill" },
-          { id: await genId(), text: "Pancakes" },
-          { id: await genId(), text: "Salad" },
-          { id: await genId(), text: "Pizza" },
+          { id: genId(), text: "Meat on the grill" },
+          { id: genId(), text: "Pancakes" },
+          { id: genId(), text: "Salad" },
+          { id: genId(), text: "Pizza" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What does Anna's brother help her do?",
         options: [
-          { id: await genId(), text: "Stir the batter" },
-          { id: await genId(), text: "Chop vegetables" },
-          { id: await genId(), text: "Make the salad dressing" },
-          { id: await genId(), text: "Set the table" },
+          { id: genId(), text: "Stir the batter" },
+          { id: genId(), text: "Chop vegetables" },
+          { id: genId(), text: "Make the salad dressing" },
+          { id: genId(), text: "Set the table" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What language does Anna like to study?",
         options: [
-          { id: await genId(), text: "Russian" },
-          { id: await genId(), text: "English" },
-          { id: await genId(), text: "Spanish" },
-          { id: await genId(), text: "French" },
+          { id: genId(), text: "Russian" },
+          { id: genId(), text: "English" },
+          { id: genId(), text: "Spanish" },
+          { id: genId(), text: "French" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "Who does Anna say 'you' to?",
         options: [
-          { id: await genId(), text: "Her brother" },
-          { id: await genId(), text: "Her mom and dad" },
-          { id: await genId(), text: "Her friends" },
-          { id: await genId(), text: "Her teacher" },
+          { id: genId(), text: "Her brother" },
+          { id: genId(), text: "Her mom and dad" },
+          { id: genId(), text: "Her friends" },
+          { id: genId(), text: "Her teacher" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What pronoun do Anna's mom and dad use to refer to other people?",
         options: [
-          { id: await genId(), text: "They" },
-          { id: await genId(), text: "I" },
-          { id: await genId(), text: "You" },
-          { id: await genId(), text: "We" },
+          { id: genId(), text: "They" },
+          { id: genId(), text: "I" },
+          { id: genId(), text: "You" },
+          { id: genId(), text: "We" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What does Anna usually do when she comes home from school?",
         options: [
-          { id: await genId(), text: "Do homework and help her mom" },
-          { id: await genId(), text: "Watch TV" },
-          { id: await genId(), text: "Play video games" },
-          { id: await genId(), text: "Go out with friends" },
+          { id: genId(), text: "Do homework and help her mom" },
+          { id: genId(), text: "Watch TV" },
+          { id: genId(), text: "Play video games" },
+          { id: genId(), text: "Go out with friends" },
         ],
       },
       {
-        id: await genId(),
+        id: genId(),
         text: "What do Anna and her family do after they eat dinner?",
         options: [
-          { id: await genId(), text: "Talk about their day" },
-          { id: await genId(), text: "Watch TV" },
-          { id: await genId(), text: "Play board games" },
-          { id: await genId(), text: "Read books" },
+          { id: genId(), text: "Talk about their day" },
+          { id: genId(), text: "Watch TV" },
+          { id: genId(), text: "Play board games" },
+          { id: genId(), text: "Read books" },
         ],
       },
     ],
@@ -134,11 +134,11 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
       question.options.map((item, index) => index)
     );
     for (let index of randomOrderedIndexes) {
-      question.options[index].id = await genId();
+      question.options[index].id = genId();
     }
 
     const answer: EpilogueQuestionAnswer = {
-      id: await genId(),
+      id: genId(),
       questionId: question.id,
       correctOptionId: question.options[0].id,
     };

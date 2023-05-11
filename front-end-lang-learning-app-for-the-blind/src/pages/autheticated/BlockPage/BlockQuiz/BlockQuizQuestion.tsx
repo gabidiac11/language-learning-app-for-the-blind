@@ -8,7 +8,7 @@ import AppTimerDisplay from "../../../page-components/AppTimerDisplay";
 
 const BlockQuizQuestion = (props: {
   currentQuestion: QuizResponseNextQuestion;
-  correctOptionId?: number;
+  correctOptionId?: string;
   onNext: () => void;
   onChoose: (option: QuizOption) => void;
 }) => {
@@ -63,7 +63,7 @@ const BlockQuizQuestion = (props: {
 
 export default BlockQuizQuestion;
 
-function getAnswerIfDemo(optionId: number) {
+function getAnswerIfDemo(optionId: string) {
   //TODO: delete this or make this env-based
   if (window.cheat_correctBlockOptions?.[optionId]) {
     return " -> CHEAT";

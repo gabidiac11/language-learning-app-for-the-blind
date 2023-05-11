@@ -1,3 +1,4 @@
+import { genUid } from "../../utils";
 import { Context } from "../context.types";
 import {
   QuizBlockState,
@@ -82,10 +83,6 @@ class FileStorageContext {
   }
 }
 
-const genId = async ():Promise<number> => {
-  const storage = new FileStorage();
-  const newId = await storage.getConter();
-  return newId;
-};
+const genId = genUid;
 
 export { genId, FileStorageContext };

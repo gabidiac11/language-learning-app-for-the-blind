@@ -2,8 +2,8 @@ import { log } from "../../logger";
 import { BuildingBlock, Story } from "../ctx.story.types";
 
 type ItemDependence = {
-  id: number;
-  dependentOnIds?: number[];
+  id: string;
+  dependentOnIds?: string[];
   isStarter?: boolean;
 };
 

@@ -40,7 +40,7 @@
 //   private _userId: string;
 //   private _context: MockContext;
 
-//   public constructor(userId: string, epilogueProgressId: number) {
+//   public constructor(userId: string, epilogueProgressId: string) {
 //     this._epilogueProgress = this.getEpilogueProgress(
 //       epilogueProgressId,
 //       userId
@@ -217,7 +217,7 @@
 //     return lastQuiz;
 //   }
 //   private getEpilogueProgress(
-//     epilogueProgressId: number,
+//     epilogueProgressId: string,
 //     userId: string
 //   ): EpilogueProgress {
 //     const epilogueProgress = mockContext
@@ -290,7 +290,7 @@
 //     const wordIds = this._epilogueProgress.questionProgressItems.map(
 //       (w) => w.id
 //     );
-//     const wordIdToProbability: { wordProgressId: number; prob: number }[] =
+//     const wordIdToProbability: { wordProgressId: string; prob: number }[] =
 //       wordIds.map((wordProgressId) => ({
 //         wordProgressId,
 //         prob: 0,
@@ -350,7 +350,7 @@
 //   }
 
 //   private createOutcomesBasedOnProbability(
-//     wordIdToProbability: { wordProgressId: number; prob: number }[]
+//     wordIdToProbability: { wordProgressId: string; prob: number }[]
 //   ): EpilogueQuestionOutcome[] {
 //     const results = wordIdToProbability.map((item) => {
 //       if (this.randomBinary(item.prob / 100)) {
@@ -475,7 +475,7 @@
 //    * @returns
 //    */
 //   private getLastGroupFromOutcomeSequence(
-//     idWordProgress: number,
+//     idWordProgress: string,
 //     qs: QuizEpilogueState
 //   ) {
 //     const outcomes = qs.outcomes
@@ -512,7 +512,7 @@
 //    * @returns
 //    */
 //   private generateQuizQuestion_FromEpilogueQuestion(
-//     idEpilogueQuestionProgress: number
+//     idEpilogueQuestionProgress: string
 //   ): QuizQuestion {
 //     const convert_ToQuizOption_FromEpilogueOption = (
 //       epilogueOption: EpilogueOption
@@ -582,7 +582,7 @@
 //   }
 
 //   private generateQuizOutcome_FromEpilogueQuestion(
-//     idEpilogueQuestionProgress: number,
+//     idEpilogueQuestionProgress: string,
 //     outcome: RoundOutcome
 //   ): EpilogueQuestionOutcome {
 //     const epilogueQuestionProgress =

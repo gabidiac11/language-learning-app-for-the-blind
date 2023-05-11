@@ -13,13 +13,13 @@ export const StoryPage = () => {
     `userStories/${id}`
   );
   const [dependentBlocks, setDependentBlocks] = useState<{
-    [blockProgressId: number]: string[];
+    [blockProgressId: string]: string[];
   }>({});
 
   useEffect(() => {
     if (data) {
       const ids: {
-        [blockProgressId: number]: string[];
+        [blockProgressId: string]: string[];
       } = {};
       const _dependentBlocks = data.buildingBlocksProgressItems.reduce(
         (prev, bp) => {
