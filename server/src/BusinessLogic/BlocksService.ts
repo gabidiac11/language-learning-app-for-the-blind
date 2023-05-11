@@ -92,6 +92,41 @@ export default class BlocksService {
     return Result.Success(targetedBlockProgress);
   }
 
+  public async completeSummaryBlockProgress(
+    userId: string,
+    blockProgressId: string
+  ): Promise<Result<boolean>> {
+    const blockResult = await this.getUserBlockProgress(
+      userId,
+      blockProgressId
+    );
+    if (blockResult.isError()) return blockResult.As<boolean>();
+
+    if (!blockResult.data.timeUnlocked) {
+      return Result.Error(
+        "This block summary was not completed because this block is locked.",
+        403
+      );
+    }
+
+    // retrieve user story id from dedicated table for relations
+    const userStoryIdResult =
+      await this._userStoryRelationsManager.getUserStoryIdFromBlockProgress(
+        userId,
+        blockProgressId
+      );
+    if (userStoryIdResult.isError()) return userStoryIdResult.As<boolean>();
+    if (!userStoryIdResult.data) {
+      return Result.Error("Not found.", 404);
+    }
+
+    await this._db.set(
+      Date.now(),
+      `userStories/${userId}/${userStoryIdResult.data}/buildingBlocksProgressItems/${blockProgressId}/timeSummaryCompleted`
+    );
+    return Result.Success(true);
+  }
+
   /**
    * a user story is a decorator for a lesson story, with information about the particular user progress.
    * to avoid duplicating data from lesson story into the user story in the storage, only the id (foreign key) is stored

@@ -71,12 +71,12 @@ app.get("/api/blocks/:blockProgressId", async (req, res) => {
   );
 });
 
-// app.post("/api/blocks/:blockProgressId/complete-summary", async (req, res) => {
-//   await executeActionAsync(
-//     { req, res },
-//     blocksController.completeSummary.bind(blocksController)
-//   );
-// });
+app.post("/api/blocks/:blockProgressId/complete-summary", async (req, res) => {
+  await executeActionAsync(
+    { req, res },
+    blocksController.completeSummary.bind(blocksController)
+  );
+});
 
 app.get("/api/*", (req, res) => {
   return res.status(404).send({ message: "Route not found." });
