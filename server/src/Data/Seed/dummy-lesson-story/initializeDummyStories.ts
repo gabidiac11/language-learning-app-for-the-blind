@@ -15,6 +15,7 @@ async function generateDummyStory(): Promise<Story> {
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
   const story: Story = {
     id: genUid(),
+    order: 0,
     name: "My family",
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
@@ -32,6 +33,7 @@ async function generateClonedStories() {
   const stories: Story[] = [];
   for (let i = 0; i < storiesCount; i++) {
     const storyItem = await generateDummyStory();
+    storyItem.order = stories.length;
     stories.push(storyItem);
   }
 

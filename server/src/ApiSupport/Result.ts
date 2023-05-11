@@ -2,6 +2,14 @@ export default class Result<T> {
   public data?: T;
   public errors?: string[];
   public statusCode?: number;
+  // NOTE: update getCopy when adding new properties
+
+  public getCopy<T2>(): Result<T2> {
+    const newResult = new Result<T2>();
+    newResult.errors = this.errors;
+    newResult.statusCode = this.statusCode;
+    return newResult;
+  }
 
   public isError(): boolean {
     return !!this.errors;

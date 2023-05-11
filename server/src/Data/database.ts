@@ -4,6 +4,7 @@ import { get, set } from "@firebase/database";
 import Result from "../ApiSupport/Result";
 import { log } from "../logger";
 import { getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { valuesOrdered } from "../utils";
 
 class Database {
   private db;
@@ -31,7 +32,7 @@ class Database {
     const resultObj = await this.get<{ [id: string]: T }>(path);
     if (resultObj.isError()) return resultObj.As<T[]>();
 
-    const values = Object.values(resultObj.data);
+    const values = valuesOrdered(resultObj.data);
     return Result.Success(values);
   }
 

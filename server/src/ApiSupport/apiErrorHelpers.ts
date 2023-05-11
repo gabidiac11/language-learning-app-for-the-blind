@@ -65,4 +65,8 @@ export class ApiError<T> {
 
     return apiError;
   }
+
+  public static IsApiError(error: unknown) {
+    return (error as ApiError<any>)?.isThisApiError === true;
+  }
 }
