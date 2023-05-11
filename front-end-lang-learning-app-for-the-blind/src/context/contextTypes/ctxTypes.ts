@@ -18,7 +18,7 @@ export type StateAction =
     };
 
 export type UserStory = {
-  id: number;
+  id: string;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -28,7 +28,7 @@ export type UserStory = {
   imageUrl: string;
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: number[];
+  dependentOnIds: string[];
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
   epilogueProgress: EpilogueProgress;
@@ -42,7 +42,7 @@ export type UserStory = {
 
 //building block:
 export type BuildingBlockProgress = {
-  id: number;
+  id: string;
 
   isStarter?: boolean;
 
@@ -58,17 +58,17 @@ export type BuildingBlockProgress = {
 };
 
 export type WordProgress = {
-  id: number;
+  id: string;
   word: Word;
 };
 
 export type BuildingBlock = {
-  id: number;
+  id: string;
   name: string;
   imageUrl: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
-  dependentOnIds?: number[];
+  dependentOnIds?: string[];
 
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
@@ -76,7 +76,7 @@ export type BuildingBlock = {
 };
 
 export type Word = {
-  id: number;
+  id: string;
 
   // the text is the actual word in Russian
   text: string;
@@ -90,7 +90,7 @@ export type Word = {
 
 // epilogue:
 export type Epilogue = {
-  id: number;
+  id: string;
 
   // the name of the story tale; short and descriptive - needs to be a word from the building blocks completed from the current and the previous stories
   name: string;
@@ -107,7 +107,7 @@ export type Epilogue = {
 };
 
 export type EpilogueProgress = {
-  id: number;
+  id: string;
   epilogue: Epilogue;
   questionProgressItems: EpilogueQuestionProgress[];
   timeSummaryCompleted?: number;
@@ -117,12 +117,12 @@ export type EpilogueProgress = {
 };
 
 export type EpilogueQuestionProgress = {
-  id: number;
+  id: string;
   question: EpilogueQuestion;
 };
 
 export type EpilogueQuestion = {
-  id: number;
+  id: string;
 
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
@@ -131,12 +131,12 @@ export type EpilogueQuestion = {
 };
 
 export type EpilogueQuestionAnswer = {
-  id: number;
-  questionId: number;
-  correctOptionId: number;
+  id: string;
+  questionId: string;
+  correctOptionId: string;
 };
 
 export type EpilogueOption = {
-  id: number;
+  id: string;
   text: string;
 };

@@ -9,13 +9,13 @@ export const StoriesOverviewPage = () => {
   const { data, loading, error, retry } =
     useFetchData<UserStory[]>("userStories");
   const [dependent, setDependent] = useState<{
-    [storyId: number]: string[];
+    [storyId: string]: string[];
   }>({});
 
   useEffect(() => {
     if (data) {
       const ids: {
-        [storyId: number]: string[];
+        [storyId: string]: string[];
       } = {};
       const _dependentBlocks = data.reduce((prev, story) => {
         const parentStory = data.filter((bpParent) =>

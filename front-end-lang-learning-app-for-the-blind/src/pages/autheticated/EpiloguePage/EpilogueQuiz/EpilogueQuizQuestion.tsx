@@ -9,7 +9,7 @@ import "./EpilogueQuiz.scss";
 
 const EpilogueQuizQuestion = (props: {
   currentQuestion: QuizResponseNextQuestion;
-  correctOptionId?: number;
+  correctOptionId?: string;
   onNext: () => void;
   onChoose: (option: QuizOption) => void;
 }) => {
@@ -69,7 +69,7 @@ const EpilogueQuizQuestion = (props: {
 
 export default EpilogueQuizQuestion;
 
-function getAnswerIfDemo(optionId: number) {
+function getAnswerIfDemo(optionId: string) {
   //TODO: delete this or make this env-based
   if (window.cheat_correctEpilogueOptions?.[optionId]) {
     return " -> CHEAT";

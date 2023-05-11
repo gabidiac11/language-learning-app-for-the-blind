@@ -14,7 +14,7 @@ async function generateDummyStory(): Promise<Story> {
   const buildingBlocks = await generateBuildingBlocks();
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
   const story: Story = {
-    id: await genId(),
+    id: genId(),
     name: "My family",
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:

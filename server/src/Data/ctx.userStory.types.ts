@@ -9,7 +9,7 @@ import {
  */
 
 export type UserStory = {
-  id: number;
+  id: string;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -17,10 +17,10 @@ export type UserStory = {
   name: string;
 
   imageUrl: string;
-  storyId: number;
+  storyId: string;
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: number[];
+  dependentOnIds: string[];
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
   epilogueProgress: EpilogueProgress;
@@ -35,9 +35,9 @@ export type UserStory = {
 
 // building block progress ------------------------------------------------------------------------------------------------------------------------------------
 export type BuildingBlockProgress = {
-  id: number;
+  id: string;
 
-  blockId: number;
+  blockId: string;
   block?: BuildingBlock;
 
   wordProgressItems: WordProgress[];
@@ -53,17 +53,17 @@ export type BuildingBlockProgress = {
 };
 
 export type WordProgress = {
-  id: number;
+  id: string;
 
-  wordId: number;
+  wordId: string;
   word?: Word;
 };
 
 // epilogue pogress ------------------------------------------------------------------------------------------------------------------------------------
 export type EpilogueProgress = {
-  id: number;
+  id: string;
 
-  epilogueId: number;
+  epilogueId: string;
   epilogue?: Epilogue;
 
   questionProgressItems: EpilogueQuestionProgress[];

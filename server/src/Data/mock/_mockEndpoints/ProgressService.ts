@@ -8,7 +8,7 @@
 //     this._context = mockContext;
 //   }
 
-//   public setBlockComplete(blockProgressId: number) {
+//   public setBlockComplete(blockProgressId: string) {
 //     const story = this._context
 //       .getCtx()
 //       .userStories.flatMap((us) => us.stories)
@@ -67,7 +67,7 @@
 //     this._context.SaveContext();
 //   }
 
-//   public setEpilogueCompleted(epilogueProgressId: number) {
+//   public setEpilogueCompleted(epilogueProgressId: string) {
 //     const story = this._context
 //       .getCtx()
 //       .userStories.flatMap((us) => us.stories)

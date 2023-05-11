@@ -12,27 +12,27 @@ export enum RoundOutcome {
 }
 
 export type RoundWord = {
-  idWordProgress: number;
+  idWordProgress: string;
   wordProgress?: WordProgress;
   outcomes: RoundOutcome[];
 };
 
 export type IdLinkEntity<T> = {
-  idEntity: number;
+  idEntity: string;
   entity: T;
 };
 
 export type QuizQuestion = {
-  id: number;
+  id: string;
   text: string;
-  correctOptionId: number;
+  correctOptionId: string;
   options: QuizOption[];
 };
 
 export type WordOutcome = {
-  id: number;
+  id: string;
   outcome: RoundOutcome;
-  idWordProgress: number;
+  idWordProgress: string;
   question?: QuizQuestion;
   // intended for tracing - not usage
   wordTxt: string;
@@ -40,21 +40,21 @@ export type WordOutcome = {
 };
 
 export type QuizBlockState = {
-  id: number;
-  blockProgressId: number;
+  id: string;
+  blockProgressId: string;
   wordOutcomes: WordOutcome[];
   timeCompleted?: number;
 };
 
 export type QuizOption = {
   // this id is mapped to a word id - to avoid exposing the correct option
-  id: number;
+  id: string;
   text: string;
 };
 
 export type BlockQuizStates = {
   // Obs: since a progress block to user is one-to-one relationship -> user is traceable
-  progressBlockId: number;
+  progressBlockId: string;
   // if one of the quiz states is completed -> the block is completed
   // if the user wants to redu a building block he can do so, but won't modify the block progress, but actually continue the last uncompleted quiz state or start a new one
   quizStates: QuizBlockState[];
@@ -62,9 +62,9 @@ export type BlockQuizStates = {
 
 //< --START-- >< ---------------- TYPES EPILOGUE ---------------- >< --START-->
 export type EpilogueQuestionOutcome = {
-  id: number;
+  id: string;
   outcome: RoundOutcome;
-  idQuestionProgress: number;
+  idQuestionProgress: string;
   question?: QuizQuestion;
   // intended for tracing - not usage
   wordTxt: string;
@@ -72,14 +72,14 @@ export type EpilogueQuestionOutcome = {
 };
 
 export type QuizEpilogueState = {
-  id: number;
-  epilogueProgressId: number;
+  id: string;
+  epilogueProgressId: string;
   outcomes: EpilogueQuestionOutcome[];
   timeCompleted?: number;
 };
 
 export type EpilogueQuizStates = {
-    progressBlockId: number;
+    progressBlockId: string;
     // if one of the quiz states is completed -> the epilogue is completed
     // if the user wants to redu a EPILOGUE he can do so, but won't modify the progress, but actually continue the last uncompleted quiz state or start a new one
     quizStates: QuizEpilogueState[];
@@ -89,23 +89,23 @@ export type EpilogueQuizStates = {
 
 export type QuizResponseNextQuestion = {
   questionText: string;
-  questionId: number;
+  questionId: string;
   options: QuizOption[];
 
   // id to the correct answer from previous question
-  previouslyQuestion_CorrectOptionId?: number;
+  previouslyQuestion_CorrectOptionId?: string;
 };
 export type QuizResponseComplete = {
   quizCompleted: boolean;
-  quizId: number;
-  previouslyQuestion_CorrectOptionId?: number;
+  quizId: string;
+  previouslyQuestion_CorrectOptionId?: string;
 };
 export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
 
 // quiz REQUEST
 export type QuizRequestBodyAnswer = {
-  questionId: number;
-  optionId: number;
+  questionId: string;
+  optionId: string;
 };
 
 export type QuizRequestBodyIntialQuestion = {
@@ -125,7 +125,7 @@ export type QuizBlockCompletedResponse = {
   epilogueProgressUnlocked?: EpilogueProgress;
   blockProgressUnlockedItems?: BuildingBlockProgress[];
   blockCompleted?: BuildingBlockProgress;
-  blockCompletedStoryRefId: number;
+  blockCompletedStoryRefId: string;
   userStoriesUnlocked?: UserStory[];
 }
 // < --END-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --END-->

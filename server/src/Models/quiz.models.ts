@@ -5,23 +5,23 @@ import { EpilogueProgress, BuildingBlockProgress, UserStory } from "../Data/ctx.
 
 export type QuizResponseNextQuestion = {
   questionText: string;
-  questionId: number;
+  questionId: string;
   options: QuizOption[];
 
   // id to the correct answer from previous question
-  previouslyQuestion_CorrectOptionId?: number;
+  previouslyQuestion_CorrectOptionId?: string;
 };
 export type QuizResponseComplete = {
   quizCompleted: boolean;
-  quizId: number;
-  previouslyQuestion_CorrectOptionId?: number;
+  quizId: string;
+  previouslyQuestion_CorrectOptionId?: string;
 };
 export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
 
 // quiz REQUEST
 export type QuizRequestBodyAnswer = {
-  questionId: number;
-  optionId: number;
+  questionId: string;
+  optionId: string;
 };
 
 export type QuizRequestBodyIntialQuestion = {
@@ -36,7 +36,7 @@ export type QuizBlockCompletedResponse = {
   epilogueProgressUnlocked?: EpilogueProgress;
   blockProgressUnlockedItems?: BuildingBlockProgress[];
   blockCompleted?: BuildingBlockProgress;
-  blockCompletedStoryRefId: number;
+  blockCompletedStoryRefId: string;
   userStoriesUnlocked?: UserStory[];
 };
 // < --END-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --END-->

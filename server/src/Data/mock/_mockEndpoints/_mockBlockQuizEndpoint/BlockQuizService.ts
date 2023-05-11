@@ -35,7 +35,7 @@
 //   private _userId: string;
 //   private _context: MockContext;
 
-//   public constructor(userId: string, blockProgressId: number) {
+//   public constructor(userId: string, blockProgressId: string) {
 //     this._blockProgress = this.getBlock(blockProgressId, userId);
 //     this._userId = userId;
 //     this._context = mockContext;
@@ -203,7 +203,7 @@
 //     }
 //     return lastQuiz;
 //   }
-//   private getBlock(blockProgressId: number, userId: string) {
+//   private getBlock(blockProgressId: string, userId: string) {
 //     const block = mockContext
 //       .getCtx()
 //       .userStories.find((us) => us.userId == userId)
@@ -266,7 +266,7 @@
 //       );
 //     }
 //     const wordIds = this._blockProgress.wordProgressItems.map((w) => w.id);
-//     const wordIdToProbability: { wordProgressId: number; prob: number }[] =
+//     const wordIdToProbability: { wordProgressId: string; prob: number }[] =
 //       wordIds.map((wordProgressId) => ({
 //         wordProgressId,
 //         prob: 0,
@@ -326,7 +326,7 @@
 //   }
 
 //   private createOutcomesBasedOnProbability(
-//     wordIdToProbability: { wordProgressId: number; prob: number }[]
+//     wordIdToProbability: { wordProgressId: string; prob: number }[]
 //   ): WordOutcome[] {
 //     const results = wordIdToProbability.map((item) => {
 //       if (this.randomBinary(item.prob / 100)) {
@@ -451,7 +451,7 @@
 //    * @returns
 //    */
 //   private getLastGroupFromOutcomeSequence(
-//     idWordProgress: number,
+//     idWordProgress: string,
 //     qs: QuizBlockState
 //   ) {
 //     const outcomes = qs.wordOutcomes
@@ -478,7 +478,7 @@
 //     };
 //   }
 
-//   private generateQuestion(idWordProgress: number): QuizQuestion {
+//   private generateQuestion(idWordProgress: string): QuizQuestion {
 //     const convertToOption = (wp: WordProgress): QuizOption => ({
 //       id: genId(),
 //       text: `${wp.word.shortTranslation} - ${wp.word.longTranslation}`,
@@ -519,7 +519,7 @@
 //   }
 
 //   private generateWordOutcomeQuestion(
-//     idWordProgress: number,
+//     idWordProgress: string,
 //     outcome: RoundOutcome
 //   ): WordOutcome {
 //     const word = this._blockProgress.wordProgressItems.find(

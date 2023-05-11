@@ -47,7 +47,7 @@ class LessonToUserStoryConvertor {
     const epilogueProgress = await this.generateEpilogueProgress();
 
     const userStory: UserStory = {
-      id: await genId(),
+      id: genId(),
       storyId: this._lessonStory.id,
 
       name: this._lessonStory.name,
@@ -70,7 +70,7 @@ class LessonToUserStoryConvertor {
       const wordProgressItems: WordProgress[] =
         await this.generateWordProgressItems(buildingBlock);
       const item: BuildingBlockProgress = {
-        id: await genId(),
+        id: genId(),
         blockId: buildingBlock.id,
         isStarter: buildingBlock.isStarter,
         wordProgressItems,
@@ -85,7 +85,7 @@ class LessonToUserStoryConvertor {
     const wordProgressItems: WordProgress[] = [];
     for (const word of buildingBlock.words) {
       const wordProgress: WordProgress = {
-        id: await genId(),
+        id: genId(),
         wordId: word.id,
       };
       wordProgressItems.push(wordProgress);
@@ -96,12 +96,12 @@ class LessonToUserStoryConvertor {
     const questionProgressItems: EpilogueQuestionProgress[] = [];
     for (let question of this._lessonStory.epilogue.questions) {
       questionProgressItems.push({
-        id: await genId(),
+        id: genId(),
         questionId: question.id,
       });
     }
     const epilogueProgress: EpilogueProgress = {
-      id: await genId(),
+      id: genId(),
       epilogueId: this._lessonStory.epilogue.id,
       questionProgressItems,
     };
