@@ -28,9 +28,29 @@ export default class BaseController {
   protected getParam<T>(req: Request, key: string): string {
     const value = req.params?.[key];
     if (!value) {
-      throw ApiError.Error<T>(`Request parameter ${key} should not be null.`, 400);
+      throw ApiError.Error<T>(
+        `Request parameter ${key} should not be null.`,
+        400
+      );
     }
 
     return value;
+  }
+
+  protected getParams<T>(
+    req: Request,
+    keys: string[]
+  ): { key: string; value: string } {
+    const values: { key: string; value: string }[] = [];
+    for (const key of keys) {
+      const value = this.getParam<T>(req, key);
+      values.push({ key, value });
+    }
+    
+    const valuesObj = values.reduce(
+      (prev, curr) => ({ ...prev, [curr.key]: curr.value }),
+      {} as { key: string; value: string }
+    );
+    return valuesObj;
   }
 }

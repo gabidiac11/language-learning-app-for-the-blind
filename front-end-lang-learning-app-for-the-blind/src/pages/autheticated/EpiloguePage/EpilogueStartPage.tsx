@@ -11,9 +11,9 @@ import axiosInstance from "../../../axiosInstance";
 
 const EpilogueStartPage = () => {
   //TODO: should have something explaining what this page is (later)
-  const { id: epilogueId } = useParams<{ id: string }>();
+  const { id: epilogueProgressId } = useParams<{ id: string }>();
   const { data, loading, error, retry } = useFetchData<EpilogueProgress>(
-    `epilogue/${epilogueId}`
+    `epilogue/${epilogueProgressId}`
   );
 
   useEffect(() => {}, []);
@@ -21,7 +21,7 @@ const EpilogueStartPage = () => {
   return (
     <div className="view epilogue-summary-view">
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        {!error && data && epilogueId && (
+        {!error && data && epilogueProgressId && (
           <div className="view-content">
             <h1> Epilogue: {data.epilogue.name} </h1>
 

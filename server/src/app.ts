@@ -48,7 +48,7 @@ app.use("/api/*", (req, res, next) => {
   next();
 });
 
-const [storiesController] = getControllers(diContainer);
+const [storiesController, blocksController] = getControllers(diContainer);
 
 app.get("/api/userStories", async (req, res) => {
   await executeActionAsync(
@@ -61,6 +61,13 @@ app.get("/api/userStories/:id", async (req, res) => {
   await executeActionAsync(
     { req, res },
     storiesController.getStory.bind(storiesController)
+  );
+});
+
+app.get("/api/blocks/:blockProgressId", async (req, res) => {
+  await executeActionAsync(
+    { req, res },
+    blocksController.getBlockProgress.bind(blocksController)
   );
 });
 

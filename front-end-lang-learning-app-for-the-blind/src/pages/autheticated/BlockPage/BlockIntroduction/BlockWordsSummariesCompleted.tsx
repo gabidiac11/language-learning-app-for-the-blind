@@ -10,10 +10,10 @@ const fetchOptioons: UseFetchDataOptions = {
 };
 
 const BlockWordsSummariesCompleted = (props: {
-  block: BuildingBlockProgress;
+  blockProgress: BuildingBlockProgress;
 }) => {
   const { loading, error, retry } = useFetchData<{}>(
-    `blocks/${props.block.id}/complete-summary`,
+    `blocks/${props.blockProgress.id}/complete-summary`,
     fetchOptioons
   );
   // TODO: review the text is not ideal for now
@@ -22,10 +22,10 @@ const BlockWordsSummariesCompleted = (props: {
       <div>
         Completed!🎉
         <br></br>
-        {props.block.timeSummaryCompleted
+        {props.blockProgress.timeSummaryCompleted
           ? "You again completed the words introduction"
           : "You completed the words introduction. You can now start the word practice quiz."}
-        <ButtonContinueToBlockQuiz blockProgressId={props.block.id} />
+        <ButtonContinueToBlockQuiz blockProgressId={props.blockProgress.id} />
       </div>
     </ErrorBoundary>
   );
