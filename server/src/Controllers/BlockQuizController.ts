@@ -8,7 +8,7 @@ import { BuildingBlockProgressOutput } from "../Models/output.userStory.types";
 import { convertBlockResultToOutput } from "../Models/modelConvertors";
 import { ApiError } from "../ApiSupport/apiErrorHelpers";
 
-// TODO: make this transient dependency or something like that to work this out
+// NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class BlockQuizControllerFactory {
   public static inject = [Authenticator.name, BlocksService.name];
 

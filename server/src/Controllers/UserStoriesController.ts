@@ -11,6 +11,7 @@ import {
   convertUserStoryResultToOutput,
 } from "../Models/modelConvertors";
 
+// NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class UserStoriesControllerFactory {
   public static inject = [Authenticator.name, UserStoryService.name];
 

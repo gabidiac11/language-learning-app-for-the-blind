@@ -7,6 +7,7 @@ import { Request } from "express";
 import { BuildingBlockProgressOutput } from "../Models/output.userStory.types";
 import { convertBlockResultToOutput } from "../Models/modelConvertors";
 
+// NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class BlocksControllerFactory {
   public static inject = [Authenticator.name, BlocksService.name];
 
