@@ -1,5 +1,4 @@
 import Result from "../../ApiSupport/Result";
-
 import {
   BuildingBlock,
   EpilogueQuestionProgress,
@@ -44,11 +43,14 @@ class LessonToUserStoryConvertor {
   }
 
   public async GetCookedUserStory() {
-    const buildingBlocksProgressItems = await this.generateBuildingProgress();
-    const epilogueProgress = await this.generateEpilogueProgress();
+    const userStoryId = genUid();
+    const buildingBlocksProgressItems = await this.generateBuildingProgress(
+      userStoryId
+    );
+    const epilogueProgress = await this.generateEpilogueProgress(userStoryId);
 
     const userStory: UserStory = {
-      id: genUid(),
+      id: userStoryId,
       storyId: this._lessonStory.id,
 
       description: null,
@@ -67,14 +69,20 @@ class LessonToUserStoryConvertor {
     };
     return userStory;
   }
-  async generateBuildingProgress(): Promise<BuildingBlockProgress[]> {
+  async generateBuildingProgress(
+    userStoryId: string
+  ): Promise<BuildingBlockProgress[]> {
     const blockProgressItems: BuildingBlockProgress[] = [];
     for (let buildingBlock of this._lessonStory.buildingBlocks) {
       const wordProgressItems: WordProgress[] =
-        await this.generateWordProgressItems(buildingBlock);
+        await this.generateWordProgressItems(buildingBlock, userStoryId);
+
       const item: BuildingBlockProgress = {
         id: genUid(),
         blockId: buildingBlock.id,
+
+        userStoryId,
+
         isStarter: buildingBlock.isStarter,
         wordProgressItems,
       };
@@ -83,28 +91,34 @@ class LessonToUserStoryConvertor {
     return blockProgressItems;
   }
   async generateWordProgressItems(
-    buildingBlock: BuildingBlock
+    buildingBlock: BuildingBlock,
+    userStoryId: string
   ): Promise<WordProgress[]> {
     const wordProgressItems: WordProgress[] = [];
     for (const word of buildingBlock.words) {
       const wordProgress: WordProgress = {
         id: genUid(),
+        userStoryId,
         wordId: word.id,
       };
       wordProgressItems.push(wordProgress);
     }
     return wordProgressItems;
   }
-  async generateEpilogueProgress(): Promise<EpilogueProgress> {
+  async generateEpilogueProgress(
+    userStoryId: string
+  ): Promise<EpilogueProgress> {
     const questionProgressItems: EpilogueQuestionProgress[] = [];
     for (let question of this._lessonStory.epilogue.questions) {
       questionProgressItems.push({
         id: genUid(),
+        userStoryId,
         questionId: question.id,
       });
     }
     const epilogueProgress: EpilogueProgress = {
       id: genUid(),
+      userStoryId,
       epilogueId: this._lessonStory.epilogue.id,
       questionProgressItems,
     };

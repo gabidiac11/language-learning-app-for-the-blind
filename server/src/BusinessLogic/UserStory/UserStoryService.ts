@@ -3,12 +3,18 @@ import { Story } from "../../Data/ctx.story.types";
 import { UserStory } from "../../Data/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { UserStoriesCreator } from "./UserStoriesCreator";
+import { UserStoriesRelationsManager } from "../UserStoryRelations/UserStoriesRelationsManager";
 
 export default class UserStoryService {
   private _db: Database;
-  public static inject = [Database.name];
-  constructor(db: Database) {
+  private _userStoryRelationsManager: UserStoriesRelationsManager;
+  public static inject = [Database.name, UserStoriesRelationsManager.name];
+  constructor(
+    db: Database,
+    userStoryRelationsManager: UserStoriesRelationsManager
+  ) {
     this._db = db;
+    this._userStoryRelationsManager = userStoryRelationsManager;
   }
 
   public async hasUserStoriesAssign(userId: string): Promise<Result<boolean>> {
@@ -131,6 +137,11 @@ export default class UserStoryService {
     if (userStoriesResult.isError()) {
       return userStoriesResult.As<boolean>();
     }
+
+    await this._userStoryRelationsManager.addUserStoriesRelationsAsync(
+      userId,
+      userStoriesResult.data
+    );
 
     await this._db.setArray<UserStory>(
       userStoriesResult.data,

@@ -41,6 +41,8 @@ export type BuildingBlockProgress = {
 
   blockId: string;
   block?: BuildingBlock;
+  
+  userStoryId: string;
 
   wordProgressItems: WordProgress[];
 
@@ -57,6 +59,8 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: string;
 
+  userStoryId: string;
+
   wordId: string;
   word?: Word;
 };
@@ -67,6 +71,8 @@ export type EpilogueProgress = {
 
   epilogueId: string;
   epilogue?: Epilogue;
+  
+  userStoryId: string;
 
   questionProgressItems: EpilogueQuestionProgress[];
 

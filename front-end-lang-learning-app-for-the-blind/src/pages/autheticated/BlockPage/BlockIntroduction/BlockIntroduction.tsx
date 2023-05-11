@@ -51,7 +51,7 @@ const BlockIntroduction = () => {
               />
             )}
             {learningSitCompleted && (
-              <BlockWordsSummariesCompleted block={data} />
+              <BlockWordsSummariesCompleted blockProgress={data} />
             )}
             {data.timeSummaryCompleted && (
               <ButtonContinueToBlockQuiz blockProgressId={data.id} />

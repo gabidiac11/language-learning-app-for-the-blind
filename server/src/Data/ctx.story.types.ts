@@ -68,6 +68,7 @@ export type Epilogue = {
 export type EpilogueQuestionProgress = {
   id: string;
   questionId: string;
+  userStoryId: string;
   question?: EpilogueQuestion;
 };
 

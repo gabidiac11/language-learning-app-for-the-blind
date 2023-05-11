@@ -70,7 +70,7 @@ class Database {
     }
   }
 
-  private async set<T>(item: T, path: string) {
+  public async set<T>(item: T, path: string) {
     removeUndefined(item);
     await set(ref(this.db, path), item);
   }
