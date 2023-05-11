@@ -14,6 +14,7 @@ export const StoriesOverviewPage = () => {
 
   useEffect(() => {
     if (data) {
+      // TODO: move this at the server level
       const ids: {
         [storyId: string]: string[];
       } = {};

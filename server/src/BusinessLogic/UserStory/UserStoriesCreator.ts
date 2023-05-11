@@ -51,6 +51,8 @@ class LessonToUserStoryConvertor {
       id: genUid(),
       storyId: this._lessonStory.id,
 
+      description: null,
+
       name: this._lessonStory.name,
       imageUrl: this._lessonStory.imageUrl,
 

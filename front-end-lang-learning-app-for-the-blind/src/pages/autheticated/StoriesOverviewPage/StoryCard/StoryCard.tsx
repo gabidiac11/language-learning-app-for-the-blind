@@ -11,7 +11,7 @@ import "./StoryCard.scss";
 
 export const StoryCard = (props: {
   userStory: UserStory;
-  dependentNames?:  string[];
+  dependentNames?: string[];
 }) => {
   const navigate = useNavigate();
   const { userStory } = props;
@@ -30,11 +30,16 @@ export const StoryCard = (props: {
       <CardHeader
         title={props.userStory.name}
         // TODO: add dependent story on the summary
-        subheader={<ItemProgressSummary dependentNames={props.dependentNames} item={props.userStory} />}
+        subheader={
+          <ItemProgressSummary
+            dependentNames={props.dependentNames}
+            item={props.userStory}
+          />
+        }
       />
       <CardMedia
         component="img"
-        height="194"
+        width="320"
         image={props.userStory.imageUrl}
         // TODO: what alt to use here -> should devine some property for this one
         alt="Russian family"

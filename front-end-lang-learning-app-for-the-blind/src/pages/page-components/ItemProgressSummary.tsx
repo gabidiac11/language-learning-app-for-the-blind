@@ -25,6 +25,17 @@ const computeText = (
   return `🔒 Locked` + (names ? `- complete ${names}` : "");
 };
 
+const computeDescription = (targetItem: SummaryTargetItem) => {
+  if ((targetItem as { description?: string }).description) {
+    return (
+      <p style={{ fontSize: "11px", margin: "0", padding: "5px 0 0 0px" }}>
+        {(targetItem as { description?: string }).description}
+      </p>
+    );
+  }
+  return "";
+};
+
 export const ItemProgressSummary = (props: {
   item: SummaryTargetItem;
   dependentNames?: string[];
@@ -35,5 +46,10 @@ export const ItemProgressSummary = (props: {
     setText(computeText(props.item, props.dependentNames));
   }, [props.item, props.dependentNames]);
 
-  return <>{text}</>;
+  return (
+    <>
+      {text}
+      {computeDescription(props.item)}
+    </>
+  );
 };
