@@ -24,6 +24,21 @@ export default class BlocksController extends BaseController {
     return result;
   }
 
+  public async completeSummary(
+    req: Request
+  ): Promise<Result<any>> {
+    await this.authenticateAsync<any>(req);
+
+    const userId = this.getUser().uid;
+    const blockProgressId = this.getParam<string>(req, "blockProgressId");
+
+    const result = await this._blocksService.completeSummaryBlockProgress(
+      userId,
+      blockProgressId
+    );
+    return result;
+  }
+
   private async _internal_getBlockProgress(
     req: Request
   ): Promise<Result<BuildingBlockProgress>> {
