@@ -228,7 +228,7 @@
 //   //< --START-- >< ---------------- CRUD ACTIONS ---------------- >< --START-->
 //   private createAndAddNewQuizState() {
 //     const qs: QuizBlockState = {
-//       id: genId(),
+//       id: genUid(),
 //       blockProgressId: this._blockProgress.id,
 //       wordOutcomes: this._blockProgress.wordProgressItems.map((wp) => {
 //         const o = this.generateWordOutcomeQuestion(wp.id, RoundOutcome.Unset);
@@ -480,7 +480,7 @@
 
 //   private generateQuestion(idWordProgress: string): QuizQuestion {
 //     const convertToOption = (wp: WordProgress): QuizOption => ({
-//       id: genId(),
+//       id: genUid(),
 //       text: `${wp.word.shortTranslation} - ${wp.word.longTranslation}`,
 //     });
 
@@ -510,7 +510,7 @@
 //     const options = getShuffledArray([correctOption, ...wrongOptions]);
 
 //     const question: QuizQuestion = {
-//       id: genId(),
+//       id: genUid(),
 //       correctOptionId: correctOption.id,
 //       options,
 //       text: `What does '${correctWord.word.text}' mean?`,
@@ -527,7 +527,7 @@
 //     );
 
 //     const newWordOutcome: WordOutcome = {
-//       id: genId(),
+//       id: genUid(),
 //       idWordProgress,
 //       outcome,
 //       // these are for tracing - not intended for usage

@@ -1,11 +1,10 @@
-import { getShuffledArray } from "../../../utils";
-import { genId } from "../../ContextFileBased/FileStorageContext";
+import { genUid, getShuffledArray } from "../../../utils";
 import { Epilogue, EpilogueQuestionAnswer } from "../../ctx.story.types";
 
 
 const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]> => {
   const epilogue: Epilogue = {
-    id: genId(),
+    id: genUid(),
     name: "Anna's family",
     textStoryTale: `"Семья Анны"
   
@@ -18,103 +17,103 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
       Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.`,
     questions: [
       {
-        id: genId(),
+        id: genUid(),
         text: "Who does Anna live with?",
         options: [
-          { id: genId(), text: "Anna's mom and dad" },
-          { id: genId(), text: "Anna's brother and sister" },
-          { id: genId(), text: "Anna's grandparents" },
-          { id: genId(), text: "Anna's aunt and uncle" },
+          { id: genUid(), text: "Anna's mom and dad" },
+          { id: genUid(), text: "Anna's brother and sister" },
+          { id: genUid(), text: "Anna's grandparents" },
+          { id: genUid(), text: "Anna's aunt and uncle" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What is Anna's mom's name?",
         options: [
-          { id: genId(), text: "Kate" },
-          { id: genId(), text: "Ivan" },
-          { id: genId(), text: "Alexander" },
-          { id: genId(), text: "Anna" },
+          { id: genUid(), text: "Kate" },
+          { id: genUid(), text: "Ivan" },
+          { id: genUid(), text: "Alexander" },
+          { id: genUid(), text: "Anna" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What does Anna like to cook?",
         options: [
-          { id: genId(), text: "Pancakes" },
-          { id: genId(), text: "Meat on the grill" },
-          { id: genId(), text: "Salad" },
-          { id: genId(), text: "Pizza" },
+          { id: genUid(), text: "Pancakes" },
+          { id: genUid(), text: "Meat on the grill" },
+          { id: genUid(), text: "Salad" },
+          { id: genUid(), text: "Pizza" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What does Anna's dad usually cook?",
         options: [
-          { id: genId(), text: "Meat on the grill" },
-          { id: genId(), text: "Pancakes" },
-          { id: genId(), text: "Salad" },
-          { id: genId(), text: "Pizza" },
+          { id: genUid(), text: "Meat on the grill" },
+          { id: genUid(), text: "Pancakes" },
+          { id: genUid(), text: "Salad" },
+          { id: genUid(), text: "Pizza" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What does Anna's brother help her do?",
         options: [
-          { id: genId(), text: "Stir the batter" },
-          { id: genId(), text: "Chop vegetables" },
-          { id: genId(), text: "Make the salad dressing" },
-          { id: genId(), text: "Set the table" },
+          { id: genUid(), text: "Stir the batter" },
+          { id: genUid(), text: "Chop vegetables" },
+          { id: genUid(), text: "Make the salad dressing" },
+          { id: genUid(), text: "Set the table" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What language does Anna like to study?",
         options: [
-          { id: genId(), text: "Russian" },
-          { id: genId(), text: "English" },
-          { id: genId(), text: "Spanish" },
-          { id: genId(), text: "French" },
+          { id: genUid(), text: "Russian" },
+          { id: genUid(), text: "English" },
+          { id: genUid(), text: "Spanish" },
+          { id: genUid(), text: "French" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "Who does Anna say 'you' to?",
         options: [
-          { id: genId(), text: "Her brother" },
-          { id: genId(), text: "Her mom and dad" },
-          { id: genId(), text: "Her friends" },
-          { id: genId(), text: "Her teacher" },
+          { id: genUid(), text: "Her brother" },
+          { id: genUid(), text: "Her mom and dad" },
+          { id: genUid(), text: "Her friends" },
+          { id: genUid(), text: "Her teacher" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What pronoun do Anna's mom and dad use to refer to other people?",
         options: [
-          { id: genId(), text: "They" },
-          { id: genId(), text: "I" },
-          { id: genId(), text: "You" },
-          { id: genId(), text: "We" },
+          { id: genUid(), text: "They" },
+          { id: genUid(), text: "I" },
+          { id: genUid(), text: "You" },
+          { id: genUid(), text: "We" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What does Anna usually do when she comes home from school?",
         options: [
-          { id: genId(), text: "Do homework and help her mom" },
-          { id: genId(), text: "Watch TV" },
-          { id: genId(), text: "Play video games" },
-          { id: genId(), text: "Go out with friends" },
+          { id: genUid(), text: "Do homework and help her mom" },
+          { id: genUid(), text: "Watch TV" },
+          { id: genUid(), text: "Play video games" },
+          { id: genUid(), text: "Go out with friends" },
         ],
       },
       {
-        id: genId(),
+        id: genUid(),
         text: "What do Anna and her family do after they eat dinner?",
         options: [
-          { id: genId(), text: "Talk about their day" },
-          { id: genId(), text: "Watch TV" },
-          { id: genId(), text: "Play board games" },
-          { id: genId(), text: "Read books" },
+          { id: genUid(), text: "Talk about their day" },
+          { id: genUid(), text: "Watch TV" },
+          { id: genUid(), text: "Play board games" },
+          { id: genUid(), text: "Read books" },
         ],
       },
     ],
@@ -125,7 +124,7 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
     /*
       NOTE 1.): always first option at this point is the one correct
       Note 2.): 
-      given 1. and because genId() is basically does increse and return of a counter
+      given 1. and because genUid() is basically does increse and return of a counter
       someone can easily figure out the correct option id by noticing the smallest id is the correct one
       -> so we'll generate a random order of generating ids for each option so that's out fo the discussion
       because cheating stands against everything this represents!!!
@@ -134,11 +133,11 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
       question.options.map((item, index) => index)
     );
     for (let index of randomOrderedIndexes) {
-      question.options[index].id = genId();
+      question.options[index].id = genUid();
     }
 
     const answer: EpilogueQuestionAnswer = {
-      id: genId(),
+      id: genUid(),
       questionId: question.id,
       correctOptionId: question.options[0].id,
     };

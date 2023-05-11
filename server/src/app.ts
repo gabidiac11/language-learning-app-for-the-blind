@@ -11,7 +11,7 @@ import { executeActionAsync } from "./ApiSupport/apiActionHelpers";
 import getControllers from "./ApiSupport/getControllers";
 import Seeder from "./Data/Seed/Seeder";
 
-if (process.env.SEED === "true") {
+if (process.env.ALLOW_SEED === "true") {
   (async () => {
     const seeder = await diContainer.get("Seeder") as Seeder;
     seeder.seedIfNeeded();

@@ -1,10 +1,10 @@
 import { Story } from "../../ctx.story.types";
-import { genId } from "../../ContextFileBased/FileStorageContext";
 import generateBuildingBlocks from "./buidingBlocks";
 import generateEpilogue from "./epilogue";
 import fs from "fs";
 import path from "path";
 import guardStories from "../storiesValidationGuard";
+import { genUid } from "../../../utils";
 
 /**
  * this script is a utility script to generate the story json used for seeding lessons
@@ -14,7 +14,7 @@ async function generateDummyStory(): Promise<Story> {
   const buildingBlocks = await generateBuildingBlocks();
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
   const story: Story = {
-    id: genId(),
+    id: genUid(),
     name: "My family",
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
