@@ -16,6 +16,8 @@ export type UserStory = {
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
 
+  description: string | null,
+
   imageUrl: string;
   storyId: string;
 

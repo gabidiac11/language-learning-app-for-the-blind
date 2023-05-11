@@ -8,21 +8,27 @@ export class DiverseStateUserStoryDecorator {
     this._userStories = userStories;
   }
 
+  // TODO: make sure the dependencies between blocks hold when marking things completd/locked/started
   public generateDiverseStories(): UserStory[] {
     const [
-      finishedStory, startedStoryWithEpilogueStarted, startedStoryWithEpilogueUnlocked, startedStory, unlockStory, lockedStory,
+      finishedStory,
+      startedStoryWithEpilogueStarted,
+      startedStoryWithEpilogueUnlocked,
+      startedStory,
+      unlockStory,
+      lockedStory,
     ] = this._userStories;
 
     // story - locked:
     // ############################################################################################################################################################################################################################################################
-    lockedStory.name += " - LOCKED";
+    lockedStory.description = "Example: LOCKED story";
 
     // story - unlocked with 1 block unlocked:
     // ############################################################################################################################################################################################################################################################
     unlockStory.timeUnlocked = new Date().getTime();
     unlockStory.buildingBlocksProgressItems[0].timeUnlocked =
       new Date().getTime();
-    unlockStory.name += " - UNLOCKED - 1 block unlocked";
+    unlockStory.description = "Example: UNLOCKED - 1 block unlocked";
 
     // story - started with 1 block unlocked, 1 started, 1 completed:
     // ############################################################################################################################################################################################################################################################
@@ -47,8 +53,8 @@ export class DiverseStateUserStoryDecorator {
       new Date().getTime();
     startedStory.buildingBlocksProgressItems[2].timeCompleted =
       new Date().getTime();
-    startedStory.name +=
-      " - STARTED #1 - 1 block unlocked, 1 started, 1 completed";
+    startedStory.description =
+      "Example: STARTED #1 - 1 completed, 1 started, 1 block unlocked";
     this.updateNumOfStuffForStory(startedStory);
 
     // story - started with all blocks completed, epilogue unlocked
@@ -57,8 +63,8 @@ export class DiverseStateUserStoryDecorator {
     // epilogue - unlocked:
     startedStoryWithEpilogueUnlocked.epilogueProgress.timeUnlocked =
       new Date().getTime();
-    startedStoryWithEpilogueUnlocked.name +=
-      " - STARTED #2 - all blocks completed, epilogue unlocked";
+    startedStoryWithEpilogueUnlocked.description =
+      "Example: STARTED #2 - all blocks completed, epilogue unlocked";
     this.updateNumOfStuffForStory(startedStoryWithEpilogueUnlocked);
 
     // story - started with all blocks completed:
@@ -73,8 +79,8 @@ export class DiverseStateUserStoryDecorator {
     startedStoryWithEpilogueStarted.epilogueProgress.timeStarted =
       new Date().getTime();
 
-    startedStoryWithEpilogueStarted.name +=
-      " - STARTED #2 - all blocks completed";
+    startedStoryWithEpilogueStarted.description =
+      "Example: STARTED #2 - all blocks completed";
     this.updateNumOfStuffForStory(startedStoryWithEpilogueStarted);
 
     // story - completed:
@@ -90,7 +96,7 @@ export class DiverseStateUserStoryDecorator {
     finishedStory.epilogueProgress.timeStarted = new Date().getTime();
     finishedStory.epilogueProgress.timeCompleted = new Date().getTime();
     this.updateNumOfStuffForStory(finishedStory);
-    finishedStory.name += " - COMPLETED";
+    finishedStory.description = "Example: COMPLETED";
 
     const stories = [
       finishedStory,
@@ -100,6 +106,10 @@ export class DiverseStateUserStoryDecorator {
       unlockStory,
       lockedStory,
     ];
+
+    stories.forEach((item, index) => {
+      item.name += ` #${index + 1}`;
+    });
 
     return stories;
   }

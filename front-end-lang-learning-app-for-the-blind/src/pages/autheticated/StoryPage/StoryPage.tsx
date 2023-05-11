@@ -18,6 +18,7 @@ export const StoryPage = () => {
 
   useEffect(() => {
     if (data) {
+      // TODO: move this at the server level
       const ids: {
         [blockProgressId: string]: string[];
       } = {};

@@ -25,6 +25,8 @@ export type UserStory = {
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
 
+  description?: string;
+
   imageUrl: string;
 
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
