@@ -9,9 +9,25 @@ import { convertBlockResultToOutput } from "../Models/modelConvertors";
 import { ApiError } from "../ApiSupport/apiErrorHelpers";
 
 // TODO: make this transient dependency or something like that to work this out
-export default class BlockQuizController extends BaseController {
+export default class BlockQuizControllerFactory {
   public static inject = [Authenticator.name, BlocksService.name];
 
+  private _authenticator: Authenticator;
+  private _blocksService: BlocksService;
+  constructor(authenticator: Authenticator, userStoryService: BlocksService) {
+    this._authenticator = authenticator;
+    this._blocksService = userStoryService;
+  }
+  public Create(): BlockQuizController {
+    const controller = new BlockQuizController(
+      this._authenticator,
+      this._blocksService
+    );
+    return controller;
+  }
+}
+
+class BlockQuizController extends BaseController {
   private shallowBlockProgress?: BuildingBlockProgress;
 
   private _blocksService: BlocksService;
@@ -50,14 +66,14 @@ export default class BlockQuizController extends BaseController {
     this.shallowBlockProgress = blockProgressResult.data;
   }
 
-  public async getQuizQuestionAndAnswerPrevious(
-    req: Request
-  ): Promise<Result<any>> {
-    await this.authenticateAsync<any>(req);
+  // public async getQuizQuestionAndAnswerPrevious(
+  //   req: Request
+  // ): Promise<Result<any>> {
+  //   await this.authenticateAsync<any>(req);
 
-    const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
+  //   const userId = this.getUser().uid;
+  //   const blockProgressId = this.getParam<string>(req, "blockProgressId");
 
-    return BlockQuizController;
-  }
+  //   return BlockQuizControllerFactory;
+  // }
 }

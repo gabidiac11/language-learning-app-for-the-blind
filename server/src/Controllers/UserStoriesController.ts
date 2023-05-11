@@ -7,13 +7,32 @@ import { Request } from "express";
 import { Authenticator } from "../ApiSupport/authentication";
 import { UserStoryOutput } from "../Models/output.userStory.types";
 import {
- convertUserStoriesResultToOutput,
+  convertUserStoriesResultToOutput,
   convertUserStoryResultToOutput,
 } from "../Models/modelConvertors";
 
-export default class UserStoriesController extends BaseController {
+export default class UserStoriesControllerFactory {
   public static inject = [Authenticator.name, UserStoryService.name];
 
+  private _userStoryService: UserStoryService;
+  private _authenticator: Authenticator;
+  constructor(
+    authenticator: Authenticator,
+    userStoryService: UserStoryService
+  ) {
+    this._authenticator = authenticator;
+    this._userStoryService = userStoryService;
+  }
+  public create(): UserStoriesController {
+    const controller = new UserStoriesController(
+      this._authenticator,
+      this._userStoryService
+    );
+    return controller;
+  }
+}
+
+class UserStoriesController extends BaseController {
   private _userStoryService: UserStoryService;
   constructor(
     authenticator: Authenticator,

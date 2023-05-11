@@ -1,12 +1,12 @@
 import { Injector } from "boxed-injector";
-import BlocksController from "../Controllers/BlocksController";
-import UserStoriesController from "../Controllers/UserStoriesController";
+import BlocksControllerFactory from "../Controllers/BlocksController";
+import UserStoriesControllerFactory from "../Controllers/UserStoriesController";
 
 export default function getControllers(
   DI: Injector
-): [UserStoriesController, BlocksController] {
+): [UserStoriesControllerFactory, BlocksControllerFactory] {
   return [
-    DI.get(UserStoriesController.name) as UserStoriesController,
-    DI.get(BlocksController.name) as BlocksController,
+    DI.get(UserStoriesControllerFactory.name) as UserStoriesControllerFactory,
+    DI.get(BlocksControllerFactory.name) as BlocksControllerFactory,
   ];
 }
