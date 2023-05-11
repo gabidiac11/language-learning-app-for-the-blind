@@ -3,8 +3,9 @@ import { Authenticator } from "./ApiSupport/authentication";
 import BlocksService from "./BusinessLogic/BlocksService";
 import UserStoryService from "./BusinessLogic/UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./BusinessLogic/UserStoryRelations/UserStoriesRelationsManager";
-import BlocksController from "./Controllers/BlocksController";
-import UserStoriesController from "./Controllers/UserStoriesController";
+import BlockQuizControllerFactory from "./Controllers/BlockQuizController";
+import BlocksControllerFactory from "./Controllers/BlocksController";
+import UserStoriesControllerFactory from "./Controllers/UserStoriesController";
 import { Database } from "./Data/database";
 import Seeder from "./Data/Seed/Seeder";
 
@@ -26,7 +27,8 @@ diContainer.factory(UserStoryService.name, UserStoryService);
 diContainer.factory(BlocksService.name, BlocksService);
 
 // Controllers:
-diContainer.factory(UserStoriesController.name, UserStoriesController);
-diContainer.factory(BlocksController.name, BlocksController);
+diContainer.factory(UserStoriesControllerFactory.name, UserStoriesControllerFactory);
+diContainer.factory(BlocksControllerFactory.name, BlocksControllerFactory);
+diContainer.factory(BlockQuizControllerFactory.name, BlockQuizControllerFactory);
 
 export default diContainer;

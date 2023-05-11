@@ -53,7 +53,7 @@ const BlockIntroduction = () => {
             {learningSitCompleted && (
               <BlockWordsSummariesCompleted blockProgress={data} />
             )}
-            {data.timeSummaryCompleted && (
+            {!learningSitCompleted && data.timeSummaryCompleted && (
               <ButtonContinueToBlockQuiz blockProgressId={data.id} />
             )}
           </div>

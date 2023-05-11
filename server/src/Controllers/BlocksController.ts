@@ -7,9 +7,23 @@ import { Request } from "express";
 import { BuildingBlockProgressOutput } from "../Models/output.userStory.types";
 import { convertBlockResultToOutput } from "../Models/modelConvertors";
 
-export default class BlocksController extends BaseController {
+export default class BlocksControllerFactory {
   public static inject = [Authenticator.name, BlocksService.name];
 
+  private _blocksService: BlocksService;
+  private _authenticator: Authenticator;
+  constructor(authenticator: Authenticator, userStoryService: BlocksService) {
+    this._authenticator = authenticator;
+    this._blocksService = userStoryService;
+  }
+
+  public create():BlocksController {
+    const controller = new BlocksController(this._authenticator, this._blocksService);
+    return controller;
+  }
+}
+
+class BlocksController extends BaseController {
   private _blocksService: BlocksService;
   constructor(authenticator: Authenticator, userStoryService: BlocksService) {
     super(authenticator);

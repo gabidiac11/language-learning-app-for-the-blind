@@ -48,33 +48,35 @@ app.use("/api/*", (req, res, next) => {
   next();
 });
 
-const [storiesController, blocksController] = getControllers(diContainer);
+const [storiesControllerFactory, blocksControllerFactory] =
+  getControllers(diContainer);
 
 app.get("/api/userStories", async (req, res) => {
+  const controller = storiesControllerFactory.create();
   await executeActionAsync(
     { req, res },
-    storiesController.getStories.bind(storiesController)
+    controller.getStories.bind(controller)
   );
 });
 
 app.get("/api/userStories/:id", async (req, res) => {
-  await executeActionAsync(
-    { req, res },
-    storiesController.getStory.bind(storiesController)
-  );
+  const controller = storiesControllerFactory.create();
+  await executeActionAsync({ req, res }, controller.getStory.bind(controller));
 });
 
 app.get("/api/blocks/:blockProgressId", async (req, res) => {
+  const controller = blocksControllerFactory.create();
   await executeActionAsync(
     { req, res },
-    blocksController.getBlockProgress.bind(blocksController)
+    controller.getBlockProgress.bind(controller)
   );
 });
 
 app.post("/api/blocks/:blockProgressId/complete-summary", async (req, res) => {
+  const controller = blocksControllerFactory.create();
   await executeActionAsync(
     { req, res },
-    blocksController.completeSummary.bind(blocksController)
+    controller.completeSummary.bind(controller)
   );
 });
 
