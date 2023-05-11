@@ -1,5 +1,5 @@
 import Result from "../../ApiSupport/Result";
-import { genId } from "../../Data/ContextFileBased/FileStorageContext";
+
 import {
   BuildingBlock,
   EpilogueQuestionProgress,
@@ -11,6 +11,7 @@ import {
   UserStory,
   WordProgress,
 } from "../../Data/ctx.userStory.types";
+import { genUid } from "../../utils";
 import { DiverseStateUserStoryDecorator } from "./DiverseStateUserStoryDecorator";
 
 export class UserStoriesCreator {
@@ -47,7 +48,7 @@ class LessonToUserStoryConvertor {
     const epilogueProgress = await this.generateEpilogueProgress();
 
     const userStory: UserStory = {
-      id: genId(),
+      id: genUid(),
       storyId: this._lessonStory.id,
 
       name: this._lessonStory.name,
@@ -70,7 +71,7 @@ class LessonToUserStoryConvertor {
       const wordProgressItems: WordProgress[] =
         await this.generateWordProgressItems(buildingBlock);
       const item: BuildingBlockProgress = {
-        id: genId(),
+        id: genUid(),
         blockId: buildingBlock.id,
         isStarter: buildingBlock.isStarter,
         wordProgressItems,
@@ -85,7 +86,7 @@ class LessonToUserStoryConvertor {
     const wordProgressItems: WordProgress[] = [];
     for (const word of buildingBlock.words) {
       const wordProgress: WordProgress = {
-        id: genId(),
+        id: genUid(),
         wordId: word.id,
       };
       wordProgressItems.push(wordProgress);
@@ -96,12 +97,12 @@ class LessonToUserStoryConvertor {
     const questionProgressItems: EpilogueQuestionProgress[] = [];
     for (let question of this._lessonStory.epilogue.questions) {
       questionProgressItems.push({
-        id: genId(),
+        id: genUid(),
         questionId: question.id,
       });
     }
     const epilogueProgress: EpilogueProgress = {
-      id: genId(),
+      id: genUid(),
       epilogueId: this._lessonStory.epilogue.id,
       questionProgressItems,
     };

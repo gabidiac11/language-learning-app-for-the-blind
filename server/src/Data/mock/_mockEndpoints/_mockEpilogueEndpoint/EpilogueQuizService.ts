@@ -253,7 +253,7 @@
 //     );
 
 //     const qs: QuizEpilogueState = {
-//       id: genId(),
+//       id: genUid(),
 //       epilogueProgressId: this._epilogueProgress.id,
 //       outcomes,
 //       timeCompleted: undefined,
@@ -517,7 +517,7 @@
 //     const convert_ToQuizOption_FromEpilogueOption = (
 //       epilogueOption: EpilogueOption
 //     ): QuizOption => ({
-//       id: genId(),
+//       id: genUid(),
 //       text: epilogueOption.text,
 //     });
 
@@ -573,7 +573,7 @@
 //     // final options shuffled:
 //     const options = getShuffledArray([correctQuizOption, ...wrongQuizOptions]);
 //     const question: QuizQuestion = {
-//       id: genId(),
+//       id: genUid(),
 //       correctOptionId: correctQuizOption.id,
 //       options,
 //       text: epilogueQuestion.text,
@@ -591,7 +591,7 @@
 //       );
 
 //     const newWordOutcome: EpilogueQuestionOutcome = {
-//       id: genId(),
+//       id: genUid(),
 //       idQuestionProgress: idEpilogueQuestionProgress,
 //       outcome,
 //       // these are for tracing - not intended for usage

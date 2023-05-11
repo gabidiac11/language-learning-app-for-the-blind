@@ -19,14 +19,14 @@
 //     const wordProgressItems: WordProgress[] = [];
 //     for (let wordItem of buildingBlock.words) {
 //       const wordProgress: WordProgress = {
-//         id: genId(),
+//         id: genUid(),
 //         word: wordItem,
 //       };
 //       wordProgressItems.push(wordProgress);
 //     }
 //     // generate building block progress:
 //     const item: BuildingBlockProgress = {
-//       id: genId(),
+//       id: genUid(),
 //       block: buildingBlock,
 //       isStarter: starterIds.some((id) => id === buildingBlock.id),
 //       wordProgressItems,
@@ -45,14 +45,14 @@
 //   const questionProgressItems: EpilogueQuestionProgress[] = [];
 //   for (let question of epilogue.questions) {
 //     const questionProgress: EpilogueQuestionProgress = {
-//       id: genId(),
+//       id: genUid(),
 //       question: question,
 //     };
 //     questionProgressItems.push(questionProgress);
 //   }
 
 //   const epilogueProgress: EpilogueProgress = {
-//     id: genId(),
+//     id: genUid(),
 //     epilogue: epilogue,
 //     questionProgressItems,
 //   };
@@ -67,7 +67,7 @@
 //     await generateEpilogueProgress();
 
 //   const story: UserStory = {
-//     id: genId(),
+//     id: genUid(),
 //     name: "My family",
 //     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
 //     imageUrl:
