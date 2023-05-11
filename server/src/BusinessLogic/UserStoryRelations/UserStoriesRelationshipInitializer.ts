@@ -2,6 +2,7 @@ import { StorySubItemLink } from "../../Data/ctx.relations.types";
 import { UserStory } from "../../Data/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { log } from "../../logger";
+import { valuesOrdered } from "../../utils";
 
 export class UserStoriesRelationshipInitializer {
   private _userStories: UserStory[];
@@ -41,7 +42,7 @@ export class UserStoriesRelationshipInitializer {
     const blockProgressItemsRel: { [id: string]: StorySubItemLink } = {};
 
     this._userStories.forEach((userStory) => {
-      userStory.buildingBlocksProgressItems.forEach((bp) => {
+      valuesOrdered(userStory.buildingBlocksProgressItems).forEach((bp) => {
         blockProgressItemsRel[bp.id] = {
           userStoryId: userStory.id,
         };

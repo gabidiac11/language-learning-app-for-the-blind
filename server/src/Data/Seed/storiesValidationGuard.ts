@@ -1,5 +1,5 @@
 import { log } from "../../logger";
-import { BuildingBlock, Story } from "../ctx.story.types";
+import { Story } from "../ctx.story.types";
 
 type ItemDependence = {
   id: string;

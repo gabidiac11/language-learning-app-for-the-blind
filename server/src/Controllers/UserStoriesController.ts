@@ -5,6 +5,11 @@ import BaseController from "./BaseController";
 import Result from "../ApiSupport/Result";
 import { Request } from "express";
 import { Authenticator } from "../ApiSupport/authentication";
+import { UserStoryOutput } from "../Models/output.userStory.types";
+import {
+ convertUserStoriesResultToOutput,
+  convertUserStoryResultToOutput,
+} from "../Models/modelConvertors";
 
 export default class UserStoriesController extends BaseController {
   public static inject = [Authenticator.name, UserStoryService.name];
@@ -18,8 +23,21 @@ export default class UserStoriesController extends BaseController {
     this._userStoryService = userStoryService;
   }
 
-  // TODO: add id generation with guid
-  public async getStories(req: Request): Promise<Result<UserStory[]>> {
+  public async getStories(req: Request): Promise<Result<UserStoryOutput[]>> {
+    const result = await this._internal_getStories(req);
+    const outputResult = convertUserStoriesResultToOutput(result);
+    return outputResult;
+  }
+
+  public async getStory(req: Request): Promise<Result<UserStoryOutput>> {
+    const result = await this._internal_getStory(req);
+    const outputResult = convertUserStoryResultToOutput(result);
+    return outputResult;
+  }
+
+  private async _internal_getStories(
+    req: Request
+  ): Promise<Result<UserStory[]>> {
     await this.authenticateAsync<UserStory[]>(req);
     const userId = this.getUser().uid;
 
@@ -57,12 +75,15 @@ export default class UserStoriesController extends BaseController {
     return Result.Success(result.data, 200);
   }
 
-  public async getStory(req: Request): Promise<Result<UserStory>> {
+  private async _internal_getStory(req: Request): Promise<Result<UserStory>> {
     await this.authenticateAsync<UserStory>(req);
     const userId = this.getUser().uid;
     const userStoryId = this.getParam<UserStory>(req, "id");
 
-    const result = await this._userStoryService.queryUserStory(userId, userStoryId);
+    const result = await this._userStoryService.queryUserStory(
+      userId,
+      userStoryId
+    );
     return result;
   }
 }

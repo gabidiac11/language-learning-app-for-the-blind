@@ -1,6 +1,8 @@
 export type Story = {
   id: string;
 
+  order: number;
+
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
@@ -20,6 +22,7 @@ export type Story = {
 //building block:
 export type BuildingBlock = {
   id: string;
+
   name: string;
   imageUrl: string;
 
@@ -63,13 +66,6 @@ export type Epilogue = {
 
   // the questions asked are about what is happening in the story tale
   questions: EpilogueQuestion[];
-};
-
-export type EpilogueQuestionProgress = {
-  id: string;
-  questionId: string;
-  userStoryId: string;
-  question?: EpilogueQuestion;
 };
 
 export type EpilogueQuestion = {

@@ -1,7 +1,7 @@
 import {
   BuildingBlock,
   Epilogue,
-  EpilogueQuestionProgress,
+  EpilogueQuestion,
   Word,
 } from "./ctx.story.types";
 /**
@@ -16,7 +16,9 @@ export type UserStory = {
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
 
-  description: string | null,
+  order: number;
+
+  description: string | null;
 
   imageUrl: string;
   storyId: string;
@@ -24,7 +26,9 @@ export type UserStory = {
   // a user can start a story if the stories dependent on are completed; otherwise it is locked
   dependentOnIds: string[];
 
-  buildingBlocksProgressItems: BuildingBlockProgress[];
+  buildingBlocksProgressItems: {
+    [blockProgressId: string]: BuildingBlockProgress;
+  };
   epilogueProgress: EpilogueProgress;
 
   numOfBlocksCompleted: number;
@@ -39,12 +43,14 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: string;
 
+  order: number;
+
   blockId: string;
   block?: BuildingBlock;
-  
+
   userStoryId: string;
 
-  wordProgressItems: WordProgress[];
+  wordProgressItems: { [wordProgressId: string]: WordProgress };
 
   // means it will be unlock first when a story is unlocked
   isStarter: boolean;
@@ -59,6 +65,7 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: string;
 
+  order: number;
   userStoryId: string;
 
   wordId: string;
@@ -71,13 +78,23 @@ export type EpilogueProgress = {
 
   epilogueId: string;
   epilogue?: Epilogue;
-  
+
   userStoryId: string;
 
-  questionProgressItems: EpilogueQuestionProgress[];
+  questionProgressItems: {
+    [epilogueQuestionProgressId: string]: EpilogueQuestionProgress;
+  };
 
   timeSummaryCompleted?: number;
   timeUnlocked?: number;
   timeStarted?: number;
   timeCompleted?: number;
+};
+
+export type EpilogueQuestionProgress = {
+  id: string;
+  order: number;
+  questionId: string;
+  userStoryId: string;
+  question?: EpilogueQuestion;
 };

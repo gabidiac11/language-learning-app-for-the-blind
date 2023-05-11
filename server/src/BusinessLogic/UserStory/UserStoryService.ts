@@ -4,6 +4,7 @@ import { UserStory } from "../../Data/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { UserStoriesCreator } from "./UserStoriesCreator";
 import { UserStoriesRelationsManager } from "../UserStoryRelations/UserStoriesRelationsManager";
+import { valuesOrdered } from "../../utils";
 
 export default class UserStoryService {
   private _db: Database;
@@ -97,16 +98,16 @@ export default class UserStoryService {
   ) {
     for (const userStory of userStories) {
       const lessonStory = lessonStories.find((s) => s.id === userStory.storyId);
-      userStory.buildingBlocksProgressItems.forEach((bp) => {
+      valuesOrdered(userStory.buildingBlocksProgressItems).forEach((bp) => {
         bp.block = lessonStory.buildingBlocks.find(
           (block) => block.id === bp.blockId
         );
-        bp.wordProgressItems.forEach((wordProgress) => {
+        valuesOrdered(bp.wordProgressItems).forEach((wordProgress) => {
           wordProgress.word = bp.block.words.find((item) => item.id);
         });
       });
       userStory.epilogueProgress.epilogue = lessonStory.epilogue;
-      userStory.epilogueProgress.questionProgressItems.forEach((item) => {
+      valuesOrdered(userStory.epilogueProgress.questionProgressItems).forEach((item) => {
         item.question = lessonStory.epilogue.questions.find(
           (q) => q.id === item.questionId
         );

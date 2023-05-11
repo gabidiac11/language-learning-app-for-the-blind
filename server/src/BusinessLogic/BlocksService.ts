@@ -4,6 +4,7 @@ import { BuildingBlock, Story } from "../Data/ctx.story.types";
 import { BuildingBlockProgress, UserStory } from "../Data/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
+import { valuesOrdered } from "../utils";
 import { UserStoriesRelationsManager } from "./UserStoryRelations/UserStoriesRelationsManager";
 
 export default class BlocksService {
@@ -17,7 +18,7 @@ export default class BlocksService {
     this._userStoryRelationsManager = userStoryRelationsManager;
   }
 
-  public async getUserBlockProgressItems(
+  private async getUserBlockProgressItems(
     userId: string,
     blockProgressId: string
   ): Promise<Result<BuildingBlockProgress[]>> {
@@ -53,11 +54,13 @@ export default class BlocksService {
       return lessonResult.As<BuildingBlockProgress[]>();
     }
     this.fillInLessonStoryDataToBlockProgress(
-      userStoryResult.data.buildingBlocksProgressItems,
+      valuesOrdered(userStoryResult.data.buildingBlocksProgressItems),
       lessonResult.data.buildingBlocks
     );
 
-    return Result.Success(userStoryResult.data.buildingBlocksProgressItems);
+    return Result.Success(
+      valuesOrdered(userStoryResult.data.buildingBlocksProgressItems)
+    );
   }
 
   public async getUserBlockProgress(
@@ -102,7 +105,7 @@ export default class BlocksService {
   ) {
     userStoriesBlockProgressItems.forEach((bp) => {
       bp.block = lessonStoriesBlocks.find((block) => block.id === bp.blockId);
-      bp.wordProgressItems.forEach((wordProgress) => {
+      valuesOrdered(bp.wordProgressItems).forEach((wordProgress) => {
         wordProgress.word = bp.block.words.find((item) => item.id);
       });
     });

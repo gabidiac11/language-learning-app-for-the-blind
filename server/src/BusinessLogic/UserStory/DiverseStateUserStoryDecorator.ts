@@ -1,4 +1,5 @@
 import { UserStory } from "../../Data/ctx.userStory.types";
+import { valuesOrdered } from "../../utils";
 
 // DEMO: add state changes to the user story progress to emulate each state
 
@@ -26,7 +27,7 @@ export class DiverseStateUserStoryDecorator {
     // story - unlocked with 1 block unlocked:
     // ############################################################################################################################################################################################################################################################
     unlockStory.timeUnlocked = new Date().getTime();
-    unlockStory.buildingBlocksProgressItems[0].timeUnlocked =
+    valuesOrdered(unlockStory.buildingBlocksProgressItems)[0].timeUnlocked =
       new Date().getTime();
     unlockStory.description = "Example: UNLOCKED - 1 block unlocked";
 
@@ -35,23 +36,25 @@ export class DiverseStateUserStoryDecorator {
     startedStory.timeUnlocked = new Date().getTime();
     startedStory.timeStarted = new Date().getTime();
     // block - unlocked:
-    startedStory.buildingBlocksProgressItems[0].timeUnlocked =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[0].timeUnlocked =
       new Date().getTime();
     // block - started:
-    startedStory.buildingBlocksProgressItems[1].timeUnlocked =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[1].timeUnlocked =
       new Date().getTime();
-    startedStory.buildingBlocksProgressItems[1].timeStarted =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[1].timeStarted =
       new Date().getTime();
-    startedStory.buildingBlocksProgressItems[1].timeSummaryCompleted =
-      new Date().getTime();
+    valuesOrdered(
+      startedStory.buildingBlocksProgressItems
+    )[1].timeSummaryCompleted = new Date().getTime();
     // block - completed:
-    startedStory.buildingBlocksProgressItems[2].timeUnlocked =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeUnlocked =
       new Date().getTime();
-    startedStory.buildingBlocksProgressItems[2].timeStarted =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeStarted =
       new Date().getTime();
-    startedStory.buildingBlocksProgressItems[2].timeSummaryCompleted =
-      new Date().getTime();
-    startedStory.buildingBlocksProgressItems[2].timeCompleted =
+    valuesOrdered(
+      startedStory.buildingBlocksProgressItems
+    )[2].timeSummaryCompleted = new Date().getTime();
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeCompleted =
       new Date().getTime();
     startedStory.description =
       "Example: STARTED #1 - 1 completed, 1 started, 1 block unlocked";
@@ -88,8 +91,9 @@ export class DiverseStateUserStoryDecorator {
     this.completeAllBlocks(finishedStory);
     finishedStory.timeCompleted = new Date().getTime();
 
-    finishedStory.numOfBlocksCompleted =
-      finishedStory.buildingBlocksProgressItems.length;
+    finishedStory.numOfBlocksCompleted = valuesOrdered(
+      finishedStory.buildingBlocksProgressItems
+    ).length;
 
     finishedStory.epilogueProgress.timeSummaryCompleted = new Date().getTime();
     finishedStory.epilogueProgress.timeUnlocked = new Date().getTime();
@@ -118,20 +122,20 @@ export class DiverseStateUserStoryDecorator {
     userStory.timeUnlocked = new Date().getTime();
     userStory.timeStarted = new Date().getTime();
     // all blocks - completed:
-    userStory.buildingBlocksProgressItems.forEach((bp) => {
+    valuesOrdered(userStory.buildingBlocksProgressItems).forEach((bp) => {
       bp.timeUnlocked = new Date().getTime();
       bp.timeStarted = new Date().getTime();
       bp.timeSummaryCompleted = new Date().getTime();
       bp.timeCompleted = new Date().getTime();
     });
-    userStory.numOfBlocksCompleted =
-      userStory.buildingBlocksProgressItems.length;
+    userStory.numOfBlocksCompleted = valuesOrdered(
+      userStory.buildingBlocksProgressItems
+    ).length;
   }
 
   private updateNumOfStuffForStory(userStory: UserStory) {
-    userStory.numOfBlocksCompleted =
-      userStory.buildingBlocksProgressItems.filter(
-        (bp) => !!bp.timeCompleted
-      ).length;
+    userStory.numOfBlocksCompleted = valuesOrdered(
+      userStory.buildingBlocksProgressItems
+    ).filter((bp) => !!bp.timeCompleted).length;
   }
 }

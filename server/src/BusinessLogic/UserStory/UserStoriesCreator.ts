@@ -1,16 +1,16 @@
 import Result from "../../ApiSupport/Result";
 import {
   BuildingBlock,
-  EpilogueQuestionProgress,
   Story,
 } from "../../Data/ctx.story.types";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
+  EpilogueQuestionProgress,
   UserStory,
   WordProgress,
 } from "../../Data/ctx.userStory.types";
-import { genUid } from "../../utils";
+import { arrayToObjectIds, genUid } from "../../utils";
 import { DiverseStateUserStoryDecorator } from "./DiverseStateUserStoryDecorator";
 
 export class UserStoriesCreator {
@@ -21,6 +21,7 @@ export class UserStoriesCreator {
     for (let lessonStory of lessonStories) {
       const convertor = new LessonToUserStoryConvertor(lessonStory);
       const userStoryItem = await convertor.GetCookedUserStory();
+      userStoryItem.order = userStories.length;
       userStories.push(userStoryItem);
     }
 
@@ -51,6 +52,7 @@ class LessonToUserStoryConvertor {
 
     const userStory: UserStory = {
       id: userStoryId,
+      order: 0,
       storyId: this._lessonStory.id,
 
       description: null,
@@ -60,7 +62,9 @@ class LessonToUserStoryConvertor {
 
       dependentOnIds: this._lessonStory.dependentOnIds,
 
-      buildingBlocksProgressItems,
+      buildingBlocksProgressItems: arrayToObjectIds<BuildingBlockProgress>(
+        buildingBlocksProgressItems
+      ),
 
       epilogueProgress,
 
@@ -79,12 +83,12 @@ class LessonToUserStoryConvertor {
 
       const item: BuildingBlockProgress = {
         id: genUid(),
+        order: blockProgressItems.length,
         blockId: buildingBlock.id,
-
         userStoryId,
 
         isStarter: buildingBlock.isStarter,
-        wordProgressItems,
+        wordProgressItems: arrayToObjectIds(wordProgressItems),
       };
       blockProgressItems.push(item);
     }
@@ -98,6 +102,7 @@ class LessonToUserStoryConvertor {
     for (const word of buildingBlock.words) {
       const wordProgress: WordProgress = {
         id: genUid(),
+        order: wordProgressItems.length,
         userStoryId,
         wordId: word.id,
       };
@@ -112,6 +117,7 @@ class LessonToUserStoryConvertor {
     for (let question of this._lessonStory.epilogue.questions) {
       questionProgressItems.push({
         id: genUid(),
+        order: questionProgressItems.length,
         userStoryId,
         questionId: question.id,
       });
@@ -120,7 +126,7 @@ class LessonToUserStoryConvertor {
       id: genUid(),
       userStoryId,
       epilogueId: this._lessonStory.epilogue.id,
-      questionProgressItems,
+      questionProgressItems: arrayToObjectIds(questionProgressItems),
     };
     return epilogueProgress;
   }
