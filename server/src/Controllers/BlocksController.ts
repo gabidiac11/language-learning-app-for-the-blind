@@ -24,9 +24,7 @@ export default class BlocksController extends BaseController {
     return result;
   }
 
-  public async completeSummary(
-    req: Request
-  ): Promise<Result<any>> {
+  public async completeSummary(req: Request): Promise<Result<any>> {
     await this.authenticateAsync<any>(req);
 
     const userId = this.getUser().uid;

@@ -92,6 +92,45 @@ export default class BlocksService {
     return Result.Success(targetedBlockProgress);
   }
 
+  public async getUserStoryIdFromBlock(
+    userId: string,
+    blockProgressId: string
+  ): Promise<string> {
+    // retrieve user story id from dedicated table for relations
+    const userStoryIdResult =
+      await this._userStoryRelationsManager.getUserStoryIdFromBlockProgress(
+        userId,
+        blockProgressId
+      );
+    if (userStoryIdResult.isError()) {
+      throw ApiError.ErrorResult(userStoryIdResult);
+    }
+
+    if (!userStoryIdResult.data) {
+      const result = Result.Error("Not found.", 404);
+      throw ApiError.ErrorResult(result);
+    }
+    const userStoryId = userStoryIdResult.data;
+    return userStoryId;
+  }
+
+  public async getShallowBlockProgress(
+    userId: string,
+    blockProgressId: string
+  ): Promise<Result<BuildingBlockProgress>> {
+    const userStoryId = await this.getUserStoryIdFromBlock(userId, blockProgressId);
+    const blockResult = await this._db.get<BuildingBlockProgress>(
+      `userStories/${userId}/${userStoryId}/buildingBlocksProgressItems/${blockProgressId}`
+    );
+    if(blockResult.isError()) {
+      return blockResult;
+    }
+    if(!blockResult.data) {
+      return Result.Error("Not found.", 404);
+    }
+    return blockResult;
+  }
+
   public async completeSummaryBlockProgress(
     userId: string,
     blockProgressId: string
