@@ -1,5 +1,5 @@
 import { genUid, getShuffledArray } from "../../../utils";
-import { Epilogue, EpilogueQuestionAnswer } from "../../ctx.story.types";
+import { Epilogue, EpilogueQuestionAnswer } from "../../ctxTypes/ctx.story.types";
 
 
 const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]> => {

@@ -1,5 +1,5 @@
 import { genUid } from "../../../utils";
-import { BuildingBlock } from "../../ctx.story.types";
+import { BuildingBlock } from "../../ctxTypes/ctx.story.types";
 
 const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
   const familyBlock: BuildingBlock = {

@@ -1,7 +1,7 @@
 import Result from "../../ApiSupport/Result";
 import {
   UserStory,
-} from "../../Data/ctx.userStory.types";
+} from "../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { UserStoriesRelationshipInitializer } from "./UserStoriesRelationshipInitializer";
 
