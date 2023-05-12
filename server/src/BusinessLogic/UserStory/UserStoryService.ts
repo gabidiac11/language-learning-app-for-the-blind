@@ -1,6 +1,6 @@
 import Result from "../../ApiSupport/Result";
-import { Story } from "../../Data/ctx.story.types";
-import { UserStory } from "../../Data/ctx.userStory.types";
+import { Story } from "../../Data/ctxTypes/ctx.story.types";
+import { UserStory } from "../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { UserStoriesCreator } from "./UserStoriesCreator";
 import { UserStoriesRelationsManager } from "../UserStoryRelations/UserStoriesRelationsManager";

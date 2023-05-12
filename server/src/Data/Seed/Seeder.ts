@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import { environment } from "../../constants";
 import { log } from "../../logger";
-import { Story } from "../ctx.story.types";
+import { Story } from "../ctxTypes/ctx.story.types";
 import { Database } from "../database";
 import guardStories from "./storiesValidationGuard";
 import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";

@@ -7,7 +7,7 @@ import {
   EpilogueQuestionProgress,
   UserStory,
   WordProgress,
-} from "../Data/ctx.userStory.types";
+} from "../Data/ctxTypes/ctx.userStory.types";
 
 export type UserStoryOutput = Omit<
   UserStory,

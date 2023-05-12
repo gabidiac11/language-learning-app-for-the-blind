@@ -1,4 +1,4 @@
-import { UserStory } from "../../Data/ctx.userStory.types";
+import { UserStory } from "../../Data/ctxTypes/ctx.userStory.types";
 import { valuesOrdered } from "../../utils";
 
 // DEMO: add state changes to the user story progress to emulate each state

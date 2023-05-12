@@ -2,14 +2,14 @@ import Result from "../../ApiSupport/Result";
 import {
   BuildingBlock,
   Story,
-} from "../../Data/ctx.story.types";
+} from "../../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
   EpilogueQuestionProgress,
   UserStory,
   WordProgress,
-} from "../../Data/ctx.userStory.types";
+} from "../../Data/ctxTypes/ctx.userStory.types";
 import { arrayToObjectIds, genUid } from "../../utils";
 import { DiverseStateUserStoryDecorator } from "./DiverseStateUserStoryDecorator";
 

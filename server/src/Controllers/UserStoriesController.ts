@@ -1,5 +1,5 @@
 import UserStoryService from "../BusinessLogic/UserStory/UserStoryService";
-import { UserStory } from "../Data/ctx.userStory.types";
+import { UserStory } from "../Data/ctxTypes/ctx.userStory.types";
 import { log } from "../logger";
 import BaseController from "./BaseController";
 import Result from "../ApiSupport/Result";

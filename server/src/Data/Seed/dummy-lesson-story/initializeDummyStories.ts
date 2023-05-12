@@ -1,4 +1,4 @@
-import { Story } from "../../ctx.story.types";
+import { Story } from "../../ctxTypes/ctx.story.types";
 import generateBuildingBlocks from "./buidingBlocks";
 import generateEpilogue from "./epilogue";
 import fs from "fs";

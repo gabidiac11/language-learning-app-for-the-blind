@@ -1,5 +1,5 @@
-import { StorySubItemLink } from "../../Data/ctx.relations.types";
-import { UserStory } from "../../Data/ctx.userStory.types";
+import { StorySubItemLink } from "../../Data/ctxTypes/ctx.relations.types";
+import { UserStory } from "../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { log } from "../../logger";
 import { valuesOrdered } from "../../utils";

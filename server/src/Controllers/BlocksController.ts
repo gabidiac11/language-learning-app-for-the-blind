@@ -1,7 +1,7 @@
 import BaseController from "./BaseController";
 import { Authenticator } from "../ApiSupport/authentication";
 import BlocksService from "../BusinessLogic/BlocksService";
-import { BuildingBlockProgress } from "../Data/ctx.userStory.types";
+import { BuildingBlockProgress } from "../Data/ctxTypes/ctx.userStory.types";
 import Result from "../ApiSupport/Result";
 import { Request } from "express";
 import { BuildingBlockProgressOutput } from "../Models/output.userStory.types";

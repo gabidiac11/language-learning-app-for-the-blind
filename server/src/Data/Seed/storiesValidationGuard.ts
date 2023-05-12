@@ -1,5 +1,5 @@
 import { log } from "../../logger";
-import { Story } from "../ctx.story.types";
+import { Story } from "../ctxTypes/ctx.story.types";
 
 type ItemDependence = {
   id: string;

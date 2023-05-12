@@ -1,8 +1,24 @@
-//< --START-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --START-->
+import { QuizOption } from "../Data/ctxTypes/ctx.quiz.shared.types";
+import {
+  EpilogueProgress,
+  BuildingBlockProgress,
+  UserStory,
+} from "../Data/ctxTypes/ctx.userStory.types";
 
-import { QuizOption } from "../Data/ctx.quiz.types";
-import { EpilogueProgress, BuildingBlockProgress, UserStory } from "../Data/ctx.userStory.types";
+// quiz question REQUEST
+export type QuizRequestBody =
+  | QuizRequestBodyAnswer
+  | QuizRequestBodyIntialQuestion;
+export type QuizRequestBodyIntialQuestion = {
+  questionRequested: true;
+};
+export type QuizRequestBodyAnswer = {
+  questionId: string;
+  optionId: string;
+};
 
+// quiz question RESPONSE:
+export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
 export type QuizResponseNextQuestion = {
   questionText: string;
   questionId: string;
@@ -16,22 +32,8 @@ export type QuizResponseComplete = {
   quizId: string;
   previouslyQuestion_CorrectOptionId?: string;
 };
-export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
 
-// quiz REQUEST
-export type QuizRequestBodyAnswer = {
-  questionId: string;
-  optionId: string;
-};
-
-export type QuizRequestBodyIntialQuestion = {
-  questionRequested: true;
-};
-
-export type QuizRequestBody =
-  | QuizRequestBodyAnswer
-  | QuizRequestBodyIntialQuestion;
-
+// quiz completion -> state response
 export type QuizBlockCompletedResponse = {
   epilogueProgressUnlocked?: EpilogueProgress;
   blockProgressUnlockedItems?: BuildingBlockProgress[];
@@ -39,4 +41,3 @@ export type QuizBlockCompletedResponse = {
   blockCompletedStoryRefId: string;
   userStoriesUnlocked?: UserStory[];
 };
-// < --END-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --END-->
