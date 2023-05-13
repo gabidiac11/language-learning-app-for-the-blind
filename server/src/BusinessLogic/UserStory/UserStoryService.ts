@@ -4,7 +4,8 @@ import { UserStory } from "../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import { UserStoriesCreator } from "./UserStoriesCreator";
 import { UserStoriesRelationsManager } from "../UserStoryRelations/UserStoriesRelationsManager";
-import { valuesOrdered } from "../../utils";
+import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
+import { log } from "../../logger";
 
 export default class UserStoryService {
   private _db: Database;
@@ -98,20 +99,26 @@ export default class UserStoryService {
   ) {
     for (const userStory of userStories) {
       const lessonStory = lessonStories.find((s) => s.id === userStory.storyId);
-      valuesOrdered(userStory.buildingBlocksProgressItems).forEach((bp) => {
-        bp.block = lessonStory.buildingBlocks.find(
-          (block) => block.id === bp.blockId
-        );
-        valuesOrdered(bp.wordProgressItems).forEach((wordProgress) => {
-          wordProgress.word = bp.block.words.find((item) => item.id);
-        });
-      });
+      Object.values(userStory.buildingBlocksProgressItems).forEach(
+        (bProgress) => {
+          bProgress.block = lessonStory.buildingBlocks.find(
+            (block) => block.id === bProgress.blockId
+          );
+          Object.values(bProgress.wordProgressItems).forEach((wordProgress) => {
+            wordProgress.word = bProgress.block.words.find(
+              (word) => word.id == wordProgress.wordId
+            );
+          });
+        }
+      );
       userStory.epilogueProgress.epilogue = lessonStory.epilogue;
-      valuesOrdered(userStory.epilogueProgress.questionProgressItems).forEach((item) => {
-        item.question = lessonStory.epilogue.questions.find(
-          (q) => q.id === item.questionId
-        );
-      });
+      Object.values(userStory.epilogueProgress.questionProgressItems).forEach(
+        (epilogueProgress) => {
+          epilogueProgress.question = lessonStory.epilogue.questions.find(
+            (q) => q.id === epilogueProgress.questionId
+          );
+        }
+      );
     }
   }
 
@@ -125,17 +132,31 @@ export default class UserStoryService {
       "lessonStories/"
     );
     if (lessonStoriesResult.isError()) {
+      log(
+        `[INIT-UserStrories]: error while querying lessons:` +
+          getStringifiedError(lessonStoriesResult.errors)
+      );
       return lessonStoriesResult.As<boolean>();
     }
     if (!lessonStoriesResult.data) {
+      log(
+        `[INIT-UserStrories]: No lessons found at "lessonStories/". Seeding needs to be done.`
+      );
       throw "No lessons found. Seeding needs to be done.";
     }
 
+    log(
+      `[INIT-UserStrories]: starting generating user stories from lesson stories...`
+    );
     const convertor = new UserStoriesCreator();
-    const userStoriesResult = await convertor.createUserStories(
+    const userStoriesResult = convertor.createUserStories(
       lessonStoriesResult.data
     );
     if (userStoriesResult.isError()) {
+      log(
+        `[INIT-UserStrories]: errors found when generating user stories from lesson stories...` +
+          getStringifiedError(userStoriesResult.errors)
+      );
       return userStoriesResult.As<boolean>();
     }
 

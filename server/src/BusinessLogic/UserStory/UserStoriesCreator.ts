@@ -1,8 +1,6 @@
+import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
 import Result from "../../ApiSupport/Result";
-import {
-  BuildingBlock,
-  Story,
-} from "../../Data/ctxTypes/ctx.story.types";
+import { BuildingBlock, Story } from "../../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
@@ -14,41 +12,45 @@ import { arrayToObjectIds, genUid } from "../../utils";
 import { DiverseStateUserStoryDecorator } from "./DiverseStateUserStoryDecorator";
 
 export class UserStoriesCreator {
-  public async createUserStories(
-    lessonStories: Story[]
-  ): Promise<Result<UserStory[]>> {
-    const userStories: UserStory[] = [];
-    for (let lessonStory of lessonStories) {
-      const convertor = new LessonToUserStoryConvertor(lessonStory);
-      const userStoryItem = await convertor.GetCookedUserStory();
-      userStoryItem.order = userStories.length;
-      userStories.push(userStoryItem);
+  public createUserStories(allLessonStories: Story[]): Result<UserStory[]> {
+    try {
+      const userStories: UserStory[] = [];
+      for (let lessonStory of allLessonStories) {
+        const convertor = new LessonToUserStoryConvertor(
+          lessonStory,
+          allLessonStories
+        );
+        const userStoryItem = convertor.GetCookedUserStory();
+        userStoryItem.order = userStories.length;
+        userStories.push(userStoryItem);
+      }
+
+      // TODO: add conditions for this
+      // DEMO: add state changes to the user story progress to emulate each state
+      const decorator = new DiverseStateUserStoryDecorator(userStories);
+      const userStoriesWithDiverseProgress = decorator.generateDiverseStories();
+
+      return Result.Success(userStoriesWithDiverseProgress);
+    } catch (err) {
+      return Result.Error<UserStory[]>(getStringifiedError(err));
     }
-
-    // TODO: add conditions for this
-    // DEMO: add state changes to the user story progress to emulate each state
-    const decorator = new DiverseStateUserStoryDecorator(userStories);
-    const userStoriesWithDiverseProgress = decorator.generateDiverseStories();
-
-    return Result.Success(userStoriesWithDiverseProgress);
   }
 }
 
 class LessonToUserStoryConvertor {
   private _lessonStory: Story;
+  private _allLessons: Story[];
 
-  public userStory: UserStory;
-
-  public constructor(lessonStory: Story) {
+  public constructor(lessonStory: Story, allLessons: Story[]) {
     this._lessonStory = lessonStory;
+    this._allLessons = allLessons;
   }
 
-  public async GetCookedUserStory() {
+  public GetCookedUserStory(): UserStory {
     const userStoryId = genUid();
-    const buildingBlocksProgressItems = await this.generateBuildingProgress(
-      userStoryId
-    );
-    const epilogueProgress = await this.generateEpilogueProgress(userStoryId);
+    const buildingBlocksProgressItems =
+      this.generateBuildingProgress(userStoryId);
+    const epilogueProgress = this.generateEpilogueProgress(userStoryId);
 
     const userStory: UserStory = {
       id: userStoryId,
@@ -57,10 +59,10 @@ class LessonToUserStoryConvertor {
 
       description: null,
 
+      isDependentOnNames: this.getParentStoryNames(),
+
       name: this._lessonStory.name,
       imageUrl: this._lessonStory.imageUrl,
-
-      dependentOnIds: this._lessonStory.dependentOnIds,
 
       buildingBlocksProgressItems: arrayToObjectIds<BuildingBlockProgress>(
         buildingBlocksProgressItems
@@ -73,18 +75,30 @@ class LessonToUserStoryConvertor {
     };
     return userStory;
   }
-  async generateBuildingProgress(
-    userStoryId: string
-  ): Promise<BuildingBlockProgress[]> {
+
+  getParentStoryNames(): string[] {
+    const names = this._allLessons
+      .filter((serachedParentStory) =>
+        serachedParentStory.dependentOnIds?.find((id) => id === this._lessonStory.id)
+      )
+      .map((s) => s.name);
+    return names;
+  }
+
+  generateBuildingProgress(userStoryId: string): BuildingBlockProgress[] {
     const blockProgressItems: BuildingBlockProgress[] = [];
     for (let buildingBlock of this._lessonStory.buildingBlocks) {
-      const wordProgressItems: WordProgress[] =
-        await this.generateWordProgressItems(buildingBlock, userStoryId);
+      const wordProgressItems: WordProgress[] = this.generateWordProgressItems(
+        buildingBlock,
+        userStoryId
+      );
 
       const item: BuildingBlockProgress = {
         id: genUid(),
         order: blockProgressItems.length,
         blockId: buildingBlock.id,
+        isDependentOnNames: this.getDependentBlockNames(buildingBlock),
+
         userStoryId,
 
         isStarter: buildingBlock.isStarter,
@@ -94,10 +108,20 @@ class LessonToUserStoryConvertor {
     }
     return blockProgressItems;
   }
-  async generateWordProgressItems(
+
+  getDependentBlockNames(childBlock: BuildingBlock): string[] {
+    const names = this._lessonStory.buildingBlocks
+      .filter((serachedParentBlock) =>
+        serachedParentBlock.dependentOnIds?.find((id) => id === childBlock.id)
+      )
+      .map((s) => s.name);
+    return names;
+  }
+
+  generateWordProgressItems(
     buildingBlock: BuildingBlock,
     userStoryId: string
-  ): Promise<WordProgress[]> {
+  ): WordProgress[] {
     const wordProgressItems: WordProgress[] = [];
     for (const word of buildingBlock.words) {
       const wordProgress: WordProgress = {
@@ -110,9 +134,8 @@ class LessonToUserStoryConvertor {
     }
     return wordProgressItems;
   }
-  async generateEpilogueProgress(
-    userStoryId: string
-  ): Promise<EpilogueProgress> {
+
+  generateEpilogueProgress(userStoryId: string): EpilogueProgress {
     const questionProgressItems: EpilogueQuestionProgress[] = [];
     for (let question of this._lessonStory.epilogue.questions) {
       questionProgressItems.push({

@@ -38,13 +38,13 @@ const computeDescription = (targetItem: SummaryTargetItem) => {
 
 export const ItemProgressSummary = (props: {
   item: SummaryTargetItem;
-  dependentNames?: string[];
+  isDependentOnNames?: string[];
 }) => {
   const [text, setText] = useState("");
 
   useLayoutEffect(() => {
-    setText(computeText(props.item, props.dependentNames));
-  }, [props.item, props.dependentNames]);
+    setText(computeText(props.item, props.isDependentOnNames));
+  }, [props.item, props.isDependentOnNames]);
 
   return (
     <>

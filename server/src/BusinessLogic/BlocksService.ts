@@ -1,7 +1,10 @@
-import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
-import { BuildingBlock, Story } from "../Data/ctx.story.types";
-import { BuildingBlockProgress, UserStory } from "../Data/ctx.userStory.types";
+import { BuildingBlock, Story } from "../Data/ctxTypes/ctx.story.types";
+import {
+  BuildingBlockProgress,
+  UserStory,
+} from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
 import { valuesOrdered } from "../utils";
@@ -54,7 +57,7 @@ export default class BlocksService {
       return lessonResult.As<BuildingBlockProgress[]>();
     }
     this.fillInLessonStoryDataToBlockProgress(
-      valuesOrdered(userStoryResult.data.buildingBlocksProgressItems),
+      Object.values(userStoryResult.data.buildingBlocksProgressItems),
       lessonResult.data.buildingBlocks
     );
 
@@ -114,18 +117,27 @@ export default class BlocksService {
     return userStoryId;
   }
 
+  /**
+   * shallow -> associated fields from the base lesson (like block, epilogue etc.) is not filled in
+   * @param userId
+   * @param blockProgressId
+   * @returns
+   */
   public async getShallowBlockProgress(
     userId: string,
     blockProgressId: string
   ): Promise<Result<BuildingBlockProgress>> {
-    const userStoryId = await this.getUserStoryIdFromBlock(userId, blockProgressId);
+    const userStoryId = await this.getUserStoryIdFromBlock(
+      userId,
+      blockProgressId
+    );
     const blockResult = await this._db.get<BuildingBlockProgress>(
       `userStories/${userId}/${userStoryId}/buildingBlocksProgressItems/${blockProgressId}`
     );
-    if(blockResult.isError()) {
+    if (blockResult.isError()) {
       return blockResult;
     }
-    if(!blockResult.data) {
+    if (!blockResult.data) {
       return Result.Error("Not found.", 404);
     }
     return blockResult;
@@ -166,6 +178,91 @@ export default class BlocksService {
     return Result.Success(true);
   }
 
+  async getDependentBuildingBlocksData(
+    userId: string,
+    blockProgressId: string
+  ): Promise<Result<DepenedentBlocksData>> {
+    const userStoryId = await this.getUserStoryIdFromBlock(
+      userId,
+      blockProgressId
+    );
+    log(
+      `[DependentBuildingBlocksData]: User story ID found ${userStoryId}) from blockProgress ID:${blockProgressId}`
+    );
+
+    // get lesson stories to fill up data
+    const lessonStoryIdPath = `userStories/${userId}/${userStoryId}/storyId`;
+    const lessonStoryIdResult = await this._db.get_NotNull<string>(
+      lessonStoryIdPath
+    );
+    if (lessonStoryIdResult.isError()) {
+      log(
+        `[DependentBuildingBlocksData]: Error while querying lessonStory-ID from userStory-ID at path '${lessonStoryIdPath}` +
+          getStringifiedError(lessonStoryIdResult.errors)
+      );
+      return lessonStoryIdResult.As<DepenedentBlocksData>();
+    }
+    log(`[DependentBuildingBlocksData]: Lesson story ID found.`);
+
+    // get lesson story
+    const lessonPath = `lessonStories/${lessonStoryIdResult.data}`;
+    const lessonResult = await this._db.get_NotNull<Story>(lessonPath);
+    if (lessonResult.isError()) {
+      log(
+        `[DependentBuildingBlocksData]: Error while querying lessonStory at path '${lessonPath}'.`
+      );
+      return lessonResult.As<DepenedentBlocksData>();
+    }
+    log(`[DependentBuildingBlocksData]: lessonStory found.`);
+
+    // retrive all block progress items
+    const blocksPath = `userStories/${userId}/${userStoryId}/buildingBlocksProgressItems`;
+    const buildingBlocksProgressItemsResult = await this._db.get_NotNull<{
+      [blockProgressId: string]: BuildingBlockProgress;
+    }>(blocksPath);
+
+    if (buildingBlocksProgressItemsResult.isError()) {
+      log(
+        `[DependentBuildingBlocksData]: Error while querying buildingBlockItems at path '${blocksPath}'.` +
+          getStringifiedError(buildingBlocksProgressItemsResult.errors)
+      );
+      return buildingBlocksProgressItemsResult.As<DepenedentBlocksData>();
+    }
+    log(`[DependentBuildingBlocksData]: buildingBlockItems found.`);
+
+    const blockProgressArrayItems = Object.values(
+      buildingBlocksProgressItemsResult.data
+    );
+    this.fillInLessonStoryDataToBlockProgress(
+      blockProgressArrayItems,
+      lessonResult.data.buildingBlocks
+    );
+    log(
+      `[DependentBuildingBlocksData] Fillied in lesson data to the block progress items.`
+    );
+
+    const targetBlockProgress = blockProgressArrayItems.find(
+      (item) => item.id === blockProgressId
+    );
+    if (!targetBlockProgress)
+      throw "Building block is null somehow, although this should not happen at this point.";
+
+    let dependentBlockProgressItems: BuildingBlockProgress[] = [];
+    const targetBlockDepIds = targetBlockProgress.block?.dependentOnIds;
+    if (targetBlockDepIds?.length) {
+      dependentBlockProgressItems = blockProgressArrayItems.filter((item) =>
+        targetBlockDepIds.some((depId) => depId === item.block?.id)
+      );
+    }
+
+    const data: DepenedentBlocksData = {
+      childBlocks: dependentBlockProgressItems,
+      parentBlock: targetBlockProgress,
+      userStoryId: userStoryId,
+    };
+    return Result.Success(data);
+  }
+
   /**
    * a user story is a decorator for a lesson story, with information about the particular user progress.
    * to avoid duplicating data from lesson story into the user story in the storage, only the id (foreign key) is stored
@@ -179,9 +276,17 @@ export default class BlocksService {
   ) {
     userStoriesBlockProgressItems.forEach((bp) => {
       bp.block = lessonStoriesBlocks.find((block) => block.id === bp.blockId);
-      valuesOrdered(bp.wordProgressItems).forEach((wordProgress) => {
-        wordProgress.word = bp.block.words.find((item) => item.id);
+      Object.values(bp.wordProgressItems).forEach((wordProgress) => {
+        wordProgress.word = bp.block.words.find(
+          (item) => item.id === wordProgress.wordId
+        );
       });
     });
   }
 }
+
+type DepenedentBlocksData = {
+  childBlocks: BuildingBlockProgress[];
+  parentBlock: BuildingBlockProgress;
+  userStoryId: string;
+};

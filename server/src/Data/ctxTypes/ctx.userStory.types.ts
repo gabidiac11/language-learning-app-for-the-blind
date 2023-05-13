@@ -15,16 +15,15 @@ export type UserStory = {
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
-
+  
   order: number;
-
+  
   description: string | null;
-
+  
   imageUrl: string;
   storyId: string;
-
-  // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: string[];
+  
+  isDependentOnNames?: string[];
 
   buildingBlocksProgressItems: {
     [blockProgressId: string]: BuildingBlockProgress;
@@ -47,6 +46,7 @@ export type BuildingBlockProgress = {
 
   blockId: string;
   block?: BuildingBlock;
+  isDependentOnNames: string[];
 
   userStoryId: string;
 

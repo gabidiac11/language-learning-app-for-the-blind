@@ -3,21 +3,28 @@ import { firebaseApp } from "./firebase-app";
 import { get, set } from "@firebase/database";
 import Result from "../ApiSupport/Result";
 import { log } from "../logger";
-import { getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import { valuesOrdered } from "../utils";
+import { dbRootPathKey } from "../constants";
 
 class Database {
   private db;
   constructor() {
     this.db = getDatabase(firebaseApp);
   }
-  public ref(path: string) {
-    return ref(this.db, path);
+
+  /**
+   * secure
+   * @param requestedPath 
+   * @returns 
+   */
+  private decoratedPath(requestedPath: string) {
+    return `${dbRootPathKey}/${requestedPath}`;
   }
 
   public async exists(path: string): Promise<Result<boolean>> {
     try {
-      const snapshot = await get(ref(this.db, path));
+      const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
         return Result.Success(false);
       }
@@ -59,21 +66,35 @@ class Database {
 
   public async get<T>(path: string): Promise<Result<T>> {
     try {
-      const snapshot = await get(ref(this.db, path));
+      const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
         return Result.Success(null);
       }
       const value = snapshot.val() as T;
       return Result.Success(value);
     } catch (error) {
-      log(`[db]: error occured at path '${path}'`, error);
+      log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
       return Result.Error("Something went wrong.", 500);
     }
   }
 
+  public async get_NotNull<T>(path: string): Promise<Result<T>> {
+    const result = await this.get<T>(path);
+    if (!result.isError() && !result.data) {
+      log(`Record espected not null is actually not there at path ${path}.`);
+      return Result.Error<T>("Resource not found.", 404);
+    }
+    return result;
+  }
+
   public async set<T>(item: T, path: string) {
     removeUndefined(item);
-    await set(ref(this.db, path), item);
+    try {
+      await set(ref(this.db, this.decoratedPath(path)), item);
+    } catch(error) {
+      log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
+      throw ApiError.Error("Something went wrong.", 500);
+    }
   }
 }
 

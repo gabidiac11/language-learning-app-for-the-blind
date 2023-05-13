@@ -1,5 +1,8 @@
 import Result from "../ApiSupport/Result";
-import { BuildingBlockProgress, UserStory } from "../Data/ctxTypes/ctx.userStory.types";
+import {
+  BuildingBlockProgress,
+  UserStory,
+} from "../Data/ctxTypes/ctx.userStory.types";
 import { valuesOrdered } from "../utils";
 import {
   BuildingBlockProgressOutput,
@@ -18,7 +21,6 @@ function convertBlockToOutput(
 function convertUserStoryToOutput(userStory: UserStory): UserStoryOutput {
   const userStoryOutput: UserStoryOutput = {
     ...userStory,
-
     buildingBlocksProgressItems: valuesOrdered(
       userStory.buildingBlocksProgressItems
     ).map(convertBlockToOutput),

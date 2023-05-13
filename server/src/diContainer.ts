@@ -1,6 +1,8 @@
 import { Injector } from "boxed-injector";
 import { Authenticator } from "./ApiSupport/authentication";
 import BlocksService from "./BusinessLogic/BlocksService";
+import ProgressService from "./BusinessLogic/Progress/ProgressService";
+import BlockQuizProgressServiceFactory from "./BusinessLogic/Quiz/BlockQuiz/BlockQuizService";
 import UserStoryService from "./BusinessLogic/UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./BusinessLogic/UserStoryRelations/UserStoriesRelationsManager";
 import BlockQuizControllerFactory from "./Controllers/BlockQuizController";
@@ -25,6 +27,8 @@ diContainer.factory(
 );
 diContainer.factory(UserStoryService.name, UserStoryService);
 diContainer.factory(BlocksService.name, BlocksService);
+diContainer.factory(BlockQuizProgressServiceFactory.name, BlockQuizProgressServiceFactory);
+diContainer.factory(ProgressService.name, ProgressService);
 
 // Controllers:
 diContainer.factory(UserStoriesControllerFactory.name, UserStoriesControllerFactory);

@@ -8,7 +8,6 @@ import "./StoryPage.scss";
 
 const BuildingBlockItem = (props: {
   blockProgress: BuildingBlockProgress;
-  dependentNames?: string[];
 }) => {
   const { blockProgress } = props;
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const BuildingBlockItem = (props: {
         title={blockProgress.block.name}
         subheader={
           <ItemProgressSummary
-            dependentNames={props.dependentNames}
+            isDependentOnNames={props.blockProgress.isDependentOnNames}
             item={blockProgress}
           />
         }

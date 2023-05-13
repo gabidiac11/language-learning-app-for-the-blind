@@ -1,7 +1,7 @@
 export enum RoundOutcome {
+  Unset,
   Hit,
   Miss,
-  Unset,
   Excluded,
 }
 export type QuizQuestion = {

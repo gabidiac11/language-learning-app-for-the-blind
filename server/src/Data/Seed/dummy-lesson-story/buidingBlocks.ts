@@ -587,7 +587,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     ],
   };
 
-  // family block is first unlocked:
+  // family block is first to be unlocked because is not dependent on anyone
+  // no other block b2 will reference familyBlock id in b2.dependentOnIds 
   familyBlock.isStarter = true;
 
   // family unlocks -> pronons and names

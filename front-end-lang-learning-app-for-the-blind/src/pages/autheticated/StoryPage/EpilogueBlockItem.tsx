@@ -28,7 +28,7 @@ const EpilogueBlockItem = (props: {
         title={epilogueProgress.epilogue.name}
         subheader={
           <ItemProgressSummary
-            dependentNames={["all building blocks"]}
+            isDependentOnNames={["all building blocks"]}
             item={epilogueProgress}
           />
         }

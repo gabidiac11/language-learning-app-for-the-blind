@@ -10,8 +10,8 @@ export type Story = {
 
   imageUrl: string;
 
-  // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: string[];
+  // ids of the stories which will be unlocked when current story is completed
+  dependentOnIds: string[]; 
   isStarter?: boolean;
 
   buildingBlocks: BuildingBlock[];
@@ -26,7 +26,7 @@ export type BuildingBlock = {
   name: string;
   imageUrl: string;
 
-  // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
+  // ids of the BLOCKS which will be unlocked when current BLOCK is completed
   dependentOnIds?: string[];
 
   // means it will be unlock first when a story is unlocked
