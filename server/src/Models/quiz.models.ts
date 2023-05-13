@@ -34,7 +34,7 @@ export type QuizResponseComplete = {
 };
 
 // quiz completion -> state response
-export type QuizBlockCompletedResponse = {
+export type QuizBlockCompletedStatsResponse = {
   epilogueProgressUnlocked?: EpilogueProgress;
   blockProgressUnlockedItems?: BuildingBlockProgress[];
   blockCompleted?: BuildingBlockProgress;

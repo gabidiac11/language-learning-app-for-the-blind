@@ -12,11 +12,13 @@ export type EpilogueQuestionOutcome = {
 
 export type QuizEpilogueState = {
   id: string;
+  timestamp: number;
   epilogueProgressId: string;
   outcomes: EpilogueQuestionOutcome[];
   timeCompleted?: number;
 };
 
+// TODO: might need to delete this, but keep the comments somewhere
 export type EpilogueQuizStates = {
   progressBlockId: string;
   // if one of the quiz states is completed -> the epilogue is completed

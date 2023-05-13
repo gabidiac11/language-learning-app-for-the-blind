@@ -11,7 +11,6 @@ import "./StoryCard.scss";
 
 export const StoryCard = (props: {
   userStory: UserStory;
-  dependentNames?: string[];
 }) => {
   const navigate = useNavigate();
   const { userStory } = props;
@@ -32,7 +31,7 @@ export const StoryCard = (props: {
         // TODO: add dependent story on the summary
         subheader={
           <ItemProgressSummary
-            dependentNames={props.dependentNames}
+            isDependentOnNames={props.userStory.isDependentOnNames}
             item={props.userStory}
           />
         }

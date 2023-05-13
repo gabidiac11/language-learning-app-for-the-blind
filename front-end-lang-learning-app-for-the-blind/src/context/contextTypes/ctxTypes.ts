@@ -27,10 +27,9 @@ export type UserStory = {
 
   description?: string;
 
-  imageUrl: string;
+  isDependentOnNames?: string[];
 
-  // a user can start a story if the stories dependent on are completed; otherwise it is locked
-  dependentOnIds: string[];
+  imageUrl: string;
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
   epilogueProgress: EpilogueProgress;
@@ -47,6 +46,8 @@ export type BuildingBlockProgress = {
   id: string;
 
   isStarter?: boolean;
+
+  isDependentOnNames?: string[];
 
   // a building block is completed if a quiz state associated is completed
   timeUnlocked?: number;
@@ -112,6 +113,7 @@ export type EpilogueProgress = {
   id: string;
   epilogue: Epilogue;
   questionProgressItems: EpilogueQuestionProgress[];
+  isDependentOnNames: [];
   timeSummaryCompleted?: number;
   timeUnlocked?: number;
   timeStarted?: number;

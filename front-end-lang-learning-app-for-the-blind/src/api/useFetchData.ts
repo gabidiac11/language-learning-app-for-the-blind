@@ -6,21 +6,6 @@ export type UseFetchDataOptions = {
   body?: object;
 };
 
-const withDelayIfDemoEnv = (originalPromise: Promise<any>) => {
-  // TODO: make this dynamic
-  const isDemoEnv = true;
-  if (!isDemoEnv) {
-    return originalPromise;
-  }
-
-  const newPromise = new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(originalPromise);
-    }, 500)
-  );
-  return newPromise;
-};
-
 const computeAxiosPromise = (
   fetchOptions: UseFetchDataOptions | undefined,
   url: string
@@ -63,9 +48,7 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
       setLoading(true);
       const _fetchOptions = fetchOptions;
 
-      const response = await withDelayIfDemoEnv(
-        computeAxiosPromise(fetchOptions, url)
-      );
+      const response = await computeAxiosPromise(fetchOptions, url);
       setData(response.data);
       setError(undefined);
       setDataWithHttpResponse({

@@ -12,31 +12,6 @@ export const StoryPage = () => {
   const { data, loading, error, retry } = useFetchData<UserStory>(
     `userStories/${id}`
   );
-  const [dependentBlocks, setDependentBlocks] = useState<{
-    [blockProgressId: string]: string[];
-  }>({});
-
-  useEffect(() => {
-    if (data) {
-      // TODO: move this at the server level
-      const ids: {
-        [blockProgressId: string]: string[];
-      } = {};
-      const _dependentBlocks = data.buildingBlocksProgressItems.reduce(
-        (prev, bp) => {
-          const parentBlocks = data.buildingBlocksProgressItems.filter(
-            (bpParent) =>
-              bpParent.block.dependentOnIds?.some((id) => id === bp.block.id)
-          );
-          const names = parentBlocks.map((bp) => bp.block.name);
-          prev[bp.id] = names;
-          return prev;
-        },
-        ids
-      );
-      setDependentBlocks(_dependentBlocks);
-    }
-  }, [data]);
 
   return (
     <div className="view story-page-wrapper">
@@ -57,7 +32,6 @@ export const StoryPage = () => {
               {data.buildingBlocksProgressItems.map(
                 (blockProgress: BuildingBlockProgress) => (
                   <BuildingBlockItem
-                    dependentNames={dependentBlocks[blockProgress.id]}
                     key={blockProgress.id}
                     blockProgress={blockProgress}
                   />

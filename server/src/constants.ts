@@ -7,4 +7,6 @@ export const firebaseConfig = {
   appId: process.env.firebase_appId,
 };
 
+export const dbRootPathKey = process.env.DB_ROOT_PATH;
+
 export const environment = process.env.ENV_NAME;

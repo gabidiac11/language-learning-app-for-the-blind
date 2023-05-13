@@ -52,3 +52,23 @@ export const valuesOrdered = <T>(obj: { [id: string]: T }) => {
   });
   return values as unknown as T[];
 };
+
+
+export const valuesOrderedByTimestamp = <T>(obj: { [id: string]: T }) => {
+  const values = Object.values(obj).sort((i1, i2) => {
+    if (
+      (i1 as unknown as { order: number }).order ===
+      (i2 as unknown as { order: number }).order
+    )
+      return 0;
+
+    if (
+      (i1 as unknown as { order: number }).order <
+      (i2 as unknown as { order: number }).order
+    ) {
+      return -1;
+    }
+    return 1;
+  });
+  return values as unknown as T[];
+};

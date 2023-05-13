@@ -19,21 +19,17 @@ export class UserStoriesRelationshipInitializer {
     log(`Started adding block-userStory relationships.`);
 
     const blockProgressRel = this.createBlockProgressRelations();
-    for (const [key, value] of Object.entries(blockProgressRel)) {
-      await this._db.set<StorySubItemLink>(
-        value,
-        `userStoriesTableRelations/${this._userId}/blockProgress/${key}`
-      );
-    }
+    await this._db.set<{[blockProgressId: string]: StorySubItemLink}>(
+      blockProgressRel,
+      `userStoriesTableRelations/${this._userId}/blockProgress`
+    );
 
     log(`Started adding epilogue-userStory relationships.`);
     const epilogueProgressRel = this.createEpilogueEpilogueRelations();
-    for (const [key, value] of Object.entries(epilogueProgressRel)) {
-      await this._db.set<StorySubItemLink>(
-        value,
-        `userStoriesTableRelations/${this._userId}/epilogueProgress/${key}`
-      );
-    }
+    await this._db.set<{[blockProgressId: string]: StorySubItemLink}>(
+      epilogueProgressRel,
+      `userStoriesTableRelations/${this._userId}/epilogueProgress`
+    );
 
     log(`Finished adding all user story relationships.`);
   }
