@@ -36,7 +36,7 @@ export class DiverseStateUserStoryDecorator {
     startedStory.timeUnlocked = new Date().getTime();
     startedStory.timeStarted = new Date().getTime();
     // block - unlocked:
-    valuesOrdered(startedStory.buildingBlocksProgressItems)[0].timeUnlocked =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeUnlocked =
       new Date().getTime();
     // block - started:
     valuesOrdered(startedStory.buildingBlocksProgressItems)[1].timeUnlocked =
@@ -47,9 +47,9 @@ export class DiverseStateUserStoryDecorator {
       startedStory.buildingBlocksProgressItems
     )[1].timeSummaryCompleted = new Date().getTime();
     // block - completed:
-    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeUnlocked =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[0].timeUnlocked =
       new Date().getTime();
-    valuesOrdered(startedStory.buildingBlocksProgressItems)[2].timeStarted =
+    valuesOrdered(startedStory.buildingBlocksProgressItems)[0].timeStarted =
       new Date().getTime();
     valuesOrdered(
       startedStory.buildingBlocksProgressItems
