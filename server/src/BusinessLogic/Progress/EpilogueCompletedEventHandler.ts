@@ -31,7 +31,11 @@ export class EpilogueCompletedEventHandler {
     private async markCompletedUserStory(userId: string, userStoryId: string) {
         const path = `userStories/${userId}/${userStoryId}/timeCompleted`;
         await this._db.set<number>(Date.now(), path);
-        log(`Unlocked story. Set completed at path ${path}`);
+        log(`Set story completed. Set completed at path ${path}`);
+
+        const pathEpilogue = `userStories/${userId}/${userStoryId}/epilogueProgress/timeCompleted`;
+        await this._db.set<number>(Date.now(), pathEpilogue);
+        log(`Set epilogue completed. Set completed at path ${pathEpilogue}`);
     }
     
     private async unlockDependentUserStories(userId: string, userStoryId: string, userStories: UserStory[]) {

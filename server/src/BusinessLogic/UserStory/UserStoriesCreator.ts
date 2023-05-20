@@ -50,7 +50,7 @@ export class UserStoriesCreator {
     for (const { userStory, lessonStory } of pairsUserAndLesson) {
       const idsDependentOnThisUserStory: string[] = [];
       lessonStory.idsItemsDependentOnThis?.forEach((depLessonStoryId) => {
-        const pair = pairsUserAndLesson.find((i) => i.lessonStory.id);
+        const pair = pairsUserAndLesson.find((pair) => pair.lessonStory.id === depLessonStoryId);
         if (pair) {
           idsDependentOnThisUserStory.push(pair.userStory.id);
         }

@@ -1,3 +1,4 @@
+import { environment } from "../../constants";
 import {
   QuizOption,
   QuizOutcome,
@@ -15,13 +16,11 @@ export class QuizStateCreator {
   }
 
   public createQuizState(): QuizState {
-    const quizOutcomes = this._quizableItem.templateQuestionItems.map(
-      (wp) => {
-        const o = this.generateWordOutcomeQuestion(wp, RoundOutcome.Unset);
-        o.prababilityInclusion = 1;
-        return o;
-      }
-    );
+    const quizOutcomes = this._quizableItem.templateQuestionItems.map((wp) => {
+      const o = this.generateWordOutcomeQuestion(wp, RoundOutcome.Unset);
+      o.prababilityInclusion = 1;
+      return o;
+    });
 
     const qs: QuizState = {
       id: genUid(),
@@ -45,7 +44,7 @@ export class QuizStateCreator {
 
     const correctOption: QuizOption = {
       id: genUid(),
-      text: correctOptionText,
+      text: `${environment === "demo" ? "->" : ""}${correctOptionText}`,
     };
     const wrongOptions: QuizOption[] = wrongOptionTexts.map((text) => ({
       id: genUid(),

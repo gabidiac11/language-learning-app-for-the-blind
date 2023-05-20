@@ -65,6 +65,8 @@ class Database {
   }
 
   public async get<T>(path: string): Promise<Result<T>> {
+    const time = Date.now();
+    log(`\nDB_GET: '${path}': [STARTED]`);
     try {
       const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
@@ -75,6 +77,8 @@ class Database {
     } catch (error) {
       log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
       return Result.Error("Something went wrong.", 500);
+    } finally {
+      log(`DB_GET: '${path}': [FINISHED] at ${(Date.now() - time)/1000}s\n`);
     }
   }
 
@@ -89,11 +93,16 @@ class Database {
 
   public async set<T>(item: T, path: string) {
     removeUndefined(item);
+
+    const time = Date.now();
+    log(`\nDB_SET: '${path}': [STARTED]`);
     try {
       await set(ref(this.db, this.decoratedPath(path)), item);
     } catch(error) {
       log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
       throw ApiError.Error("Something went wrong.", 500);
+    } finally {
+      log(`DB_SET: '${path}': [FINISHED] at ${(Date.now() - time)/1000}s\n`);
     }
   }
 }

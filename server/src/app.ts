@@ -123,6 +123,17 @@ app.get(
   }
 );
 
+app.post(
+  "/api/epilogues/:epilogueProgressId/complete-summary",
+  async (req, res) => {
+    const controller = epilogueControllerFactory.create();
+    await executeActionAsync(
+      { req, res },
+      controller.completeSummary.bind(controller)
+    );
+  }
+);
+
 // ENDPOINTS -> ### EPILOGUE QUIZ
 app.post("/api/epilogues/:epilogueProgressId/quiz", async (req, res) => {
   const controller = epilogueQuizServiceFactory.create();

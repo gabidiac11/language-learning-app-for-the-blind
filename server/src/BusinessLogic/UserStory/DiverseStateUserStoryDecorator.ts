@@ -114,6 +114,7 @@ export class DiverseStateUserStoryDecorator {
     stories.forEach((item, index) => {
       item.name += ` #${index + 1}`;
     });
+    this.updateDependentNames(stories);
 
     return stories;
   }
@@ -137,5 +138,18 @@ export class DiverseStateUserStoryDecorator {
     userStory.numOfBlocksCompleted = valuesOrdered(
       userStory.buildingBlocksProgressItems
     ).filter((bp) => !!bp.timeCompleted).length;
+  }
+
+  private updateDependentNames(userStories: UserStory[]) {
+    for (const us of userStories) {
+      const names = userStories
+        .filter((serachedParentStory) =>
+          serachedParentStory.idsDependentOnThisUserStory?.find(
+            (id) => id === us.id
+          )
+        )
+        .map((s) => s.name);
+      us.isDependentOnNames = names;
+    }
   }
 }

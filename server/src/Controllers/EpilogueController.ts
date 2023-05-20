@@ -42,7 +42,19 @@ class EpilogueController extends BaseController {
     const epilogueProgressId = req.params.epilogueProgressId;
     const userId = this.getUser()?.uid;
 
-    const result = await this._epilogueService.getEpilogue(userId, epilogueProgressId);
+    const result = await this._epilogueService.getEpilogueWithGuard(userId, epilogueProgressId);
     return convertEpilogueResultToOutput(result);
+  }
+
+  public async completeSummary(
+    req: Request
+  ): Promise<Result<boolean>> {
+    await this.authenticateAsync(req);
+
+    const epilogueProgressId = req.params.epilogueProgressId;
+    const userId = this.getUser()?.uid;
+
+    await this._epilogueService.completeSummary(userId, epilogueProgressId);
+    return Result.Success(true);
   }
 }

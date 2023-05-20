@@ -46,7 +46,7 @@ const EpilogueQuizCompleted = () => {
                     color="success"
                   />{" "}
                 </span>
-                <h2>{`Coungradulations! You finished story this story.`}</h2>
+                <h2>{`Coungradulations! You finished this story.`}</h2>
               </div>
 
               {data?.userStoriesUnlocked && (
@@ -73,7 +73,6 @@ const DisplayStoryUnlockedItems = (props: { stories: UserStory[] }) => {
         <Chip label="Stories unlocked" />
       </Divider>
       <div
-        // TOOD: test if still looks good
         className="view-items-section"
       >
         {props.stories.map((userStory: UserStory) => (
