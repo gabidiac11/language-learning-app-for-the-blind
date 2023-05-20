@@ -20,7 +20,6 @@ if (process.env.ALLOW_SEED === "true") {
   log("No seed tried for this environment.");
 }
 
-
 // TODO:
 // prioritize what message will pre-recorded for the user, some might not appear to him if the app is working from a good actor
 // you can use the fallback text to speech for messages that might not apepar for the user that much if is not activetly messing with the API
@@ -49,12 +48,16 @@ app.use(function (req, res, next) {
 });
 
 app.use("/api/*", (req, res, next) => {
-  log(`Started ${req.method?.toUpperCase()} /${req.originalUrl}`);
+  log(`Started ${req.method?.toUpperCase()} ${req.originalUrl}`);
   next();
 });
 
-const [storiesControllerFactory, blocksControllerFactory, blockQuizControllerFactory] =
-  getControllers(diContainer);
+const [
+  storiesControllerFactory,
+  blocksControllerFactory,
+  blockQuizControllerFactory,
+  epilogueControllerFactory,
+] = getControllers(diContainer);
 
 // ENDPOINTS -> ### Stories
 app.get("/api/userStories", async (req, res) => {
@@ -85,7 +88,7 @@ app.post("/api/blocks/:blockProgressId/complete-summary", async (req, res) => {
   );
 });
 
-// ENDPOINTS -> ### BLOCK QUIZ 
+// ENDPOINTS -> ### BLOCK QUIZ
 app.post("/api/blocks/:blockProgressId/quiz", async (req, res) => {
   const controller = blockQuizControllerFactory.create();
   await executeActionAsync(
@@ -93,13 +96,28 @@ app.post("/api/blocks/:blockProgressId/quiz", async (req, res) => {
     controller.getQuizQuestionAndAnswerPrevious.bind(controller)
   );
 });
-app.get("/api/blocks/:blockProgressId/quiz/:quizId/completed", async (req, res) => {
-  const controller = blockQuizControllerFactory.create();
-  await executeActionAsync(
-    { req, res },
-    controller.getProgressAchievedOfCompletedQuiz.bind(controller)
-  );
-});
+app.get(
+  "/api/blocks/:blockProgressId/quiz/:quizId/completed",
+  async (req, res) => {
+    const controller = blockQuizControllerFactory.create();
+    await executeActionAsync(
+      { req, res },
+      controller.getProgressAchievedOfCompletedQuiz.bind(controller)
+    );
+  }
+);
+
+// ENDPOINTS -> ### EPILOGUE
+app.get(
+  "/api/epilogues/:epilogueProgressId",
+  async (req, res) => {
+    const controller = epilogueControllerFactory.create();
+    await executeActionAsync(
+      { req, res },
+      controller.getEpilogueProgress.bind(controller)
+    );
+  }
+);
 
 app.get("/api/*", (req, res) => {
   return res.status(404).send({ message: "Route not found." });

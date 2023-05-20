@@ -19,7 +19,7 @@ const EpilogueBlockItem = (props: {
       //TODO: add audio saying it's diabled because it's locked
       return;
     }
-    navigate(`/epilogue/${epilogueProgress.id}`);
+    navigate(`/epilogues/${epilogueProgress.id}`);
   }, [epilogueProgress, disabled]);
 
   return (

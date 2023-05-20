@@ -13,7 +13,7 @@ const EpilogueStartPage = () => {
   //TODO: should have something explaining what this page is (later)
   const { id: epilogueProgressId } = useParams<{ id: string }>();
   const { data, loading, error, retry } = useFetchData<EpilogueProgress>(
-    `epilogue/${epilogueProgressId}`
+    `epilogues/${epilogueProgressId}`
   );
 
   useEffect(() => {}, []);
@@ -58,7 +58,7 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
     setLoading(true);
     try {
       await axiosInstance.post(
-        `epilogue/${props.epilogueProgress.id}/complete-summary`
+        `epilogues/${props.epilogueProgress.id}/complete-summary`
       );
       props.reload();
     } catch (error) {

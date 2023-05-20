@@ -14,9 +14,9 @@ export class UserStoriesRelationsManager {
   }
 
   /**
-   * Makes sure to:
-   * block/:id -> needs a link between block progress id and user story id
-   * epilogue/:id -> needs a link too
+   * This make sure to have a easy time querying the path from children to parent by having a pair (blockId, parentStoryId) or (epilogueId, parentStoryId):
+   * block(id) -> needs a link between block progress id and user story id
+   * epilogues(id) -> needs a link too
    * @param userId
    * @param userStories
    */

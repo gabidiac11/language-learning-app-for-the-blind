@@ -46,6 +46,9 @@ export function getErrorLogMessage(error: unknown, prefix?: string) {
   return message;
 }
 
+// TODO: search where is thrown and make sure:
+// log 500 errors and make sure the user doesn't see those
+// make sure technical errors are logged and not returned to the user
 export class ApiError<T> {
   public isThisApiError = true;
   public result: Result<T>;

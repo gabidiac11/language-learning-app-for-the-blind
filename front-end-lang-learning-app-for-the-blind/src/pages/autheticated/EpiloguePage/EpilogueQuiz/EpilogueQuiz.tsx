@@ -32,7 +32,7 @@ const EpilogueQuiz = () => {
     error,
     retry,
   } = useFetchData<QuizResponse>(
-    `epilogue/${epilogueProgressId}/quiz`,
+    `epilogues/${epilogueProgressId}/quiz`,
     fetchOptions
   );
   const [currentQuestion, setCurrentQuestion] =
@@ -73,7 +73,7 @@ const EpilogueQuiz = () => {
     if (dataAsQuizComplete?.quizCompleted) {
       setQuizCompleted(true);
       navigate(
-        `/epilogue/${epilogueProgressId}/quiz/${dataAsQuizComplete.quizId}/completed`
+        `/epilogues/${epilogueProgressId}/quiz/${dataAsQuizComplete.quizId}/completed`
       );
       return;
     }
