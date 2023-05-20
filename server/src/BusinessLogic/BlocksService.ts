@@ -12,17 +12,20 @@ import {
 } from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
+import EpilogueService from "./EpilogueService";
+import { BlockStartedEventHandler } from "./Progress/BlockStartedEventHandler";
 import { UserStoriesRelationsManager } from "./UserStoryRelations/UserStoriesRelationsManager";
 
 export default class BlocksService {
+  public static inject = [Database.name, UserStoriesRelationsManager.name, EpilogueService.name];
+
   private _db: Database;
   private _userStoryRelationsManager: UserStoriesRelationsManager;
-
-  public static inject = [Database.name, UserStoriesRelationsManager.name];
-
-  constructor(db: Database, userStoryRelationsManager) {
+  private _epilogueService: EpilogueService;
+  constructor(db: Database, userStoryRelationsManager: UserStoriesRelationsManager, epilogueService: EpilogueService) {
     this._db = db;
     this._userStoryRelationsManager = userStoryRelationsManager;
+    this._epilogueService = epilogueService;
   }
 
   public async getUserBlockProgress(
@@ -142,21 +145,14 @@ export default class BlocksService {
       );
     }
 
-    // retrieve user story id from dedicated table for relations
-    const userStoryIdResult =
-      await this._userStoryRelationsManager.getUserStoryIdFromBlockProgress(
-        userId,
-        blockProgressId
-      );
-    if (userStoryIdResult.isError()) return userStoryIdResult.As<boolean>();
-    if (!userStoryIdResult.data) {
-      return Result.Error("Not found.", 404);
-    }
-
     await this._db.set(
       Date.now(),
-      `userStories/${userId}/${userStoryIdResult.data}/buildingBlocksProgressItems/${blockProgressId}/timeSummaryCompleted`
+      `userStories/${userId}/${blockResult.data.userStoryId}/buildingBlocksProgressItems/${blockProgressId}/timeSummaryCompleted`
     );
+    
+    const handler = new BlockStartedEventHandler(this._db);
+    await handler.handle(userId, blockResult.data);
+    
     return Result.Success(true);
   }
 
@@ -244,11 +240,7 @@ export default class BlocksService {
       (item) => !!item.timeCompleted
     );
     if (allBlocksCompleted) {
-      epilogueUnlocked = (
-        await this._db.get<EpilogueProgress>(
-          `userStories/${userId}/${userStoryId}/epilogueProgress`
-        )
-      ).data;
+      epilogueUnlocked = (await this._epilogueService.getEpilogueByStory(userId, userStoryId)).data;
     }
 
     const data: DepenedentBlocksData = {

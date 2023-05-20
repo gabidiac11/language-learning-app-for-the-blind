@@ -17,7 +17,7 @@ import UserStoryService from "./UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./UserStoryRelations/UserStoriesRelationsManager";
 
 export default class EpilogueService {
-  public static inject = [Database.name, UserStoriesRelationsManager.name];
+  public static inject = [Database.name, UserStoriesRelationsManager.name, UserStoryService.name];
   
   
   private _db: Database;
@@ -58,7 +58,7 @@ export default class EpilogueService {
     return userStoryIdResult.data;
   }
 
-  public async getEpilogue(
+  public async getEpilogueWithGuard(
     userId: string,
     epilogueProgressId: string
   ): Promise<Result<EpilogueProgress>> {
@@ -166,5 +166,44 @@ export default class EpilogueService {
         );
       }
     );
+  }
+
+  public async getEpilogueByStory(
+    userId: string,
+    userStoryId: string
+  ): Promise<Result<EpilogueProgress>> { 
+    const epilogueProgressResult = await this._db.get_NotNull<EpilogueProgress>(
+      `userStories/${userId}/${userStoryId}/epilogueProgress`
+    );
+    if (epilogueProgressResult.isError())
+      return epilogueProgressResult.As<EpilogueProgress>();
+
+    const lessonStoryIdResult = await this._db.get_NotNull<string>(
+      `userStories/${userId}/${userStoryId}/storyId`
+    );
+    if (lessonStoryIdResult.isError())
+      return lessonStoryIdResult.As<EpilogueProgress>();
+
+    const lessonStoryEpilogueResult = await this._db.get_NotNull<Epilogue>(
+      `lessonStories/${lessonStoryIdResult.data}/epilogue`
+    );
+    if (lessonStoryEpilogueResult.isError())
+      return lessonStoryEpilogueResult.As<EpilogueProgress>();
+
+    this.fillInLessonEpilogoue(
+      epilogueProgressResult.data,
+      lessonStoryEpilogueResult.data
+    );
+    return epilogueProgressResult;
+  }
+
+  public async completeSummary(userId: string, epilogueProgressId: string) {
+    const userStoryId = await this.getUserStoryId(userId, epilogueProgressId);
+    const timeUnlocked = await this._db.get<number|undefined>(`userStories/${userId}/${userStoryId}/epilogueProgress/timeUnlocked`)
+    if(!timeUnlocked.data) {
+      throw ApiError.Error("Epilogue is locked. Please complete all building blocks first.");
+    }
+    await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeSummaryCompleted`);
+    await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeStarted`);
   }
 }

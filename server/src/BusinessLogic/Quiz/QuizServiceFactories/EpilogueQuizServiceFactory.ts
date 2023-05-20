@@ -15,7 +15,11 @@ import { getShuffledArray, valuesOrdered } from "../../../utils";
 import { EpilogueQuestionAnswerObj } from "../../bussinessModels";
 import EpilogueService from "../../EpilogueService";
 import ProgressService from "../../Progress/ProgressService";
-import { QuizableItem, QuizSettings, TemplateQuestionItemReference } from "../QuizableItem";
+import {
+  QuizableItem,
+  QuizSettings,
+  TemplateQuestionItemReference,
+} from "../QuizableItem";
 import QuizService from "../QuizService";
 
 export class EpilogueQuizServiceFactory {
@@ -42,7 +46,10 @@ export class EpilogueQuizServiceFactory {
     userId: string,
     epilogueProgressId: string
   ): Promise<QuizService> {
-    const epilogueProgress:EpilogueProgress = await this.getEpilogueProgress(userId, epilogueProgressId)
+    const epilogueProgress: EpilogueProgress = await this.getEpilogueProgress(
+      userId,
+      epilogueProgressId
+    );
     const blockQuizableItem: QuizableItem = await this.createQuizableItem(
       userId,
       epilogueProgress
@@ -54,10 +61,20 @@ export class EpilogueQuizServiceFactory {
     );
     return quizService;
   }
-  private async getEpilogueProgress(userId: string, epilogueProgressId: string): Promise<EpilogueProgress> {
-    const result = await this._epilogueService.getEpilogue(userId, epilogueProgressId);
-    if(result.isError()) throw `Could not create quiz: cannot find epilogue at id ${epilogueProgressId} because of error: ${getStringifiedError(result.errors)}`;
-    if(!result.data) throw `Could not create quiz: cannot find epilogue at id ${epilogueProgressId} because of epilogue data is undefined.`;
+  private async getEpilogueProgress(
+    userId: string,
+    epilogueProgressId: string
+  ): Promise<EpilogueProgress> {
+    const result = await this._epilogueService.getEpilogueWithGuard(
+      userId,
+      epilogueProgressId
+    );
+    if (result.isError())
+      throw `Could not create quiz: cannot find epilogue at id ${epilogueProgressId} because of error: ${getStringifiedError(
+        result.errors
+      )}`;
+    if (!result.data)
+      throw `Could not create quiz: cannot find epilogue at id ${epilogueProgressId} because of epilogue data is undefined.`;
 
     return result.data;
   }
@@ -86,13 +103,15 @@ export class EpilogueQuizServiceFactory {
       this.createTemplateQuestionItem(epilogueQp, epilogueQuestionAnswers)
     );
 
-    quizableItem.quizSettings = this.createQuizSettings();
+    quizableItem.quizSettings = this.createQuizSettings(
+      epilogueProgress.epilogue.questions.length
+    );
     quizableItem.dbLocationBasePath = `quizzesEpilogues/${userId}/epilogueProgress-${epilogueProgress.id}`;
     quizableItem.userId = userId;
     quizableItem.getAcheivements = this.createCallbackForAchievements(
       userId,
       epilogueProgress
-    );
+    ).bind(this);
     return quizableItem;
   }
   // TODO: search 'block' in vscode
@@ -153,17 +172,28 @@ export class EpilogueQuizServiceFactory {
 
       const responseData: QuizCompletedStatsResponse = {
         blockCompletedStoryRefId: epilogueProgress.userStoryId,
-        userStoriesUnlocked: unlockedUserStoriesResult.data 
+        userStoriesUnlocked: unlockedUserStoriesResult.data,
       };
       return Result.Success(responseData);
     };
   };
 
-  private createQuizSettings(): QuizSettings {
+  private createQuizSettings(questionCount: number): QuizSettings {
     const s = new QuizSettings();
-    s.MISS_PROB_INC = 30;
-    s.EXCLUDED_PROB_INC = 10;
-    s.HIT_PROB_DEC = 20;
+    // TODO: test more and adjust to a final configuration that works best
+    if (questionCount < 5) {
+      s.MISS_PROB_INC = 30;
+      s.EXCLUDED_PROB_INC = 10;
+      s.HIT_PROB_DEC = 20;
+    } else if (questionCount < 10) {
+      s.MISS_PROB_INC = 50;
+      s.EXCLUDED_PROB_INC = 5;
+      s.HIT_PROB_DEC = 40;
+    } else {
+      s.MISS_PROB_INC = 80;
+      s.EXCLUDED_PROB_INC = 2;
+      s.HIT_PROB_DEC = 70;
+    }
 
     s.NUM_OF_REQUIRED_CONSECUTIVE_HITS = 1;
 

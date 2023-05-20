@@ -91,13 +91,13 @@ export class BlockQuizServiceFactory {
       blockProgress.wordProgressItems
     ).map((wp) => this.createTemplateQuestionItem(wp, blockProgress));
 
-    quizableItem.quizSettings = this.createQuizSettings();
+    quizableItem.quizSettings = this.createQuizSettings(Object.values(blockProgress.wordProgressItems).length);
     quizableItem.dbLocationBasePath = `quizzesBlocks/${userId}/blockProgress-${blockProgress.id}`;
     quizableItem.userId = userId;
     quizableItem.getAcheivements = this.createCallbackForAchievements(
       userId,
       blockProgress
-    );
+    ).bind(this);
     return quizableItem;
   }
 
@@ -150,11 +150,24 @@ export class BlockQuizServiceFactory {
     return templateQuestion;
   }
 
-  private createQuizSettings(): QuizSettings {
+  private createQuizSettings(numOfWords: number): QuizSettings {
     const s = new QuizSettings();
-    s.MISS_PROB_INC = 30;
-    s.EXCLUDED_PROB_INC = 10;
-    s.HIT_PROB_DEC = 20;
+
+    // TODO: test more and adjust to a final configuration that works best
+    if(numOfWords < 5) {
+      s.MISS_PROB_INC = 30;
+      s.EXCLUDED_PROB_INC = 10;
+      s.HIT_PROB_DEC = 20;
+    } else if(numOfWords < 10) {
+      s.MISS_PROB_INC = 50 ;
+      s.EXCLUDED_PROB_INC = 5;
+      s.HIT_PROB_DEC = 40;
+    } else {
+      s.MISS_PROB_INC = 80;
+      s.EXCLUDED_PROB_INC = 2;
+      s.HIT_PROB_DEC = 70;
+    }
+
 
     s.NUM_OF_REQUIRED_CONSECUTIVE_HITS = 1;
 

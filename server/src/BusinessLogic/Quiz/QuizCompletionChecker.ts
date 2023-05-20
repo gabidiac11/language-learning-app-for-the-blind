@@ -42,7 +42,7 @@ export default class QuizCompletionChecker {
    */
   public quizCanBeCompleted(): boolean {
     const allFinished = this._quizableItem.templateQuestionItems.every(
-      this.isQuestionTemplateCompleted
+      this.isQuestionTemplateCompleted.bind(this)
     );
 
     this.log(`Is quiz complete? R:${allFinished}.`);

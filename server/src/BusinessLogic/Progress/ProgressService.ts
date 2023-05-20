@@ -1,9 +1,11 @@
 import { QuizEntityName } from "../../Data/ctxTypes/ctx.quiz.shared.types";
+import { BuildingBlockProgress } from "../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../Data/database";
 import BlocksService from "../BlocksService";
 import { QuizableItem } from "../Quiz/QuizableItem";
 import UserStoryService from "../UserStory/UserStoryService";
 import { BlockCompletedEventHandler } from "./BlockCompletedEventHandler";
+import { BlockStartedEventHandler } from "./BlockStartedEventHandler";
 import { EpilogueCompletedEventHandler } from "./EpilogueCompletedEventHandler";
 
 export default class ProgressService {
@@ -44,7 +46,4 @@ export default class ProgressService {
       return;
     }
   }
-
-  // TODO: implement this:
-  public async handleBlockWasStartedEvent() {}
 }

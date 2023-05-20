@@ -39,7 +39,7 @@ export class BlockCompletedEventHandler {
     blockProgress: BuildingBlockProgress
   ) {
     // will emit the event completion even if the block was already completed
-    if (!blockProgress.timeCompleted) {
+    if (!!blockProgress.timeCompleted) {
       return;
     }
     const path = `userStories/${userId}/${blockProgress.userStoryId}/buildingBlocksProgressItems/${blockProgress.id}/timeCompleted`;

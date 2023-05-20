@@ -14,6 +14,7 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
 import BuildingBlockItem from "../../StoryPage/BuildingBlockItem";
+import EpilogueBlockItem from "../../StoryPage/EpilogueBlockItem";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -28,9 +29,10 @@ const BlockQuizCompleted = () => {
     id: string;
     quizId: string;
   }>();
-  const { data, loading, error, retry } = useFetchData<QuizBlockCompletedResponse>(
-    `blocks/${blockProgressId}/quiz/${quizId}/completed`
-  );
+  const { data, loading, error, retry } =
+    useFetchData<QuizBlockCompletedResponse>(
+      `blocks/${blockProgressId}/quiz/${quizId}/completed`
+    );
 
   // TODO: restrict page per session of quiz
 
@@ -49,7 +51,11 @@ const BlockQuizCompleted = () => {
                     color="success"
                   />{" "}
                 </span>
-                <h2>{`Coungradulations! You finished block '${data.blockCompleted?.block.name}'.`}</h2>
+                <h2 style={{ textAlign: "center" }}>
+                  {`Coungradulations!`}
+                  <br></br>
+                  {`You finished block '${data.blockCompleted?.block.name}'.`}
+                </h2>
               </div>
               {!!data?.blockProgressUnlockedItems?.length && (
                 <DisplayBlockProgressUnlockedItems
@@ -82,10 +88,7 @@ const DisplayBlockProgressUnlockedItems = (props: {
       <Divider>
         <Chip label="Blocks unlocked" />
       </Divider>
-      <div
-        // TOOD: test if still looks good
-        className="view-items-section"
-      >
+      <div className="view-items-section">
         {props.blocks.map((blockProgress: BuildingBlockProgress) => (
           <BuildingBlockItem
             key={blockProgress.id}
@@ -100,10 +103,18 @@ const DisplayBlockEpilogueUnlocked = (props: {
   epilogue: EpilogueProgress;
 }) => {
   return (
-    <Divider>
-      <Chip label="Epilogue unlocked" />
-      {/* TODO: add epilogue item */}
-    </Divider>
+    <div>
+      <Divider>
+        <Chip label="Epilogue unlocked" />
+      </Divider>
+      <div className="view-items-section">
+        <EpilogueBlockItem
+          epilogueProgress={props.epilogue}
+          // TODO:
+          storyImgUrl="https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        />
+      </div>
+    </div>
   );
 };
 

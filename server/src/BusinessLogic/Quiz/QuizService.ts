@@ -117,7 +117,7 @@ export default class QuizService {
       );
     }
 
-    log(`[${this._trace}]: Question found within the current quiz."`);
+    log(`[${this._trace}]: Question found within the current quiz.`);
 
     // update and save outcome of the word outcome based on response
     if (quizOutcome.quizQuestion.correctOptionId === request.optionId) {
@@ -395,7 +395,6 @@ export default class QuizService {
       `[${this._trace}]: <Updater>. Checking if quiz can be marked as completed.`
     );
     const qs = await this.getMostRecentQuizAsync();
-
     const quizCompletionChecker = new QuizCompletionChecker(
       qs,
       this._quizableItem
