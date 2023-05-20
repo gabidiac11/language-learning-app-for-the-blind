@@ -54,6 +54,9 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
   const [isListening, setIsListening] = useState(false);
 
   const markEpilogueAsListened = useCallback(async () => {
+    if(props.epilogueProgress.timeSummaryCompleted) {
+      return;
+    }
     setError(undefined);
     setLoading(true);
     try {
@@ -71,7 +74,6 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
   const listenStory = useCallback(() => {
     setIsListening(true);
 
-    // TODO: only make the request if summary not completed
     timeoutRef.current = setTimeout(() => {
       setIsListening(false);
       markEpilogueAsListened();
@@ -89,7 +91,6 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
       loading={loadingRef.current}
     >
       <div>
-        {/* TODO:  */}
         <Button
           onClick={listenStory}
           variant="contained"
@@ -102,18 +103,5 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
     </ErrorBoundary>
   );
 };
-
-/**
- * TODO:
- * 0.1 implement initial stories with epilogue summary started??
- * 0.1 implement start page with start summary and start/continue quiz (locked or what not)
- * 1. implement GET id -> check if epilogue unlocked
- * 2. implement POST id -> mark summary completed
- * 3. extract logic for choosing questions by probabilities to a separate service to be shared with building block
- *    MAKE SURE - to provide different parameters for building blocks separate from epilogue
- *    MAKE SURE - maybe provide diffrent parameters based on number of words of a block
- * 4. retest buidling block
- * 5. start working
- */
 
 export default EpilogueStartPage;

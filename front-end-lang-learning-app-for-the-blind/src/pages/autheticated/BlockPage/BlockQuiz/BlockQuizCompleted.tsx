@@ -34,9 +34,6 @@ const BlockQuizCompleted = () => {
       `blocks/${blockProgressId}/quiz/${quizId}/completed`
     );
 
-  // TODO: restrict page per session of quiz
-
-  // todo: return newly unblocked items and epilogue if it's unlocked
   return (
     <div className="view quiz-view">
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>

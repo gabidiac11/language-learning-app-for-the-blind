@@ -6,14 +6,10 @@ import {
 import { QuizCompletedStatsResponse } from "../../Models/quiz.models";
 
 export class QuizSettings {
-  // TODO: move these to class level and configure them based more things
-  // TODO: make this configurable based on num of questions??
   MISS_PROB_INC: number;
   EXCLUDED_PROB_INC: number;
   HIT_PROB_DEC: number;
 
-  // TODO: move this to config
-  // NUM_OF_REQUIRED_CONSECUTIVE_HITS: number;
   NUM_OF_REQUIRED_CONSECUTIVE_HITS: number;
 
   // It means:

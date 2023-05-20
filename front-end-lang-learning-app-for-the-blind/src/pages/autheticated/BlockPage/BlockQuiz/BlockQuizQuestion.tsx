@@ -13,7 +13,7 @@ const BlockQuizQuestion = (props: {
   onChoose: (option: QuizOption) => void;
 }) => {
   const [selected, setSelected] = useState<QuizOption>();
-  
+
   const onChoose = useCallback(
     (option: QuizOption) => {
       setSelected(option);
@@ -24,7 +24,9 @@ const BlockQuizQuestion = (props: {
 
   return (
     <>
-      <Typography variant="h5" mb={5} align="center">{props.currentQuestion.questionText}</Typography>
+      <Typography variant="h5" mb={5} align="center">
+        {props.currentQuestion.questionText}
+      </Typography>
       {props.currentQuestion.options.map((option) => (
         <div key={option.id}>
           {/* TODO: see how you wrap the text */}
@@ -45,7 +47,7 @@ const BlockQuizQuestion = (props: {
                 return <Typography className="mark">❌</Typography>;
               }
             })()}
-            <Typography variant="body1">{option.text}{getAnswerIfDemo(option.id)}</Typography>
+            <Typography variant="body1">{option.text}</Typography>
           </Button>
         </div>
       ))}
@@ -62,11 +64,3 @@ const BlockQuizQuestion = (props: {
 };
 
 export default BlockQuizQuestion;
-
-function getAnswerIfDemo(optionId: string) {
-  //TODO: delete this or make this env-based
-  if (window.cheat_correctBlockOptions?.[optionId]) {
-    return " -> CHEAT";
-  }
-  return "";
-}

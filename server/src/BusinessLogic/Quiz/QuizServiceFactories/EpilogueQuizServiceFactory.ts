@@ -50,14 +50,14 @@ export class EpilogueQuizServiceFactory {
       userId,
       epilogueProgressId
     );
-    const blockQuizableItem: QuizableItem = await this.createQuizableItem(
+    const epilogueQuizableItem: QuizableItem = await this.createQuizableItem(
       userId,
       epilogueProgress
     );
     const quizService = new QuizService(
       this._db,
       this._progressService,
-      blockQuizableItem
+      epilogueQuizableItem
     );
     return quizService;
   }
@@ -114,7 +114,7 @@ export class EpilogueQuizServiceFactory {
     ).bind(this);
     return quizableItem;
   }
-  // TODO: search 'block' in vscode
+  
   private createTemplateQuestionItem(
     epilogueQp: EpilogueQuestionProgress,
     epilogueQuestionAnswers: EpilogueQuestionAnswerObj

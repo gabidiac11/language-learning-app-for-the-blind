@@ -95,7 +95,6 @@ const BlockQuiz = () => {
       <ErrorBoundary
         error={error}
         onRetry={retry}
-        //TODO: retest completion to check the redirect
         loading={loading || !!quizCompleted}
         preserveChildren={preserveChildren}
       >
@@ -116,36 +115,3 @@ const BlockQuiz = () => {
 };
 
 export default BlockQuiz;
-
-//TODO: restrict page if introduction not finished
-//TODO: start a session in the backend
-//TODO: stop watch for fairly long time
-//TODO: lower or increase score for a word when answered
-//TODO: add inc/dec factor settings, stop-watch settings
-//TODO: complete a block -> emit event completion only if it was alreay completed! -> unblock other blocks -> unlock epiloque (if all blocks finished)
-//      if already completed only change the scores, if it gets through without mistake pass don't repeat questions, otherwise do it untill all are score 100
-//
-//TODO: make question wrongly answer more frequent than the others -> need to do a call to server to calculate that
-
-/**
- * TODO:
- * create new options and trigger new post
- * {
- *  questionId: ....
- *  proxyIdOption: ...
- * }
- *
- * receive:
- * {
- *  proxyIdCorrect: ...
- *  ...the other stuff from QuizResponse - meaning the next question
- * }
- *
- * POST:
- * find question
- * set status from unset to Miss/Hit
- * if all current questions were answered:
- *  if is finale -> return isFinale in response together with the other stuff
- *  else -> safe history questions and compiled next set of questions with the probability algorithm
- * return response detailed earlier with correct id and next question
- */
