@@ -72,13 +72,14 @@ class Database {
     await this.set<{ [id: string | number]: T }>(obj, path);
   }
 
-  public async get<T>(path: string): Promise<Result<T>> {
+  public async get<T>(path: string, ignoreCache = false): Promise<Result<T>> {
     const time = Date.now();
     log(`\nDB_GET: '${path}': [STARTED]`);
     try {
-
-      const cached = this.cache.getData<T>(this.decoratedPath(path));
-      if (cached) return Result.Success(cached);
+      if (!ignoreCache) {
+        const cached = this.cache.getData<T>(this.decoratedPath(path));
+        if (cached) return Result.Success(cached);
+      }
 
       const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
@@ -120,6 +121,10 @@ class Database {
       log(`DB_SET: '${path}': [FINISHED] at ${(Date.now() - time) / 1000}s\n`);
     }
   }
+
+  public resetCache() {
+    this.cache.reset();
+  }
 }
 
 type CachedDbData = {
@@ -142,8 +147,15 @@ class CachedDb {
     this.cachedData = {};
   }
 
+  public reset() {
+    Object.keys(this.cachedData).forEach((key) => {
+      delete this.cachedData[key];
+    });
+    log(`Cache was reset.`);
+  }
+
   public setAllowedData(item: any, path: string) {
-    if(!item) return;
+    if (!item) return;
 
     const cleanPath = this.getCleanedPath(path);
     if (!this.canBeCached(cleanPath)) {
@@ -154,7 +166,7 @@ class CachedDb {
   }
 
   public getData<T>(path) {
-    const cleanPath = this.getCleanedPath(path); 
+    const cleanPath = this.getCleanedPath(path);
     const data = objectPath.get(this.cachedData, cleanPath) as T;
     if (data) {
       log(`Got cached data at path ${cleanPath}.`);
@@ -163,7 +175,7 @@ class CachedDb {
   }
 
   private canBeCached(path: string) {
-    console.log({path})
+    console.log({ path });
     if (path.indexOf("/lessonStories") > -1) {
       return true;
     }
@@ -177,7 +189,7 @@ class CachedDb {
     const pathTrimmed = path.trim();
 
     if (pathTrimmed.length === 0) return pathTrimmed;
-    if(pathTrimmed === "/") return pathTrimmed;
+    if (pathTrimmed === "/") return pathTrimmed;
 
     if (pathTrimmed[pathTrimmed.length - 1] === "/") {
       return pathTrimmed.slice(0, pathTrimmed.length - 1);

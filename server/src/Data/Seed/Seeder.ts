@@ -34,6 +34,7 @@ export default class Seeder {
 
   private async addStories(stories: Story[]) {
     await this._db.setArray<Story>(stories, "lessonStories/");
+    this._db.resetCache();
   }
 
   private async isSeedNeeded(): Promise<boolean> {
