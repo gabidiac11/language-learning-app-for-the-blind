@@ -1,8 +1,13 @@
 import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
-import { BuildingBlock, Story } from "../Data/ctxTypes/ctx.story.types";
+import {
+  BuildingBlock,
+  Epilogue,
+  Story,
+} from "../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgress,
+  EpilogueProgress,
   UserStory,
 } from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
@@ -255,10 +260,25 @@ export default class BlocksService {
       );
     }
 
+    // TODO: test this stuff:
+    // add epilogue to the achievements list if all are completed
+    let epilogueUnlocked: EpilogueProgress | undefined;
+    const allBlocksCompleted = blockProgressArrayItems.every(
+      (item) => !!item.timeCompleted
+    );
+    if (allBlocksCompleted) {
+      epilogueUnlocked = (
+        await this._db.get<EpilogueProgress>(
+          `userStories/${userId}/${userStoryId}/epilogueProgress`
+        )
+      ).data;
+    }
+
     const data: DepenedentBlocksData = {
       childBlocks: dependentBlockProgressItems,
       parentBlock: targetBlockProgress,
       userStoryId: userStoryId,
+      epilogueUnlocked,
     };
     return Result.Success(data);
   }
@@ -289,4 +309,5 @@ type DepenedentBlocksData = {
   childBlocks: BuildingBlockProgress[];
   parentBlock: BuildingBlockProgress;
   userStoryId: string;
+  epilogueUnlocked?: EpilogueProgress;
 };

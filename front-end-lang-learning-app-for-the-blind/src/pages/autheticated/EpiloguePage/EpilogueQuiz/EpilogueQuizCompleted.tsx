@@ -3,8 +3,6 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { useParams } from "react-router";
 import useFetchData from "../../../../api/useFetchData";
 import {
-  BuildingBlockProgress,
-  EpilogueProgress,
   UserStory,
 } from "../../../../context/contextTypes/ctxTypes";
 import { QuizBlockCompletedResponse } from "../../../../context/contextTypes/quizTypes";
@@ -31,7 +29,7 @@ const EpilogueQuizCompleted = () => {
   }>();
   const { data, loading, error, retry } =
     useFetchData<QuizBlockCompletedResponse>(
-      `epilogue/${epilogueProgressId}/quiz/${quizId}/completed`
+      `epilogues/${epilogueProgressId}/quiz/${quizId}/completed`
     );
 
   return (

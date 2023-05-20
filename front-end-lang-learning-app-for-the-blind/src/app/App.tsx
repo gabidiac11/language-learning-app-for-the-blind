@@ -44,11 +44,15 @@ const App = () => {
         ) : (
           <WithToken>
             <WithTokenRefreshInterval>
+              {/* TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
+              {/* TODO: add instructions page */}
+              
               <Routes>
+                {/* ### STORIES PAGES: */}
                 <Route path="/stories" element={<StoriesOverviewPage />} />
                 <Route path="/stories/:id" element={<StoryPage />} />
 
-                {/* // TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
+                {/* ### BUILDING BLOCK PAGES: */}
                 <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
                 <Route
                   path="/blocks/:id/introduction"
@@ -60,12 +64,15 @@ const App = () => {
                 />
                 <Route path="/blocks/:id" element={<BlockStartPage />} />
 
-                <Route path="/epilogue/:id/quiz" element={<EpilogueQuiz />} />
+                {/* ### EPILOGUE PAGES: */}
+                <Route path="/epilogues/:id/quiz" element={<EpilogueQuiz />} />
                 <Route
-                  path="/epilogue/:id/quiz/:quizId/completed"
+                  path="/epilogues/:id/quiz/:quizId/completed"
                   element={<EpilogueQuizCompleted />}
                 />
-                <Route path="/epilogue/:id" element={<EpilogueStartPage />} />
+                <Route path="/epilogues/:id" element={<EpilogueStartPage />} />
+
+                {/* ### FALLBACK PAGE: */}
                 <Route path="*" element={<DefaultRouteRedirection isAuth />} />
               </Routes>
             </WithTokenRefreshInterval>
