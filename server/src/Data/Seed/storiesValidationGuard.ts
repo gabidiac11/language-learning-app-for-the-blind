@@ -3,7 +3,7 @@ import { Story } from "../ctxTypes/ctx.story.types";
 
 type ItemDependence = {
   id: string;
-  dependentOnIds?: string[];
+  idsItemsDependentOnThis?: string[];
   isStarter?: boolean;
 };
 
@@ -17,7 +17,7 @@ function quardStoriesDependencyTree(stories: Story[]) {
     (story) =>
       ({
         id: story.id,
-        dependentOnIds: story.dependentOnIds,
+        idsItemsDependentOnThis: story.idsItemsDependentOnThis ?? [],
         isStarter: story.isStarter,
       } as ItemDependence)
   );
@@ -35,7 +35,7 @@ function quardStoryBuildingBlocksDependencyTree(stories: Story[]) {
       (item) =>
         ({
           id: item.id,
-          dependentOnIds: item.dependentOnIds,
+          idsItemsDependentOnThis: item.idsItemsDependentOnThis ?? [],
           isStarter: item.isStarter,
         } as ItemDependence)
     );
@@ -64,7 +64,7 @@ function guardIfAllItemsAccesible(itemsTargeted: ItemDependence[]) {
 
   let currentItem = queue.shift();
   while (currentItem) {
-    const dependentIds = currentItem.dependentOnIds;
+    const dependentIds = currentItem.idsItemsDependentOnThis;
     if (!dependentIds) {
       currentItem = queue.shift();
       continue;

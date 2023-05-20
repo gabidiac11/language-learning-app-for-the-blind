@@ -206,7 +206,7 @@
 //       }
 
 //       const userStoriesUnlocked: UserStory[] = [];
-//       existingStory.dependentOnIds
+//       existingStory.idsItemsDependentOnThis
 //         ?.map((id) => existingUser.stories.find((i) => i.id === id))
 //         .forEach((item) => {
 //           if (item) {

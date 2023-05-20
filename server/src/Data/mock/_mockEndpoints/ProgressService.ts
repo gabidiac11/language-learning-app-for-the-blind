@@ -35,7 +35,7 @@
 //     );
 
 //     // check if any dependent (locked!!!) stories -> unblock them
-//     blockProgress.block.dependentOnIds?.forEach((id) => {
+//     blockProgress.block.idsItemsDependentOnThis?.forEach((id) => {
 //       const dependentBp = story.buildingBlocksProgressItems.find(
 //         (i) => i.block.id === id
 //       );
@@ -92,7 +92,7 @@
 //       )?.stories;
 //     if (!allUserStories) throw Error("Something went wrong");
 
-//     story.dependentOnIds?.forEach((dependenceId) => {
+//     story.idsItemsDependentOnThis?.forEach((dependenceId) => {
 //       const dependentStory = allUserStories.find((i) => i.id === dependenceId);
 //       if (dependentStory && !dependentStory.timeUnlocked) {
 //         // unlock story

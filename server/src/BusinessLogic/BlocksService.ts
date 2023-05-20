@@ -12,7 +12,6 @@ import {
 } from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
-import { valuesOrdered } from "../utils";
 import { UserStoriesRelationsManager } from "./UserStoryRelations/UserStoriesRelationsManager";
 
 export default class BlocksService {
@@ -26,10 +25,10 @@ export default class BlocksService {
     this._userStoryRelationsManager = userStoryRelationsManager;
   }
 
-  private async getUserBlockProgressItems(
+  public async getUserBlockProgress(
     userId: string,
     blockProgressId: string
-  ): Promise<Result<BuildingBlockProgress[]>> {
+  ): Promise<Result<BuildingBlockProgress>> {
     // retrieve user story id from dedicated table for relations
     const userStoryIdResult =
       await this._userStoryRelationsManager.getUserStoryIdFromBlockProgress(
@@ -37,67 +36,45 @@ export default class BlocksService {
         blockProgressId
       );
     if (userStoryIdResult.isError())
-      return userStoryIdResult.As<BuildingBlockProgress[]>();
+      return userStoryIdResult.As<BuildingBlockProgress>();
     if (!userStoryIdResult.data) {
       return Result.Error("Not found.", 404);
     }
-
-    // retrieve user story
     const userStoryId = userStoryIdResult.data;
-    const userStoryResult = await this._db.get<UserStory>(
-      `userStories/${userId}/${userStoryId}`
-    );
-    if (userStoryResult.isError()) {
-      return userStoryResult.As<BuildingBlockProgress[]>();
-    }
-    if (!userStoryResult.data) {
-      return Result.Error<BuildingBlockProgress[]>("Not found.", 404);
+
+    // retrieve block progress data
+    const blockProgressResult =
+      await this._db.get_NotNull<BuildingBlockProgress>(
+        `userStories/${userId}/${userStoryId}/buildingBlocksProgressItems/${blockProgressId}`
+      );
+    if (blockProgressResult.isError()) {
+      return blockProgressResult.As<BuildingBlockProgress>();
     }
 
-    // fill in lesson block, lesson epilogue to the user story
-    const lessonResult = await this._db.get<Story>(
-      `lessonStories/${userStoryResult.data.storyId}`
+    // retrieve lesson storyId
+    const lessonStoryIdResult = await this._db.get_NotNull<string>(
+      `userStories/${userId}/${userStoryId}/storyId`
+    );
+    if (lessonStoryIdResult.isError()) {
+      return lessonStoryIdResult.As<BuildingBlockProgress>();
+    }
+    const lessonStoryId = lessonStoryIdResult.data;
+
+    // retrieve lesson story
+    const lessonResult = await this._db.get_NotNull<Story>(
+      `lessonStories/${lessonStoryId}`
     );
     if (lessonResult.isError()) {
-      return lessonResult.As<BuildingBlockProgress[]>();
+      return lessonResult.As<BuildingBlockProgress>();
     }
+
+    // fill data from lesson-story block to user-story progress-block
     this.fillInLessonStoryDataToBlockProgress(
-      Object.values(userStoryResult.data.buildingBlocksProgressItems),
+      [blockProgressResult.data],
       lessonResult.data.buildingBlocks
     );
 
-    return Result.Success(
-      valuesOrdered(userStoryResult.data.buildingBlocksProgressItems)
-    );
-  }
-
-  public async getUserBlockProgress(
-    userId: string,
-    blockProgressId: string
-  ): Promise<Result<BuildingBlockProgress>> {
-    const blocksResult = await this.getUserBlockProgressItems(
-      userId,
-      blockProgressId
-    );
-    if (blocksResult.isError()) {
-      return blocksResult.As<BuildingBlockProgress>();
-    }
-
-    const targetedBlockProgress = blocksResult.data.find(
-      (bp) => bp.id === blockProgressId
-    );
-    if (!targetedBlockProgress) {
-      log(
-        `block/${blockProgressId} retrived the user story with block progress items:[${blocksResult.data
-          .map((i) => i.id)
-          .join(
-            ","
-          )}], but the block was not really found. Something went bad while seeding or data was compromised.`
-      );
-      throw ApiError.Error("Something went wrong.", 500);
-    }
-
-    return Result.Success(targetedBlockProgress);
+    return Result.Success(blockProgressResult.data);
   }
 
   public async getUserStoryIdFromBlock(
@@ -253,8 +230,8 @@ export default class BlocksService {
       throw "Building block is null somehow, although this should not happen at this point.";
 
     let dependentBlockProgressItems: BuildingBlockProgress[] = [];
-    const targetBlockDepIds = targetBlockProgress.block?.dependentOnIds;
-    if (targetBlockDepIds?.length) {
+    const targetBlockDepIds = targetBlockProgress.block?.idsItemsDependentOnThis ?? [];
+    if (targetBlockDepIds.length) {
       dependentBlockProgressItems = blockProgressArrayItems.filter((item) =>
         targetBlockDepIds.some((depId) => depId === item.block?.id)
       );

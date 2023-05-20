@@ -13,9 +13,9 @@ export default class BlocksControllerFactory {
 
   private _blocksService: BlocksService;
   private _authenticator: Authenticator;
-  constructor(authenticator: Authenticator, userStoryService: BlocksService) {
+  constructor(authenticator: Authenticator, blockService: BlocksService) {
     this._authenticator = authenticator;
-    this._blocksService = userStoryService;
+    this._blocksService = blockService;
   }
 
   public create():BlocksController {
@@ -26,9 +26,9 @@ export default class BlocksControllerFactory {
 
 class BlocksController extends BaseController {
   private _blocksService: BlocksService;
-  constructor(authenticator: Authenticator, userStoryService: BlocksService) {
+  constructor(authenticator: Authenticator, blockService: BlocksService) {
     super(authenticator);
-    this._blocksService = userStoryService;
+    this._blocksService = blockService;
   }
 
   public async getBlockProgress(

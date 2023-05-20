@@ -2,8 +2,8 @@ import { QuizOption } from "../Data/ctxTypes/ctx.quiz.shared.types";
 import {
   EpilogueProgress,
   BuildingBlockProgress,
-  UserStory,
 } from "../Data/ctxTypes/ctx.userStory.types";
+import { UserStoryOutput } from "./output.userStory.types";
 
 // quiz question REQUEST
 export type QuizRequestBody =
@@ -39,5 +39,12 @@ export type QuizBlockCompletedStatsResponse = {
   blockProgressUnlockedItems?: BuildingBlockProgress[];
   blockCompleted?: BuildingBlockProgress;
   blockCompletedStoryRefId: string;
-  userStoriesUnlocked?: UserStory[];
+};
+
+export type QuizCompletedStatsResponse = {
+  epilogueProgressUnlocked?: EpilogueProgress;
+  blockProgressUnlockedItems?: BuildingBlockProgress[];
+  blockCompleted?: BuildingBlockProgress;
+  blockCompletedStoryRefId: string;
+  userStoriesUnlocked?: UserStoryOutput[];
 };

@@ -14,8 +14,11 @@ import { DiverseStateUserStoryDecorator } from "./DiverseStateUserStoryDecorator
 export class UserStoriesCreator {
   public createUserStories(allLessonStories: Story[]): Result<UserStory[]> {
     try {
+      const pairsUserAndLesson: { userStory: UserStory; lessonStory: Story }[] =
+        [];
+
       const userStories: UserStory[] = [];
-      for (let lessonStory of allLessonStories) {
+      for (const lessonStory of allLessonStories) {
         const convertor = new LessonToUserStoryConvertor(
           lessonStory,
           allLessonStories
@@ -23,7 +26,13 @@ export class UserStoriesCreator {
         const userStoryItem = convertor.GetCookedUserStory();
         userStoryItem.order = userStories.length;
         userStories.push(userStoryItem);
+
+        pairsUserAndLesson.push({
+          userStory: userStoryItem,
+          lessonStory: lessonStory,
+        });
       }
+      this.fillInDependencies(pairsUserAndLesson);
 
       // TODO: add conditions for this
       // DEMO: add state changes to the user story progress to emulate each state
@@ -33,6 +42,21 @@ export class UserStoriesCreator {
       return Result.Success(userStoriesWithDiverseProgress);
     } catch (err) {
       return Result.Error<UserStory[]>(getStringifiedError(err));
+    }
+  }
+  private fillInDependencies(
+    pairsUserAndLesson: { userStory: UserStory; lessonStory: Story }[]
+  ) {
+    for (const { userStory, lessonStory } of pairsUserAndLesson) {
+      const idsDependentOnThisUserStory: string[] = [];
+      lessonStory.idsItemsDependentOnThis?.forEach((depLessonStoryId) => {
+        const pair = pairsUserAndLesson.find((i) => i.lessonStory.id);
+        if (pair) {
+          idsDependentOnThisUserStory.push(pair.userStory.id);
+        }
+      });
+
+      userStory.idsDependentOnThisUserStory = idsDependentOnThisUserStory;
     }
   }
 }
@@ -60,6 +84,7 @@ class LessonToUserStoryConvertor {
       description: null,
 
       isDependentOnNames: this.getParentStoryNames(),
+      idsDependentOnThisUserStory: [], // to be fiiled in
 
       name: this._lessonStory.name,
       imageUrl: this._lessonStory.imageUrl,
@@ -79,7 +104,9 @@ class LessonToUserStoryConvertor {
   getParentStoryNames(): string[] {
     const names = this._allLessons
       .filter((serachedParentStory) =>
-        serachedParentStory.dependentOnIds?.find((id) => id === this._lessonStory.id)
+        serachedParentStory.idsItemsDependentOnThis?.find(
+          (id) => id === this._lessonStory.id
+        )
       )
       .map((s) => s.name);
     return names;
@@ -100,6 +127,7 @@ class LessonToUserStoryConvertor {
         isDependentOnNames: this.getDependentBlockNames(buildingBlock),
 
         userStoryId,
+        lessonStoryId: this._lessonStory.id,
 
         isStarter: buildingBlock.isStarter,
         wordProgressItems: arrayToObjectIds(wordProgressItems),
@@ -112,7 +140,9 @@ class LessonToUserStoryConvertor {
   getDependentBlockNames(childBlock: BuildingBlock): string[] {
     const names = this._lessonStory.buildingBlocks
       .filter((serachedParentBlock) =>
-        serachedParentBlock.dependentOnIds?.find((id) => id === childBlock.id)
+        serachedParentBlock.idsItemsDependentOnThis?.find(
+          (id) => id === childBlock.id
+        )
       )
       .map((s) => s.name);
     return names;
@@ -148,6 +178,7 @@ class LessonToUserStoryConvertor {
     const epilogueProgress: EpilogueProgress = {
       id: genUid(),
       userStoryId,
+      lessonStoryId: this._lessonStory.id,
       epilogueId: this._lessonStory.epilogue.id,
       questionProgressItems: arrayToObjectIds(questionProgressItems),
     };

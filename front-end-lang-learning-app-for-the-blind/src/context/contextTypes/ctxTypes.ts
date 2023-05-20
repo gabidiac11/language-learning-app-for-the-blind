@@ -71,7 +71,7 @@ export type BuildingBlock = {
   imageUrl: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
-  dependentOnIds?: string[];
+  idsItemsDependentOnThis?: string[];
 
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian
@@ -113,7 +113,6 @@ export type EpilogueProgress = {
   id: string;
   epilogue: Epilogue;
   questionProgressItems: EpilogueQuestionProgress[];
-  isDependentOnNames: [];
   timeSummaryCompleted?: number;
   timeUnlocked?: number;
   timeStarted?: number;

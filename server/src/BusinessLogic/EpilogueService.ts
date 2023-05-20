@@ -1,23 +1,36 @@
 import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
-import { Epilogue } from "../Data/ctxTypes/ctx.story.types";
-import { EpilogueProgress } from "../Data/ctxTypes/ctx.userStory.types";
+import {
+  Epilogue,
+  EpilogueQuestionAnswer,
+} from "../Data/ctxTypes/ctx.story.types";
+import {
+  EpilogueProgress,
+  UserStory,
+} from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
+import { convertUserStoriesResultToOutput } from "../Models/modelConvertors";
+import { UserStoryOutput } from "../Models/output.userStory.types";
+import { EpilogueQuestionAnswerObj } from "./bussinessModels";
+import UserStoryService from "./UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./UserStoryRelations/UserStoriesRelationsManager";
 
 export default class EpilogueService {
+  public static inject = [Database.name, UserStoriesRelationsManager.name];
+  
+  
   private _db: Database;
   private _userStoryRelationsManager: UserStoriesRelationsManager;
-
-  public static inject = [Database.name, UserStoriesRelationsManager.name];
-
+  private _userStoryService: UserStoryService;
   constructor(
     db: Database,
-    userStoryRelationsManager: UserStoriesRelationsManager
+    userStoryRelationsManager: UserStoriesRelationsManager,
+    userStoryService: UserStoryService
   ) {
     this._db = db;
     this._userStoryRelationsManager = userStoryRelationsManager;
+    this._userStoryService = userStoryService;
   }
 
   public async getUserStoryId(
@@ -102,7 +115,46 @@ export default class EpilogueService {
     return epilogueProgressResult;
   }
 
-  fillInLessonEpilogoue(
+  public async getEpilogueAnswers(
+    lessonStoryId
+  ): Promise<EpilogueQuestionAnswerObj> {
+    const path = `lessonStories/${lessonStoryId}/epilogueQuestionAnswers`;
+    const answersResult = await this._db.get<EpilogueQuestionAnswer[]>(path);
+    if (answersResult.isError()) {
+      log(`Error occured while retrieving epilgoue answers at '${path}'`);
+      throw answersResult.errors;
+    }
+    if (!answersResult.data) {
+      throw `No records found while while retrieving epilgoue answers at '${path}'`;
+    }
+
+    const answers: EpilogueQuestionAnswerObj = answersResult.data.reduce(
+      (obj, item) => ({ ...obj, [item.questionId]: item }),
+      {}
+    );
+    return answers;
+  }
+
+  public async getDependentEpilogueData(
+    userId: string,
+    epilogueProgress: EpilogueProgress
+  ): Promise<Result<UserStoryOutput[]>> {
+    const userStoriesResult = await this._userStoryService.queryUserStories(userId);
+    if(userStoriesResult.isError() || !userStoriesResult.data) {
+      throw `Cannot find userStories at getDependentEpilogueData. Error: ${getStringifiedError(userStoriesResult.errors)}`;
+    }
+
+    const currentUserStory = userStoriesResult.data.find(i => i.id === epilogueProgress.userStoryId);
+    if(!currentUserStory) {
+      throw `Cannot find current userStory at getDependentEpilogueData. Error: ${getStringifiedError(userStoriesResult.data)}`;
+    }
+    
+    const achievedUserStories = (currentUserStory.idsDependentOnThisUserStory ?? []).map(id => userStoriesResult.data.find(i => i.id === id));
+    const output = convertUserStoriesResultToOutput(Result.Success(achievedUserStories));
+    return output;
+  }
+
+  private fillInLessonEpilogoue(
     epilogueProgress: EpilogueProgress,
     epilogue: Epilogue
   ) {

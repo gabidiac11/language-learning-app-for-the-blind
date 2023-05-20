@@ -71,6 +71,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
         longTranslation: "Feeling or showing pleasure or contentment",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
   const namesBlock: BuildingBlock = {
     id: genUid(),
@@ -104,6 +106,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           'A male given name of Greek origin, meaning "defender of the people."',
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
   const pronumsBlock: BuildingBlock = {
     id: genUid(),
@@ -247,6 +251,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           "Indicates a state of being with one or more other people or things",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
 
   const temporalsBlock: BuildingBlock = {
@@ -326,6 +332,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           "Indicates that something happens without exception or failure",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
   const placesBlock: BuildingBlock = {
     id: genUid(),
@@ -376,6 +384,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           "Classes or sessions in which a teacher instructs a student on a particular subject or topic",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
   const verbsBlock: BuildingBlock = {
     id: genUid(),
@@ -539,6 +549,8 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           "A thin, flat cake made of batter and fried on both sides, typically eaten with sweet or savory toppings",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
   const connectionWords: BuildingBlock = {
     id: genUid(),
@@ -585,26 +597,28 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
           "Preposition indicating accompaniment, source, or possession.",
       },
     ],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
   };
 
   // family block is first to be unlocked because is not dependent on anyone
-  // no other block b2 will reference familyBlock id in b2.dependentOnIds 
+  // no other block b2 will reference familyBlock id in b2.idsItemsDependentOnThis 
   familyBlock.isStarter = true;
 
   // family unlocks -> pronons and names
-  familyBlock.dependentOnIds = [namesBlock.id, pronumsBlock.id];
+  familyBlock.idsItemsDependentOnThis = [namesBlock.id, pronumsBlock.id];
 
   // pronums unlocks -> temporal
-  pronumsBlock.dependentOnIds = [temporalsBlock.id];
+  pronumsBlock.idsItemsDependentOnThis = [temporalsBlock.id];
 
   // temporal unlocks -> places
-  temporalsBlock.dependentOnIds = [placesBlock.id];
+  temporalsBlock.idsItemsDependentOnThis = [placesBlock.id];
 
   // places unlocks -> verbs
-  placesBlock.dependentOnIds = [verbsBlock.id];
+  placesBlock.idsItemsDependentOnThis = [verbsBlock.id];
 
   // verbs unlocks -> connection words
-  verbsBlock.dependentOnIds = [connectionWords.id];
+  verbsBlock.idsItemsDependentOnThis = [connectionWords.id];
 
   const blocks = [
     familyBlock,
