@@ -1,9 +1,6 @@
-import BaseController from "./BaseController";
 import { Authenticator } from "../ApiSupport/authentication";
-import BlocksService from "../BusinessLogic/BlocksService";
 import Result from "../ApiSupport/Result";
-import { Request } from "express";
-import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import EpilogueService from "../BusinessLogic/EpilogueService";
 import {
   QuizBlockCompletedStatsResponse,
   QuizRequestBody,
@@ -11,65 +8,69 @@ import {
   QuizRequestBodyIntialQuestion,
   QuizResponse,
 } from "../Models/quiz.models";
-import { BlockQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/BlockQuizServiceFactory";
+import BaseController from "./BaseController";
+import { Request } from "express";
+import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import { EpilogueQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/EpilogueQuizServiceFactory";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class BlockQuizControllerFactory {
+export default class EpilogueQuizControllerFactory {
   public static inject = [
     Authenticator.name,
-    BlocksService.name,
-    BlockQuizServiceFactory.name,
+    EpilogueService.name,
+    EpilogueQuizServiceFactory.name,
   ];
 
   private _authenticator: Authenticator;
-  private _blocksService: BlocksService;
-  private _blockQuizServiceFactory: BlockQuizServiceFactory;
+  private _epilogueService: EpilogueService;
+  private _epilogueQuizServiceFactory: EpilogueQuizServiceFactory;
   constructor(
     authenticator: Authenticator,
-    userStoryService: BlocksService,
-    blockQuizServiceFactory: BlockQuizServiceFactory
+    epilogueService: EpilogueService,
+    epilogueQuizServiceFactory: EpilogueQuizServiceFactory
   ) {
     this._authenticator = authenticator;
-    this._blocksService = userStoryService;
-    this._blockQuizServiceFactory = blockQuizServiceFactory;
+    this._epilogueService = epilogueService;
+    this._epilogueQuizServiceFactory = epilogueQuizServiceFactory;
   }
-  public create(): BlockQuizController {
-    const controller = new BlockQuizController(
+  public create(): EpilogueQuizController {
+    const controller = new EpilogueQuizController(
       this._authenticator,
-      this._blocksService,
-      this._blockQuizServiceFactory
+      this._epilogueService,
+      this._epilogueQuizServiceFactory
     );
     return controller;
   }
 }
 
-class BlockQuizController extends BaseController {
-  private _blocksService: BlocksService;
-  private _blockQuizServiceFactory: BlockQuizServiceFactory;
+class EpilogueQuizController extends BaseController {
+  private _epilogueService: EpilogueService;
+  private _epilogueQuizServiceFactory: EpilogueQuizServiceFactory;
   constructor(
     authenticator: Authenticator,
-    userStoryService: BlocksService,
-    blockQuizServiceFactory: BlockQuizServiceFactory
+    epilogueService: EpilogueService,
+    epilogueQuizServiceFactory: EpilogueQuizServiceFactory
   ) {
     super(authenticator);
-    this._blocksService = userStoryService;
-    this._blockQuizServiceFactory = blockQuizServiceFactory;
+    this._epilogueService = epilogueService;
+    this._epilogueQuizServiceFactory = epilogueQuizServiceFactory;
   }
 
   public async getQuizQuestionAndAnswerPrevious(
     req: Request
   ): Promise<Result<QuizResponse>> {
     await this.authenticateAsync<QuizResponse>(req);
+    await this.guardQuizRequest(req);
 
     const requestBodyResult = this.getQuizRequestBody(req);
     if (requestBodyResult.isError())
       return requestBodyResult.As<QuizResponse>();
 
     const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
-    const quizService = await this._blockQuizServiceFactory.create(
+    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
+    const quizService = await this._epilogueQuizServiceFactory.create(
       userId,
-      blockProgressId
+      epilogueProgressId
     );
     if (
       (requestBodyResult.data as QuizRequestBodyIntialQuestion)
@@ -87,29 +88,15 @@ class BlockQuizController extends BaseController {
 
   private async guardQuizRequest(req: Request) {
     const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
+    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
 
-    const blockProgressResult =
-      await this._blocksService.getShallowBlockProgress(
+    const epilogueProgressResult =
+      await this._epilogueService.getShallowEpilogueWithValidation(
         userId,
-        blockProgressId
+        epilogueProgressId
       );
-    if (blockProgressResult.isError()) {
-      throw ApiError.ErrorResult(blockProgressResult);
-    }
-
-    if (!blockProgressResult.data.timeUnlocked) {
-      throw ApiError.Error(
-        "Building block is locked. Please complete the other blocks or stories required.",
-        403
-      );
-    }
-
-    if (!blockProgressResult.data.timeSummaryCompleted) {
-      throw ApiError.Error(
-        "Building block summary was not completed. Please complete it to practice the words from this block before.",
-        403
-      );
+    if (epilogueProgressResult.isError()) {
+      throw ApiError.ErrorResult(epilogueProgressResult);
     }
   }
 
@@ -141,11 +128,16 @@ class BlockQuizController extends BaseController {
     await this.guardQuizRequest(req);
 
     const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
+    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
     const quizId = this.getParam<string>(req, "quizId");
-    
-    const quizService = await this._blockQuizServiceFactory.create(userId, blockProgressId); 
-    const result = await quizService.getProgressAchievedOfCompletedQuiz(quizId);
+
+    const quizService = await this._epilogueQuizServiceFactory.create(
+      userId,
+      epilogueProgressId
+    );
+    const result = await quizService.getProgressAchievedOfCompletedQuiz(
+      quizId
+    );
     return result;
   }
 }

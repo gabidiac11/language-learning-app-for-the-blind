@@ -11,10 +11,11 @@ import { log } from "../../logger";
 import BlocksService from "../BlocksService";
 import UserStoryService from "../UserStory/UserStoryService";
 
-export class BlockCompleteEventHandler {
+export class BlockCompletedEventHandler {
   private _db: Database;
   private _blocksService: BlocksService;
   private _userStoryService: UserStoryService;
+
   public constructor(
     db: Database,
     blocksService: BlocksService,
@@ -25,7 +26,7 @@ export class BlockCompleteEventHandler {
     this._userStoryService = userStoryService;
   }
 
-  public async setBlockComplete(userId: string, blockProgressId: string) {
+  public async handle(userId: string, blockProgressId: string) {
     const blockProgress = await this.getBlockProgress(userId, blockProgressId);
     await this.markBlockAsComplete(userId, blockProgress);
     await this.unlockDependentBlocks(userId, blockProgress);
@@ -66,7 +67,7 @@ export class BlockCompleteEventHandler {
     );
 
     // check if any dependent (locked!!!) blocks -> unblock them
-    for (const idBlockLesson of completedBlockProgress.block.dependentOnIds ?? []) {
+    for (const idBlockLesson of completedBlockProgress.block.idsItemsDependentOnThis ?? []) {
       const dependentBp = Object.values(
         userStory.buildingBlocksProgressItems
       ).find((i) => i.block.id === idBlockLesson);
@@ -94,6 +95,10 @@ export class BlockCompleteEventHandler {
     ).every((bp) => !!bp.timeCompleted);
 
     if (allComplete) {
+      log(
+        `[BlockCompleteEventHandler] All blocks are completed at useStory(id: ${userStory.id}, name: ${userStory.name})`
+      );
+
       const path = `userStories/${userId}/${userStoryId}/epilogueProgress/timeUnlocked`;
 
       log(`[BlockCompleteEventHandler] Starting updating story-epilogue UNLOCK at '${path}'`);
@@ -101,10 +106,7 @@ export class BlockCompleteEventHandler {
       await this._db.set(Date.now(), path);
 
       log(
-        `[BlockCompleteEventHandler] All blocks completed at useStory(id: ${userStory.id}, name: ${userStory.name})`
-      );
-      log(
-        `[BlockCompleteEventHandler] Epilogue unlocked at useStory(id: ${userStory.id}, name: ${userStory.name})`
+        `[BlockCompleteEventHandler] Epilogue was unlocked at useStory(id: ${userStory.id}, name: ${userStory.name})`
       );
     }
   }

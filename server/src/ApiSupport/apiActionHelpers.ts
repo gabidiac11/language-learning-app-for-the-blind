@@ -45,7 +45,7 @@ export async function executeActionAsync<T>(
       return processResultOfT<T>(apiError.result, req, res);
     }
 
-    const result = Result.Error<T>("Something went wrong.");
+    const result = Result.Error<T>("Something went wrong.", 500);
     return processResultOfT<T>(result, req, res);
   }
 }

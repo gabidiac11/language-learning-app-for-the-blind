@@ -20,7 +20,8 @@ async function generateDummyStory(): Promise<Story> {
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    dependentOnIds: [],
+    idsItemsDependentOnThis: [],
+    isStarter: false,
     buildingBlocks,
     epilogue,
     epilogueQuestionAnswers,
@@ -49,13 +50,13 @@ async function generateClonedStories() {
   finishedStory.isStarter = true;
 
   // ADD dependencies between stories
-  finishedStory.dependentOnIds = [
+  finishedStory.idsItemsDependentOnThis = [
     startedStoryWithEpilogueStarted.id,
     startedStoryWithEpilogueUnlocked.id,
     startedStory.id,
     unlockStory.id,
   ];
-  startedStoryWithEpilogueStarted.dependentOnIds = [lockedStory.id];
+  startedStoryWithEpilogueStarted.idsItemsDependentOnThis = [lockedStory.id];
 
   return stories;
 }

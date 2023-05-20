@@ -125,7 +125,7 @@
 //       if (!storyOfTheBlock) throw Error("Something went wrong.");
 
 //       const blockProgressUnlockedItems: BuildingBlockProgress[] = [];
-//       existingBlock.block.dependentOnIds
+//       existingBlock.block.idsItemsDependentOnThis
 //         ?.map((id) =>
 //           storyOfTheBlock.buildingBlocksProgressItems.find(
 //             (i) => i.block.id === id

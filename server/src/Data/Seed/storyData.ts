@@ -72,7 +72,7 @@
 //     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
 //     imageUrl:
 //       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//     dependentOnIds: [],
+//     idsItemsDependentOnThis: [],
 //     buildingBlocksProgressItems,
 //     epilogueProgress,
 //     numOfBlocksCompleted: 0,

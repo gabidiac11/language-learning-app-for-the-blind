@@ -53,7 +53,7 @@ export class UserStoriesRelationshipInitializer {
     const epilogueProgressRel: { [id: string]: StorySubItemLink } = {};
 
     this._userStories.forEach((userStory) => {
-      epilogueProgressRel[userStory.epilogueProgress.epilogueId] = {
+      epilogueProgressRel[userStory.epilogueProgress.id] = {
         userStoryId: userStory.id,
       };
     });

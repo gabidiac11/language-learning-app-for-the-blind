@@ -11,8 +11,8 @@ export type Story = {
   imageUrl: string;
 
   // ids of the stories which will be unlocked when current story is completed
-  dependentOnIds: string[]; 
-  isStarter?: boolean;
+  idsItemsDependentOnThis?: string[]; 
+  isStarter: boolean;
 
   buildingBlocks: BuildingBlock[];
   epilogue: Epilogue;
@@ -27,10 +27,10 @@ export type BuildingBlock = {
   imageUrl: string;
 
   // ids of the BLOCKS which will be unlocked when current BLOCK is completed
-  dependentOnIds?: string[];
+  idsItemsDependentOnThis?: string[];
 
   // means it will be unlock first when a story is unlocked
-  isStarter?: boolean;
+  isStarter: boolean;
 
   // the words needs to be part of the ontology associated with the building block
   // the words are in Russian

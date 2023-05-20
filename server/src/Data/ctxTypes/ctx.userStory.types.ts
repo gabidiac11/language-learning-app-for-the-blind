@@ -24,6 +24,7 @@ export type UserStory = {
   storyId: string;
   
   isDependentOnNames?: string[];
+  idsDependentOnThisUserStory?: string[];
 
   buildingBlocksProgressItems: {
     [blockProgressId: string]: BuildingBlockProgress;
@@ -46,9 +47,10 @@ export type BuildingBlockProgress = {
 
   blockId: string;
   block?: BuildingBlock;
-  isDependentOnNames: string[];
+  isDependentOnNames?: string[];
 
   userStoryId: string;
+  lessonStoryId: string;
 
   wordProgressItems: { [wordProgressId: string]: WordProgress };
 
@@ -80,6 +82,7 @@ export type EpilogueProgress = {
   epilogue?: Epilogue;
 
   userStoryId: string;
+  lessonStoryId: string;
 
   questionProgressItems: {
     [epilogueQuestionProgressId: string]: EpilogueQuestionProgress;

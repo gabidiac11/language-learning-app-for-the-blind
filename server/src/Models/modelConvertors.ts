@@ -1,11 +1,13 @@
 import Result from "../ApiSupport/Result";
 import {
   BuildingBlockProgress,
+  EpilogueProgress,
   UserStory,
 } from "../Data/ctxTypes/ctx.userStory.types";
 import { valuesOrdered } from "../utils";
 import {
   BuildingBlockProgressOutput,
+  EpilogueProgressOutput,
   UserStoryOutput,
 } from "./output.userStory.types";
 
@@ -25,14 +27,21 @@ function convertUserStoryToOutput(userStory: UserStory): UserStoryOutput {
       userStory.buildingBlocksProgressItems
     ).map(convertBlockToOutput),
 
-    epilogueProgress: {
-      ...userStory.epilogueProgress,
-      questionProgressItems: valuesOrdered(
-        userStory.epilogueProgress.questionProgressItems
-      ),
-    },
+    epilogueProgress: convertEpilogueToOutput(userStory.epilogueProgress),
   };
   return userStoryOutput;
+}
+
+function convertEpilogueToOutput(
+  epilogueProgress: EpilogueProgress
+): EpilogueProgressOutput {
+  const output: EpilogueProgressOutput = {
+    ...epilogueProgress,
+    questionProgressItems: valuesOrdered(
+      epilogueProgress.questionProgressItems
+    ),
+  };
+  return output;
 }
 
 export function convertUserStoryResultToOutput(
@@ -71,6 +80,20 @@ export function convertBlockResultToOutput(
     ) as BuildingBlockProgress;
     const bpOutput = convertBlockToOutput(bcBp);
     result.data = bpOutput;
+  }
+  return result;
+}
+
+export function convertEpilogueResultToOutput(
+  bpResult: Result<EpilogueProgress>
+): Result<EpilogueProgressOutput> {
+  const result = bpResult.getCopy<EpilogueProgressOutput>();
+  if (bpResult.data) {
+    const epilogueProgress = JSON.parse(
+      JSON.stringify(bpResult.data)
+    ) as EpilogueProgress;
+    const output = convertEpilogueToOutput(epilogueProgress);
+    result.data = output;
   }
   return result;
 }

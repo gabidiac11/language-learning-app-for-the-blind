@@ -57,7 +57,11 @@ const [
   blocksControllerFactory,
   blockQuizControllerFactory,
   epilogueControllerFactory,
+  epilogueQuizServiceFactory
 ] = getControllers(diContainer);
+
+// TODO: make sure to validate if each request id is GUID and not something else!!!
+
 
 // ENDPOINTS -> ### Stories
 app.get("/api/userStories", async (req, res) => {
@@ -115,6 +119,25 @@ app.get(
     await executeActionAsync(
       { req, res },
       controller.getEpilogueProgress.bind(controller)
+    );
+  }
+);
+
+// ENDPOINTS -> ### EPILOGUE QUIZ
+app.post("/api/epilogues/:epilogueProgressId/quiz", async (req, res) => {
+  const controller = epilogueQuizServiceFactory.create();
+  await executeActionAsync(
+    { req, res },
+    controller.getQuizQuestionAndAnswerPrevious.bind(controller)
+  );
+});
+app.get(
+  "/api/epilogues/:epilogueProgressId/quiz/:quizId/completed",
+  async (req, res) => {
+    const controller = epilogueQuizServiceFactory.create();
+    await executeActionAsync(
+      { req, res },
+      controller.getProgressAchievedOfCompletedQuiz.bind(controller)
     );
   }
 );
