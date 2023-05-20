@@ -6,8 +6,16 @@ import { log } from "../logger";
 import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import { valuesOrdered } from "../utils";
 import { dbRootPathKey } from "../constants";
+import { Story } from "./ctxTypes/ctx.story.types";
+import objectPath from "object-path";
+import {
+  BlockQuizQuestionLink,
+  StorySubItemLink,
+} from "./ctxTypes/ctx.relations.types";
 
 class Database {
+  private cache: CachedDb = new CachedDb();
+
   private db;
   constructor() {
     this.db = getDatabase(firebaseApp);
@@ -15,8 +23,8 @@ class Database {
 
   /**
    * secure
-   * @param requestedPath 
-   * @returns 
+   * @param requestedPath
+   * @returns
    */
   private decoratedPath(requestedPath: string) {
     return `${dbRootPathKey}/${requestedPath}`;
@@ -68,17 +76,24 @@ class Database {
     const time = Date.now();
     log(`\nDB_GET: '${path}': [STARTED]`);
     try {
+
+      const cached = this.cache.getData<T>(this.decoratedPath(path));
+      if (cached) return Result.Success(cached);
+
       const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
         return Result.Success(null);
       }
       const value = snapshot.val() as T;
+
+      this.cache.setAllowedData(value, this.decoratedPath(path));
+
       return Result.Success(value);
     } catch (error) {
       log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
       return Result.Error("Something went wrong.", 500);
     } finally {
-      log(`DB_GET: '${path}': [FINISHED] at ${(Date.now() - time)/1000}s\n`);
+      log(`DB_GET: '${path}': [FINISHED] at ${(Date.now() - time) / 1000}s\n`);
     }
   }
 
@@ -98,12 +113,76 @@ class Database {
     log(`\nDB_SET: '${path}': [STARTED]`);
     try {
       await set(ref(this.db, this.decoratedPath(path)), item);
-    } catch(error) {
+    } catch (error) {
       log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
       throw ApiError.Error("Something went wrong.", 500);
     } finally {
-      log(`DB_SET: '${path}': [FINISHED] at ${(Date.now() - time)/1000}s\n`);
+      log(`DB_SET: '${path}': [FINISHED] at ${(Date.now() - time) / 1000}s\n`);
     }
+  }
+}
+
+type CachedDbData = {
+  lessonStories?: { [lessonStoryId: string]: Story };
+  userStoriesTableRelations?: {
+    [userId: string]: {
+      blockProgress?: {
+        [blockProgressId: string]: BlockQuizQuestionLink;
+      };
+      epilogueProgress?: {
+        [epilogueProgressId: string]: StorySubItemLink;
+      };
+    };
+  };
+};
+class CachedDb {
+  private cachedData: CachedDbData;
+
+  constructor() {
+    this.cachedData = {};
+  }
+
+  public setAllowedData(item: any, path: string) {
+    if(!item) return;
+
+    const cleanPath = this.getCleanedPath(path);
+    if (!this.canBeCached(cleanPath)) {
+      return;
+    }
+    objectPath.set(this.cachedData, cleanPath, item);
+    log(`Cached data at path ${cleanPath}.`);
+  }
+
+  public getData<T>(path) {
+    const cleanPath = this.getCleanedPath(path); 
+    const data = objectPath.get(this.cachedData, cleanPath) as T;
+    if (data) {
+      log(`Got cached data at path ${cleanPath}.`);
+    }
+    return data;
+  }
+
+  private canBeCached(path: string) {
+    console.log({path})
+    if (path.indexOf("/lessonStories") > -1) {
+      return true;
+    }
+    if (path.indexOf("/userStoriesTableRelations") > -1) {
+      return true;
+    }
+    return false;
+  }
+
+  private getCleanedPath(path: string) {
+    const pathTrimmed = path.trim();
+
+    if (pathTrimmed.length === 0) return pathTrimmed;
+    if(pathTrimmed === "/") return pathTrimmed;
+
+    if (pathTrimmed[pathTrimmed.length - 1] === "/") {
+      return pathTrimmed.slice(0, pathTrimmed.length - 1);
+    }
+    return pathTrimmed;
   }
 }
 

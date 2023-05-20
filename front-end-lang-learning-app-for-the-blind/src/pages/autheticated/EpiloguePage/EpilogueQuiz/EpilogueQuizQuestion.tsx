@@ -50,7 +50,6 @@ const EpilogueQuizQuestion = (props: {
             })()}
             <Typography variant="body1">
               {option.text}
-              {getAnswerIfDemo(option.id)}
             </Typography>
           </Button>
         </div>
@@ -68,11 +67,3 @@ const EpilogueQuizQuestion = (props: {
 };
 
 export default EpilogueQuizQuestion;
-
-function getAnswerIfDemo(optionId: string) {
-  //TODO: delete this or make this env-based
-  if (window.cheat_correctEpilogueOptions?.[optionId]) {
-    return " -> CHEAT";
-  }
-  return "";
-}
