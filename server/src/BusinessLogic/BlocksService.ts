@@ -233,8 +233,6 @@ export default class BlocksService {
       );
     }
 
-    // TODO: test this stuff:
-    // add epilogue to the achievements list if all are completed
     let epilogueUnlocked: EpilogueProgress | undefined;
     const allBlocksCompleted = blockProgressArrayItems.every(
       (item) => !!item.timeCompleted

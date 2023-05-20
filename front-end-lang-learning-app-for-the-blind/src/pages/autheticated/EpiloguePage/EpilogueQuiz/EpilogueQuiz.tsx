@@ -95,7 +95,6 @@ const EpilogueQuiz = () => {
       <ErrorBoundary
         error={error}
         onRetry={retry}
-        //TODO: retest completion to check the redirect
         loading={loading || !!quizCompleted}
         preserveChildren={preserveChildren}
       >

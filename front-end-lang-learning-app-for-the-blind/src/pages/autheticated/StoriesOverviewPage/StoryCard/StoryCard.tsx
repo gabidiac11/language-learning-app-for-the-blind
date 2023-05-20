@@ -28,7 +28,6 @@ export const StoryCard = (props: {
     <CardBlock disabled={disabled} onClick={navigateToStory}>
       <CardHeader
         title={props.userStory.name}
-        // TODO: add dependent story on the summary
         subheader={
           <ItemProgressSummary
             isDependentOnNames={props.userStory.isDependentOnNames}

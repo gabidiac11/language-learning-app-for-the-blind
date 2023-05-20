@@ -80,7 +80,6 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
 
   useEffect(() => {
     if (!retryFlag) {
-      // TODO: BUG -> it seems that this retry doesn't actually work!!!! test case 400 -> 200 (doesn't show results)
       return;
     }
     fetchData();

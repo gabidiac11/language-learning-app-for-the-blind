@@ -9,7 +9,6 @@ export class DiverseStateUserStoryDecorator {
     this._userStories = userStories;
   }
 
-  // TODO: make sure the dependencies between blocks hold when marking things completd/locked/started
   public generateDiverseStories(): UserStory[] {
     const [
       finishedStory,

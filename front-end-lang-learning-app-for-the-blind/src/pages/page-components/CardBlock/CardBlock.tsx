@@ -14,7 +14,6 @@ const CardBlock = (
       : ""
   }`;
   return (
-    // TODO: see what to do with this width: response stuff here?
     <Card
       sx={{ maxWidth: 345, minWidth: 300 }}
       className={className}

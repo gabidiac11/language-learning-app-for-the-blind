@@ -76,7 +76,6 @@ class UserStoriesController extends BaseController {
       return storiesResult;
     }
 
-    // TODO: I should think about how can we initialize user stories at an earlier time -> maybe event on user registration?
     log(`User ${userId} doesn't have user stories. Will create...`);
     const initResult = await this._userStoryService.initializeUserStories(
       userId
