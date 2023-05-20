@@ -7,8 +7,3 @@ export type BlockQuizQuestionLink = {
   blockProgressId: string;
   userStoryId: string;
 };
-
-export type BlockQuizLink = {
-  blockProgressId: string;
-  userStoryId: string;
-};
