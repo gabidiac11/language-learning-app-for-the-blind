@@ -1,8 +1,7 @@
 import { UserStory } from "../../Data/ctxTypes/ctx.userStory.types";
 import { valuesOrdered } from "../../utils";
 
-// DEMO: add state changes to the user story progress to emulate each state
-
+// add state changes to the user story progress to emulate each state
 export class DiverseStateUserStoryDecorator {
   private _userStories: UserStory[];
   constructor(userStories: UserStory[]) {

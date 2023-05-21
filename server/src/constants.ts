@@ -10,3 +10,5 @@ export const firebaseConfig = {
 export const dbRootPathKey = process.env.DB_ROOT_PATH;
 
 export const environment = process.env.ENV_NAME;
+
+export const cheatAnswers = process.env.CHEAT === "true";
