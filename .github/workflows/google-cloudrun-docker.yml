@@ -50,9 +50,9 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }} # TODO: update Google Cloud project id
-  GAR_LOCATION: $GITHUB_GAR_LOCATION # TODO: update Artifact Registry location
-  SERVICE: $GITHUB_SERVICE # TODO: update Cloud Run service name
-  REGION: $GITHUB_REGION # TODO: update Cloud Run service region
+  GAR_LOCATION: ${{ env.GAR_LOCATION }} # TODO: update Artifact Registry location
+  SERVICE: ${{ env.GAR_SERVICE }} # TODO: update Cloud Run service name
+  REGION: ${{ env.GAR_REGION }} # TODO: update Cloud Run service region
 
 jobs:
   deploy:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use action variable
-        run: echo "$GAR_LOCATION $REGION"
+        run: echo "$GAR_LOCATION $REGION $SERVICE"
     
       - name: Checkout
         uses: actions/checkout@v2
