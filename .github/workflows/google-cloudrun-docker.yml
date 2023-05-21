@@ -63,6 +63,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+      - name: Use action variable
+        run: echo $GITHUB_GAR_LOCATION
+    
       - name: Checkout
         uses: actions/checkout@v2
 
