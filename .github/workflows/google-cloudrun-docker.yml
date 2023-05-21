@@ -49,10 +49,10 @@ on:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: YOUR_PROJECT_ID # TODO: update Google Cloud project id
-  GAR_LOCATION: YOUR_GAR_LOCATION # TODO: update Artifact Registry location
-  SERVICE: YOUR_SERVICE_NAME # TODO: update Cloud Run service name
-  REGION: YOUR_SERVICE_REGION # TODO: update Cloud Run service region
+  PROJECT_ID: ${{ secrets.PROJECT_ID }} # TODO: update Google Cloud project id
+  GAR_LOCATION: $GITHUB_GAR_LOCATION # TODO: update Artifact Registry location
+  SERVICE: $GITHUB_SERVICE # TODO: update Cloud Run service name
+  REGION: $GITHUB_REGION # TODO: update Cloud Run service region
 
 jobs:
   deploy:
@@ -90,13 +90,12 @@ jobs:
         with:
           username: 'oauth2accesstoken'
           password: '${{ steps.auth.outputs.access_token }}'
-          registry: 'europe-west1-docker.pkg.dev/big-depth-387415/my-docker'
+          registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
 
       - name: Build and Push Container
         run: |-
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
-
       # END - Docker auth and build
 
       - name: Deploy to Cloud Run
