@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Bundle app source
 COPY . .
 
-RUN npm run prepare-frontend && npm run prepare-server
+RUN npm run prepare && npm run prepare-frontend && npm run prepare-server
 # If you are building your code for production
 # RUN npm ci --omit=dev
 
