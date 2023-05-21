@@ -171,7 +171,7 @@ app.get("/*", function (req, res) {
   res.sendFile(pathName);
 });
 
-const port = process.env.ENV_NAME === "demo" ? 5001 : process.env.PORT;
+const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
 module.exports = app;

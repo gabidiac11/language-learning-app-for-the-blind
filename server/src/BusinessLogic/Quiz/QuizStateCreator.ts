@@ -1,4 +1,4 @@
-import { environment } from "../../constants";
+import { cheatAnswers, environment } from "../../constants";
 import {
   QuizOption,
   QuizOutcome,
@@ -44,7 +44,7 @@ export class QuizStateCreator {
 
     const correctOption: QuizOption = {
       id: genUid(),
-      text: `${environment === "demo" ? "->" : ""}${correctOptionText}`,
+      text: `${cheatAnswers ? "->" : ""}${correctOptionText}`,
     };
     const wrongOptions: QuizOption[] = wrongOptionTexts.map((text) => ({
       id: genUid(),
