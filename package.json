@@ -1,0 +1,23 @@
+{
+  "name": "root-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare-frontend": "npm --prefix ./frontend/ ci && npm --prefix ./frontend/ run build && rimraf ./frontend/node_modules",
+    "prepare-server": "npm --prefix ./server ci && npm --prefix ./server/ run build && rimraf ./server/node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabidiac11/language-learning-app-for-the-blind.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabidiac11/language-learning-app-for-the-blind/issues"
+  },
+  "homepage": "https://github.com/gabidiac11/language-learning-app-for-the-blind#readme",
+  "dependencies": {
+    "rimraf": "^5.0.1"
+  }
+}
