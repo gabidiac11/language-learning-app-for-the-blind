@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare-frontend": "npm --prefix ./frontend/ ci && npm --prefix ./frontend/ run build && rimraf ./frontend/node_modules",
-    "prepare-server": "npm --prefix ./server ci && npm --prefix ./server/ run build && rimraf ./server/node_modules"
+    "prepare-server": "npm --prefix ./server ci && npm --prefix ./server/ run build"
   },
   "repository": {
     "type": "git",
