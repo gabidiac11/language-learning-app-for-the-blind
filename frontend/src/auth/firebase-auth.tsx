@@ -10,12 +10,12 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDbJvC-f_CBX0Hl_2IqEAAddfglKDEKW7w",
-  authDomain: "lang-learning-for-the-blind.firebaseapp.com",
-  projectId: "lang-learning-for-the-blind",
-  storageBucket: "lang-learning-for-the-blind.appspot.com",
-  messagingSenderId: "510945432371",
-  appId: "1:510945432371:web:62de4becd1bc4784f52446"
+  apiKey: "AIzaSyDkQWaydiRpZB6936g85VBRngp9RzwG2lM",
+  authDomain: "big-depth-387415.firebaseapp.com",
+  projectId: "big-depth-387415",
+  storageBucket: "big-depth-387415.appspot.com",
+  messagingSenderId: "402112207048",
+  appId: "1:402112207048:web:70338535c0715dba522dfd"
 };
 
 const app = initializeApp(firebaseConfig);
