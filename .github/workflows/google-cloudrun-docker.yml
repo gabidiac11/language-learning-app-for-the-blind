@@ -98,22 +98,18 @@ jobs:
       - name: Build and Push Container
         run: >
           docker build 
-          --build-arg DB_ROOT_PATH=${{ secrets.DB_ROOT_PATH_PRODUCTION }} \
-
+          --build-arg DB_ROOT_PATH=${{ secrets.DB_ROOT_PATH_PRODUCTION }} 
           --build-arg FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} 
           --build-arg FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }} 
           --build-arg FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} 
           --build-arg FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }} 
           --build-arg FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }} 
           --build-arg FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }} 
-          --build-arg FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }} \
-          
-          --build-arg ENV_NAME=${{ secrets.ENV_NAME }} \
-
+          --build-arg FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }} 
+          --build-arg ENV_NAME=${{ secrets.ENV_NAME }} 
           --build-arg ALLOW_SEED=${{ secrets.ALLOW_SEED }} 
           --build-arg PORT=${{ secrets.PORT }} 
           --build-arg CHEAT=${{ secrets.CHEAT }} 
-          
           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ github.sha }}" ./ ;
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ github.sha }}"
       # END - Docker auth and build
