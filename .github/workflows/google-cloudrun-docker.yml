@@ -110,7 +110,7 @@ jobs:
           --build-arg DB_ROOT_PATH=${{ secrets.DB_ROOT_PATH }} 
           --build-arg PORT=${{ secrets.PORT }} 
           --build-arg CHEAT=${{ secrets.CHEAT }} 
-          -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ github.sha }}" ./  \
+          -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ github.sha }}" ./ ;
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ github.sha }}"
       # END - Docker auth and build
 
