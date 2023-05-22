@@ -17,6 +17,7 @@ import EpilogueStartPage from "../pages/autheticated/EpiloguePage/EpilogueStartP
 import EpilogueQuiz from "../pages/autheticated/EpiloguePage/EpilogueQuiz/EpilogueQuiz";
 import EpilogueQuizCompleted from "../pages/autheticated/EpiloguePage/EpilogueQuiz/EpilogueQuizCompleted";
 import WithToken from "./WithToken";
+import InstructionsPage from "../pages/InstructionsPage/InstructionsPage";
 
 // TODO: on-off button for voice navigation
 
@@ -45,7 +46,6 @@ const App = () => {
           <WithToken>
             <WithTokenRefreshInterval>
               {/* TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
-              {/* TODO: add instructions page */}
               
               <Routes>
                 {/* ### STORIES PAGES: */}
@@ -71,6 +71,9 @@ const App = () => {
                   element={<EpilogueQuizCompleted />}
                 />
                 <Route path="/epilogues/:id" element={<EpilogueStartPage />} />
+
+                {/* ### INSTRUCTIONS: */}
+                <Route path="/instructions" element={<InstructionsPage />} />
 
                 {/* ### FALLBACK PAGE: */}
                 <Route path="*" element={<DefaultRouteRedirection isAuth />} />
