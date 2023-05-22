@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,22 +7,12 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { firebaseAuth, logout } from "./../../auth/firebase-auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  Alert,
-  Avatar,
-  Menu,
-  MenuItem,
-  Snackbar,
-  Tooltip,
-} from "@mui/material";
+import { Alert, Avatar, Button, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router";
-import { Home, Info } from "@mui/icons-material";
-
-const settings = ["Logout"];
+import { Home, Info, LogoutRounded } from "@mui/icons-material";
 
 export default function Header() {
   const [user] = useAuthState(firebaseAuth);
-  const [anchorElUser, setAnchorElUser] = useState<EventTarget & Element|undefined>();
   const [snack, setSnack] = useState({
     message: "",
     open: false,
@@ -30,19 +20,6 @@ export default function Header() {
   });
   const navigate = useNavigate();
 
-  const handleOpenUserMenu = (event: React.MouseEvent) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = (setting: string) => {
-    setAnchorElUser(undefined);
-
-    switch (setting) {
-      case "Logout":
-        logout();
-        break;
-    }
-  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -77,62 +54,40 @@ export default function Header() {
           </button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-                onClick={handleOpenUserMenu}
-              >
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  style={{ lineHeight: "50px", paddingRight: "10px" }}
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                >
-                  {user?.displayName || user?.email}
-                </Typography>
-                <IconButton sx={{ p: 0 }}>
-                  {!user?.photoURL && <AccountCircle htmlColor="white" />}
-                  {user?.photoURL && (
-                    <Avatar
-                      alt={`User button (press enter to open the log out dropdown). Your name is ${
-                        user?.displayName || "... oh wait you don't have one"
-                      }`}
-                      src={user?.photoURL}
-                    />
-                  )}
-                </IconButton>
-              </div>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => handleCloseUserMenu(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                style={{ lineHeight: "50px", paddingRight: "10px" }}
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                {user?.displayName || user?.email}
+              </Typography>
+              <IconButton sx={{ p: 0 }}>
+                {!user?.photoURL && <AccountCircle htmlColor="white" />}
+                {user?.photoURL && (
+                  <Avatar
+                    alt={`User button (press enter to open the log out dropdown). Your name is ${
+                      user?.displayName || "... oh wait you don't have one"
+                    }`}
+                    src={user?.photoURL}
+                  />
+                )}
+              </IconButton>
+              <div>
+                <LogoutRounded
+                  onClick={() => logout()}
+                  style={{ color: "white", marginLeft: "10px", fontSize: 20 }}
+                ></LogoutRounded>
+              </div>
+            </div>
           </Box>
         </Toolbar>
       </AppBar>
