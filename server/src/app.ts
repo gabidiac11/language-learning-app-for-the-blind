@@ -33,7 +33,7 @@ app.use(
   express.static(
     path.join(
       __dirname,
-      "../../front-end-lang-learning-app-for-the-blind/build"
+      "../../frontend/build"
     )
   )
 );
@@ -160,12 +160,12 @@ app.get("/api/*", (req, res) => {
 app.get("/*", function (req, res) {
   const pathName = path.join(
     __dirname,
-    "../../front-end-lang-learning-app-for-the-blind/build",
+    "../../frontend/build",
     "index.html"
   );
   if (!fs.existsSync(pathName)) {
     log(`Path to frontend is not great.`);
-    return res.status(404).send({ message: "Route not found." });
+    return res.status(404).send({ message: "Route was not found." });
   }
   log(`Path to frontend...`);
   res.sendFile(pathName);
