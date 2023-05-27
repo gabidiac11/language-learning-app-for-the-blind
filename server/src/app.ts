@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
 app.use(morgan("tiny"));
 
 app.use(
-  "/docs",
+  "/api/docs",
   swaggerUi.serve,
   swaggerUi.setup(undefined, {
     swaggerOptions: {
