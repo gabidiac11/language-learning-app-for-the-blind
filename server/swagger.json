@@ -2035,7 +2035,7 @@
 						}
 					}
 				},
-				"description": "Returns a new question from the quiz. If the quiz doesn't exist it will be created with the first round of questions consisting of all the template questions available.\r\nIf the quiz already exists the first unanswered question is returned.\r\n\r\nTo prevent cheating option-ids, question-ids are generated each time questions are being generated from the template questions.\r\n\r\nNOTE: this endpoint is accesible only if the user has the epilogue unlocked",
+				"description": "Returns a new question from the quiz. If the quiz doesn't exist it will be created with the first round of questions consisting of all the template questions available.\r\nIf the quiz already exists the first unanswered question is returned.\r\n\r\nTo prevent cheating, option-ids and question-ids are generated each time questions are being generated from the template questions.\r\n\r\nNOTE: this endpoint is accesible only if the user has the epilogue unlocked",
 				"tags": [
 					"Quiz - Epilogue blocks"
 				],
@@ -2108,7 +2108,7 @@
 						}
 					}
 				},
-				"description": "Receives a question and option id. Matches these values to the current existing unfinished quiz.\r\n\r\nUpdates the quiz state with the outcome (correct/wrong). It returns:\r\n- the correct option id + next question - if the quiz is not completed\r\n- ... or the quiz completion response - if the quiz is completed\r\n\r\nBased on the outcome, new rounds of questions are generated as follows:\r\n- the probability of a question to appear is increasing as to how many times that question was wrongly answered in a row, OR it increases as to how many times it was prevented from appearing\r\n- the probability of a question to appear is decreasing as to how many times that question was correctly answered in a row\r\n\r\nTo prevent cheating option-ids, question-ids are generated each time questions are being generated from the template questions.\r\n\r\nNOTE: this endpoint is accesible only if the user has the epilogue unlocked",
+				"description": "Receives a question and option id. Matches these values to the current existing unfinished quiz.\r\n\r\nUpdates the quiz state with the outcome (correct/wrong). It returns:\r\n- the correct option id + next question - if the quiz is not completed\r\n- ... or the quiz completion response - if the quiz is completed\r\n\r\nBased on the outcome, new rounds of questions are generated as follows:\r\n- the probability of a question to appear is increasing as to how many times that question was wrongly answered in a row, OR it increases as to how many times it was prevented from appearing\r\n- the probability of a question to appear is decreasing as to how many times that question was correctly answered in a row\r\n\r\nTo prevent cheating, option-ids and question-ids are generated each time questions are being generated from the template questions.\r\n\r\nNOTE: this endpoint is accesible only if the user has the epilogue unlocked",
 				"tags": [
 					"Quiz - Epilogue blocks"
 				],
