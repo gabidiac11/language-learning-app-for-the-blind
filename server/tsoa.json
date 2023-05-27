@@ -10,6 +10,28 @@
         "in": "header",
         "description": "Bearer token"
       }
-    }
+    },
+    "tags": [
+      {
+        "name": "User Stories",
+        "description": "Get user progress of a story. A story is a lesson chapter containing learning blocks: multiple building blocks and a final epilogue block."
+      },
+      {
+        "name": "Building blocks",
+        "description": "Get user progress around a building block of a story chapter - the initiating sub-chapter of a story. A building block is a lesson block which consists of a set of words based around one onthology (Ex. pronons, family, etc.)"
+      },
+      {
+        "name": "Epilogue blocks",
+        "description": "Get user progress around an epilogue block of a story chapter - the final sub-chapter of a story. An epilogue block is a lesson block which consists of a text / short-story formed by words learnt during the completion of prior building blocks and the completion of previous lessons."
+      },
+      {
+        "name": "Quiz - Builiding blocks",
+        "description": "Start / Continue quiz about a building block of a story chapter. It helps user learn the set of words associated with the building blocks by providing repeated questions with options to pick and answer. The quiz stops when all the questions are answered correctly consistently, indicating learning. When such quiz is finished, the dependent building blocks are unlocked or the epilogue of the lesson story is unlocked in case all the building blocks are completed."
+      },
+      {
+        "name": "Quiz - Epilogue blocks",
+        "description": "Start / Continue quiz about an epilogue block of a story chapter. It tests user understanding of the text-story by providing repeated questions about what the short-story describes. The quiz stops when all the questions are answered consistently, indicating learning. When such quiz is finished, the user story is considered completed and the dependent locked stories are unlocked."
+      }
+    ]
   }
 }

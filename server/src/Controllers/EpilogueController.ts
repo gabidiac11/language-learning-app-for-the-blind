@@ -3,7 +3,8 @@ import { Authenticator } from "../ApiSupport/authentication";
 import EpilogueService from "../BusinessLogic/EpilogueService";
 import { EpilogueProgressOutput } from "../Models/output.userStory.types";
 import { convertEpilogueResultToOutput } from "../Models/modelConvertors";
-import { Get, Path, Post, Route, Security, Tags } from "tsoa";
+import { Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class EpilogueControllerFactory {
@@ -35,7 +36,14 @@ class EpilogueController extends BaseController {
     this._epilogueService = userStoryService;
   }
 
+  /**
+   * Gets the epilogue block lesson data and the user information about the progress on this lesson block.
+   * 
+   * @param epilogueProgressId 
+   * @returns 
+   */
   @Get("/{epilogueProgressId}")
+  @Example<EpilogueProgressOutput>(apiExamples.epilogueProgress)
   public async getEpilogueProgress(
     @Path() epilogueProgressId: string
   ): Promise<EpilogueProgressOutput> {
@@ -46,7 +54,15 @@ class EpilogueController extends BaseController {
     return this.processResult(outputResult);
   }
 
+   /**
+   * Marks that the user has listened to the short story of an epilogue.  
+   * 
+   * NOTE: it's only accesible if the user has completed all the building blocks of the lesson story associated with the epilogue.
+   * @param epilogueProgressId 
+   * @returns 
+   */
   @Post("/{epilogueProgressId}/complete-summary")
+  @Example<boolean>(true, "Ok")
   public async completeSummary(
     @Path() epilogueProgressId: string
   ): Promise<boolean> {

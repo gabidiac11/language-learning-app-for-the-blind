@@ -9,11 +9,7 @@ import {
   convertUserStoriesResultToOutput,
   convertUserStoryResultToOutput,
 } from "../Models/modelConvertors";
-import { Get, Route, Response, Res, SuccessResponse, Example, Security, Tags } from "tsoa";
-import {
-  ApiDataResponse404,
-  ApiDataResponseError,
-} from "../ApiSupport/apiResponses.types";
+import { Get, Route, Example, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
