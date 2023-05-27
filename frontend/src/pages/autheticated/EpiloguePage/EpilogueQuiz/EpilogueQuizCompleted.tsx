@@ -2,9 +2,7 @@ import { Typography } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { useParams } from "react-router";
 import useFetchData from "../../../../api/useFetchData";
-import {
-  UserStory,
-} from "../../../../context/contextTypes/ctxTypes";
+import { UserStory } from "../../../../context/contextTypes/ctxTypes";
 import { QuizBlockCompletedResponse } from "../../../../context/contextTypes/quizTypes";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import Divider from "@mui/material/Divider";
@@ -49,9 +47,14 @@ const EpilogueQuizCompleted = () => {
                 <h2>{`Coungradulations! You finished this story.`}</h2>
               </div>
 
-              {data?.userStoriesUnlocked && (
+              {!!data?.userStoriesUnlocked?.length && (
                 <DisplayStoryUnlockedItems stories={data.userStoriesUnlocked} />
               )}
+              {data?.userStoriesUnlocked?.length === 0 && (<div>
+                <Divider>
+                  <Chip label="Actions" />
+                </Divider>{" "}
+              </div>)}
 
               <Typography mt={10} align="center">
                 <Link to={`/stories/${data.blockCompletedStoryRefId}`}>
@@ -72,9 +75,7 @@ const DisplayStoryUnlockedItems = (props: { stories: UserStory[] }) => {
       <Divider>
         <Chip label="Stories unlocked" />
       </Divider>
-      <div
-        className="view-items-section"
-      >
+      <div className="view-items-section">
         {props.stories.map((userStory: UserStory) => (
           <StoryCard key={userStory.id} userStory={userStory} />
         ))}

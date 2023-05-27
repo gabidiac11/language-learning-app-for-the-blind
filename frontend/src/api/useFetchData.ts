@@ -23,7 +23,7 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
   const [data, setData] = useState<T>();
   const [dataWithHttpResponse, setDataWithHttpResponse] = useState<{
     data: T;
-    httpInfo: { options?: UseFetchDataOptions };
+    httpInfo: { options?: UseFetchDataOptions, url: string };
   }>();
   const [, setLoadingKey] = useState<number>(0);
   const loadingRef = useRef<{ key: number; value: boolean }>({
@@ -47,6 +47,7 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
     try {
       setLoading(true);
       const _fetchOptions = fetchOptions;
+      const _url = url;
 
       const response = await computeAxiosPromise(fetchOptions, url);
       setData(response.data);
@@ -55,6 +56,7 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
         data: response.data as T,
         httpInfo: {
           options: _fetchOptions,
+          url: _url
         },
       });
     } catch (error) {

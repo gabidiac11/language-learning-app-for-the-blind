@@ -1,14 +1,12 @@
-import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
 import {
   BuildingBlock,
-  Epilogue,
   Story,
 } from "../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
-  UserStory,
 } from "../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../Data/database";
 import { log } from "../logger";
@@ -91,12 +89,11 @@ export default class BlocksService {
         blockProgressId
       );
     if (userStoryIdResult.isError()) {
-      throw ApiError.ErrorResult(userStoryIdResult);
+      throw ApiErrorResponse.ErrorResult(userStoryIdResult);
     }
 
     if (!userStoryIdResult.data) {
-      const result = Result.Error("Not found.", 404);
-      throw ApiError.ErrorResult(result);
+      throw ApiErrorResponse.NotFound();
     }
     const userStoryId = userStoryIdResult.data;
     return userStoryId;

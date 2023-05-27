@@ -1,17 +1,14 @@
 import BaseController from "./BaseController";
 import { Authenticator } from "../ApiSupport/authentication";
 import BlocksService from "../BusinessLogic/BlocksService";
-import Result from "../ApiSupport/Result";
-import { Request } from "express";
-import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse } from "../ApiSupport/apiErrorHelpers";
 import {
   QuizBlockCompletedStatsResponse,
   QuizRequestBody,
-  QuizRequestBodyAnswer,
-  QuizRequestBodyIntialQuestion,
   QuizResponse,
 } from "../Models/quiz.models";
 import { BlockQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/BlockQuizServiceFactory";
+import { Body, Get, Path, Post, Route, Security, Tags } from "tsoa";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class BlockQuizControllerFactory {
@@ -43,6 +40,9 @@ export default class BlockQuizControllerFactory {
   }
 }
 
+@Tags('Quiz - Builiding blocks')
+@Security('BearerAuth')
+@Route("api/blocks/:blockProgressId/quiz")
 class BlockQuizController extends BaseController {
   private _blocksService: BlocksService;
   private _blockQuizServiceFactory: BlockQuizServiceFactory;
@@ -56,38 +56,57 @@ class BlockQuizController extends BaseController {
     this._blockQuizServiceFactory = blockQuizServiceFactory;
   }
 
-  public async getQuizQuestionAndAnswerPrevious(
-    req: Request
-  ): Promise<Result<QuizResponse>> {
-    await this.authenticateAsync<QuizResponse>(req);
-
-    const requestBodyResult = this.getQuizRequestBody(req);
-    if (requestBodyResult.isError())
-      return requestBodyResult.As<QuizResponse>();
+  @Post("/request-question")
+  public async requestQuizQuestion(
+    @Path() blockProgressId: string
+  ): Promise<QuizResponse> {
+    await this.guardQuizRequestAuthorization(blockProgressId);
 
     const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
     const quizService = await this._blockQuizServiceFactory.create(
       userId,
       blockProgressId
     );
-    if (
-      (requestBodyResult.data as QuizRequestBodyIntialQuestion)
-        ?.questionRequested
-    ) {
-      const result = await quizService.getLeftOffQuestionFromQuiz();
-      return result;
-    }
-
-    const result = await quizService.answerQuestionAndGetNextQuestion(
-      requestBodyResult.data as QuizRequestBodyAnswer
-    );
-    return result;
+    const result = await quizService.getLeftOffQuestionFromQuiz();
+    return this.processResult(result);
   }
 
-  private async guardQuizRequest(req: Request) {
+  @Post("/answer-question")
+  public async answerQuizQuestion(
+    @Body() quizRequestBody: QuizRequestBody,
+    @Path() blockProgressId: string
+  ): Promise<QuizResponse> {
+    this.guardQuizRequestBody(quizRequestBody);
+    await this.guardQuizRequestAuthorization(blockProgressId);
+
     const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
+    const quizService = await this._blockQuizServiceFactory.create(
+      userId,
+      blockProgressId
+    );
+
+    const result = await quizService.answerQuestionAndGetNextQuestion(
+      quizRequestBody
+    );
+    return this.processResult(result);
+  }
+
+  @Get("/{quizId}/completed")
+  public async getProgressAchievedOfCompletedQuiz(
+    @Path() blockProgressId: string,
+    @Path() quizId: string,
+  ): Promise<QuizBlockCompletedStatsResponse> {
+    await this.guardQuizRequestAuthorization(blockProgressId);
+
+    const userId = this.getUser().uid;
+    
+    const quizService = await this._blockQuizServiceFactory.create(userId, blockProgressId); 
+    const result = await quizService.getProgressAchievedOfCompletedQuiz(quizId);
+    return this.processResult(result);
+  }
+
+  private async guardQuizRequestAuthorization(blockProgressId: string) {
+    const userId = this.getUser().uid;
 
     const blockProgressResult =
       await this._blocksService.getShallowBlockProgress(
@@ -95,57 +114,32 @@ class BlockQuizController extends BaseController {
         blockProgressId
       );
     if (blockProgressResult.isError()) {
-      throw ApiError.ErrorResult(blockProgressResult);
+      throw ApiErrorResponse.ErrorResult(blockProgressResult);
     }
 
     if (!blockProgressResult.data.timeUnlocked) {
-      throw ApiError.Error(
-        "Building block is locked. Please complete the other blocks or stories required.",
-        403
+      throw ApiErrorResponse.Forbidden(
+        "Building block is locked. Please complete the other blocks or stories required."
       );
     }
 
     if (!blockProgressResult.data.timeSummaryCompleted) {
-      throw ApiError.Error(
-        "Building block summary was not completed. Please complete it to practice the words from this block before.",
-        403
+      throw ApiErrorResponse.Forbidden(
+        "Building block summary was not completed. Please complete it to practice the words from this block before."
       );
     }
   }
 
-  private getQuizRequestBody(req: Request): Result<QuizRequestBody> {
-    if (req.body.questionRequested === true) {
-      const requestBody: QuizRequestBodyIntialQuestion = {
-        questionRequested: true,
-      };
-      return Result.Success(requestBody);
+  private guardQuizRequestBody(requestBody: QuizRequestBody) {
+    if (!requestBody) {
+      throw ApiErrorResponse.BadRequest("Request body should not be empty.");
     }
 
-    const requestBody: QuizRequestBodyAnswer = {
-      optionId: req.body.optionId,
-      questionId: req.body.questionId,
-    };
     if (!requestBody.optionId) {
-      return Result.Error("Option should not be empty.", 400);
+      throw ApiErrorResponse.BadRequest("Option should not be empty.");
     }
     if (!requestBody.questionId) {
-      return Result.Error("Question should not be empty.", 400);
+      throw ApiErrorResponse.BadRequest("Question should not be empty.");
     }
-    return Result.Success(requestBody);
-  }
-
-  public async getProgressAchievedOfCompletedQuiz(
-    req: Request
-  ): Promise<Result<QuizBlockCompletedStatsResponse>> {
-    await this.authenticateAsync<QuizResponse>(req);
-    await this.guardQuizRequest(req);
-
-    const userId = this.getUser().uid;
-    const blockProgressId = this.getParam<string>(req, "blockProgressId");
-    const quizId = this.getParam<string>(req, "quizId");
-    
-    const quizService = await this._blockQuizServiceFactory.create(userId, blockProgressId); 
-    const result = await quizService.getProgressAchievedOfCompletedQuiz(quizId);
-    return result;
   }
 }

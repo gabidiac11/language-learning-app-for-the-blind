@@ -2,12 +2,12 @@ import { Button, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
 import {
   QuizOption,
-  QuizResponseNextQuestion,
+  QuizResponse,
 } from "../../../../context/contextTypes/quizTypes";
 import AppTimerDisplay from "../../../page-components/AppTimerDisplay";
 
 const BlockQuizQuestion = (props: {
-  currentQuestion: QuizResponseNextQuestion;
+  currentQuestion: QuizResponse;
   correctOptionId?: string;
   onNext: () => void;
   onChoose: (option: QuizOption) => void;

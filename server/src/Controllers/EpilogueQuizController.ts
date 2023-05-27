@@ -1,17 +1,14 @@
 import { Authenticator } from "../ApiSupport/authentication";
-import Result from "../ApiSupport/Result";
 import EpilogueService from "../BusinessLogic/EpilogueService";
 import {
   QuizBlockCompletedStatsResponse,
   QuizRequestBody,
-  QuizRequestBodyAnswer,
-  QuizRequestBodyIntialQuestion,
   QuizResponse,
 } from "../Models/quiz.models";
 import BaseController from "./BaseController";
-import { Request } from "express";
-import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse } from "../ApiSupport/apiErrorHelpers";
 import { EpilogueQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/EpilogueQuizServiceFactory";
+import { Body, Get, Path, Post, Route, Security, Tags } from "tsoa";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class EpilogueQuizControllerFactory {
@@ -43,6 +40,9 @@ export default class EpilogueQuizControllerFactory {
   }
 }
 
+@Tags('Quiz - Epilogue blocks')
+@Security("BearerAuth")
+@Route("api/epilogues/:epilogueProgressId/quiz")
 class EpilogueQuizController extends BaseController {
   private _epilogueService: EpilogueService;
   private _epilogueQuizServiceFactory: EpilogueQuizServiceFactory;
@@ -56,39 +56,62 @@ class EpilogueQuizController extends BaseController {
     this._epilogueQuizServiceFactory = epilogueQuizServiceFactory;
   }
 
-  public async getQuizQuestionAndAnswerPrevious(
-    req: Request
-  ): Promise<Result<QuizResponse>> {
-    await this.authenticateAsync<QuizResponse>(req);
-    await this.guardQuizRequest(req);
-
-    const requestBodyResult = this.getQuizRequestBody(req);
-    if (requestBodyResult.isError())
-      return requestBodyResult.As<QuizResponse>();
+  @Post("/request-question")
+  public async requestQuizQuestion(
+    @Path() epilogueProgressId: string
+  ): Promise<QuizResponse> {
+    await this.guardQuizRequestAuthorization(epilogueProgressId);
 
     const userId = this.getUser().uid;
-    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
     const quizService = await this._epilogueQuizServiceFactory.create(
       userId,
       epilogueProgressId
     );
-    if (
-      (requestBodyResult.data as QuizRequestBodyIntialQuestion)
-        ?.questionRequested
-    ) {
-      const result = await quizService.getLeftOffQuestionFromQuiz();
-      return result;
-    }
-
-    const result = await quizService.answerQuestionAndGetNextQuestion(
-      requestBodyResult.data as QuizRequestBodyAnswer
-    );
-    return result;
+    const result = await quizService.getLeftOffQuestionFromQuiz();
+    return this.processResult(result);
   }
 
-  private async guardQuizRequest(req: Request) {
+  @Post("/")
+  public async answerQuizQuestion(
+    @Body() quizRequest: QuizRequestBody,
+    @Path() epilogueProgressId: string
+  ): Promise<QuizResponse> {
+    this.guardQuizRequestBody(quizRequest);
+    await this.guardQuizRequestAuthorization(epilogueProgressId);
+
     const userId = this.getUser().uid;
-    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
+    const quizService = await this._epilogueQuizServiceFactory.create(
+      userId,
+      epilogueProgressId
+    );
+
+    const outputResult = await quizService.answerQuestionAndGetNextQuestion(
+      quizRequest
+    );
+    return this.processResult(outputResult);
+  }
+
+  @Get("/{quizId}/completed")
+  public async getProgressAchievedOfCompletedQuiz(
+    @Path() epilogueProgressId: string,
+    @Path() quizId: string
+  ): Promise<QuizBlockCompletedStatsResponse> {
+    await this.guardQuizRequestAuthorization(epilogueProgressId);
+
+    const userId = this.getUser().uid;
+
+    const quizService = await this._epilogueQuizServiceFactory.create(
+      userId,
+      epilogueProgressId
+    );
+    const outputResult = await quizService.getProgressAchievedOfCompletedQuiz(
+      quizId
+    );
+    return this.processResult(outputResult);
+  }
+
+  private async guardQuizRequestAuthorization(epilogueProgressId: string) {
+    const userId = this.getUser().uid;
 
     const epilogueProgressResult =
       await this._epilogueService.getShallowEpilogueWithValidation(
@@ -96,48 +119,20 @@ class EpilogueQuizController extends BaseController {
         epilogueProgressId
       );
     if (epilogueProgressResult.isError()) {
-      throw ApiError.ErrorResult(epilogueProgressResult);
+      throw ApiErrorResponse.ErrorResult(epilogueProgressResult);
     }
   }
 
-  private getQuizRequestBody(req: Request): Result<QuizRequestBody> {
-    if (req.body.questionRequested === true) {
-      const requestBody: QuizRequestBodyIntialQuestion = {
-        questionRequested: true,
-      };
-      return Result.Success(requestBody);
+  private guardQuizRequestBody(requestBody: QuizRequestBody) {
+    if (!requestBody) {
+      throw ApiErrorResponse.BadRequest("Request body should not be empty.");
     }
 
-    const requestBody: QuizRequestBodyAnswer = {
-      optionId: req.body.optionId,
-      questionId: req.body.questionId,
-    };
     if (!requestBody.optionId) {
-      return Result.Error("Option should not be empty.", 400);
+      throw ApiErrorResponse.BadRequest("Option should not be empty.");
     }
     if (!requestBody.questionId) {
-      return Result.Error("Question should not be empty.", 400);
+      throw ApiErrorResponse.BadRequest("Question should not be empty.");
     }
-    return Result.Success(requestBody);
-  }
-
-  public async getProgressAchievedOfCompletedQuiz(
-    req: Request
-  ): Promise<Result<QuizBlockCompletedStatsResponse>> {
-    await this.authenticateAsync<QuizResponse>(req);
-    await this.guardQuizRequest(req);
-
-    const userId = this.getUser().uid;
-    const epilogueProgressId = this.getParam<string>(req, "epilogueProgressId");
-    const quizId = this.getParam<string>(req, "quizId");
-
-    const quizService = await this._epilogueQuizServiceFactory.create(
-      userId,
-      epilogueProgressId
-    );
-    const result = await quizService.getProgressAchievedOfCompletedQuiz(
-      quizId
-    );
-    return result;
   }
 }

@@ -1,4 +1,4 @@
-import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
 import {
   Epilogue,
@@ -48,11 +48,11 @@ export default class EpilogueService {
           userStoryIdResult.errors
         )}`
       );
-      throw ApiError.Error<EpilogueProgress>("Something went wrong.", 500);
+      throw ApiErrorResponse.Error<EpilogueProgress>("Something went wrong.", 500);
     }
 
     if (!userStoryIdResult.data) {
-      throw ApiError.Error<EpilogueProgress>("Not found.", 404);
+      throw ApiErrorResponse.NotFound<EpilogueProgress>();
     }
 
     return userStoryIdResult.data;
@@ -201,7 +201,7 @@ export default class EpilogueService {
     const userStoryId = await this.getUserStoryId(userId, epilogueProgressId);
     const timeUnlocked = await this._db.get<number|undefined>(`userStories/${userId}/${userStoryId}/epilogueProgress/timeUnlocked`)
     if(!timeUnlocked.data) {
-      throw ApiError.Error("Epilogue is locked. Please complete all building blocks first.");
+      throw ApiErrorResponse.Forbidden("Epilogue is locked. Please complete all building blocks first.");
     }
     await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeSummaryCompleted`);
     await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeStarted`);

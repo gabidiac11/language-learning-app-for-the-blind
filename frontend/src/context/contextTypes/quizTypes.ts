@@ -21,34 +21,23 @@ export type QuizOption = {
 
 //< --START-- >< ---------------- TYPES EXPOSED TO THE FRONTEND ---------------- >< --START-->
 
-export type QuizResponseNextQuestion = {
+export type QuizResponse = {
   questionText: string;
   questionId: string;
   options: QuizOption[];
 
   // id to the correct answer from previous question
   previouslyQuestion_CorrectOptionId?: string;
+
+  quizCompleted?: boolean;
+  quizId?: string;
 };
-export type QuizResponseComplete = {
-  quizCompleted: boolean;
-  quizId: string;
-  previouslyQuestion_CorrectOptionId?: string;
-};
-export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
 
 // quiz REQUEST
-export type QuizRequestBodyAnswer = {
+export type QuizRequestBody = {
   questionId: string;
   optionId: string;
 };
-
-export type QuizRequestBodyIntialQuestion = {
-  questionRequested: true;
-};
-
-export type QuizRequestBody =
-  | QuizRequestBodyAnswer
-  | QuizRequestBodyIntialQuestion;
 
 export interface UseFetchDataOptionsQuizRequest extends UseFetchDataOptions {
   method: "POST";

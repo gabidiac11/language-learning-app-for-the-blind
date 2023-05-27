@@ -1,6 +1,7 @@
 import { AppUser, Authenticator } from "../ApiSupport/authentication";
 import { Request } from "express";
-import { ApiError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse } from "../ApiSupport/apiErrorHelpers";
+import Result from "../ApiSupport/Result";
 
 export default class BaseController {
   private _user?: AppUser;
@@ -9,13 +10,13 @@ export default class BaseController {
     this._authenticator = authenticator;
   }
 
-  protected async authenticateAsync<T>(req: Request) {
+  public async authenticateAsync<T>(req: Request) {
     const authResult = await this._authenticator.getAuthUserFromReq(req);
     if (!authResult.isError()) {
       this._user = authResult.data;
       return;
     }
-    throw ApiError.ErrorResult(authResult.As<T>());
+    throw ApiErrorResponse.ErrorResult(authResult.As<T>());
   }
 
   protected getUser(): AppUser {
@@ -25,32 +26,29 @@ export default class BaseController {
     return this._user;
   }
 
-  protected getParam<T>(req: Request, key: string): string {
+  private getParam<T>(req: Request, key: string): string {
     const value = req.params?.[key];
     if (!value) {
-      throw ApiError.Error<T>(
-        `Request parameter ${key} should not be null.`,
-        400
+      throw ApiErrorResponse.BadRequest<T>(
+        `Request parameter ${key} should not be null.`
       );
     }
 
     return value;
   }
 
-  protected getParams<T>(
-    req: Request,
-    keys: string[]
-  ): { key: string; value: string } {
-    const values: { key: string; value: string }[] = [];
+  public getParams<T>(req: Request, keys: string[]): string[] {
+    const values: string[] = [];
     for (const key of keys) {
       const value = this.getParam<T>(req, key);
-      values.push({ key, value });
+      values.push(value);
     }
-    
-    const valuesObj = values.reduce(
-      (prev, curr) => ({ ...prev, [curr.key]: curr.value }),
-      {} as { key: string; value: string }
-    );
-    return valuesObj;
+    return values;
+  }
+
+  protected processResult<T>(outputResult: Result<T>): T {
+    if (outputResult.isError())
+      throw ApiErrorResponse.ErrorResult(outputResult);
+    return outputResult.data;
   }
 }

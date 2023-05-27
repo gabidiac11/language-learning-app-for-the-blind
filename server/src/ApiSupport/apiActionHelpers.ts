@@ -1,7 +1,8 @@
 import Result from "./Result";
 import { log } from "../logger";
 import { Response, Request } from "express";
-import { ApiError, getErrorLogMessage } from "./apiErrorHelpers";
+import { ApiErrorResponse, getErrorLogMessage } from "./apiErrorHelpers";
+import BaseController from "../Controllers/BaseController";
 
 export function processResultOfT<T>(
   result: Result<T>,
@@ -29,22 +30,24 @@ export function processResultOfT<T>(
   return res.status(statusCode).send(data);
 }
 
-export async function executeActionAsync<T>(
-  { req, res }: { req: Request; res: Response },
-  callbackAsync: (req: Request) => Promise<Result<T>>
+export async function executeAuthenticatedAction<T>(
+  { req, res, controller }: { req: Request; res: Response, controller: BaseController },
+  callbackAsync: () => Promise<T>
 ) {
   try {
-    const result = await callbackAsync(req);
-    return processResultOfT<T>(result, req, res);
+    await controller.authenticateAsync(req);
+    const data = await callbackAsync();
+    return processResultOfT<T>(Result.Success<T>(data), req, res);
   } catch (error) {
-    const loggableMessage = getErrorLogMessage(error);
-    log(loggableMessage);
-
-    const apiError = error as ApiError<T>;
+    const apiError = error as ApiErrorResponse<T>;
     if (apiError?.isThisApiError) {
+      const loggableMessage = getErrorLogMessage(apiError.result.errors);
+      log(loggableMessage);
       return processResultOfT<T>(apiError.result, req, res);
     }
 
+    const loggableMessage = getErrorLogMessage(error);
+    log(loggableMessage);
     const result = Result.Error<T>("Something went wrong.", 500);
     return processResultOfT<T>(result, req, res);
   }

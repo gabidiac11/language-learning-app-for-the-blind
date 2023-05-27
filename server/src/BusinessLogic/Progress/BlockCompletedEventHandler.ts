@@ -1,5 +1,5 @@
 import {
-  ApiError,
+  ApiErrorResponse,
   getStringifiedError,
 } from "../../ApiSupport/apiErrorHelpers";
 import {
@@ -141,7 +141,7 @@ export class BlockCompletedEventHandler {
         `[BlockCompleteEventHandler] Error: could not find block progress.` +
           getStringifiedError(blockProgressResult)
       );
-      throw ApiError.Error("Something went wrong", 500);
+      throw ApiErrorResponse.InternalError();
     }
 
     return blockProgressResult.data;
@@ -160,7 +160,7 @@ export class BlockCompletedEventHandler {
         `[BlockCompleteEventHandler] Progress update block completed: could not find story.` +
           getStringifiedError(userStoryResult)
       );
-      throw ApiError.Error("Something went wrong", 500);
+      throw ApiErrorResponse.InternalError();
     }
     return userStoryResult.data;
   }

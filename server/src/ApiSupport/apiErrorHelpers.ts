@@ -49,12 +49,12 @@ export function getErrorLogMessage(error: unknown, prefix?: string) {
 // TODO: search where is thrown and make sure:
 // log 500 errors and make sure the user doesn't see those
 // make sure technical errors are logged and not returned to the user
-export class ApiError<T> {
+export class ApiErrorResponse<T> {
   public isThisApiError = true;
   public result: Result<T>;
 
-  public static Error<T>(userMessage: string, code?: number): ApiError<T> {
-    const apiError = new ApiError<T>();
+  public static Error<T>(userMessage: string, code?: number): ApiErrorResponse<T> {
+    const apiError = new ApiErrorResponse<T>();
     apiError.result = new Result<T>();
     apiError.result.statusCode = code;
     apiError.result.errors = [userMessage];
@@ -62,14 +62,50 @@ export class ApiError<T> {
     return apiError;
   }
 
-  public static ErrorResult<T>(result: Result<T>): ApiError<T> {
-    const apiError = new ApiError<T>();
+  public static NotFound<T>(): ApiErrorResponse<T> {
+    const notFoundError = new ApiErrorResponse<T>();
+    notFoundError.result = new Result<T>();
+    notFoundError.result.statusCode = 404;
+    notFoundError.result.errors = ["Not found."];
+
+    return notFoundError;
+  }
+
+  public static InternalError<T>(): ApiErrorResponse<T> {
+    const notFoundError = new ApiErrorResponse<T>();
+    notFoundError.result = new Result<T>();
+    notFoundError.result.statusCode = 500;
+    notFoundError.result.errors = ["Something went wrong."];
+
+    return notFoundError;
+  }
+
+  public static Forbidden<T>(userMessage: string): ApiErrorResponse<T> {
+    const apiError = new ApiErrorResponse<T>();
+    apiError.result = new Result<T>();
+    apiError.result.statusCode = 403;
+    apiError.result.errors = [userMessage];
+
+    return apiError;
+  }
+
+  public static BadRequest<T>(userMessage: string): ApiErrorResponse<T> {
+    const apiError = new ApiErrorResponse<T>();
+    apiError.result = new Result<T>();
+    apiError.result.statusCode = 400;
+    apiError.result.errors = [userMessage];
+
+    return apiError;
+  }
+
+  public static ErrorResult<T>(result: Result<T>): ApiErrorResponse<T> {
+    const apiError = new ApiErrorResponse<T>();
     apiError.result = result;
 
     return apiError;
   }
 
   public static IsApiError(error: unknown) {
-    return (error as ApiError<any>)?.isThisApiError === true;
+    return (error as ApiErrorResponse<any>)?.isThisApiError === true;
   }
 }

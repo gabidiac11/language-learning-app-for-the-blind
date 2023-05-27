@@ -3,7 +3,7 @@ import { firebaseApp } from "./firebase-app";
 import { get, set } from "@firebase/database";
 import Result from "../ApiSupport/Result";
 import { log } from "../logger";
-import { ApiError, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
 import { valuesOrdered } from "../utils";
 import { dbRootPathKey } from "../constants";
 import { Story } from "./ctxTypes/ctx.story.types";
@@ -116,7 +116,7 @@ class Database {
       await set(ref(this.db, this.decoratedPath(path)), item);
     } catch (error) {
       log(`[db]: error occured at path '${path}'`, getStringifiedError(error));
-      throw ApiError.Error("Something went wrong.", 500);
+      throw ApiErrorResponse.InternalError();
     } finally {
       log(`DB_SET: '${path}': [FINISHED] at ${(Date.now() - time) / 1000}s\n`);
     }

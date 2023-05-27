@@ -1,11 +1,9 @@
 import BaseController from "./BaseController";
 import { Authenticator } from "../ApiSupport/authentication";
 import EpilogueService from "../BusinessLogic/EpilogueService";
-import { EpilogueProgress } from "../Data/ctxTypes/ctx.userStory.types";
-import Result from "../ApiSupport/Result";
-import { Request } from "express";
 import { EpilogueProgressOutput } from "../Models/output.userStory.types";
 import { convertEpilogueResultToOutput } from "../Models/modelConvertors";
+import { Get, Path, Post, Route, Security, Tags } from "tsoa";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class EpilogueControllerFactory {
@@ -27,6 +25,9 @@ export default class EpilogueControllerFactory {
   }
 }
 
+@Tags('Epilogue blocks')
+@Security('BearerAuth')
+@Route("api/epilogues")
 class EpilogueController extends BaseController {
   private _epilogueService: EpilogueService;
   constructor(authenticator: Authenticator, userStoryService: EpilogueService) {
@@ -34,27 +35,24 @@ class EpilogueController extends BaseController {
     this._epilogueService = userStoryService;
   }
 
+  @Get("/{epilogueProgressId}")
   public async getEpilogueProgress(
-    req: Request
-  ): Promise<Result<EpilogueProgressOutput>> {
-    await this.authenticateAsync(req);
-
-    const epilogueProgressId = req.params.epilogueProgressId;
+    @Path() epilogueProgressId: string
+  ): Promise<EpilogueProgressOutput> {
     const userId = this.getUser()?.uid;
 
-    const result = await this._epilogueService.getEpilogueWithGuard(userId, epilogueProgressId);
-    return convertEpilogueResultToOutput(result);
+    const epilogueResult = await this._epilogueService.getEpilogueWithGuard(userId, epilogueProgressId);
+    const outputResult = convertEpilogueResultToOutput(epilogueResult);
+    return this.processResult(outputResult);
   }
 
+  @Post("/{epilogueProgressId}/complete-summary")
   public async completeSummary(
-    req: Request
-  ): Promise<Result<boolean>> {
-    await this.authenticateAsync(req);
-
-    const epilogueProgressId = req.params.epilogueProgressId;
+    @Path() epilogueProgressId: string
+  ): Promise<boolean> {
     const userId = this.getUser()?.uid;
 
     await this._epilogueService.completeSummary(userId, epilogueProgressId);
-    return Result.Success(true);
+    return true;
   }
 }

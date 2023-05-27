@@ -1,43 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import useFetchData from "../../../../api/useFetchData";
+import useFetchData, { UseFetchDataOptions } from "../../../../api/useFetchData";
 import {
   UseFetchDataOptionsQuizRequest,
   QuizResponse,
   QuizOption,
-  QuizRequestBodyAnswer,
-  QuizRequestBodyIntialQuestion,
-  QuizResponseNextQuestion,
-  QuizResponseComplete,
+  QuizRequestBody,
 } from "../../../../context/contextTypes/quizTypes";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import EpilogueQuizQuestion from "./EpilogueQuizQuestion";
 import "./EpilogueQuiz.scss";
 
-const requestIntialQuestionFetchOption: UseFetchDataOptionsQuizRequest = {
-  method: "POST",
-  body: {
-    questionRequested: true,
-  },
-};
-
 const EpilogueQuiz = () => {
   const navigate = useNavigate();
   const { id: epilogueProgressId } = useParams<{ id: string }>();
-  const [fetchOptions, setFetchOptions] =
-    useState<UseFetchDataOptionsQuizRequest>(requestIntialQuestionFetchOption);
+  const [fetchOptions, setFetchOptions] = useState<{
+    url: string;
+    options?: UseFetchDataOptionsQuizRequest | UseFetchDataOptions;
+  }>({
+    url: `epilogues/${epilogueProgressId}/quiz/request-question`,
+    options: {
+      method: "POST",
+    },
+  });
   const {
     dataWithHttpResponse: response,
     loading,
     error,
     retry,
-  } = useFetchData<QuizResponse>(
-    `epilogues/${epilogueProgressId}/quiz`,
-    fetchOptions
-  );
-  const [currentQuestion, setCurrentQuestion] =
-    useState<QuizResponseNextQuestion>();
-  const [nextQuestion, setNextQuestion] = useState<QuizResponseNextQuestion>();
+  } = useFetchData<QuizResponse>(fetchOptions.url, fetchOptions.options);
+  const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
+  const [nextQuestion, setNextQuestion] = useState<QuizResponse>();
   const [quizCompleted, setQuizCompleted] = useState<boolean>();
   const [preserveChildren, setPreserveChildren] = useState<boolean>();
 
@@ -50,11 +43,14 @@ const EpilogueQuiz = () => {
       }
 
       // new request is triggered by changing these fetch options
-      const body: QuizRequestBodyAnswer = {
+      const body: QuizRequestBody = {
         optionId: option.id,
         questionId: currentQuestion.questionId,
       };
-      setFetchOptions({ method: "POST", body: body });
+      setFetchOptions({
+        url: `epilogues/${epilogueProgressId}/quiz/answer-question`,
+        options: { method: "POST", body: body },
+      });
     },
     [currentQuestion]
   );
@@ -69,25 +65,23 @@ const EpilogueQuiz = () => {
       return;
     }
 
-    const dataAsQuizComplete = response.data as QuizResponseComplete;
-    if (dataAsQuizComplete?.quizCompleted) {
+    const quizResponse = response.data as QuizResponse;
+    if (quizResponse?.quizCompleted) {
       setQuizCompleted(true);
       navigate(
-        `/epilogues/${epilogueProgressId}/quiz/${dataAsQuizComplete.quizId}/completed`
+        `/epilogues/${epilogueProgressId}/quiz/${quizResponse.quizId}/completed`
       );
       return;
     }
 
-    const nextQuestionResponseData = response.data as QuizResponseNextQuestion;
-    const intialQuestionRequest_WasMade = (
-      response.httpInfo?.options?.body as QuizRequestBodyIntialQuestion
-    )?.questionRequested;
-    if (intialQuestionRequest_WasMade) {
-      setCurrentQuestion(nextQuestionResponseData);
+    const initialQuestionRequestMade =
+      response.httpInfo?.url?.indexOf("/request-question") > -1;
+    if (initialQuestionRequestMade) {
+      setCurrentQuestion(quizResponse);
       setPreserveChildren(true);
       return;
     }
-    setNextQuestion(nextQuestionResponseData);
+    setNextQuestion(quizResponse);
   }, [response]);
 
   return (

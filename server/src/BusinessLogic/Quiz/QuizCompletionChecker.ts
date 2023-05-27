@@ -1,4 +1,3 @@
-import { ApiError } from "../../ApiSupport/apiErrorHelpers";
 import {
   QuizState,
   RoundOutcome,

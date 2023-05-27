@@ -1,4 +1,4 @@
-import { ApiError } from "../../ApiSupport/apiErrorHelpers";
+import { ApiErrorResponse } from "../../ApiSupport/apiErrorHelpers";
 import {
   QuizOutcome,
   QuizState,
@@ -75,11 +75,11 @@ export class QuizStateRoundQuestionsGenerator {
       log(
         `<comute-next-round>: This method should be called only after user responds to at least a round of questions.`
       );
-      throw ApiError.Error("Something went wrong", 500);
+      throw ApiErrorResponse.InternalError();
     }
     if (this._qs.quizOutcomes?.some((o) => o.outcome === RoundOutcome.Unset)) {
       log(`<comute-next-round>: This method should be called only with all the outcomes decided.`);
-      throw ApiError.Error("Something went wrong", 500);
+      throw ApiErrorResponse.InternalError();
     }
   }
 

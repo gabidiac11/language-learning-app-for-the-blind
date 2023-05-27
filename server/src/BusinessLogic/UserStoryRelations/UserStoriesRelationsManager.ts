@@ -39,6 +39,8 @@ export class UserStoriesRelationsManager {
     const result = await this._db.get<string>(
       `userStoriesTableRelations/${userId}/blockProgress/${blockProgressId}/userStoryId`
     );
+    if(result.isError()) throw result.errors;
+    
     return result;
   }
 
