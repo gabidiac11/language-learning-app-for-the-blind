@@ -8,7 +8,8 @@ import {
 import BaseController from "./BaseController";
 import { ApiErrorResponse } from "../ApiSupport/apiErrorHelpers";
 import { EpilogueQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/EpilogueQuizServiceFactory";
-import { Body, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import { Body, Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class EpilogueQuizControllerFactory {
@@ -40,7 +41,7 @@ export default class EpilogueQuizControllerFactory {
   }
 }
 
-@Tags('Quiz - Epilogue blocks')
+@Tags("Quiz - Epilogue blocks")
 @Security("BearerAuth")
 @Route("api/epilogues/:epilogueProgressId/quiz")
 class EpilogueQuizController extends BaseController {
@@ -56,7 +57,19 @@ class EpilogueQuizController extends BaseController {
     this._epilogueQuizServiceFactory = epilogueQuizServiceFactory;
   }
 
+  /**
+   * Returns a new question from the quiz. If the quiz doesn't exist it will be created with the first round of questions consisting of all the template questions available.
+   * If the quiz already exists the first unanswered question is returned.
+   * 
+   * To prevent cheating, option-ids and question-ids are generated each time questions are being generated from the template questions.
+   * 
+   * NOTE: this endpoint is accesible only if the user has the epilogue unlocked 
+   * @param epilogueProgressId 
+   * @returns 
+   */
   @Post("/request-question")
+  @Example<QuizResponse>(apiExamples.epilogueQuizRequestQuestionExample, "Next question.")
+  @Example<QuizResponse>(apiExamples.epilogueQuizRequestQuestionExampleCompleted, "Quiz completed.")
   public async requestQuizQuestion(
     @Path() epilogueProgressId: string
   ): Promise<QuizResponse> {
@@ -71,7 +84,27 @@ class EpilogueQuizController extends BaseController {
     return this.processResult(result);
   }
 
+  /**
+   * Receives a question and option id. Matches these values to the current existing unfinished quiz.
+   * 
+   * Updates the quiz state with the outcome (correct/wrong). It returns:
+   * - the correct option id + next question - if the quiz is not completed
+   * - ... or the quiz completion response - if the quiz is completed
+   * 
+   * Based on the outcome, new rounds of questions are generated as follows:
+   * - the probability of a question to appear is increasing as to how many times that question was wrongly answered in a row, OR it increases as to how many times it was prevented from appearing
+   * - the probability of a question to appear is decreasing as to how many times that question was correctly answered in a row
+   * 
+   * To prevent cheating, option-ids and question-ids are generated each time questions are being generated from the template questions.
+   * 
+   * NOTE: this endpoint is accesible only if the user has the epilogue unlocked
+   * @param quizRequest 
+   * @param epilogueProgressId 
+   * @returns 
+   */
   @Post("/")
+  @Example<QuizResponse>(apiExamples.epilogueQuizRequestQuestionExample, "Next question.")
+  @Example<QuizResponse>(apiExamples.epilogueQuizRequestQuestionExampleCompleted, "Quiz completed.")
   public async answerQuizQuestion(
     @Body() quizRequest: QuizRequestBody,
     @Path() epilogueProgressId: string
@@ -91,7 +124,14 @@ class EpilogueQuizController extends BaseController {
     return this.processResult(outputResult);
   }
 
+  /**
+   * Gets the achievements gained by completing an epilogue quiz: the stories unlocked.
+   * @param epilogueProgressId 
+   * @param quizId 
+   * @returns 
+   */
   @Get("/{quizId}/completed")
+  @Example<QuizBlockCompletedStatsResponse>(apiExamples.epilogueCompletedResponse)
   public async getProgressAchievedOfCompletedQuiz(
     @Path() epilogueProgressId: string,
     @Path() quizId: string

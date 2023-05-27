@@ -8,7 +8,8 @@ import {
   QuizResponse,
 } from "../Models/quiz.models";
 import { BlockQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/BlockQuizServiceFactory";
-import { Body, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import { Body, Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
 export default class BlockQuizControllerFactory {
@@ -40,8 +41,8 @@ export default class BlockQuizControllerFactory {
   }
 }
 
-@Tags('Quiz - Builiding blocks')
-@Security('BearerAuth')
+@Tags("Quiz - Builiding blocks")
+@Security("BearerAuth")
 @Route("api/blocks/:blockProgressId/quiz")
 class BlockQuizController extends BaseController {
   private _blocksService: BlocksService;
@@ -56,7 +57,19 @@ class BlockQuizController extends BaseController {
     this._blockQuizServiceFactory = blockQuizServiceFactory;
   }
 
+  /**
+   * Returns a new question from the quiz. If the quiz doesn't exist it will be created with the first round of questions consisting of all the words associated with this building block.
+   * If the quiz already exists the first unanswered question is returned.
+   *
+   * To prevent cheating, option-ids and question-ids are generated each time questions are being generated from the words.
+   *
+   * NOTE: this endpoint is accesible only if the user has this lesson block unlocked
+   * @param blockProgressId
+   * @returns
+   */
   @Post("/request-question")
+  @Example<QuizResponse>(apiExamples.blockQuizRequestQuestionExample, "Next question.")
+  @Example<QuizResponse>(apiExamples.blockQuizRequestQuestionExampleCompleted, "Quiz completed.")
   public async requestQuizQuestion(
     @Path() blockProgressId: string
   ): Promise<QuizResponse> {
@@ -71,7 +84,27 @@ class BlockQuizController extends BaseController {
     return this.processResult(result);
   }
 
+  /**
+   * Receives a question and option id. Matches these values to the current existing unfinished quiz.
+   * 
+   * Updates the quiz state with the outcome (correct/wrong). It returns:
+   * - the correct option id + next question - if the quiz is not completed
+   * - ... or the quiz completion response - if the quiz is completed
+   * 
+   * Based on the outcome, new rounds of questions are generated as follows:
+   * - the probability of a question to appear is increasing as to how many times that question was wrongly answered in a row, OR it increases as to how many times it was prevented from appearing
+   * - the probability of a question to appear is decreasing as to how many times that question was correctly answered in a row
+   * 
+   * To prevent cheating, option-ids and question-ids are generated each time questions are being generated from the words.
+   * 
+   * NOTE: this endpoint is accesible only if the user has this lesson block unlocked
+   * @param quizRequestBody 
+   * @param blockProgressId 
+   * @returns 
+   */
   @Post("/answer-question")
+  @Example<QuizResponse>(apiExamples.blockQuizRequestQuestionExample, "Next question.")
+  @Example<QuizResponse>(apiExamples.blockQuizRequestQuestionExampleCompleted, "Quiz completed.")
   public async answerQuizQuestion(
     @Body() quizRequestBody: QuizRequestBody,
     @Path() blockProgressId: string
@@ -91,16 +124,26 @@ class BlockQuizController extends BaseController {
     return this.processResult(result);
   }
 
+  /**
+   * Gets the achievements gained by completing this quiz: other building blocks might be unlocked or the epilogue of the lesson story is unlocked if all building blocks are unlocked.
+   * @param blockProgressId 
+   * @param quizId 
+   * @returns 
+   */
   @Get("/{quizId}/completed")
+  @Example<QuizBlockCompletedStatsResponse>(apiExamples.blockCompletedResponse)
   public async getProgressAchievedOfCompletedQuiz(
     @Path() blockProgressId: string,
-    @Path() quizId: string,
+    @Path() quizId: string
   ): Promise<QuizBlockCompletedStatsResponse> {
     await this.guardQuizRequestAuthorization(blockProgressId);
 
     const userId = this.getUser().uid;
-    
-    const quizService = await this._blockQuizServiceFactory.create(userId, blockProgressId); 
+
+    const quizService = await this._blockQuizServiceFactory.create(
+      userId,
+      blockProgressId
+    );
     const result = await quizService.getProgressAchievedOfCompletedQuiz(quizId);
     return this.processResult(result);
   }

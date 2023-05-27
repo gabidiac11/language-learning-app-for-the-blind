@@ -58,6 +58,12 @@ app.use(
     swaggerOptions: {
       url: "/swagger.json",
     },
+    customCss: `
+      .swagger-ui .opblock-tag {
+        display: block!important;
+      }
+    `,
+    customSiteTitle: "Swagger - API Language Learning App"
   })
 );
 
@@ -69,8 +75,6 @@ const [
   epilogueControllerFactory,
   epilogueQuizServiceFactory,
 ] = getControllers(diContainer);
-
-// TODO: make sure to validate if each request id is GUID and not something else!!!
 
 // ENDPOINTS -> ### Stories
 app.get("/api/userStories", async (req, res) => {
