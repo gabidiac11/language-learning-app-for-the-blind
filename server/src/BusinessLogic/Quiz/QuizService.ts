@@ -1,5 +1,5 @@
 import {
-  ApiError,
+  ApiErrorResponse,
   getStringifiedError,
 } from "../../ApiSupport/apiErrorHelpers";
 import Result from "../../ApiSupport/Result";
@@ -13,8 +13,8 @@ import { Database } from "../../Data/database";
 import { log } from "../../logger";
 import {
   QuizResponse,
-  QuizRequestBodyAnswer,
   QuizCompletedStatsResponse,
+  QuizRequestBody,
 } from "../../Models/quiz.models";
 import ProgressService from "../Progress/ProgressService";
 import { QuizStateCreator } from "./QuizStateCreator";
@@ -71,7 +71,7 @@ export default class QuizService {
   }
 
   public async answerQuestionAndGetNextQuestion(
-    request: QuizRequestBodyAnswer
+    request: QuizRequestBody
   ): Promise<Result<QuizResponse>> {
     // validate user progress permission to the block
     const validationResult = this.getAccessValidatonResult();
@@ -218,6 +218,9 @@ export default class QuizService {
 
       const qs = await this.getMostRecentQuizAsync();
       return Result.Success<QuizResponse>({
+        options: [],
+        questionId: "",
+        questionText: "",
         quizId: qs.id,
         quizCompleted: true,
       });
@@ -333,7 +336,7 @@ export default class QuizService {
       log(
         `[${this._trace}]: Could not find the recent quiz even after prior passed validations.`
       );
-      throw ApiError.Error("Something went wrong.", 500);
+      throw ApiErrorResponse.InternalError();
     }
 
     const recentestQuiz = Object.values(quiezzesResult.data).reduce(
@@ -364,7 +367,7 @@ export default class QuizService {
       log(
         `[${this._trace}]: Something went wrong. No questions with unanswered status.`
       );
-      throw ApiError.Error("Something went wrong", 500);
+      throw ApiErrorResponse.InternalError();
     }
     log(
       `[${this._trace}]: Found question id:${quizOutcome.quizQuestion.id}, text:${quizOutcome.quizQuestion.text}.`

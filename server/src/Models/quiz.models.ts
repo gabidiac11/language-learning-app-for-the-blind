@@ -6,31 +6,22 @@ import {
 import { UserStoryOutput } from "./output.userStory.types";
 
 // quiz question REQUEST
-export type QuizRequestBody =
-  | QuizRequestBodyAnswer
-  | QuizRequestBodyIntialQuestion;
-export type QuizRequestBodyIntialQuestion = {
-  questionRequested: true;
-};
-export type QuizRequestBodyAnswer = {
+export type QuizRequestBody = {
   questionId: string;
   optionId: string;
 };
 
 // quiz question RESPONSE:
-export type QuizResponse = QuizResponseNextQuestion | QuizResponseComplete;
-export type QuizResponseNextQuestion = {
+export type QuizResponse = {
   questionText: string;
   questionId: string;
   options: QuizOption[];
 
   // id to the correct answer from previous question
   previouslyQuestion_CorrectOptionId?: string;
-};
-export type QuizResponseComplete = {
-  quizCompleted: boolean;
-  quizId: string;
-  previouslyQuestion_CorrectOptionId?: string;
+  
+  quizCompleted?: boolean;
+  quizId?: string;
 };
 
 // quiz completion -> state response
