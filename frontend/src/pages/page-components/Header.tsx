@@ -7,9 +7,11 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { firebaseAuth, logout } from "./../../auth/firebase-auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Alert, Avatar, Button, Snackbar } from "@mui/material";
+import { Alert, Avatar, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router";
 import { Home, Info, LogoutRounded } from "@mui/icons-material";
+import { useAppStateContext } from "../../context/hooks/useAppStateContext";
+import { LanguageShortcuts } from "./LanguageShortcuts";
 
 export default function Header() {
   const [user] = useAuthState(firebaseAuth);
@@ -19,6 +21,7 @@ export default function Header() {
     severity: "error",
   });
   const navigate = useNavigate();
+  const {language} = useAppStateContext();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -41,17 +44,20 @@ export default function Header() {
           <button
             className="no-btn"
             aria-label="link to home page"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/home")}
             style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
             tabIndex={0}
           >
             <Home
               htmlColor="white"
               aria-label="link to home page"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/home")}
               className="outline-none"
             />
           </button>
+
+          <LanguageShortcuts lang={language} />
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 0 }}>
             <div

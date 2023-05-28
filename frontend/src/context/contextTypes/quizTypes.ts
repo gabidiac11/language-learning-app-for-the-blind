@@ -2,6 +2,7 @@ import { UseFetchDataOptions } from "../../api/useFetchData";
 import {
   BuildingBlockProgress,
   EpilogueProgress,
+  Language,
   UserStory,
 } from "./ctxTypes";
 
@@ -25,6 +26,8 @@ export type QuizResponse = {
   questionText: string;
   questionId: string;
   options: QuizOption[];
+
+  lang: Language;
 
   // id to the correct answer from previous question
   previouslyQuestion_CorrectOptionId?: string;

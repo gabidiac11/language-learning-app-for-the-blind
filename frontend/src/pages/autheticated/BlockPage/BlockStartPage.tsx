@@ -5,9 +5,13 @@ import { BuildingBlockProgress } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 
 const BlockStartPage = () => {
-  const { id: blockProgressId } = useParams<{ id: string }>();
+  const { id: blockProgressId, lang } = useParams<{
+    id: string;
+    lang: string;
+  }>();
   const { data, loading, error, retry } = useFetchData<BuildingBlockProgress>(
-    `blocks/${blockProgressId}`
+    `blocks/${blockProgressId}`,
+    lang
   );
 
   return (
@@ -17,14 +21,15 @@ const BlockStartPage = () => {
           <div className="view-content">
             <h1> {data.block.name} </h1>
             <h3>
-              <Link to={`/blocks/${blockProgressId}/introduction`}>
-               Word introduction and practice {!!data.timeSummaryCompleted && "✔️"}
+              <Link to={`/blocks/${lang}/${blockProgressId}/introduction`}>
+                Word introduction and practice{" "}
+                {!!data.timeSummaryCompleted && "✔️"}
               </Link>
             </h3>
             {/* TODO: inform why is locked - introduction needs to be started */}
             <h3>
               {!!data.timeSummaryCompleted && (
-                <Link to={`/blocks/${blockProgressId}/quiz`}>
+                <Link to={`/blocks/${lang}/${blockProgressId}/quiz`}>
                   Quiz {!!data.timeCompleted && "✔️"}
                 </Link>
               )}

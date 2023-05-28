@@ -8,11 +8,12 @@ import {
   QuizResponse,
 } from "../Models/quiz.models";
 import { BlockQuizServiceFactory } from "../BusinessLogic/Quiz/QuizServiceFactories/BlockQuizServiceFactory";
-import { Body, Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
+import { Body, Example, Get, Header, Path, Post, Route, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
+import { lessonLanguageHeader } from "../constants";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class BlockQuizControllerFactory {
+export class BlockQuizControllerFactory {
   public static inject = [
     Authenticator.name,
     BlocksService.name,
@@ -43,8 +44,9 @@ export default class BlockQuizControllerFactory {
 
 @Tags("Quiz - Builiding blocks")
 @Security("BearerAuth")
+@Security("LessonLanguage")
 @Route("api/blocks/:blockProgressId/quiz")
-class BlockQuizController extends BaseController {
+export class BlockQuizController extends BaseController {
   private _blocksService: BlocksService;
   private _blockQuizServiceFactory: BlockQuizServiceFactory;
   constructor(

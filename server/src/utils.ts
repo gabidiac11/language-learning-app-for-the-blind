@@ -72,3 +72,14 @@ export const valuesOrderedByTimestamp = <T>(obj: { [id: string]: T }) => {
   });
   return values as unknown as T[];
 };
+
+export const arrayToObj = <T>(items: T[]): { [id: string]: T } => {
+  const obj = items.reduce(
+    (valueObj, currentItem) => ({
+      ...valueObj,
+      [(currentItem as unknown as { id: string | number }).id]: currentItem,
+    }),
+    {}
+  );
+  return obj;
+};

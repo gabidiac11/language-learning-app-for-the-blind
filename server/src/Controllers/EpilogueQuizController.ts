@@ -12,7 +12,7 @@ import { Body, Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class EpilogueQuizControllerFactory {
+export class EpilogueQuizControllerFactory {
   public static inject = [
     Authenticator.name,
     EpilogueService.name,
@@ -43,8 +43,9 @@ export default class EpilogueQuizControllerFactory {
 
 @Tags("Quiz - Epilogue blocks")
 @Security("BearerAuth")
+@Security("LessonLanguage")
 @Route("api/epilogues/:epilogueProgressId/quiz")
-class EpilogueQuizController extends BaseController {
+export class EpilogueQuizController extends BaseController {
   private _epilogueService: EpilogueService;
   private _epilogueQuizServiceFactory: EpilogueQuizServiceFactory;
   constructor(

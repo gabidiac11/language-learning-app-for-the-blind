@@ -9,7 +9,6 @@ export class Authenticator {
   constructor() {}
 
   public async getAuthUserFromReq(req: Request): Promise<Result<AppUser>> {
-    console.log({hhh: req.headers})
     const authHeader = req.headers.authorization;
     if (!(authHeader && authHeader.startsWith("Bearer "))) {
       return Result.Error<AppUser>("Unauthorized.", 401);

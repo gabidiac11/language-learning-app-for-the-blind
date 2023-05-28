@@ -18,6 +18,8 @@ import EpilogueQuiz from "../pages/autheticated/EpiloguePage/EpilogueQuiz/Epilog
 import EpilogueQuizCompleted from "../pages/autheticated/EpiloguePage/EpilogueQuiz/EpilogueQuizCompleted";
 import WithToken from "./WithToken";
 import InstructionsPage from "../pages/InstructionsPage/InstructionsPage";
+import { LessonLanguagesPage } from "../pages/autheticated/LessonLanguages/LessonLanguages";
+import { WithLanguage } from "../pages/page-components/WithLanguage";
 
 // TODO: on-off button for voice navigation
 
@@ -46,37 +48,115 @@ const App = () => {
           <WithToken>
             <WithTokenRefreshInterval>
               {/* TODO: all these pages should inform the user for a time what each page does and what should they do vacally and what not */}
-              
+
               <Routes>
+                {/* ### LESSON LANGUAGES */}
+                <Route
+                  path="/home"
+                  element={
+                    <WithLanguage>
+                      <LessonLanguagesPage />
+                    </WithLanguage>
+                  }
+                />
+
                 {/* ### STORIES PAGES: */}
-                <Route path="/stories" element={<StoriesOverviewPage />} />
-                <Route path="/stories/:id" element={<StoryPage />} />
+                <Route
+                  path="/stories/:lang"
+                  element={
+                    <WithLanguage>
+                      <StoriesOverviewPage />
+                    </WithLanguage>
+                  }
+                />
+                <Route
+                  path="/stories/:lang/:id"
+                  element={
+                    <WithLanguage>
+                      <StoryPage />
+                    </WithLanguage>
+                  }
+                />
 
                 {/* ### BUILDING BLOCK PAGES: */}
-                <Route path="/blocks/:id/quiz" element={<BlockQuiz />} />
                 <Route
-                  path="/blocks/:id/introduction"
-                  element={<BlockIntroduction />}
+                  path="/blocks/:lang/:id/quiz"
+                  element={
+                    <WithLanguage>
+                      <BlockQuiz />
+                    </WithLanguage>
+                  }
                 />
                 <Route
-                  path="/blocks/:id/quiz/:quizId/completed"
-                  element={<BlockQuizCompleted />}
+                  path="/blocks/:lang/:id/introduction"
+                  element={
+                    <WithLanguage>
+                      <BlockIntroduction />
+                    </WithLanguage>
+                  }
                 />
-                <Route path="/blocks/:id" element={<BlockStartPage />} />
+                <Route
+                  path="/blocks/:lang/:id/quiz/:quizId/completed"
+                  element={
+                    <WithLanguage>
+                      <BlockQuizCompleted />
+                    </WithLanguage>
+                  }
+                />
+                <Route
+                  path="/blocks/:lang/:id"
+                  element={
+                    <WithLanguage>
+                      <BlockStartPage />
+                    </WithLanguage>
+                  }
+                />
 
                 {/* ### EPILOGUE PAGES: */}
-                <Route path="/epilogues/:id/quiz" element={<EpilogueQuiz />} />
                 <Route
-                  path="/epilogues/:id/quiz/:quizId/completed"
-                  element={<EpilogueQuizCompleted />}
+                  path="/epilogues/:lang/:id/quiz"
+                  element={
+                    <WithLanguage>
+                      <EpilogueQuiz />
+                    </WithLanguage>
+                  }
                 />
-                <Route path="/epilogues/:id" element={<EpilogueStartPage />} />
+                <Route
+                  path="/epilogues/:lang/:id/quiz/:quizId/completed"
+                  element={
+                    <WithLanguage>
+                      <EpilogueQuizCompleted />
+                    </WithLanguage>
+                  }
+                />
+                <Route
+                  path="/epilogues/:lang/:id"
+                  element={
+                    <WithLanguage>
+                      <EpilogueStartPage />
+                    </WithLanguage>
+                  }
+                />
 
                 {/* ### INSTRUCTIONS: */}
-                <Route path="/instructions" element={<InstructionsPage />} />
+                <Route
+                  path="/instructions"
+                  element={
+                    <WithLanguage>
+                      <InstructionsPage />
+                    </WithLanguage>
+                  }
+                />
 
                 {/* ### FALLBACK PAGE: */}
-                <Route path="*" element={<DefaultRouteRedirection isAuth />} />
+                <Route
+                  path="*"
+                  element={
+                    <WithLanguage>
+                      <DefaultRouteRedirection isAuth />
+                    </WithLanguage>
+                  }
+                />
               </Routes>
             </WithTokenRefreshInterval>
           </WithToken>
@@ -90,7 +170,7 @@ const DefaultRouteRedirection = (props: { isAuth?: boolean }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    props.isAuth && navigate("/stories", { replace: true });
+    props.isAuth && navigate("/home", { replace: true });
     !props.isAuth && navigate("/login", { replace: true });
   }, [props.isAuth]);
 

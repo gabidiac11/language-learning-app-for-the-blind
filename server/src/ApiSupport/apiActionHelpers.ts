@@ -3,6 +3,8 @@ import { log } from "../logger";
 import { Response, Request } from "express";
 import { ApiErrorResponse, getErrorLogMessage } from "./apiErrorHelpers";
 import BaseController from "../Controllers/BaseController";
+import { Injector } from "boxed-injector";
+import { LanguageProvider } from "../BusinessLogic/LanguageProvider";
 
 export function processResultOfT<T>(
   result: Result<T>,
@@ -31,10 +33,14 @@ export function processResultOfT<T>(
 }
 
 export async function executeAuthenticatedAction<T>(
-  { req, res, controller }: { req: Request; res: Response, controller: BaseController },
+  { req, res, controller, DI }: { req: Request; res: Response, controller: BaseController, DI: Injector },
   callbackAsync: () => Promise<T>
 ) {
   try {
+    const languageProvider = DI.get(LanguageProvider.name) as LanguageProvider;
+    if(languageProvider.language === undefined) {
+      throw ApiErrorResponse.BadRequest("Language is not set.");
+    }
     await controller.authenticateAsync(req);
     const data = await callbackAsync();
     return processResultOfT<T>(Result.Success<T>(data), req, res);

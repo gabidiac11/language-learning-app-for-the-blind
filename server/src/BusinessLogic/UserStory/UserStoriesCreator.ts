@@ -78,6 +78,9 @@ class LessonToUserStoryConvertor {
 
     const userStory: UserStory = {
       id: userStoryId,
+
+      lang: this._lessonStory.lang,
+
       order: 0,
       storyId: this._lessonStory.id,
 
@@ -131,6 +134,7 @@ class LessonToUserStoryConvertor {
 
         isStarter: buildingBlock.isStarter,
         wordProgressItems: arrayToObjectIds(wordProgressItems),
+        lang: this._lessonStory.lang,
       };
       blockProgressItems.push(item);
     }
@@ -159,6 +163,7 @@ class LessonToUserStoryConvertor {
         order: wordProgressItems.length,
         userStoryId,
         wordId: word.id,
+        lang: this._lessonStory.lang,
       };
       wordProgressItems.push(wordProgress);
     }
@@ -173,6 +178,7 @@ class LessonToUserStoryConvertor {
         order: questionProgressItems.length,
         userStoryId,
         questionId: question.id,
+        lang: this._lessonStory.lang,
       });
     }
     const epilogueProgress: EpilogueProgress = {
@@ -181,6 +187,7 @@ class LessonToUserStoryConvertor {
       lessonStoryId: this._lessonStory.id,
       epilogueId: this._lessonStory.epilogue.id,
       questionProgressItems: arrayToObjectIds(questionProgressItems),
+      lang: this._lessonStory.lang,
     };
     return epilogueProgress;
   }

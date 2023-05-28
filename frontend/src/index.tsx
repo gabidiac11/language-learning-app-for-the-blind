@@ -5,8 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import { AppContextProvider } from "./context/AppContext";
 import "./index.scss";
 
-// TODO: rename the frontend folder to /frontend
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

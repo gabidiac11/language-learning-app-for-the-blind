@@ -1,7 +1,7 @@
 import { CardHeader, CardMedia } from "@mui/material";
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
-import { BuildingBlockProgress, EpilogueProgress } from "../../../context";
+import { EpilogueProgress } from "../../../context";
 import CardBlock from "../../page-components/CardBlock/CardBlock";
 import { ItemProgressSummary } from "../../page-components/ItemProgressSummary";
 import "./StoryPage.scss";
@@ -19,7 +19,7 @@ const EpilogueBlockItem = (props: {
       //TODO: add audio saying it's diabled because it's locked
       return;
     }
-    navigate(`/epilogues/${epilogueProgress.id}`);
+    navigate(`/epilogues/${epilogueProgress.lang}/${epilogueProgress.id}`);
   }, [epilogueProgress, disabled]);
 
   return (

@@ -1,5 +1,11 @@
+export type Language = "ru" | "fr" | "de";
+
+export const acceptedLanguages: Language[] = ["ru", "fr", "de"];
+
 export type Story = {
   id: string;
+
+  lang: Language;
 
   order: number;
 
@@ -11,7 +17,7 @@ export type Story = {
   imageUrl: string;
 
   // ids of the stories which will be unlocked when current story is completed
-  idsItemsDependentOnThis?: string[]; 
+  idsItemsDependentOnThis?: string[];
   isStarter: boolean;
 
   buildingBlocks: BuildingBlock[];
@@ -22,6 +28,8 @@ export type Story = {
 //building block:
 export type BuildingBlock = {
   id: string;
+
+  lang: Language;
 
   name: string;
   imageUrl: string;
@@ -40,6 +48,8 @@ export type BuildingBlock = {
 export type Word = {
   id: string;
 
+  lang: Language;
+
   // the text is the actual word in Russian
   text: string;
 
@@ -53,6 +63,8 @@ export type Word = {
 // epilogue:
 export type Epilogue = {
   id: string;
+
+  lang: Language;
 
   // the name of the story tale; short and descriptive - needs to be a word from the building blocks completed from the current and the previous stories
   name: string;
@@ -71,6 +83,8 @@ export type Epilogue = {
 export type EpilogueQuestion = {
   id: string;
 
+  lang: Language;
+
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
   text: string;
@@ -86,4 +100,26 @@ export type EpilogueQuestionAnswer = {
 export type EpilogueOption = {
   id: string;
   text: string;
+  lang: Language;
 };
+
+export type LanguageDataItem = {
+  id: string;
+  name: string;
+  active: boolean;
+  imageUrl: string;
+  alt: string;
+  order: number;
+};
+
+export type LanguageData = {
+  [id: string]: LanguageDataItem;
+};
+
+export type LessonStoryData = {
+  [lang in Language]: Story[];
+};
+export type LessonJsonData = {
+  lessonData: LessonStoryData,
+  languages: LanguageData;
+}

@@ -21,7 +21,7 @@ export const StoryCard = (props: {
       //TODO: add audio saying it's diabled because it's locked
       return;
     }
-    navigate(`/stories/${userStory.id}`);
+    navigate(`/stories/${userStory.lang}/${userStory.id}`);
   }, [userStory, disabled]);
 
   return (

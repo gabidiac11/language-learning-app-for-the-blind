@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import axiosInstance from "../axiosInstance";
+import { lessonLanguageHeader } from "../constants";
 
 export type UseFetchDataOptions = {
   method: "GET" | "POST" | "PUT";
@@ -8,22 +9,33 @@ export type UseFetchDataOptions = {
 
 const computeAxiosPromise = (
   fetchOptions: UseFetchDataOptions | undefined,
-  url: string
+  url: string,
+  lang?: string
 ) => {
+  const config = {
+    headers: {
+      [lessonLanguageHeader]: lang,
+    },
+  };
+
   if (!fetchOptions) {
-    return axiosInstance.get(url);
+    return axiosInstance.get(url, config);
   }
   if (fetchOptions.method === "POST") {
-    return axiosInstance.post(url, fetchOptions.body);
+    return axiosInstance.post(url, fetchOptions.body, config);
   }
-  return axiosInstance.get(url);
+  return axiosInstance.get(url, config);
 };
 
-const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
+const useFetchData = <T>(
+  url: string,
+  lang?: string,
+  fetchOptions?: UseFetchDataOptions,
+) => {
   const [data, setData] = useState<T>();
   const [dataWithHttpResponse, setDataWithHttpResponse] = useState<{
     data: T;
-    httpInfo: { options?: UseFetchDataOptions, url: string };
+    httpInfo: { options?: UseFetchDataOptions; url: string };
   }>();
   const [, setLoadingKey] = useState<number>(0);
   const loadingRef = useRef<{ key: number; value: boolean }>({
@@ -48,15 +60,14 @@ const useFetchData = <T>(url: string, fetchOptions?: UseFetchDataOptions) => {
       setLoading(true);
       const _fetchOptions = fetchOptions;
       const _url = url;
-
-      const response = await computeAxiosPromise(fetchOptions, url);
+      const response = await computeAxiosPromise(fetchOptions, url, lang);
       setData(response.data);
       setError(undefined);
       setDataWithHttpResponse({
         data: response.data as T,
         httpInfo: {
           options: _fetchOptions,
-          url: _url
+          url: _url,
         },
       });
     } catch (error) {
