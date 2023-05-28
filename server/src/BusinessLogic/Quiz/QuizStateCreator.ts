@@ -24,6 +24,7 @@ export class QuizStateCreator {
 
     const qs: QuizState = {
       id: genUid(),
+      lang: this._quizableItem.lang,
       timestamp: Date.now(),
 
       entityId: this._quizableItem.entityId,
@@ -54,6 +55,7 @@ export class QuizStateCreator {
 
     const question: QuizQuestion = {
       id: genUid(),
+      lang: this._quizableItem.lang,
       correctOptionId: correctOption.id,
       options,
       text: templateQuestion.questionText,

@@ -4,30 +4,26 @@ dotenv.config(); // TODO: see if this affects the build from react and its varia
 import bodyParser from "body-parser";
 import path from "path";
 import express from "express";
+import { Request } from "express";
 import fs from "fs";
-import diContainer from "./diContainer";
 import { log } from "./logger";
 import { executeAuthenticatedAction } from "./ApiSupport/apiActionHelpers";
 import getControllers from "./ApiSupport/getControllers";
 import Seeder from "./Data/Seed/Seeder";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
+import createContainer from "./diContainer";
+import { acceptedLanguages, Language } from "./Data/ctxTypes/ctx.story.types";
+import { lessonLanguageHeader } from "./constants";
 
 if (process.env.ALLOW_SEED === "true") {
   (async () => {
-    const seeder = (await diContainer.get("Seeder")) as Seeder;
+    const seeder = (await createContainer(undefined).get("Seeder")) as Seeder;
     seeder.seedIfNeeded();
   })();
 } else {
   log("No seed tried for this environment.");
 }
-
-/**
- * TODO:
- * - adaugat swagger
- * - explicatii swagger
- * - actualizat documentatia
- */
 
 // TODO:
 // prioritize what message will pre-recorded for the user, some might not appear to him if the app is working from a good actor
@@ -62,154 +58,177 @@ app.use(
       .swagger-ui .opblock-tag {
         display: block!important;
       }
+      .btn.authorize {
+        display: none;
+      }
+      .modal-ux-header h3 {
+        visibility: hidden;
+      }
+      .swagger-ui .auth-wrapper .authorize {
+        padding-bottom: 10px;
+      }
     `,
-    customSiteTitle: "Swagger - API Language Learning App"
+    customJs: `/swagger.js`,
+    customSiteTitle: "Swagger - API Language Learning App",
   })
 );
 
-// TODO: move endpoints to a file
-const [
-  storiesControllerFactory,
-  blocksControllerFactory,
-  blockQuizControllerFactory,
-  epilogueControllerFactory,
-  epilogueQuizServiceFactory,
-] = getControllers(diContainer);
+// ENDPOINTS -> ### Languages
+app.get("/api/lesson-languages", async (req, res) => {
+  const DI = createContainer("");
+  const { lessonLanguagesController: controller } = getControllers(DI);
+  const action = () => controller.getLessonLanguages();
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
+});
 
 // ENDPOINTS -> ### Stories
 app.get("/api/userStories", async (req, res) => {
-  const controller = storiesControllerFactory.create();
+  const DI = createContainer(lg(req));
+  const { userStoriesController: controller } = getControllers(DI);
+
   const action = () => controller.getStories();
-  await executeAuthenticatedAction({ req, res, controller }, action);
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
 app.get("/api/userStories/:id", async (req, res) => {
-  const controller = storiesControllerFactory.create();
+  const DI = createContainer(lg(req));
+  const { userStoriesController: controller } = getControllers(DI);
+
   const [id] = controller.getParams(req, ["id"]);
   const action = () => controller.getStory(id);
-  await executeAuthenticatedAction({ req, res, controller }, action);
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
 
 // ENDPOINTS -> ### BLOCKS PROGRESS
 app.get("/api/blocks/:blockProgressId", async (req, res) => {
-  const controller = blocksControllerFactory.create();
+  const DI = createContainer(lg(req));
+  const { blocksController: controller } = getControllers(DI);
+
   const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
-  const action = () =>
-    controller.getBlockProgress(blockProgressId);
-  await executeAuthenticatedAction({ req, res, controller }, action);
+  const action = () => controller.getBlockProgress(blockProgressId);
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
 app.post("/api/blocks/:blockProgressId/complete-summary", async (req, res) => {
-  const controller = blocksControllerFactory.create();
+  const DI = createContainer(lg(req));
+  const { blocksController: controller } = getControllers(DI);
+
   const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
-  const action = () =>
-    controller.completeSummary(blockProgressId);
-  await executeAuthenticatedAction({ req, res, controller }, action);
+  const action = () => controller.completeSummary(blockProgressId);
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
 
 // ENDPOINTS -> ### BLOCK QUIZ
-app.post("/api/blocks/:blockProgressId/quiz/request-question", async (req, res) => {
-  const controller = blockQuizControllerFactory.create();
-  const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
-  const action = () =>
-    controller.requestQuizQuestion(
-      blockProgressId
-    );
-  await executeAuthenticatedAction({ req, res, controller }, action);
-});
+app.post(
+  "/api/blocks/:blockProgressId/quiz/request-question",
+  async (req, res) => {
+    const DI = createContainer(lg(req));
+    const { blockQuizController: controller } = getControllers(DI);
+    
+    const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
+    const action = () => controller.requestQuizQuestion(blockProgressId);
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
+  }
+);
 
-app.post("/api/blocks/:blockProgressId/quiz/answer-question", async (req, res) => {
-  const controller = blockQuizControllerFactory.create();
-  const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
-  const action = () =>
-    controller.answerQuizQuestion(
-      req.body,
-      blockProgressId
-    );
-  await executeAuthenticatedAction({ req, res, controller }, action);
-});
+app.post(
+  "/api/blocks/:blockProgressId/quiz/answer-question",
+  async (req, res) => {
+    const DI = createContainer(lg(req));
+    const { blockQuizController: controller } = getControllers(DI);
+
+    const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
+    const action = () =>
+      controller.answerQuizQuestion(req.body, blockProgressId);
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
+  }
+);
 app.get(
   "/api/blocks/:blockProgressId/quiz/:quizId/completed",
   async (req, res) => {
-    const controller = blockQuizControllerFactory.create();
+    const DI = createContainer(lg(req));
+    const { blockQuizController: controller } = getControllers(DI);
+
     const [blockProgressId, quizId] = controller.getParams(req, [
       "blockProgressId",
       "quizId",
     ]);
     const action = () =>
-      controller.getProgressAchievedOfCompletedQuiz(
-        blockProgressId,
-        quizId
-      );
-    await executeAuthenticatedAction({ req, res, controller }, action);
+      controller.getProgressAchievedOfCompletedQuiz(blockProgressId, quizId);
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
   }
 );
 
 // ENDPOINTS -> ### EPILOGUE
 app.get("/api/epilogues/:epilogueProgressId", async (req, res) => {
-  const controller = epilogueControllerFactory.create();
+  const DI = createContainer(lg(req));
+  const { epilogueController: controller } = getControllers(DI);
+  
   const [epilogueProgressId] = controller.getParams(req, [
     "epilogueProgressId",
   ]);
-  const action = () =>
-    controller.getEpilogueProgress(epilogueProgressId);
+  const action = () => controller.getEpilogueProgress(epilogueProgressId);
 
-  await executeAuthenticatedAction({ req, res, controller }, action);
+  await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
 
 app.post(
   "/api/epilogues/:epilogueProgressId/complete-summary",
   async (req, res) => {
-    const controller = epilogueControllerFactory.create();
+    const DI = createContainer(lg(req));
+    const { epilogueController: controller } = getControllers(DI);
+    
     const [epilogueProgressId] = controller.getParams(req, [
       "epilogueProgressId",
     ]);
-    const action = () =>
-      controller.completeSummary(epilogueProgressId);
+    const action = () => controller.completeSummary(epilogueProgressId);
 
-    await executeAuthenticatedAction({ req, res, controller }, action);
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
   }
 );
 
 // ENDPOINTS -> ### EPILOGUE QUIZ
-app.post("/api/epilogues/:epilogueProgressId/quiz/request-question", async (req, res) => {
-  const controller = epilogueQuizServiceFactory.create();
-  const [epilogueProgressId] = controller.getParams(req, [
-    "epilogueProgressId",
-  ]);
-  const action = () =>
-    controller.requestQuizQuestion(
-      epilogueProgressId
-    );
+app.post(
+  "/api/epilogues/:epilogueProgressId/quiz/request-question",
+  async (req, res) => {
+    const DI = createContainer(lg(req));
+    const { epilogueQuizController: controller } = getControllers(DI);
 
-  await executeAuthenticatedAction({ req, res, controller }, action);
-});
-app.post("/api/epilogues/:epilogueProgressId/quiz/answer-question", async (req, res) => {
-  const controller = epilogueQuizServiceFactory.create();
-  const [epilogueProgressId] = controller.getParams(req, [
-    "epilogueProgressId",
-  ]);
-  const action = () =>
-    controller.answerQuizQuestion(
-      req.body,
-      epilogueProgressId
-    );
+    const [epilogueProgressId] = controller.getParams(req, [
+      "epilogueProgressId",
+    ]);
+    const action = () => controller.requestQuizQuestion(epilogueProgressId);
 
-  await executeAuthenticatedAction({ req, res, controller }, action);
-});
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
+  }
+);
+app.post(
+  "/api/epilogues/:epilogueProgressId/quiz/answer-question",
+  async (req, res) => {
+    const DI = createContainer(lg(req));
+    const { epilogueQuizController: controller } = getControllers(DI);
+
+    const [epilogueProgressId] = controller.getParams(req, [
+      "epilogueProgressId",
+    ]);
+    const action = () =>
+      controller.answerQuizQuestion(req.body, epilogueProgressId);
+
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
+  }
+);
 app.get(
   "/api/epilogues/:epilogueProgressId/quiz/:quizId/completed",
   async (req, res) => {
-    const controller = epilogueQuizServiceFactory.create();
+    const DI = createContainer(lg(req));
+    const { epilogueQuizController: controller } = getControllers(DI);
+
     const [epilogueProgressId, quizId] = controller.getParams(req, [
       "epilogueProgressId",
       "quizId",
     ]);
     const action = () =>
-      controller.getProgressAchievedOfCompletedQuiz(
-        epilogueProgressId,
-        quizId
-      );
+      controller.getProgressAchievedOfCompletedQuiz(epilogueProgressId, quizId);
 
-    await executeAuthenticatedAction({ req, res, controller }, action);
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
   }
 );
 
@@ -227,6 +246,16 @@ app.get("/swagger.json", function (req, res) {
   res.sendFile(pathName);
 });
 
+app.get("/swagger.js", function (req, res) {
+  const pathName = path.join(__dirname, "../", "swagger.js");
+  if (!fs.existsSync(pathName)) {
+    log(`Path to swagger js is not great.`);
+    return res.status(404).send({ message: "Route was not found." });
+  }
+  log(`Path to swagger js...`);
+  res.sendFile(pathName);
+});
+
 app.get("/*", function (req, res) {
   const pathName = path.join(__dirname, "../../frontend/build", "index.html");
   if (!fs.existsSync(pathName)) {
@@ -236,6 +265,14 @@ app.get("/*", function (req, res) {
   log(`Path to frontend...`);
   res.sendFile(pathName);
 });
+
+function lg(req: Request): Language | undefined {
+  const value = req.headers[lessonLanguageHeader];
+  if (acceptedLanguages.some((a) => a === value)) {
+    return value as Language;
+  }
+  return undefined;
+}
 
 const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}!`));

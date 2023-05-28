@@ -94,6 +94,7 @@ export class BlockQuizServiceFactory {
     quizableItem.quizSettings = this.createQuizSettings(Object.values(blockProgress.wordProgressItems).length);
     quizableItem.dbLocationBasePath = `quizzesBlocks/${userId}/blockProgress-${blockProgress.id}`;
     quizableItem.userId = userId;
+    quizableItem.lang = blockProgress.lang;
     quizableItem.getAcheivements = this.createCallbackForAchievements(
       userId,
       blockProgress

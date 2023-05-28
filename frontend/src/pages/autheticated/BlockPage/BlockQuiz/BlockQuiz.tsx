@@ -15,7 +15,7 @@ import "./BlockQuiz.scss";
 
 const BlockQuiz = () => {
   const navigate = useNavigate();
-  const { id: blockProgressId } = useParams<{ id: string }>();
+  const { id: blockProgressId, lang } = useParams<{ id: string, lang: string; }>();
   const [fetchOptions, setFetchOptions] = useState<{
     url: string;
     options?: UseFetchDataOptionsQuizRequest | UseFetchDataOptions;
@@ -32,6 +32,7 @@ const BlockQuiz = () => {
     retry,
   } = useFetchData<QuizResponse>(
     fetchOptions.url,
+    lang,
     fetchOptions.options
   );
   const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
@@ -74,7 +75,7 @@ const BlockQuiz = () => {
     if (quizResponse?.quizCompleted) {
       setQuizCompleted(true);
       navigate(
-        `/blocks/${blockProgressId}/quiz/${quizResponse.quizId}/completed`
+        `/blocks/${quizResponse.lang}/${blockProgressId}/quiz/${quizResponse.quizId}/completed`
       );
       return;
     }

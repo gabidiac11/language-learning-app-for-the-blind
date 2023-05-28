@@ -8,12 +8,17 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import "./EpiloguePage.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
+import { lessonLanguageHeader } from "../../../constants";
 
 const EpilogueStartPage = () => {
   //TODO: should have something explaining what this page is (later)
-  const { id: epilogueProgressId } = useParams<{ id: string }>();
+  const { id: epilogueProgressId, lang } = useParams<{
+    id: string;
+    lang: string;
+  }>();
   const { data, loading, error, retry } = useFetchData<EpilogueProgress>(
-    `epilogues/${epilogueProgressId}`
+    `epilogues/${epilogueProgressId}`,
+    lang
   );
 
   useEffect(() => {}, []);
@@ -28,10 +33,13 @@ const EpilogueStartPage = () => {
             {/* TODO: implement reading of story */}
             <p className="epilogue-txt"> {data.epilogue.textStoryTale} </p>
 
-            <StoryListener epilogueProgress={data} reload={retry}/>
+            <StoryListener epilogueProgress={data} reload={retry} />
 
             {data.timeSummaryCompleted && (
-              <ButtonContinueToEpilogueQuiz epilogueProgressId={data.id} />
+              <ButtonContinueToEpilogueQuiz
+                lang={data.lang}
+                epilogueProgressId={data.id}
+              />
             )}
           </div>
         )}
@@ -40,7 +48,10 @@ const EpilogueStartPage = () => {
   );
 };
 
-const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() => void }) => {
+const StoryListener = (props: {
+  epilogueProgress: EpilogueProgress;
+  reload: () => void;
+}) => {
   const timeoutRef = useRef<NodeJS.Timeout>();
 
   const [error, setError] = useState<unknown>();
@@ -54,14 +65,22 @@ const StoryListener = (props: { epilogueProgress: EpilogueProgress, reload:() =>
   const [isListening, setIsListening] = useState(false);
 
   const markEpilogueAsListened = useCallback(async () => {
-    if(props.epilogueProgress.timeSummaryCompleted) {
+    if (props.epilogueProgress.timeSummaryCompleted) {
       return;
     }
     setError(undefined);
     setLoading(true);
     try {
+      const config = {
+        headers: {
+          [lessonLanguageHeader]: props.epilogueProgress.lang,
+        },
+      };
+
       await axiosInstance.post(
-        `epilogues/${props.epilogueProgress.id}/complete-summary`
+        `epilogues/${props.epilogueProgress.id}/complete-summary`,
+        {},
+        config
       );
       props.reload();
     } catch (error) {

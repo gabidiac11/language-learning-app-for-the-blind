@@ -10,9 +10,13 @@ import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 
 const BlockIntroduction = () => {
   //TODO: should have something explaining what this page is (later)
-  const { id: blockProgressId } = useParams<{ id: string }>();
+  const { id: blockProgressId, lang } = useParams<{
+    id: string;
+    lang: string;
+  }>();
   const { data, loading, error, retry } = useFetchData<BuildingBlockProgress>(
-    `blocks/${blockProgressId}`
+    `blocks/${blockProgressId}`,
+    lang
   );
   const [indexWord, setIndexWord] = useState<number>();
   const [learningSitCompleted, setLearningSitCompleted] = useState(false);
@@ -54,7 +58,7 @@ const BlockIntroduction = () => {
               <BlockWordsSummariesCompleted blockProgress={data} />
             )}
             {!learningSitCompleted && data.timeSummaryCompleted && (
-              <ButtonContinueToBlockQuiz blockProgressId={data.id} />
+              <ButtonContinueToBlockQuiz lang={data.lang} blockProgressId={data.id} />
             )}
           </div>
         )}
@@ -70,7 +74,7 @@ const BlockWordSummary: React.FC<{ word: Word; next: () => void }> = (
   //TODO: read notes and do the flow
   return (
     <div>
-      <h2> {props.word.text}</h2>
+      <h2 lang="ru"> {props.word.text}</h2>
       <p>
         {props.word.shortTranslation} - {props.word.longTranslation}
       </p>

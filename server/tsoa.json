@@ -9,9 +9,19 @@
         "name": "Authorization",
         "in": "header",
         "description": "Bearer token"
+      },
+      "LessonLanguage": {
+        "type": "apiKey",
+        "name": "lesson-language",
+        "in": "header",
+        "description": "Lesson language. Ex: ru"
       }
     },
     "tags": [
+      {
+        "name": "Lesson languages",
+        "description": "Get list of languages supported by the lessons."
+      },
       {
         "name": "User Stories",
         "description": "Get user progress of a story. A story is a lesson chapter containing learning blocks: multiple building blocks and a final epilogue block."

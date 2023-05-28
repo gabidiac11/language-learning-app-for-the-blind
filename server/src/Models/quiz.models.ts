@@ -1,4 +1,5 @@
 import { QuizOption } from "../Data/ctxTypes/ctx.quiz.shared.types";
+import { Language } from "../Data/ctxTypes/ctx.story.types";
 import {
   EpilogueProgress,
   BuildingBlockProgress,
@@ -22,6 +23,8 @@ export type QuizResponse = {
   
   quizCompleted?: boolean;
   quizId?: string;
+
+  lang: Language;
 };
 
 // quiz completion -> state response

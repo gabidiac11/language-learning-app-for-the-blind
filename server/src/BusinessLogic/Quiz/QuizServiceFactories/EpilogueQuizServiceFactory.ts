@@ -108,6 +108,7 @@ export class EpilogueQuizServiceFactory {
     );
     quizableItem.dbLocationBasePath = `quizzesEpilogues/${userId}/epilogueProgress-${epilogueProgress.id}`;
     quizableItem.userId = userId;
+    quizableItem.lang = epilogueProgress.lang;
     quizableItem.getAcheivements = this.createCallbackForAchievements(
       userId,
       epilogueProgress

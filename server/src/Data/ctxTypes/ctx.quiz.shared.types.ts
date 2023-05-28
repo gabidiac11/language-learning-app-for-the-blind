@@ -1,3 +1,5 @@
+import { Language } from "./ctx.story.types";
+
 export enum RoundOutcome {
   Unset,
   Hit,
@@ -9,6 +11,7 @@ export type QuizQuestion = {
   text: string;
   correctOptionId: string;
   options?: QuizOption[];
+  lang: Language,
 };
 
 export type QuizOption = {
@@ -37,6 +40,7 @@ export type QuizState = {
 
   quizOutcomes?: QuizOutcome[];
   timeCompleted?: number;
+  lang: Language,
 };
 
 export enum QuizEntityName {

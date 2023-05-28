@@ -1,6 +1,5 @@
 export type StateType = {
-  language: string;
-  userStories: UserStory[];
+  language?: Language;
 };
 
 export enum StateActionType {
@@ -14,11 +13,15 @@ export type StateAction =
     }
   | {
       type: StateActionType.SetLanguage;
-      payload: string;
+      payload?: Language;
     };
+
+export type Language = "ru" | "fr" | "de";
 
 export type UserStory = {
   id: string;
+
+  lang: Language;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -45,6 +48,8 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: string;
 
+  lang: Language;
+
   isStarter?: boolean;
 
   isDependentOnNames?: string[];
@@ -63,11 +68,15 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: string;
   word: Word;
+  lang: Language;
 };
 
 export type BuildingBlock = {
   id: string;
   name: string;
+  
+  lang: Language;
+
   imageUrl: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
@@ -80,6 +89,8 @@ export type BuildingBlock = {
 
 export type Word = {
   id: string;
+
+  lang: Language;
 
   // the text is the actual word in Russian
   text: string;
@@ -94,6 +105,8 @@ export type Word = {
 // epilogue:
 export type Epilogue = {
   id: string;
+
+  lang: Language;
 
   // the name of the story tale; short and descriptive - needs to be a word from the building blocks completed from the current and the previous stories
   name: string;
@@ -111,6 +124,9 @@ export type Epilogue = {
 
 export type EpilogueProgress = {
   id: string;
+  
+  lang: Language;
+
   epilogue: Epilogue;
   questionProgressItems: EpilogueQuestionProgress[];
   timeSummaryCompleted?: number;
@@ -122,10 +138,13 @@ export type EpilogueProgress = {
 export type EpilogueQuestionProgress = {
   id: string;
   question: EpilogueQuestion;
+  lang: Language;
 };
 
 export type EpilogueQuestion = {
   id: string;
+
+  lang: Language;
 
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
@@ -133,13 +152,17 @@ export type EpilogueQuestion = {
   options: EpilogueOption[];
 };
 
-export type EpilogueQuestionAnswer = {
-  id: string;
-  questionId: string;
-  correctOptionId: string;
-};
-
 export type EpilogueOption = {
   id: string;
   text: string;
+  lang: Language;
+};
+
+export type LanguageDataItem = {
+  id: string;
+  name: string;
+  active: boolean;
+  imageUrl: string;
+  alt: string;
+  order: number;
 };

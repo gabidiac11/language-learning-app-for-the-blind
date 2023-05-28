@@ -223,6 +223,7 @@ export default class QuizService {
         questionText: "",
         quizId: qs.id,
         quizCompleted: true,
+        lang: qs.lang
       });
     }
 
@@ -430,6 +431,7 @@ export default class QuizService {
       options: question.options,
       quizCompleted: false,
       previouslyQuestion_CorrectOptionId: undefined,
+      lang: question.lang
     };
     return data;
   }

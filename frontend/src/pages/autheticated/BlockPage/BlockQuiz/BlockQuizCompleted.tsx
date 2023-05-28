@@ -25,13 +25,15 @@ const StyleWrapper = styled("div")(({ theme }) => ({
 }));
 
 const BlockQuizCompleted = () => {
-  const { id: blockProgressId, quizId } = useParams<{
+  const { id: blockProgressId, quizId, lang } = useParams<{
     id: string;
     quizId: string;
+    lang: string;
   }>();
   const { data, loading, error, retry } =
     useFetchData<QuizBlockCompletedResponse>(
-      `blocks/${blockProgressId}/quiz/${quizId}/completed`
+      `blocks/${blockProgressId}/quiz/${quizId}/completed`,
+      lang
     );
 
   return (
@@ -66,7 +68,7 @@ const BlockQuizCompleted = () => {
               )}
 
               <Typography mt={10} align="center">
-                <Link to={`/stories/${data.blockCompletedStoryRefId}`}>
+                <Link to={`/stories/${lang}/${data.blockCompletedStoryRefId}`}>
                   Go to original story
                 </Link>
               </Typography>

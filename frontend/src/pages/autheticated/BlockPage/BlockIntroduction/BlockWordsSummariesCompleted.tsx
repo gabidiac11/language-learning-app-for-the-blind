@@ -14,6 +14,7 @@ const BlockWordsSummariesCompleted = (props: {
 }) => {
   const { loading, error, retry } = useFetchData<{}>(
     `blocks/${props.blockProgress.id}/complete-summary`,
+    props.blockProgress.lang,
     fetchOptioons
   );
   // TODO: review the text is not ideal for now
@@ -25,7 +26,7 @@ const BlockWordsSummariesCompleted = (props: {
         {props.blockProgress.timeSummaryCompleted
           ? "You again completed the words introduction"
           : "You completed the words introduction. You can now start the word practice quiz."}
-        <ButtonContinueToBlockQuiz blockProgressId={props.blockProgress.id} />
+        <ButtonContinueToBlockQuiz lang={props.blockProgress.lang} blockProgressId={props.blockProgress.id} />
       </div>
     </ErrorBoundary>
   );

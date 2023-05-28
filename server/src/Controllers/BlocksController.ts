@@ -7,7 +7,7 @@ import { Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class BlocksControllerFactory {
+export class BlocksControllerFactory {
   public static inject = [Authenticator.name, BlocksService.name];
 
   private _blocksService: BlocksService;
@@ -28,8 +28,9 @@ export default class BlocksControllerFactory {
 
 @Tags('Building blocks')
 @Security('BearerAuth')
+@Security("LessonLanguage")
 @Route("api/blocks")
-class BlocksController extends BaseController {
+export class BlocksController extends BaseController {
   private _blocksService: BlocksService;
   constructor(authenticator: Authenticator, blockService: BlocksService) {
     super(authenticator);

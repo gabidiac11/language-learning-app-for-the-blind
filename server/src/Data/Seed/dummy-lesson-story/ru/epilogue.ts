@@ -1,9 +1,11 @@
-import { genUid, getShuffledArray } from "../../../utils";
-import { Epilogue, EpilogueQuestionAnswer } from "../../ctxTypes/ctx.story.types";
+import { genUid, getShuffledArray } from "../../../../utils";
+import { Epilogue, EpilogueQuestionAnswer } from "../../../ctxTypes/ctx.story.types";
 
-
-const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]> => {
+const generateEpilogue = async (): Promise<
+  [Epilogue, EpilogueQuestionAnswer[]]
+> => {
   const epilogue: Epilogue = {
+    lang: "ru",
     id: genUid(),
     name: "Anna's family",
     textStoryTale: `"Семья Анны"
@@ -17,103 +19,273 @@ const generateEpilogue = async (): Promise<[Epilogue, EpilogueQuestionAnswer[]]>
       Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.`,
     questions: [
       {
+        lang: "ru",
         id: genUid(),
         text: "Who does Anna live with?",
         options: [
-          { id: genUid(), text: "Anna's mom and dad" },
-          { id: genUid(), text: "Anna's brother and sister" },
-          { id: genUid(), text: "Anna's grandparents" },
-          { id: genUid(), text: "Anna's aunt and uncle" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Anna's mom and dad",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Anna's brother and sister",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Anna's grandparents",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Anna's aunt and uncle",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What is Anna's mom's name?",
         options: [
-          { id: genUid(), text: "Kate" },
-          { id: genUid(), text: "Ivan" },
-          { id: genUid(), text: "Alexander" },
-          { id: genUid(), text: "Anna" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Kate",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Ivan",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Alexander",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Anna",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What does Anna like to cook?",
         options: [
-          { id: genUid(), text: "Pancakes" },
-          { id: genUid(), text: "Meat on the grill" },
-          { id: genUid(), text: "Salad" },
-          { id: genUid(), text: "Pizza" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Pancakes",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Meat on the grill",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Salad",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Pizza",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What does Anna's dad usually cook?",
         options: [
-          { id: genUid(), text: "Meat on the grill" },
-          { id: genUid(), text: "Pancakes" },
-          { id: genUid(), text: "Salad" },
-          { id: genUid(), text: "Pizza" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Meat on the grill",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Pancakes",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Salad",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Pizza",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What does Anna's brother help her do?",
         options: [
-          { id: genUid(), text: "Stir the batter" },
-          { id: genUid(), text: "Chop vegetables" },
-          { id: genUid(), text: "Make the salad dressing" },
-          { id: genUid(), text: "Set the table" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Stir the batter",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Chop vegetables",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Make the salad dressing",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Set the table",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What language does Anna like to study?",
         options: [
-          { id: genUid(), text: "Russian" },
-          { id: genUid(), text: "English" },
-          { id: genUid(), text: "Spanish" },
-          { id: genUid(), text: "French" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Russian",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "English",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Spanish",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "French",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "Who does Anna say 'you' to?",
         options: [
-          { id: genUid(), text: "Her brother" },
-          { id: genUid(), text: "Her mom and dad" },
-          { id: genUid(), text: "Her friends" },
-          { id: genUid(), text: "Her teacher" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Her brother",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Her mom and dad",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Her friends",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Her teacher",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What pronoun do Anna's mom and dad use to refer to other people?",
         options: [
-          { id: genUid(), text: "They" },
-          { id: genUid(), text: "I" },
-          { id: genUid(), text: "You" },
-          { id: genUid(), text: "We" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "They",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "I",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "You",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "We",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What does Anna usually do when she comes home from school?",
         options: [
-          { id: genUid(), text: "Do homework and help her mom" },
-          { id: genUid(), text: "Watch TV" },
-          { id: genUid(), text: "Play video games" },
-          { id: genUid(), text: "Go out with friends" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Do homework and help her mom",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Watch TV",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Play video games",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Go out with friends",
+          },
         ],
       },
       {
+        lang: "ru",
         id: genUid(),
         text: "What do Anna and her family do after they eat dinner?",
         options: [
-          { id: genUid(), text: "Talk about their day" },
-          { id: genUid(), text: "Watch TV" },
-          { id: genUid(), text: "Play board games" },
-          { id: genUid(), text: "Read books" },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Talk about their day",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Watch TV",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Play board games",
+          },
+          {
+            lang: "ru",
+            id: genUid(),
+            text: "Read books",
+          },
         ],
       },
     ],

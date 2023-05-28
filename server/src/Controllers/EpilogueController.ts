@@ -7,7 +7,7 @@ import { Example, Get, Path, Post, Route, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class EpilogueControllerFactory {
+export class EpilogueControllerFactory {
   public static inject = [Authenticator.name, EpilogueService.name];
 
   private _epilogueService: EpilogueService;
@@ -28,8 +28,9 @@ export default class EpilogueControllerFactory {
 
 @Tags('Epilogue blocks')
 @Security('BearerAuth')
+@Security("LessonLanguage")
 @Route("api/epilogues")
-class EpilogueController extends BaseController {
+export class EpilogueController extends BaseController {
   private _epilogueService: EpilogueService;
   constructor(authenticator: Authenticator, userStoryService: EpilogueService) {
     super(authenticator);

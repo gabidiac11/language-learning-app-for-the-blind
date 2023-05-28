@@ -2,6 +2,7 @@ import {
   BuildingBlock,
   Epilogue,
   EpilogueQuestion,
+  Language,
   Word,
 } from "./ctx.story.types";
 /**
@@ -10,6 +11,8 @@ import {
 
 export type UserStory = {
   id: string;
+
+  lang: Language,
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -43,6 +46,8 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: string;
 
+  lang: Language,
+
   order: number;
 
   blockId: string;
@@ -67,6 +72,8 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: string;
 
+  lang: Language,
+
   order: number;
   userStoryId: string;
 
@@ -77,6 +84,8 @@ export type WordProgress = {
 // epilogue pogress ------------------------------------------------------------------------------------------------------------------------------------
 export type EpilogueProgress = {
   id: string;
+
+  lang: Language,
 
   epilogueId: string;
   epilogue?: Epilogue;
@@ -96,6 +105,9 @@ export type EpilogueProgress = {
 
 export type EpilogueQuestionProgress = {
   id: string;
+  
+  lang: Language,
+
   order: number;
   questionId: string;
   userStoryId: string;

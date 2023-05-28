@@ -2,47 +2,58 @@ import { Injector } from "boxed-injector";
 import { Authenticator } from "./ApiSupport/authentication";
 import BlocksService from "./BusinessLogic/BlocksService";
 import EpilogueService from "./BusinessLogic/EpilogueService";
+import { LanguageProvider } from "./BusinessLogic/LanguageProvider";
 import ProgressService from "./BusinessLogic/Progress/ProgressService";
 import { BlockQuizServiceFactory } from "./BusinessLogic/Quiz/QuizServiceFactories/BlockQuizServiceFactory";
 import { EpilogueQuizServiceFactory } from "./BusinessLogic/Quiz/QuizServiceFactories/EpilogueQuizServiceFactory";
 import UserStoryService from "./BusinessLogic/UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./BusinessLogic/UserStoryRelations/UserStoriesRelationsManager";
-import BlockQuizControllerFactory from "./Controllers/BlockQuizController";
-import BlocksControllerFactory from "./Controllers/BlocksController";
-import EpilogueControllerFactory from "./Controllers/EpilogueController";
-import EpilogueQuizControllerFactory from "./Controllers/EpilogueQuizController";
-import UserStoriesControllerFactory from "./Controllers/UserStoriesController";
+import { BlockQuizControllerFactory } from "./Controllers/BlockQuizController";
+import { BlocksControllerFactory } from "./Controllers/BlocksController";
+import { EpilogueControllerFactory } from "./Controllers/EpilogueController";
+import { EpilogueQuizControllerFactory } from "./Controllers/EpilogueQuizController";
+import { LessonLanguagesControllerFactory } from "./Controllers/LessonLanguagesController";
+import { UserStoriesControllerFactory } from "./Controllers/UserStoriesController";
+import { Language } from "./Data/ctxTypes/ctx.story.types";
 import { Database } from "./Data/database";
 import Seeder from "./Data/Seed/Seeder";
 
-const diContainer = new Injector();
 
-// Data:
-diContainer.factory(Database.name, Database);
-diContainer.factory(Seeder.name, Seeder);
+const createContainer = (lang?: Language | "") => {
+  const diContainer = new Injector();
+  
+  // Data:
+  diContainer.factory(Database.name, Database);
+  diContainer.factory(Seeder.name, Seeder);
+  
+  // Authentication services:
+  diContainer.factory(Authenticator.name, Authenticator);
+  
+  // Business services:
+  diContainer.factory(
+    UserStoriesRelationsManager.name,
+    UserStoriesRelationsManager
+  );
+  diContainer.factory(UserStoryService.name, UserStoryService);
+  diContainer.factory(BlocksService.name, BlocksService);
+  diContainer.factory(ProgressService.name, ProgressService);
+  diContainer.factory(EpilogueService.name, EpilogueService);
+  
+  // Quiz services
+  diContainer.factory(EpilogueQuizServiceFactory.name, EpilogueQuizServiceFactory);
+  diContainer.factory(BlockQuizServiceFactory.name, BlockQuizServiceFactory);
+  
+  // Controllers:
+  diContainer.factory(UserStoriesControllerFactory.name, UserStoriesControllerFactory);
+  diContainer.factory(BlocksControllerFactory.name, BlocksControllerFactory);
+  diContainer.factory(BlockQuizControllerFactory.name, BlockQuizControllerFactory);
+  diContainer.factory(EpilogueControllerFactory.name, EpilogueControllerFactory);
+  diContainer.factory(EpilogueQuizControllerFactory.name, EpilogueQuizControllerFactory);
+  diContainer.factory(LessonLanguagesControllerFactory.name, LessonLanguagesControllerFactory);
 
-// Authentication services:
-diContainer.factory(Authenticator.name, Authenticator);
+  diContainer.register(LanguageProvider.name, new LanguageProvider(lang));
 
-// Business services:
-diContainer.factory(
-  UserStoriesRelationsManager.name,
-  UserStoriesRelationsManager
-);
-diContainer.factory(UserStoryService.name, UserStoryService);
-diContainer.factory(BlocksService.name, BlocksService);
-diContainer.factory(ProgressService.name, ProgressService);
-diContainer.factory(EpilogueService.name, EpilogueService);
+  return diContainer;
+}
 
-// Quiz services
-diContainer.factory(EpilogueQuizServiceFactory.name, EpilogueQuizServiceFactory);
-diContainer.factory(BlockQuizServiceFactory.name, BlockQuizServiceFactory);
-
-// Controllers:
-diContainer.factory(UserStoriesControllerFactory.name, UserStoriesControllerFactory);
-diContainer.factory(BlocksControllerFactory.name, BlocksControllerFactory);
-diContainer.factory(BlockQuizControllerFactory.name, BlockQuizControllerFactory);
-diContainer.factory(EpilogueControllerFactory.name, EpilogueControllerFactory);
-diContainer.factory(EpilogueQuizControllerFactory.name, EpilogueQuizControllerFactory);
-
-export default diContainer;
+export default createContainer;

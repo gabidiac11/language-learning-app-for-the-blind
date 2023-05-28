@@ -1,5 +1,4 @@
 import { Divider, Chip, Typography, Container } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useFetchData from "../../../api/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
@@ -8,11 +7,12 @@ import BuildingBlockItem from "./BuildingBlockItem";
 import EpilogueBlockItem from "./EpilogueBlockItem";
 
 export const StoryPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id, lang } = useParams<{ id: string, lang: string }>();
   const { data, loading, error, retry } = useFetchData<UserStory>(
-    `userStories/${id}`
+    `userStories/${id}`,
+    lang
   );
-
+  
   return (
     <div className="view story-page-wrapper">
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>

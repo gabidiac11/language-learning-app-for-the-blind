@@ -13,7 +13,7 @@ import "./EpilogueQuiz.scss";
 
 const EpilogueQuiz = () => {
   const navigate = useNavigate();
-  const { id: epilogueProgressId } = useParams<{ id: string }>();
+  const { id: epilogueProgressId, lang } = useParams<{ id: string, lang: string; }>();
   const [fetchOptions, setFetchOptions] = useState<{
     url: string;
     options?: UseFetchDataOptionsQuizRequest | UseFetchDataOptions;
@@ -28,7 +28,7 @@ const EpilogueQuiz = () => {
     loading,
     error,
     retry,
-  } = useFetchData<QuizResponse>(fetchOptions.url, fetchOptions.options);
+  } = useFetchData<QuizResponse>(fetchOptions.url, lang, fetchOptions.options);
   const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
   const [nextQuestion, setNextQuestion] = useState<QuizResponse>();
   const [quizCompleted, setQuizCompleted] = useState<boolean>();
@@ -69,7 +69,7 @@ const EpilogueQuiz = () => {
     if (quizResponse?.quizCompleted) {
       setQuizCompleted(true);
       navigate(
-        `/epilogues/${epilogueProgressId}/quiz/${quizResponse.quizId}/completed`
+        `/epilogues/${quizResponse.lang}/${epilogueProgressId}/quiz/${quizResponse.quizId}/completed`
       );
       return;
     }

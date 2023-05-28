@@ -3,6 +3,7 @@ import {
   QuizEntityName,
   QuizTemplateQuestionName,
 } from "../../Data/ctxTypes/ctx.quiz.shared.types";
+import { Language } from "../../Data/ctxTypes/ctx.story.types";
 import { QuizCompletedStatsResponse } from "../../Models/quiz.models";
 
 export class QuizSettings {
@@ -51,6 +52,8 @@ export class QuizableItem {
   public quizSettings: QuizSettings;
 
   public dbLocationBasePath: string;
+
+  public lang: Language;
 
   public userId: string;
 

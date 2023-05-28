@@ -13,7 +13,7 @@ import { Get, Route, Example, Security, Tags } from "tsoa";
 import * as apiExamples from "./../ApiSupport/responseExamples";
 
 // NOTE: use factory given that each controller has fields strictly required within the scope of a request
-export default class UserStoriesControllerFactory {
+export class UserStoriesControllerFactory {
   public static inject = [Authenticator.name, UserStoryService.name];
 
   private _userStoryService: UserStoryService;
@@ -37,7 +37,8 @@ export default class UserStoriesControllerFactory {
 @Tags('User Stories')
 @Route("api/userStories")
 @Security('BearerAuth')
-class UserStoriesController extends BaseController {
+@Security("LessonLanguage")
+export class UserStoriesController extends BaseController {
   private _userStoryService: UserStoryService;
   constructor(
     authenticator: Authenticator,
@@ -90,6 +91,11 @@ class UserStoriesController extends BaseController {
         userId
       );
       return storiesResult;
+    }
+    
+    const anyLessons = await this._userStoryService.anyLessons();
+    if(!anyLessons) {
+      return Result.Success([]);
     }
 
     log(`User ${userId} doesn't have user stories. Will create...`);

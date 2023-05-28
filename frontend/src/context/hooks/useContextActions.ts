@@ -1,12 +1,12 @@
 import { useCallback, useContext } from "react";
 import { AppContext } from "../AppContext";
-import { StateActionType } from "../contextTypes/ctxTypes";
+import { Language, StateActionType } from "../contextTypes/ctxTypes";
 
 
 export const useContextActions = () => {
   const { dispatch } = useContext(AppContext);
 
-  const updateLanguage = useCallback((language: string) => {
+  const updateLanguage = useCallback((language?: Language) => {
     dispatch({
       type: StateActionType.SetLanguage,
       payload: language,

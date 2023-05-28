@@ -122,6 +122,16 @@ export default class UserStoryService {
     }
   }
 
+  public async anyLessons(): Promise<boolean> {
+    const lessonStoriesResult = await this._db.getArray<Story>(
+      "lessonStories/"
+    );
+    if (lessonStoriesResult.data?.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * creates a user stories from lesson stories
    * @param userId

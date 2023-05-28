@@ -18,7 +18,7 @@ const BuildingBlockItem = (props: {
       //TODO: add audio saying it's diabled because it's locked
       return;
     }
-    navigate(`/blocks/${blockProgress.id}`);
+    navigate(`/blocks/${blockProgress.lang}/${blockProgress.id}`);
   }, [blockProgress, disabled]);
 
   return (
