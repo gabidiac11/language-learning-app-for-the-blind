@@ -43,14 +43,16 @@ const BuildingBlockItem = (props: { blockProgress: BuildingBlockProgress }) => {
           />
         }
       />
-      <CardMedia
-        component="img"
-        width="100%"
-        height="250px"
-        image={blockProgress.block.imageUrl}
-        alt={`image: ${blockProgress.block.imageAlt}`}
-        tabIndex={0}
-      />
+      <div className="card-image-container">
+        <CardMedia
+          component="img"
+          width="100%"
+          height="100%"
+          image={blockProgress.block.imageUrl}
+          alt={`image: ${blockProgress.block.imageAlt}`}
+          tabIndex={0}
+        />
+      </div>
     </CardBlock>
   );
 };

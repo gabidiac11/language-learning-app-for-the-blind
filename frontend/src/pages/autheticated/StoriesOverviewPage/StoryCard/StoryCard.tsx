@@ -47,13 +47,16 @@ export const StoryCard = (props: { userStory: UserStory }) => {
           />
         }
       />
-      <CardMedia
-        tabIndex={0}
-        component="img"
-        width="100%"
-        image={props.userStory.imageUrl}
-        alt={`image: ${props.userStory.imageAlt}`}
-      />
+      <div className="card-image-container">
+        <CardMedia
+          tabIndex={0}
+          component="img"
+          width="100%"
+          height="100%"
+          image={props.userStory.imageUrl}
+          alt={`image: ${props.userStory.imageAlt}`}
+        />
+      </div>
       <CardContent>
         <Typography tabIndex={0} variant="body2" color="text.secondary">
           {`${userStory.numOfBlocksCompleted} completed out of ${userStory.numOfTotalBlocks} building blocks.`}

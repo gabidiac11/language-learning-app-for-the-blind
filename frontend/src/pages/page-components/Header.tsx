@@ -23,7 +23,7 @@ export default function Header() {
   });
   const navigate = useNavigate();
   const { language } = useAppStateContext();
-
+  console.log({user})
   return (
     <Box sx={{ flexGrow: 1 }} aria-label="header">
       <AppBar position="static" aria-label="header">

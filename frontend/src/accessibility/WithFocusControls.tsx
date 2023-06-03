@@ -37,6 +37,11 @@ export const WithFocusControls = (
 
   useEffect(() => {
     const onArrowsFocusNext = (event: KeyboardEvent) => {
+      // avoid bothering key combinations
+      if(event.altKey || event.ctrlKey || event.shiftKey) {
+        return;
+      }
+
       if (
         event.key !== config[props.direction].forwards &&
         event.key !== config[props.direction].backwards

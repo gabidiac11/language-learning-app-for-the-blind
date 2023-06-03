@@ -5,35 +5,60 @@ import GoogleIcon from "@mui/icons-material/Google";
 import "./index.scss";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { WithFocusControls } from "../../accessibility/WithFocusControls";
 
 export const Login = () => {
   const authState = useAuthState(firebaseAuth);
   const [user, , error] = authState;
 
   return (
-    <div className="view login-page">
-      <div className="container">
-        <div className="buttons">
-          <Typography variant="h4" style={{ paddingBottom: "20px" }}>
-            Login page
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            className="button"
-            startIcon={<GoogleIcon aria-hidden="true" />}
-            onClick={signInWithGoogle}
+    <div className="view login-page" aria-label="wrapper for login page">
+      <WithFocusControls
+        direction="vertical"
+        customMessage="Press arrow up or arrow down to switch between buttons"
+      >
+        <div className="container" aria-label="inner wrapper for login page">
+          <div
+            className="buttons"
+            aria-label="login buttons wrapper for login page"
           >
-            Login with Google
-          </Button>
-          <Link to={"/register"} color="primary">
-            Or register
-          </Link>
-        </div>
+            <Typography
+              tabIndex={0}
+              aria-label="Login page"
+              variant="h4"
+              style={{ paddingBottom: "20px" }}
+            >
+              Login page
+            </Typography>
+            <Button
+              tabIndex={0}
+              aria-label="Login with Google"
+              variant="contained"
+              color="primary"
+              className="button"
+              startIcon={<GoogleIcon aria-hidden="true" />}
+              onClick={signInWithGoogle}
+            >
+              Login with Google
+            </Button>
+            <Link
+              tabIndex={0}
+              aria-label="Register with email and password"
+              to={"/register"}
+              color="primary"
+            >
+              Or register
+            </Link>
+          </div>
 
-        {user && <>Loading...</>}
-        {error && <>{error?.message ?? "An unexpected error happen"}...</>}
-      </div>
+          {user && <div tabIndex={0}>Loading...</div>}
+          {error && (
+            <div tabIndex={0}>
+              {error?.message ?? "An unexpected error happen"}...
+            </div>
+          )}
+        </div>
+      </WithFocusControls>
     </div>
   );
 };

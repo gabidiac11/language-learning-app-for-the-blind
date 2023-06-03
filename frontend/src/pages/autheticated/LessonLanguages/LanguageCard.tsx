@@ -25,12 +25,15 @@ export const LanguageCard = (props: {
         aria-label={cardAriaLabel}
         title={props.lessonLanguage.name}
       />
-      <CardMedia
-        component="img"
-        width="100%"
-        image={props.lessonLanguage.imageUrl}
-        alt={`${props.lessonLanguage.name}: ${props.lessonLanguage.alt}, press enter to go to lessons.`}
-      />
+      <div className="card-image-container">
+        <CardMedia
+          component="img"
+          width="100%"
+          height="100%"
+          image={props.lessonLanguage.imageUrl}
+          alt={`${props.lessonLanguage.name}: ${props.lessonLanguage.alt}, press enter to go to lessons.`}
+        />
+      </div>
     </CardBlock>
   );
 };
