@@ -54,7 +54,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
           })()}
         </>
         <div>
-          <Button onClick={onRetry}>Try again</Button>
+          <Button tabIndex={0} aria-label="Try again to fetch the request." onClick={onRetry}>Try again</Button>
         </div>
       </div>
     );
@@ -87,8 +87,10 @@ const getResponseErrorToString = (error: unknown) => {
       return "";
     })();
 
+    const errorMessage = `${responseErrorMessage ?? ""}. ${errorAsAxios.message}`
+
     return (
-      <p>
+      <p tabIndex={0} aria-label={errorMessage}>
         {errorAsAxios.message}
         {responseErrorMessage ? ":" : ""}
         {responseErrorMessage && (
@@ -111,6 +113,7 @@ const getResponseErrorToString = (error: unknown) => {
 // TODO: add some @mui materials here for a prettier look
 const DefaultDisplayedApiError = (props: { error: unknown }) => {
   const errorMessage = getResponseErrorToString(props.error);
+
   return (
     <div>
       <p>Operation failed</p>

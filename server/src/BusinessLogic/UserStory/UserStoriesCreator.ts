@@ -91,6 +91,7 @@ class LessonToUserStoryConvertor {
 
       name: this._lessonStory.name,
       imageUrl: this._lessonStory.imageUrl,
+      imageAlt: this._lessonStory.imageAlt,
 
       buildingBlocksProgressItems: arrayToObjectIds<BuildingBlockProgress>(
         buildingBlocksProgressItems

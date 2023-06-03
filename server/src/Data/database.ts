@@ -35,20 +35,25 @@ class Database {
    */
   private decoratedPath(requestedPath: string) {
     if (this._languageProvider.language) {
-      return `${dbRootPathKey}/${this._languageProvider.language}/${requestedPath}`;
+      return `${dbRootPathKey}/${this._languageProvider.language}/${requestedPath}`.replace(
+        "//",
+        "/"
+      );
     }
-    return `${dbRootPathKey}/${requestedPath}`;
+    return `${dbRootPathKey}/${requestedPath}`.replace("//", "/");
   }
 
   public async exists(path: string): Promise<Result<boolean>> {
     try {
+      log(`[db-exists]: at path ${this.decoratedPath(path)}`);
+
       const snapshot = await get(ref(this.db, this.decoratedPath(path)));
       if (!snapshot.exists()) {
         return Result.Success(false);
       }
       return Result.Success(true);
     } catch (error) {
-      log(`[db]: error occured`, error);
+      log(`[db-exists]: error occured`, error);
       return Result.Error("Something went wrong.", 500);
     }
   }
@@ -56,7 +61,7 @@ class Database {
   public async getArray<T>(path: string): Promise<Result<T[]>> {
     const resultObj = await this.get<{ [id: string]: T }>(path);
     if (resultObj.isError()) return resultObj.As<T[]>();
-    if(!resultObj.data) return Result.Success<T[]>([]);
+    if (!resultObj.data) return Result.Success<T[]>([]);
 
     const values = valuesOrdered(resultObj.data);
     return Result.Success(values);

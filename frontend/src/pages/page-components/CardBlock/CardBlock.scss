@@ -1,3 +1,20 @@
 .block-card {
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    > img {
+        flex: 1;
+
+        display: block;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-background-position: center;
+        background-position: center;
+        object-fit: cover;
+
+        width: 100%;
+        max-height: 250px;
+    }
 }

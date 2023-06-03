@@ -8,6 +8,9 @@ const generateEpilogue = async (): Promise<
     lang: "fr",
     id: genUid(),
     name: "Anna's family",
+    imageUrl:
+      "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "Russian family at the dinner table",
     textStoryTale: `La famille d'Anna
   
     Mon nom est Anna. Je vis avec ma famille : maman, papa et frère. Le nom de ma mère est Katya et le nom de mon père est Ivan. Mon frère Alexandre a deux ans de moins que moi.

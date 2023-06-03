@@ -36,10 +36,11 @@ const EpilogueQuiz = () => {
 
   const onChoose = useCallback(
     (option: QuizOption) => {
+      // TODO: play audio file here
       if (!currentQuestion) {
         throw new Error(
           "Contact admin: this should not happen - current question is null."
-        ); // TODO: do to make this more accesibile and manageable for the user
+        );
       }
 
       // new request is triggered by changing these fetch options
@@ -85,14 +86,14 @@ const EpilogueQuiz = () => {
   }, [response]);
 
   return (
-    <div className="view epilgue-quiz-view">
+    <div className="view epilgue-quiz-view" aria-label="wrapper for quiz page">
       <ErrorBoundary
         error={error}
         onRetry={retry}
         loading={loading || !!quizCompleted}
         preserveChildren={preserveChildren}
       >
-        <div className="view-content">
+        <div className="view-content" aria-label="inner wrapper for quiz page">
           {currentQuestion && (
             <EpilogueQuizQuestion
               key={currentQuestion.questionId}

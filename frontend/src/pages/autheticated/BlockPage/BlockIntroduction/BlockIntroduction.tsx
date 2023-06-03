@@ -7,9 +7,11 @@ import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary"
 import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
 import "./BlockIntroduction.scss";
 import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
+import explanations from "../explanations";
+import { BlockWordSummary } from "./BlockWordSummary";
+import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 
 const BlockIntroduction = () => {
-  //TODO: should have something explaining what this page is (later)
   const { id: blockProgressId, lang } = useParams<{
     id: string;
     lang: string;
@@ -34,6 +36,7 @@ const BlockIntroduction = () => {
     setIndexWord(indexWord_ + 1);
   }, [indexWord, data]);
 
+  // TODO: play something that says what page is and what it does. To not make it annoying inform about the wiki page
   useLayoutEffect(() => {
     if (data) {
       data.block.words = getShuffledArray(data.block.words);
@@ -42,46 +45,52 @@ const BlockIntroduction = () => {
   }, [data]);
 
   return (
-    <div className="view block-summary-view">
+    <div
+      className="view block-summary-view"
+      aria-label={`wrapper for summary introduction of building block ${
+        data?.block?.name ?? ""
+      }`}
+    >
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
         {!error && data && blockProgressId && (
-          <div className="view-content">
-            <h1> {data.block.name} </h1>
-            {!learningSitCompleted && indexWord !== undefined && (
-              <BlockWordSummary
-                key={data.block.words[indexWord].id}
-                word={data.block.words[indexWord]}
-                next={next}
-              />
-            )}
-            {learningSitCompleted && (
-              <BlockWordsSummariesCompleted blockProgress={data} />
-            )}
-            {!learningSitCompleted && data.timeSummaryCompleted && (
-              <ButtonContinueToBlockQuiz lang={data.lang} blockProgressId={data.id} />
-            )}
-          </div>
+          <WithFocusControls
+            direction="vertical"
+            customMessage="Press arrow up or arrow down to switch between available menu options"
+          >
+            <div
+              className="view-content"
+              aria-label={`inner wrapper for summary introduction of building block ${
+                data?.block?.name ?? ""
+              }. ${explanations.summaryBlock}`}
+            >
+              <h1
+                tabIndex={0}
+                aria-label={`Summary page title of building block ${
+                  data?.block.name ?? ""
+                }. ${explanations.summaryBlock}`}
+              >
+                {data.block.name} - building block
+              </h1>
+              {!learningSitCompleted && indexWord !== undefined && (
+                <BlockWordSummary
+                  key={data.block.words[indexWord].id}
+                  word={data.block.words[indexWord]}
+                  next={next}
+                />
+              )}
+              {learningSitCompleted && (
+                <BlockWordsSummariesCompleted blockProgress={data} />
+              )}
+              {!learningSitCompleted && data.timeSummaryCompleted && (
+                <ButtonContinueToBlockQuiz
+                  lang={data.lang}
+                  blockProgressId={data.id}
+                />
+              )}
+            </div>
+          </WithFocusControls>
         )}
       </ErrorBoundary>
-    </div>
-  );
-};
-
-const BlockWordSummary: React.FC<{ word: Word; next: () => void }> = (
-  props
-) => {
-  //TODO: read and display translations
-  //TODO: read notes and do the flow
-  return (
-    <div>
-      <h2 lang="ru"> {props.word.text}</h2>
-      <p>
-        {props.word.shortTranslation} - {props.word.longTranslation}
-      </p>
-      {/* TODO: delete temporar next btn */}
-      <div>
-        <button onClick={props.next}>next</button>
-      </div>
     </div>
   );
 };

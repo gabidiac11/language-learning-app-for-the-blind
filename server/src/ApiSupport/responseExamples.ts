@@ -1,4 +1,7 @@
-import { LanguageData, LanguageDataItem } from "../Data/ctxTypes/ctx.story.types";
+import {
+  LanguageData,
+  LanguageDataItem,
+} from "../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgressOutput,
   EpilogueProgressOutput,
@@ -19,6 +22,7 @@ export const userStory: UserStoryOutput = {
   ],
   imageUrl:
     "some url/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  imageAlt: "image alt",
   name: "My family #1",
   numOfBlocksCompleted: 7,
   numOfTotalBlocks: 7,
@@ -64,6 +68,7 @@ export const userStory: UserStoryOutput = {
         ],
         imageUrl:
           "some url/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        imageAlt: "image alt",
         isStarter: true,
         name: "Family",
         words: [
@@ -130,6 +135,8 @@ export const userStory: UserStoryOutput = {
     epilogue: {
       id: "51c76980-f429-4b41-8300-22af4bee00a3",
       name: "Anna's family",
+      imageUrl: "https://dummy-link",
+      imageAlt: "Russian family at the dinner table",
       questions: [
         {
           id: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
@@ -259,6 +266,8 @@ export const epilogueProgress: EpilogueProgressOutput = {
   epilogue: {
     id: "205cdadc-b1e2-481a-a88a-0fb88cb250ca",
     name: "Anna's family",
+    imageUrl: "https://dummy-link",
+    imageAlt: "Russian family at the dinner table",
     questions: [
       {
         id: "471dff51-c04b-4c76-8c12-ef9aa97d2a8b",
@@ -332,6 +341,7 @@ export const blockProgress: BuildingBlockProgressOutput = {
     imageUrl:
       // TODO: remove all image references
       "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "image alt",
     isStarter: true,
     name: "Family",
     words: [
@@ -481,6 +491,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
       ],
       imageUrl:
         "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      imageAlt: "image alt",
       isStarter: true,
       name: "Family",
       words: [
@@ -530,6 +541,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         id: "28e74a16-6114-4c50-815e-631cfd7b3a5e",
         imageUrl:
           "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        imageAlt: "image alt",
         isStarter: false,
         name: "Names",
         words: [
@@ -579,6 +591,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         idsItemsDependentOnThis: ["f876cde3-feaa-41dc-9720-d18f8eb975a9"],
         imageUrl:
           "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        imageAlt: "image alt",
         isStarter: false,
         name: "Pronouns",
         words: [
@@ -768,6 +781,8 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
     epilogue: {
       id: "51c76980-f429-4b41-8300-22af4bee00a3",
       name: "Anna's family",
+      imageUrl: "https://dummy-link",
+      imageAlt: "Russian family at the dinner table",
       questions: [
         {
           id: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",

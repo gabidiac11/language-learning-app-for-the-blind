@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import "./EpilogueQuiz.scss";
 import { StoryCard } from "../../StoriesOverviewPage/StoryCard/StoryCard";
+import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -21,7 +22,11 @@ const StyleWrapper = styled("div")(({ theme }) => ({
 }));
 
 const EpilogueQuizCompleted = () => {
-  const { id: epilogueProgressId, quizId, lang } = useParams<{
+  const {
+    id: epilogueProgressId,
+    quizId,
+    lang,
+  } = useParams<{
     id: string;
     quizId: string;
     lang: string;
@@ -33,51 +38,74 @@ const EpilogueQuizCompleted = () => {
     );
 
   return (
-    <div className="view epilgue-quiz-view">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        <div className="view-content quiz-view-content-complete">
-          {data && (
-            <StyleWrapper>
-              <div className="flex-center-all flex-col">
-                <span>
-                  <EmojiEventsIcon
-                    className="success-icon"
-                    fontSize="large"
-                    color="success"
-                  />{" "}
-                </span>
-                <h2>{`Coungradulations! You finished this story.`}</h2>
-              </div>
+    <WithFocusControls
+      direction="vertical"
+      customMessage="Press arrow up or arrow down to switch between page information"
+    >
+      <div
+        className="view epilgue-quiz-view"
+        aria-label="wrapper for epilogue quiz success page"
+      >
+        <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+          <div
+            className="view-content quiz-view-content-complete"
+            aria-label="inner wrapper for epilogue quiz success page"
+          >
+            {data && (
+              <StyleWrapper>
+                <div
+                  className="flex-center-all flex-col"
+                  aria-label="greeting wrapper for epilogue quiz success page"
+                >
+                  <span aria-hidden="true">
+                    <EmojiEventsIcon
+                      className="success-icon"
+                      fontSize="large"
+                      color="success"
+                    />
+                  </span>
+                  <h2
+                    tabIndex={0}
+                  >{`Coungradulations! You finished this story.`}</h2>
+                </div>
 
-              {!!data?.userStoriesUnlocked?.length && (
-                <DisplayStoryUnlockedItems stories={data.userStoriesUnlocked} />
-              )}
-              {data?.userStoriesUnlocked?.length === 0 && (<div>
-                <Divider>
-                  <Chip label="Actions" />
-                </Divider>{" "}
-              </div>)}
+                {!!data?.userStoriesUnlocked?.length && (
+                  <DisplayStoryUnlockedItems
+                    stories={data.userStoriesUnlocked}
+                  />
+                )}
+                {data?.userStoriesUnlocked?.length === 0 && (
+                  <div aria-label="wrapper for actions">
+                    <Divider aria-label="divider for action section">
+                      <Chip tabIndex={0} label="Actions" />
+                    </Divider>
+                  </div>
+                )}
 
-              <Typography mt={10} align="center">
-                <Link to={`/stories/${lang}/${data.blockCompletedStoryRefId}`}>
-                  Go to original story
-                </Link>
-              </Typography>
-            </StyleWrapper>
-          )}
-        </div>
-      </ErrorBoundary>
-    </div>
+                <Typography mt={10} align="center">
+                  <Link
+                    tabIndex={0}
+                    to={`/stories/${lang}/${data.blockCompletedStoryRefId}`}
+                  >
+                    Go to the original story
+                  </Link>
+                </Typography>
+              </StyleWrapper>
+            )}
+          </div>
+        </ErrorBoundary>
+      </div>
+    </WithFocusControls>
   );
 };
 
 const DisplayStoryUnlockedItems = (props: { stories: UserStory[] }) => {
   return (
-    <div>
-      <Divider>
-        <Chip label="Stories unlocked" />
+    <div aria-label="wrapper for unlocked stories achieved">
+      <Divider aria-label="list of unlocked stories">
+        <Chip tabIndex={0} label="Stories unlocked" />
       </Divider>
-      <div className="view-items-section">
+      <div className="view-items-section" aria-label="wrapper for unlocked stories section">
         {props.stories.map((userStory: UserStory) => (
           <StoryCard key={userStory.id} userStory={userStory} />
         ))}

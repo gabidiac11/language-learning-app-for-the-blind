@@ -118,6 +118,16 @@ code {
   align-items: center;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-start {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .flex-center-all {
   display: flex;
   align-items: center;
@@ -132,4 +142,9 @@ code {
 .flex-col {
   display: flex;
   flex-direction: column;
+}
+
+*:focus {
+  outline: 3px solid red!important;
+  outline-offset: 2px!important;;
 }

@@ -1,16 +1,23 @@
 import { Box, LinearProgress } from "@mui/material";
+import { useEffect } from "react";
 
 export const Loader = () => {
+  useEffect(() => {
+    // TODO: play sound: loading something
+  }, [])
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box tabIndex={0} aria-label="Loading" sx={{ width: "100%" }}>
       <LinearProgress />
     </Box>
   );
 };
 
 export const OverLayLoader = () => {
+  // TODO: play sound: loading something
   return (
     <div
+      tabIndex={0}
+      aria-label="Loading"
       style={{
         width: "100%",
         height: "100%",

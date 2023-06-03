@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 import "./CardBlock.scss";
 
 const CardBlock = (
-  props: PropsWithChildren & { disabled?: boolean; onClick?: () => void }
+  props: PropsWithChildren & { disabled?: boolean; onClick?: () => void, ariaLabel: string }
 ) => {
   const className = `block-card ${
     !props.disabled && props.onClick
@@ -15,7 +15,9 @@ const CardBlock = (
   }`;
   return (
     <Card
-      sx={{ maxWidth: 345, minWidth: 300 }}
+      tabIndex={0}
+      aria-label={props.ariaLabel || ""}
+      sx={{ width: 345 }}
       className={className}
       onClick={props.onClick || (() => {})}
     >

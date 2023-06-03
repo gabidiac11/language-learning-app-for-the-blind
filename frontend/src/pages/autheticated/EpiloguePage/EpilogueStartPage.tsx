@@ -9,6 +9,7 @@ import "./EpiloguePage.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { lessonLanguageHeader } from "../../../constants";
+import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 
 const EpilogueStartPage = () => {
   //TODO: should have something explaining what this page is (later)
@@ -24,24 +25,46 @@ const EpilogueStartPage = () => {
   useEffect(() => {}, []);
 
   return (
-    <div className="view epilogue-summary-view">
+    <div
+      className="view epilogue-summary-view"
+      aria-label="page wrapper for epilogue short story"
+    >
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
         {!error && data && epilogueProgressId && (
-          <div className="view-content">
-            <h1> Epilogue: {data.epilogue.name} </h1>
+          <WithFocusControls
+            direction="vertical"
+            customMessage="Press arrow up or arrow down to switch between page information"
+          >
+            <div
+              className="view-content"
+              aria-label="inner wrapper for epilogue short story"
+            >
+              <h1
+                tabIndex={0}
+                aria-label={`Title epilogue: ${data.epilogue.name}`}
+              >
+                Epilogue: {data.epilogue.name}
+              </h1>
 
-            {/* TODO: implement reading of story */}
-            <p className="epilogue-txt"> {data.epilogue.textStoryTale} </p>
+              {/* TODO: implement reading of story */}
+              <p
+                className="epilogue-txt"
+                tabIndex={0}
+                aria-label={`Short story content: ${data.epilogue.textStoryTale}`}
+              >
+                {data.epilogue.textStoryTale}
+              </p>
 
-            <StoryListener epilogueProgress={data} reload={retry} />
+              <StoryListener epilogueProgress={data} reload={retry} />
 
-            {data.timeSummaryCompleted && (
-              <ButtonContinueToEpilogueQuiz
-                lang={data.lang}
-                epilogueProgressId={data.id}
-              />
-            )}
-          </div>
+              {data.timeSummaryCompleted && (
+                <ButtonContinueToEpilogueQuiz
+                  lang={data.lang}
+                  epilogueProgressId={data.id}
+                />
+              )}
+            </div>
+          </WithFocusControls>
         )}
       </ErrorBoundary>
     </div>
@@ -111,12 +134,13 @@ const StoryListener = (props: {
     >
       <div>
         <Button
+          tabIndex={0}
           onClick={listenStory}
           variant="contained"
           color={isListening ? "secondary" : "primary"}
-          startIcon={<VolumeUpIcon />}
+          startIcon={<VolumeUpIcon aria-hidden="true" />}
         >
-          Read story
+          Play story
         </Button>
       </div>
     </ErrorBoundary>

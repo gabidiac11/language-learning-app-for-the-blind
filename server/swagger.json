@@ -126,6 +126,12 @@
 			},
 			"Epilogue": {
 				"properties": {
+					"imageAlt": {
+						"type": "string"
+					},
+					"imageUrl": {
+						"type": "string"
+					},
 					"questions": {
 						"items": {
 							"$ref": "#/components/schemas/EpilogueQuestion"
@@ -146,6 +152,8 @@
 					}
 				},
 				"required": [
+					"imageAlt",
+					"imageUrl",
 					"questions",
 					"textStoryTale",
 					"name",
@@ -283,6 +291,9 @@
 						},
 						"type": "array"
 					},
+					"imageAlt": {
+						"type": "string"
+					},
 					"imageUrl": {
 						"type": "string"
 					},
@@ -299,6 +310,7 @@
 				"required": [
 					"words",
 					"isStarter",
+					"imageAlt",
 					"imageUrl",
 					"name",
 					"lang",
@@ -660,6 +672,9 @@
 					"imageUrl": {
 						"type": "string"
 					},
+					"imageAlt": {
+						"type": "string"
+					},
 					"storyId": {
 						"type": "string"
 					},
@@ -685,6 +700,7 @@
 					"name",
 					"description",
 					"imageUrl",
+					"imageAlt",
 					"storyId",
 					"numOfBlocksCompleted",
 					"numOfTotalBlocks"
@@ -962,6 +978,7 @@
 														"c22b3077-b670-4ac8-8f21-a0a10125cb9e"
 													],
 													"imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+													"imageAlt": "image alt",
 													"isStarter": true,
 													"name": "Family",
 													"words": [
@@ -1011,6 +1028,7 @@
 													"block": {
 														"id": "28e74a16-6114-4c50-815e-631cfd7b3a5e",
 														"imageUrl": "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+														"imageAlt": "image alt",
 														"isStarter": false,
 														"name": "Names",
 														"words": [
@@ -1062,6 +1080,7 @@
 															"f876cde3-feaa-41dc-9720-d18f8eb975a9"
 														],
 														"imageUrl": "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+														"imageAlt": "image alt",
 														"isStarter": false,
 														"name": "Pronouns",
 														"words": [
@@ -1243,6 +1262,8 @@
 												"epilogue": {
 													"id": "51c76980-f429-4b41-8300-22af4bee00a3",
 													"name": "Anna's family",
+													"imageUrl": "https://dummy-link",
+													"imageAlt": "Russian family at the dinner table",
 													"questions": [
 														{
 															"id": "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
@@ -1363,6 +1384,7 @@
 													"c22b3077-b670-4ac8-8f21-a0a10125cb9e"
 												],
 												"imageUrl": "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+												"imageAlt": "image alt",
 												"isStarter": true,
 												"name": "Family",
 												"words": [
@@ -1576,6 +1598,8 @@
 											"epilogue": {
 												"id": "205cdadc-b1e2-481a-a88a-0fb88cb250ca",
 												"name": "Anna's family",
+												"imageUrl": "https://dummy-link",
+												"imageAlt": "Russian family at the dinner table",
 												"questions": [
 													{
 														"id": "471dff51-c04b-4c76-8c12-ef9aa97d2a8b",
@@ -1875,6 +1899,7 @@
 														"cf315d89-e763-41fb-a111-8d43bc8e0b96"
 													],
 													"imageUrl": "some url/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+													"imageAlt": "image alt",
 													"name": "My family #1",
 													"numOfBlocksCompleted": 7,
 													"numOfTotalBlocks": 7,
@@ -1918,6 +1943,7 @@
 																	"c22b3077-b670-4ac8-8f21-a0a10125cb9e"
 																],
 																"imageUrl": "some url/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+																"imageAlt": "image alt",
 																"isStarter": true,
 																"name": "Family",
 																"words": [
@@ -1983,6 +2009,8 @@
 														"epilogue": {
 															"id": "51c76980-f429-4b41-8300-22af4bee00a3",
 															"name": "Anna's family",
+															"imageUrl": "https://dummy-link",
+															"imageAlt": "Russian family at the dinner table",
 															"questions": [
 																{
 																	"id": "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
@@ -2148,6 +2176,7 @@
 													"cf315d89-e763-41fb-a111-8d43bc8e0b96"
 												],
 												"imageUrl": "some url/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+												"imageAlt": "image alt",
 												"name": "My family #1",
 												"numOfBlocksCompleted": 7,
 												"numOfTotalBlocks": 7,
@@ -2191,6 +2220,7 @@
 																"c22b3077-b670-4ac8-8f21-a0a10125cb9e"
 															],
 															"imageUrl": "some url/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+															"imageAlt": "image alt",
 															"isStarter": true,
 															"name": "Family",
 															"words": [
@@ -2256,6 +2286,8 @@
 													"epilogue": {
 														"id": "51c76980-f429-4b41-8300-22af4bee00a3",
 														"name": "Anna's family",
+														"imageUrl": "https://dummy-link",
+														"imageAlt": "Russian family at the dinner table",
 														"questions": [
 															{
 																"id": "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
@@ -2336,6 +2368,7 @@
 												"cf315d89-e763-41fb-a111-8d43bc8e0b96"
 											],
 											"imageUrl": "some url/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+											"imageAlt": "image alt",
 											"name": "My family #1",
 											"numOfBlocksCompleted": 7,
 											"numOfTotalBlocks": 7,
@@ -2379,6 +2412,7 @@
 															"c22b3077-b670-4ac8-8f21-a0a10125cb9e"
 														],
 														"imageUrl": "some url/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+														"imageAlt": "image alt",
 														"isStarter": true,
 														"name": "Family",
 														"words": [
@@ -2444,6 +2478,8 @@
 												"epilogue": {
 													"id": "51c76980-f429-4b41-8300-22af4bee00a3",
 													"name": "Anna's family",
+													"imageUrl": "https://dummy-link",
+													"imageAlt": "Russian family at the dinner table",
 													"questions": [
 														{
 															"id": "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",

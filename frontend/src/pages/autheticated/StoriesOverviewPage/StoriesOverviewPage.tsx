@@ -5,6 +5,7 @@ import { UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 import { useParams } from "react-router";
 import { Typography } from "@mui/material";
+import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 
 export const StoriesOverviewPage = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -12,21 +13,34 @@ export const StoriesOverviewPage = () => {
     `userStories`,
     lang
   );
-
+  // TODO: accesibility for all error boundaries and inform requests in progress
   return (
-    <div className="view dashboard-page-wrapper">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        <div className="view-content view-items">
-          {!error &&
-            data &&
-            data.map((userStory) => (
-              <StoryCard key={userStory.id} userStory={userStory} />
-            ))}
-          {!error && data && data.length === 0 && (
-            <Typography variant="h5">No lessons.</Typography>
-          )}
-        </div>
-      </ErrorBoundary>
+    <div
+      className="view dashboard-page-wrapper"
+      aria-label="wrapper for list of lesson stories"
+    >
+      <WithFocusControls
+        direction="horizontal"
+        customMessage="Press arrow left or arrow right to switch between story cards and inner information of a story card"
+      >
+        <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+          <div
+            className="view-content view-items"
+            aria-label="inner wrapper for lesson stories."
+          >
+            {!error &&
+              data &&
+              data.map((userStory) => (
+                <StoryCard key={userStory.id} userStory={userStory} />
+              ))}
+            {!error && data && data.length === 0 && (
+              <Typography variant="h5" tabIndex={0}>
+                No lessons.
+              </Typography>
+            )}
+          </div>
+        </ErrorBoundary>
+      </WithFocusControls>
     </div>
   );
 };

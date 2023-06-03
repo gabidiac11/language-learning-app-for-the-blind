@@ -49,7 +49,7 @@ import * as fr from "./fr/generateClonedStories";
         name: "German",
         active: true,
         imageUrl:
-        // TODO: find smaller images
+          // TODO: find smaller images
           "https://images.pexels.com/photos/109629/pexels-photo-109629.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "German flag image.",
         order: 2,

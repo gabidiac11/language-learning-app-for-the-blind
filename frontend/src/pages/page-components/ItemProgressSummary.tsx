@@ -11,45 +11,50 @@ type SummaryTargetItem = UserStory | BuildingBlockProgress | EpilogueProgress;
 const computeText = (
   targetItem: SummaryTargetItem,
   dependentNames?: string[]
-): string => {
+): [string, string] => {
   if (targetItem.timeCompleted) {
-    return `🏆 Completed on ${getFormattedTimestamp(targetItem.timeCompleted)}`;
+    return [`🏆 `, `Completed on ${getFormattedTimestamp(targetItem.timeCompleted)}`];
   }
   if (targetItem.timeStarted) {
-    return `✨ Started on ${getFormattedTimestamp(targetItem.timeStarted)}`;
+    return [`✨ `, `Started on ${getFormattedTimestamp(targetItem.timeStarted)}`];
   }
   if (targetItem.timeUnlocked) {
-    return `👉 Unlocked on ${getFormattedTimestamp(targetItem.timeUnlocked)}`;
+    return [`👉 `, `Unlocked on ${getFormattedTimestamp(targetItem.timeUnlocked)}`];
   }
   const names = dependentNames?.map((n) => `'${n}'`).join(",") ?? "";
-  return `🔒 Locked` + (names ? `- complete ${names}` : "");
-};
-
-const computeDescription = (targetItem: SummaryTargetItem) => {
-  if ((targetItem as { description?: string }).description) {
-    return (
-      <p style={{ fontSize: "11px", margin: "0", padding: "5px 0 0 0px" }}>
-        {(targetItem as { description?: string }).description}
-      </p>
-    );
-  }
-  return "";
+  return [`🔒 `, `Locked.` + (names ? ` Please complete ${names}` : "")];
 };
 
 export const ItemProgressSummary = (props: {
   item: SummaryTargetItem;
   isDependentOnNames?: string[];
+  name: string;
 }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(["", ""]);
 
   useLayoutEffect(() => {
     setText(computeText(props.item, props.isDependentOnNames));
   }, [props.item, props.isDependentOnNames]);
 
+  const description = (props.item as { description?: string }).description;
+  const [emoji, messageText] = text;
   return (
     <>
-      {text}
-      {computeDescription(props.item)}
+      <p
+        tabIndex={0}
+        aria-label={`${props.name} state: ${messageText}`}
+      >
+        {emoji}{messageText}
+      </p>
+      {description && (
+        <p
+          tabIndex={0}
+          aria-label={`${props.name} description: ${description}`}
+          style={{ fontSize: "11px", margin: "0", padding: "5px 0 0 0px" }}
+        >
+          {description}
+        </p>
+      )}
     </>
   );
 };

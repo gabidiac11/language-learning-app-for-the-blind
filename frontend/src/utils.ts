@@ -33,3 +33,16 @@ export const getShuffledArray = <T>(array: T[]):T[] => {
   }
   return shuffledArray;
 };
+
+export const playTextAudio = (text: string) => {
+  // const element = document.getElementById("text-to-speech-area") as HTMLTextAreaElement;
+  // element.value = text; 
+  // element.addEventListener('click', () => {
+  //   const speechText = element.value;
+  //   const utterance = new SpeechSynthesisUtterance(speechText);
+  //   window.speechSynthesis.speak(utterance);
+  // });
+
+  // element.focus();
+  // element.click();
+} 

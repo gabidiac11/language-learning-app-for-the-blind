@@ -11,16 +11,18 @@ export const LanguageShortcuts = ({ lang }: { lang?: Language }) => {
   }
   return (
     <Link
+      tabIndex={0}
       to={`/stories/${lang}`}
-      aria-label={`link to active language lesson page: ${match.name}`}
+      aria-label={`link to page: all lesson stories for ${match.name} language`}
       style={{ display: "flex", alignItems: "center", color: "white", marginLeft: "5px" }}
     >
       <FlagCircle
+        aria-hidden="true"
         htmlColor="white"
         className="outline-none"
         style={{ marginRight: "7px" }}
       />
-      <Typography variant="h6">{match.name}</Typography>
+      <Typography aria-hidden="true" variant="h6">{match.name}</Typography>
     </Link>
   );
 };

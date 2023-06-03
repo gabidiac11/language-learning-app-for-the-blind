@@ -1,5 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
+import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 import {
   QuizOption,
   QuizResponse,
@@ -23,15 +24,26 @@ const EpilogueQuizQuestion = (props: {
     [props.onChoose]
   );
 
+  const pauseLoadingNextQuestionTimeSeconds = 1;
+
   return (
-    <>
-      <Typography variant="h5" mb={5} align="center">
+    <WithFocusControls direction="vertical">
+      <Typography
+        tabIndex={0}
+        aria-label={`question: ${props.currentQuestion.questionText}`}
+        variant="h5"
+        mb={5}
+        align="center"
+      >
         {props.currentQuestion.questionText}
       </Typography>
-      {props.currentQuestion.options.map((option) => (
-        <div key={option.id}>
+      {props.currentQuestion.options.map((option, index) => (
+        <div key={option.id} aria-label="question's options wrapper">
           {/* TODO: see how you wrap the text */}
           <Button
+            tabIndex={0}
+            aria-label={`option ${index + 1}: ${option.text}`}
+
             variant="contained"
             className="quiz-question-option"
             disabled={!!selected}
@@ -48,21 +60,19 @@ const EpilogueQuizQuestion = (props: {
                 return <Typography className="mark">❌</Typography>;
               }
             })()}
-            <Typography variant="body1">
-              {option.text}
-            </Typography>
+            <Typography variant="body1">{option.text}</Typography>
           </Button>
         </div>
       ))}
       {props.correctOptionId && (
-        <div>
+        <div  aria-label={`Indication: Loading next question in ${pauseLoadingNextQuestionTimeSeconds} seconds.`}>
           <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
             Loading next question in{" "}
             <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
           </Typography>
         </div>
       )}
-    </>
+    </WithFocusControls>
   );
 };
 

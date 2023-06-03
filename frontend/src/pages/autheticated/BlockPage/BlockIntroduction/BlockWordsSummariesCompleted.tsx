@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import useFetchData, {
   UseFetchDataOptions,
 } from "../../../../api/useFetchData";
@@ -18,15 +19,19 @@ const BlockWordsSummariesCompleted = (props: {
     fetchOptioons
   );
   // TODO: review the text is not ideal for now
+
   return (
     <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-      <div>
-        Completed!🎉
-        <br></br>
-        {props.blockProgress.timeSummaryCompleted
-          ? "You again completed the words introduction"
-          : "You completed the words introduction. You can now start the word practice quiz."}
-        <ButtonContinueToBlockQuiz lang={props.blockProgress.lang} blockProgressId={props.blockProgress.id} />
+      <div aria-label="wrapper for section where you're informed you completed the word introduction">
+        <Typography tabIndex={0} variant="subtitle1" aria-label={`Congratulations! You completed the words introduction, you can start the words quiz.`}>
+          Completed! 🎉
+          <br></br>
+          You completed the words introduction, you can start the words quiz.
+        </Typography>
+        <ButtonContinueToBlockQuiz
+          lang={props.blockProgress.lang}
+          blockProgressId={props.blockProgress.id}
+        />
       </div>
     </ErrorBoundary>
   );
