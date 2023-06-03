@@ -29,6 +29,8 @@ if (process.env.ALLOW_SEED === "true") {
 // prioritize what message will pre-recorded for the user, some might not appear to him if the app is working from a good actor
 // you can use the fallback text to speech for messages that might not apepar for the user that much if is not activetly messing with the API
 
+// TODO: make json imports for seeding data is done from cloud storage
+
 const app = express();
 
 app.use(bodyParser.json());

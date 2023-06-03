@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 import { Home, Info, LogoutRounded } from "@mui/icons-material";
 import { useAppStateContext } from "../../context/hooks/useAppStateContext";
 import { LanguageShortcuts } from "./LanguageShortcuts";
+import { SoundInterationPanel } from "./SoundInterationPanel/SoundInterationPanel";
 
 export default function Header() {
   const [user] = useAuthState(firebaseAuth);
@@ -21,12 +22,12 @@ export default function Header() {
     severity: "error",
   });
   const navigate = useNavigate();
-  const {language} = useAppStateContext();
+  const { language } = useAppStateContext();
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box sx={{ flexGrow: 1 }} aria-label="header">
+      <AppBar position="static" aria-label="header">
+        <Toolbar aria-label="header">
           <button
             className="no-btn"
             aria-label="link to instructions page"
@@ -34,12 +35,7 @@ export default function Header() {
             style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
             tabIndex={0}
           >
-            <Info
-              htmlColor="white"
-              aria-label="link to instructions page"
-              onClick={() => navigate("/instructions")}
-              className="outline-none"
-            />
+            <Info htmlColor="white" className="outline-none" />
           </button>
           <button
             className="no-btn"
@@ -51,14 +47,16 @@ export default function Header() {
             <Home
               htmlColor="white"
               aria-label="link to home page"
-              onClick={() => navigate("/home")}
               className="outline-none"
             />
           </button>
 
           <LanguageShortcuts lang={language} />
 
+          <SoundInterationPanel />
+          
           <Box sx={{ flexGrow: 1 }} />
+
           <Box sx={{ flexGrow: 0 }}>
             <div
               style={{
@@ -70,13 +68,15 @@ export default function Header() {
               <Typography
                 variant="h6"
                 noWrap
+                tabIndex={0}
+                aria-label={`text: user ${user?.displayName || user?.email}`}
                 component="div"
                 style={{ lineHeight: "50px", paddingRight: "10px" }}
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
                 {user?.displayName || user?.email}
               </Typography>
-              <IconButton sx={{ p: 0 }}>
+              <IconButton aria-label="photo user" sx={{ p: 0 }} tabIndex={0}>
                 {!user?.photoURL && <AccountCircle htmlColor="white" />}
                 {user?.photoURL && (
                   <Avatar
@@ -87,7 +87,7 @@ export default function Header() {
                   />
                 )}
               </IconButton>
-              <div>
+              <div aria-label="logout button" tabIndex={0}>
                 <LogoutRounded
                   onClick={() => logout()}
                   style={{ color: "white", marginLeft: "10px", fontSize: 20 }}
@@ -97,6 +97,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+      
       <Snackbar
         open={snack.open}
         autoHideDuration={12000}

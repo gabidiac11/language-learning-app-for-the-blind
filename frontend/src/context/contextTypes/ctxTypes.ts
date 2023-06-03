@@ -33,6 +33,7 @@ export type UserStory = {
   isDependentOnNames?: string[];
 
   imageUrl: string;
+  imageAlt: string;
 
   buildingBlocksProgressItems: BuildingBlockProgress[];
   epilogueProgress: EpilogueProgress;
@@ -74,10 +75,11 @@ export type WordProgress = {
 export type BuildingBlock = {
   id: string;
   name: string;
-  
+
   lang: Language;
 
   imageUrl: string;
+  imageAlt: string;
 
   // blockDependentOnIds have all ids of the blocks from current story that need to be completed for this block to be available for the user to start
   idsItemsDependentOnThis?: string[];
@@ -120,11 +122,14 @@ export type Epilogue = {
 
   // the questions asked are about what is happening in the story tale
   questions: EpilogueQuestion[];
+
+  imageUrl: string;
+  imageAlt: string;
 };
 
 export type EpilogueProgress = {
   id: string;
-  
+
   lang: Language;
 
   epilogue: Epilogue;

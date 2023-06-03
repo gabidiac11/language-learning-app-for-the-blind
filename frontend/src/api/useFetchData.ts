@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import axiosInstance from "../axiosInstance";
 import { lessonLanguageHeader } from "../constants";
+import { playTextAudio } from "../utils";
 
 export type UseFetchDataOptions = {
   method: "GET" | "POST" | "PUT";
@@ -57,6 +58,7 @@ const useFetchData = <T>(
 
   const fetchData = useCallback(async () => {
     try {
+      // TODO: play audio message when starts and ends request
       setLoading(true);
       const _fetchOptions = fetchOptions;
       const _url = url;
@@ -73,6 +75,7 @@ const useFetchData = <T>(
     } catch (error) {
       setError(error);
     } finally {
+      playTextAudio("Loading finished.");
       setLoading(false);
     }
   }, [url, fetchOptions]);

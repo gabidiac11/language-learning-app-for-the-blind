@@ -59,7 +59,7 @@ export const Register = () => {
             variant="contained"
             className="form-button"
             onClick={signInWithGoogle}
-            startIcon={<GoogleIcon />}
+            startIcon={<GoogleIcon aria-hidden="true" />}
           >
             Register with Google
           </Button>

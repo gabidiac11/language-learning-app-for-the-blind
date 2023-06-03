@@ -7,6 +7,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Family",
     imageUrl:
       "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "Russian family at dinner.",
     words: [
       {
         id: genUid(),
@@ -90,6 +91,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Names",
     imageUrl:
       "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "walk of stars with names on it: hollywood walk of fame",
     words: [
       {
         id: genUid(),
@@ -130,6 +132,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Pronouns",
     imageUrl:
       "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "blackboard with 'we' text",
     words: [
       {
         id: genUid(),
@@ -297,6 +300,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Temporal words",
     imageUrl:
       "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "sand glas",
     words: [
       {
         id: genUid(),
@@ -398,6 +402,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Places",
     imageUrl:
       "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "road signs",
     words: [
       {
         id: genUid(),
@@ -463,6 +468,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Verbs",
     imageUrl:
       "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "board game with words",
     words: [
       {
         id: genUid(),
@@ -675,6 +681,7 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     name: "Connection words",
     imageUrl:
       "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "puzzle pieces",
     words: [
       {
         id: genUid(),

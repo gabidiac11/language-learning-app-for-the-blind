@@ -19,6 +19,7 @@ async function generateDummyStory(): Promise<Story> {
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "Russian family at the dinner table",
     idsItemsDependentOnThis: [],
     isStarter: false,
     buildingBlocks,
@@ -57,8 +58,7 @@ export async function generateClonedStories() {
   ];
   startedStoryWithEpilogueStarted.idsItemsDependentOnThis = [lockedStory.id];
 
-
   guardStories(stories);
-  
+
   return stories;
 }

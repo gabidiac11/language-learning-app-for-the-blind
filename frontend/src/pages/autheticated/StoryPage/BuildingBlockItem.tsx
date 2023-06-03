@@ -6,9 +6,7 @@ import CardBlock from "../../page-components/CardBlock/CardBlock";
 import { ItemProgressSummary } from "../../page-components/ItemProgressSummary";
 import "./StoryPage.scss";
 
-const BuildingBlockItem = (props: {
-  blockProgress: BuildingBlockProgress;
-}) => {
+const BuildingBlockItem = (props: { blockProgress: BuildingBlockProgress }) => {
   const { blockProgress } = props;
   const navigate = useNavigate();
   const disabled = !blockProgress.timeUnlocked;
@@ -21,12 +19,25 @@ const BuildingBlockItem = (props: {
     navigate(`/blocks/${blockProgress.lang}/${blockProgress.id}`);
   }, [blockProgress, disabled]);
 
+  const cardAriaLabel = disabled
+    ? `Building block ${
+        props.blockProgress.block.name
+      }. Note that this can't be started because blocks ${
+        props.blockProgress.isDependentOnNames?.join() ?? "dependent blocks"
+      } are not completed.`
+    : `Building block ${props.blockProgress.block.name}: to go to this lesson block press enter.`;
+
   return (
-    <CardBlock disabled={disabled} onClick={navigateToStory}>
+    <CardBlock
+      ariaLabel={cardAriaLabel}
+      disabled={disabled}
+      onClick={navigateToStory}
+    >
       <CardHeader
         title={blockProgress.block.name}
         subheader={
           <ItemProgressSummary
+            name="Building block"
             isDependentOnNames={props.blockProgress.isDependentOnNames}
             item={blockProgress}
           />
@@ -34,10 +45,11 @@ const BuildingBlockItem = (props: {
       />
       <CardMedia
         component="img"
-        height="194"
+        width="100%"
+        height="250px"
         image={blockProgress.block.imageUrl}
-        // TODO: add alt to this card
-        alt="Russian family"
+        alt={`image: ${blockProgress.block.imageAlt}`}
+        tabIndex={0}
       />
     </CardBlock>
   );

@@ -21,7 +21,7 @@ export const Login = () => {
             variant="contained"
             color="primary"
             className="button"
-            startIcon={<GoogleIcon />}
+            startIcon={<GoogleIcon aria-hidden="true" />}
             onClick={signInWithGoogle}
           >
             Login with Google

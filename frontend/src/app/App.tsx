@@ -38,6 +38,7 @@ const App = () => {
     <div className="main">
       <BrowserRouter>
         {user && <Header />}
+        {/* <textarea style={{height: 0, overflow: "hidden", opacity: 0}} id="text-to-speech-area"></textarea> */}
         {!user ? (
           <Routes>
             <Route path="/login" element={<Login />} />

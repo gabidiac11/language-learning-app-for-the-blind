@@ -8,6 +8,7 @@ import CardBlock from "../../page-components/CardBlock/CardBlock";
 
 export const LanguageCard = (props: {
   lessonLanguage: LanguageDataItem;
+  index: number
 }) => {
   const navigate = useNavigate();
   const { lessonLanguage } = props;
@@ -16,17 +17,19 @@ export const LanguageCard = (props: {
     navigate(`/stories/${lessonLanguage.id}`);
   }, [lessonLanguage]);
 
+  const cardAriaLabel = `${props.index + 1} ${props.lessonLanguage.name}: Go to lessons in ${props.lessonLanguage.name}, press enter.`;
+
   return (
-    <CardBlock onClick={navigateToLessonSets}>
+    <CardBlock ariaLabel={cardAriaLabel} onClick={navigateToLessonSets}>
       <CardHeader
+        aria-label={cardAriaLabel}
         title={props.lessonLanguage.name}
       />
       <CardMedia
         component="img"
-        height="320"
+        width="100%"
         image={props.lessonLanguage.imageUrl}
-        // TODO: what alt to use here -> should devine some property for this one
-        alt={props.lessonLanguage.alt}
+        alt={`${props.lessonLanguage.name}: ${props.lessonLanguage.alt}, press enter to go to lessons.`}
       />
     </CardBlock>
   );

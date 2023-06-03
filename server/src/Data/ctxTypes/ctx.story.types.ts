@@ -15,6 +15,7 @@ export type Story = {
   name: string;
 
   imageUrl: string;
+  imageAlt: string;
 
   // ids of the stories which will be unlocked when current story is completed
   idsItemsDependentOnThis?: string[];
@@ -33,6 +34,7 @@ export type BuildingBlock = {
 
   name: string;
   imageUrl: string;
+  imageAlt: string;
 
   // ids of the BLOCKS which will be unlocked when current BLOCK is completed
   idsItemsDependentOnThis?: string[];
@@ -78,6 +80,9 @@ export type Epilogue = {
 
   // the questions asked are about what is happening in the story tale
   questions: EpilogueQuestion[];
+
+  imageUrl: string;
+  imageAlt: string;
 };
 
 export type EpilogueQuestion = {

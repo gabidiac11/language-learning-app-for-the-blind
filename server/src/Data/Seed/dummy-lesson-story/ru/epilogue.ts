@@ -8,6 +8,9 @@ const generateEpilogue = async (): Promise<
     lang: "ru",
     id: genUid(),
     name: "Anna's family",
+    imageUrl:
+    "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    imageAlt: "Russian family at the dinner table",
     textStoryTale: `"Семья Анны"
   
       Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.

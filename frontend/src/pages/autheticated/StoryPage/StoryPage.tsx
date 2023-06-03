@@ -1,5 +1,6 @@
 import { Divider, Chip, Typography, Container } from "@mui/material";
 import { useParams } from "react-router";
+import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
@@ -7,53 +8,82 @@ import BuildingBlockItem from "./BuildingBlockItem";
 import EpilogueBlockItem from "./EpilogueBlockItem";
 
 export const StoryPage = () => {
-  const { id, lang } = useParams<{ id: string, lang: string }>();
+  const { id, lang } = useParams<{ id: string; lang: string }>();
   const { data, loading, error, retry } = useFetchData<UserStory>(
     `userStories/${id}`,
     lang
   );
-  
+
   return (
-    <div className="view story-page-wrapper">
-      <ErrorBoundary error={error} onRetry={retry} loading={loading}>
-        {!error && data && (
-          <div className="view-content">
-            <div>
-              <Typography variant="h5" mb={7} align="center">
-                {data.name}
-              </Typography>
-            </div>
+    <div
+      className="view story-page-wrapper"
+      aria-label="page wrapper for the lesson-blocks of this lesson story"
+    >
+      <WithFocusControls
+        direction="horizontal"
+        customMessage="Press arrow left or arrow right to switch between information on this page"
+      >
+        <ErrorBoundary error={error} onRetry={retry} loading={loading}>
+          {!error && data && (
+            <div className="view-content">
+              <div>
+                <Typography
+                  variant="h5"
+                  mb={7}
+                  align="center"
+                  tabIndex={0}
+                  aria-label={`Story title: ${data.name}`}
+                >
+                  {data.name}
+                </Typography>
+              </div>
 
-            {/* BUILDING BLOCKS */}
-            <Divider>
-              <Chip label="Building blocks" />
-            </Divider>
-            <div className="view-items-section">
-              {data.buildingBlocksProgressItems.map(
-                (blockProgress: BuildingBlockProgress) => (
-                  <BuildingBlockItem
-                    key={blockProgress.id}
-                    blockProgress={blockProgress}
-                  />
-                )
-              )}
-            </div>
+              {/* BUILDING BLOCKS */}
+              <Divider aria-label="list of building blocks">
+                <Chip
+                  tabIndex={0}
+                  aria-label="Building blocks section"
+                  label="Building blocks"
+                />
+              </Divider>
+              <div
+                className="view-items-section"
+                aria-label="building blocks list wrapper"
+              >
+                {data.buildingBlocksProgressItems.map(
+                  (blockProgress: BuildingBlockProgress) => (
+                    <BuildingBlockItem
+                      key={blockProgress.id}
+                      blockProgress={blockProgress}
+                    />
+                  )
+                )}
+              </div>
 
-            {/* EPILOGUE BLOCKS */}
-            <Container maxWidth="sm" />
-            <Divider>
-              <Chip label="Epilogue block" />
-            </Divider>
-            <div className="view-items-section">
-              <EpilogueBlockItem
-                storyImgUrl={data.imageUrl}
-                epilogueProgress={data.epilogueProgress}
-                key={data.epilogueProgress.id}
-              />
+              {/* EPILOGUE BLOCKS */}
+              <Container maxWidth="sm" />
+              <Divider aria-label="section with the epilogue block">
+                <Chip
+                  tabIndex={0}
+                  aria-label="Epilogue block section"
+                  label="Epilogue block"
+                />
+              </Divider>
+              <div
+                className="view-items-section"
+                aria-label="wrapper for the epilogue block"
+              >
+                <EpilogueBlockItem
+                  storyImgUrl={data.imageUrl}
+                  storyImgAlt={`image: ${data.imageAlt}`}
+                  epilogueProgress={data.epilogueProgress}
+                  key={data.epilogueProgress.id}
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </ErrorBoundary>
+          )}
+        </ErrorBoundary>
+      </WithFocusControls>
     </div>
   );
 };

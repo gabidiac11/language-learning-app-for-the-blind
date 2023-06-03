@@ -1,5 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
+import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 import {
   QuizOption,
   QuizResponse,
@@ -22,44 +23,59 @@ const BlockQuizQuestion = (props: {
     [props.onChoose]
   );
 
+  const pauseLoadingNextQuestionTimeSeconds = 1;
+
   return (
-    <>
-      <Typography variant="h5" mb={5} align="center">
-        {props.currentQuestion.questionText}
-      </Typography>
-      {props.currentQuestion.options.map((option) => (
-        <div key={option.id}>
-          {/* TODO: see how you wrap the text */}
-          <Button
-            variant="contained"
-            className="quiz-question-option"
-            disabled={!!selected}
-            onClick={() => onChoose(option)}
+    <WithFocusControls direction="vertical">
+      <div aria-label="wrapper for quiz page">
+        {/* TODO: play audio for this question when is focused / clicked */}
+        <Typography
+          tabIndex={0}
+          aria-label={`question: ${props.currentQuestion.questionText}`}
+          variant="h5"
+          mb={5}
+          align="center"
+        >
+          {props.currentQuestion.questionText}
+        </Typography>
+        {props.currentQuestion.options.map((option, index) => (
+          <div key={option.id} aria-label="question's options wrapper">
+            <Button
+              tabIndex={0}
+              aria-label={`option ${index + 1}: ${option.text}`}
+              variant="contained"
+              className="quiz-question-option"
+              disabled={!!selected}
+              onClick={() => onChoose(option)}
+            >
+              {(() => {
+                if (!selected || !props.correctOptionId) {
+                  return "";
+                }
+                if (option.id === props.correctOptionId) {
+                  return <Typography className="mark">✔️</Typography>;
+                }
+                if (option.id === selected.id) {
+                  return <Typography className="mark">❌</Typography>;
+                }
+              })()}
+              <Typography variant="body1">{option.text}</Typography>
+            </Button>
+          </div>
+        ))}
+
+        {props.correctOptionId && (
+          <div
+            aria-label={`Indication: Loading next question in ${pauseLoadingNextQuestionTimeSeconds} seconds.`}
           >
-            {(() => {
-              if (!selected || !props.correctOptionId) {
-                return "";
-              }
-              if (option.id === props.correctOptionId) {
-                return <Typography className="mark">✔️</Typography>;
-              }
-              if (option.id === selected.id) {
-                return <Typography className="mark">❌</Typography>;
-              }
-            })()}
-            <Typography variant="body1">{option.text}</Typography>
-          </Button>
-        </div>
-      ))}
-      {props.correctOptionId && (
-        <div>
-          <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
-            Loading next question in{" "}
-            <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
-          </Typography>
-        </div>
-      )}
-    </>
+            <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
+              Loading next question in{" "}
+              <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
+            </Typography>
+          </div>
+        )}
+      </div>
+    </WithFocusControls>
   );
 };
 

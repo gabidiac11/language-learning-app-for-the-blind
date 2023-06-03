@@ -9,6 +9,7 @@ import "./StoryPage.scss";
 const EpilogueBlockItem = (props: {
   epilogueProgress: EpilogueProgress;
   storyImgUrl: string;
+  storyImgAlt: string;
 }) => {
   const { epilogueProgress } = props;
   const navigate = useNavigate();
@@ -22,23 +23,34 @@ const EpilogueBlockItem = (props: {
     navigate(`/epilogues/${epilogueProgress.lang}/${epilogueProgress.id}`);
   }, [epilogueProgress, disabled]);
 
+  const cardAriaLabel = disabled
+    ? `Epilogue ${props.epilogueProgress.epilogue.name}. Note that this can't be started because not all building blocks are completed`
+    : `Epilogue ${props.epilogueProgress.epilogue.name}: to go to this lesson block press enter.`;
+
   return (
-    <CardBlock disabled={disabled} onClick={navigateToStory}>
+    <CardBlock
+      ariaLabel={cardAriaLabel}
+      disabled={disabled}
+      onClick={navigateToStory}
+    >
       <CardHeader
+        tabIndex={0}
+        ariaLabel={`Epilgoue title: ${epilogueProgress.epilogue.name}`}
         title={epilogueProgress.epilogue.name}
         subheader={
           <ItemProgressSummary
+            name="Epilogue"
             isDependentOnNames={["all building blocks"]}
             item={epilogueProgress}
           />
         }
       />
       <CardMedia
+        tabIndex={0}
         component="img"
-        height="194"
+        width="100%"
         image={props.storyImgUrl}
-        // TODO: add alt to this card
-        alt="Russian family"
+        alt={props.storyImgAlt}
       />
     </CardBlock>
   );

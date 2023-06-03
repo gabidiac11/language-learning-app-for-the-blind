@@ -12,20 +12,22 @@ import {
 export type UserStory = {
   id: string;
 
-  lang: Language,
+  lang: Language;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
-  
+
   order: number;
-  
+
   description: string | null;
-  
+
   imageUrl: string;
+  imageAlt: string;
+
   storyId: string;
-  
+
   isDependentOnNames?: string[];
   idsDependentOnThisUserStory?: string[];
 
@@ -46,7 +48,7 @@ export type UserStory = {
 export type BuildingBlockProgress = {
   id: string;
 
-  lang: Language,
+  lang: Language;
 
   order: number;
 
@@ -72,7 +74,7 @@ export type BuildingBlockProgress = {
 export type WordProgress = {
   id: string;
 
-  lang: Language,
+  lang: Language;
 
   order: number;
   userStoryId: string;
@@ -85,7 +87,7 @@ export type WordProgress = {
 export type EpilogueProgress = {
   id: string;
 
-  lang: Language,
+  lang: Language;
 
   epilogueId: string;
   epilogue?: Epilogue;
@@ -105,8 +107,8 @@ export type EpilogueProgress = {
 
 export type EpilogueQuestionProgress = {
   id: string;
-  
-  lang: Language,
+
+  lang: Language;
 
   order: number;
   questionId: string;

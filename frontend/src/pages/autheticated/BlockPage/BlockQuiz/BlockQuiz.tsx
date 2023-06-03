@@ -42,10 +42,11 @@ const BlockQuiz = () => {
 
   const onChoose = useCallback(
     (option: QuizOption) => {
+      // TODO: play audio for this
       if (!currentQuestion) {
         throw new Error(
           "Contact admin: this should not happen - current question is null."
-        ); // TODO: do to make this more accesibile and manageable for the user
+        );
       }
 
       // new request is triggered by changing these fetch options
@@ -74,6 +75,7 @@ const BlockQuiz = () => {
     const quizResponse = response.data as QuizResponse;
     if (quizResponse?.quizCompleted) {
       setQuizCompleted(true);
+      // TODO: make sure to play audio on the completion page when is started
       navigate(
         `/blocks/${quizResponse.lang}/${blockProgressId}/quiz/${quizResponse.quizId}/completed`
       );
@@ -83,6 +85,7 @@ const BlockQuiz = () => {
     const initialQuestionRequestMade =
       response.httpInfo?.url?.indexOf("/request-question") > -1;
     if (initialQuestionRequestMade) {
+      // TODO: make sure to play audio here
       setCurrentQuestion(quizResponse);
       setPreserveChildren(true);
       return;
@@ -91,14 +94,14 @@ const BlockQuiz = () => {
   }, [response]);
 
   return (
-    <div className="view quiz-view">
+    <div className="view quiz-view" aria-label="wrapper for quiz page">
       <ErrorBoundary
         error={error}
         onRetry={retry}
         loading={loading || !!quizCompleted}
         preserveChildren={preserveChildren}
       >
-        <div className="view-content">
+        <div className="view-content" aria-label="inner wrapper for quiz page">
           {currentQuestion && (
             <BlockQuizQuestion
               key={currentQuestion.questionId}
