@@ -2,6 +2,7 @@ import { CardHeader, CardMedia } from "@mui/material";
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { BuildingBlockProgress } from "../../../context";
+import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import CardBlock from "../../page-components/CardBlock/CardBlock";
 import { ItemProgressSummary } from "../../page-components/ItemProgressSummary";
 import "./StoryPage.scss";
@@ -11,9 +12,11 @@ const BuildingBlockItem = (props: { blockProgress: BuildingBlockProgress }) => {
   const navigate = useNavigate();
   const disabled = !blockProgress.timeUnlocked;
 
+  const { enqueueCantOpenALockedItemMessage } = useFeedbackAudioQueue();
+
   const navigateToStory = useCallback(() => {
     if (disabled) {
-      //TODO: add audio saying it's diabled because it's locked
+      enqueueCantOpenALockedItemMessage();
       return;
     }
     navigate(`/blocks/${blockProgress.lang}/${blockProgress.id}`);

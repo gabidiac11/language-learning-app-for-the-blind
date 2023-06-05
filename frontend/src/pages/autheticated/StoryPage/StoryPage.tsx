@@ -4,6 +4,8 @@ import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
+import { usePageAudioFeedback } from "../../page-components/usePageAudioFeedback";
+import { storyPageMessages } from "./appMessages";
 import BuildingBlockItem from "./BuildingBlockItem";
 import EpilogueBlockItem from "./EpilogueBlockItem";
 
@@ -13,6 +15,14 @@ export const StoryPage = () => {
     `userStories/${id}`,
     lang
   );
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: storyPageMessages.greetingPageStoryPage,
+    pageDataLoadingMessage: storyPageMessages.loadingStoryPage,
+    pageDataLoadedMessage: storyPageMessages.loadedStoryPage,
+  });
 
   return (
     <div

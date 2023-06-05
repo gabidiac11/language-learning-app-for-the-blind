@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { generalAppMessages } from "../../accessibility/generalAppMessages";
 import { PlayableMessage } from "../../accessibility/playableMessage";
 import { AppContext } from "../AppContext";
 import { StateActionType } from "../contextTypes/ctxTypes";
@@ -43,9 +44,17 @@ export const useFeedbackAudioQueue = () => {
     [dispatch]
   );
 
+  const enqueueCantOpenALockedItemMessage = useCallback(() => {
+    enqueuePlayableMessage({
+      key: `${Date.now()}-${generalAppMessages.cantOpenALockedItem.uniqueName}`,
+      messages: [generalAppMessages.cantOpenALockedItem],
+    });
+  }, [enqueuePlayableMessage]);
+
   return {
     enqueuePlayableMessage,
     prematurelyStopPlayableMessages,
     dequePlayableMessage,
+    enqueueCantOpenALockedItemMessage
   };
 };

@@ -1,17 +1,19 @@
 import { Typography } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { useParams } from "react-router";
-import useFetchData from "../../../../api/useFetchData";
-import { UserStory } from "../../../../context/contextTypes/ctxTypes";
-import { QuizBlockCompletedResponse } from "../../../../context/contextTypes/quizTypes";
-import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
+import useFetchData from "../../../../../api/useFetchData";
+import { UserStory } from "../../../../../context/contextTypes/ctxTypes";
+import { QuizBlockCompletedResponse } from "../../../../../context/contextTypes/quizTypes";
+import ErrorBoundary from "../../../../page-components/ErrorBoundary/ErrorBoundary";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import "./EpilogueQuiz.scss";
-import { StoryCard } from "../../StoriesOverviewPage/StoryCard/StoryCard";
-import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import "../EpilogueQuiz.scss";
+import { StoryCard } from "../../../StoriesOverviewPage/StoryCard/StoryCard";
+import { WithFocusControls } from "../../../../../accessibility/WithFocusControls";
+import { usePageAudioFeedback } from "../../../../page-components/usePageAudioFeedback";
+import { epiloqueQuizCompletedPageMessages } from "./appMessages";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -36,6 +38,16 @@ const EpilogueQuizCompleted = () => {
       `epilogues/${epilogueProgressId}/quiz/${quizId}/completed`,
       lang
     );
+
+    usePageAudioFeedback({
+      error,
+      loading,
+      pageGreeting: epiloqueQuizCompletedPageMessages.greetingPageEpilogueQuizCompleted,
+      pageDataLoadingMessage:
+        epiloqueQuizCompletedPageMessages.loadingEpilogueQuizCompleted,
+      pageDataLoadedMessage:
+        epiloqueQuizCompletedPageMessages.loadedEpilogueQuizCompleted,
+    });
 
   return (
     <WithFocusControls

@@ -10,6 +10,8 @@ import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 import explanations from "../explanations";
 import { BlockWordSummary } from "./BlockWordSummary";
 import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
+import { blockIntroductionPageMessages } from "./appMessages";
 
 const BlockIntroduction = () => {
   const { id: blockProgressId, lang } = useParams<{
@@ -22,6 +24,14 @@ const BlockIntroduction = () => {
   );
   const [indexWord, setIndexWord] = useState<number>();
   const [learningSitCompleted, setLearningSitCompleted] = useState(false);
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: blockIntroductionPageMessages.greetingPageBlockIntroduction,
+    pageDataLoadingMessage: blockIntroductionPageMessages.loadingBlockIntroduction,
+    pageDataLoadedMessage: blockIntroductionPageMessages.loadedBlockIntroduction,
+  });
 
   const completeSession = useCallback(() => {
     setLearningSitCompleted(true);
@@ -36,7 +46,6 @@ const BlockIntroduction = () => {
     setIndexWord(indexWord_ + 1);
   }, [indexWord, data]);
 
-  // TODO: play something that says what page is and what it does. To not make it annoying inform about the wiki page
   useLayoutEffect(() => {
     if (data) {
       data.block.words = getShuffledArray(data.block.words);

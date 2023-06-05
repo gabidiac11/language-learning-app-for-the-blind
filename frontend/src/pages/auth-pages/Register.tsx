@@ -24,6 +24,8 @@ export const Register = () => {
     <div className="view register-page" aria-label="wrapper for register page">
         <div className="form" aria-label="wrapper for register form">
           <TextField
+            tabIndex={0}
+            aria-label={"Full name"}
             type="text"
             label="Full Name"
             className="text-box"
@@ -54,6 +56,7 @@ export const Register = () => {
               size="medium"
               className="form-button"
               onClick={register}
+              aria-label="submit register"
               tabIndex={0}
             >
               Register
@@ -64,6 +67,7 @@ export const Register = () => {
               className="form-button"
               onClick={signInWithGoogle}
               startIcon={<GoogleIcon aria-hidden="true" />}
+              aria-label="register with google"
               tabIndex={0}
             >
               Register with Google

@@ -53,7 +53,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
 const ErrorDisplay = (props: { error: PlayableError; onRetry: () => void }) => {
   return (
     <div>
-      <p>{errorAppMessages.operationFailed.text}</p>
+      <p>Operation failed.</p>
       
       {props.error.message.messages.map((item, index) => {
         return <p key={`${item.uniqueName}-${index}`}>{item.text}</p>;

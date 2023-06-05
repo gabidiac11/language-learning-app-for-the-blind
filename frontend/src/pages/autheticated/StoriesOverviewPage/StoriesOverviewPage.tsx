@@ -6,6 +6,8 @@ import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 import { useParams } from "react-router";
 import { Typography } from "@mui/material";
 import { WithFocusControls } from "../../../accessibility/WithFocusControls";
+import { storiesOverviewPageMessages } from "./appMessages";
+import { usePageAudioFeedback } from "../../page-components/usePageAudioFeedback";
 
 export const StoriesOverviewPage = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -13,7 +15,15 @@ export const StoriesOverviewPage = () => {
     `userStories`,
     lang
   );
-  // TODO: accesibility for all error boundaries and inform requests in progress
+  
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: storiesOverviewPageMessages.greetingPageStoriesOverview,
+    pageDataLoadingMessage: storiesOverviewPageMessages.loadingStoriesOverview,
+    pageDataLoadedMessage: storiesOverviewPageMessages.loadedStoriesOverview,
+  });
+
   return (
     <div
       className="view dashboard-page-wrapper"
@@ -34,7 +44,7 @@ export const StoriesOverviewPage = () => {
                 <StoryCard key={userStory.id} userStory={userStory} />
               ))}
             {!error && data && data.length === 0 && (
-              <Typography variant="h5" tabIndex={0}>
+              <Typography variant="h5" tabIndex={0} aria-label="No lessons available.">
                 No lessons.
               </Typography>
             )}

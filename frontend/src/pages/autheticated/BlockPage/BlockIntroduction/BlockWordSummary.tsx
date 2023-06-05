@@ -42,6 +42,7 @@ export const BlockWordSummary: React.FC<{ word: Word; next: () => void }> = (
           <Button
             tabIndex={0}
             aria-label="Play the word translation."
+            
             style={{ marginBottom: "20px" }}
             variant="contained"
             startIcon={<PlayIcon aria-hidden="true" />}
@@ -53,7 +54,7 @@ export const BlockWordSummary: React.FC<{ word: Word; next: () => void }> = (
         </div>
         <div>
           {/* TODO: play something after new word is retrieved and displayed */}
-          <Button tabIndex={0} variant="contained" onClick={props.next}>
+          <Button tabIndex={0} aria-label="Next word" variant="contained" onClick={props.next}>
             Next word
           </Button>
         </div>

@@ -84,7 +84,6 @@ export const usePageAudioFeedback = (props: {
     const decoratedPlayableMessage: PlayableMessage = {
       ...props.error.message,
       messages: [
-        errorAppMessages.operationFailed,
         ...props.error.message.messages,
         generalAppMessages.tryAgainFetchRequest,
       ],

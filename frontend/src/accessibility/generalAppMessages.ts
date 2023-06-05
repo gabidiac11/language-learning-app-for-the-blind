@@ -16,6 +16,11 @@ export const generalAppMessages: AppMessageGeneralSet = {
     uniqueName: "interactionIsOn",
     text: "Interaction is on.",
     filePath: `${audioStorageBasePath}/frontendGeneral/interactionIsOn.mp3`,
+  },
+  cantOpenALockedItem: {
+    uniqueName: "cantOpenALockedItem",
+    text: "Entering this item is forbidden because the item is in the locked state.",
+    filePath: `${audioStorageBasePath}/frontendGeneral/cantOpenALockedItem.mp3`,
   }
 };
 
@@ -23,4 +28,5 @@ export type AppMessageGeneralSet = {
   readAvailableCommands: AppMessage;
   tryAgainFetchRequest: AppMessage;
   interactionIsOn: AppMessage;
+  cantOpenALockedItem: AppMessage;
 };

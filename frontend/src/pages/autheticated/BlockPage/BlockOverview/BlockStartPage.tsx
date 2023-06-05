@@ -1,10 +1,12 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { WithFocusControls } from "../../../accessibility/WithFocusControls";
-import useFetchData from "../../../api/useFetchData";
-import { BuildingBlockProgress } from "../../../context";
-import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import explanations from "./explanations";
+import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import useFetchData from "../../../../api/useFetchData";
+import { BuildingBlockProgress } from "../../../../context";
+import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
+import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
+import { blockStartPageMessages } from "./appMessages";
+import explanations from "../explanations";
 
 const BlockStartPage = () => {
   const { id: blockProgressId, lang } = useParams<{
@@ -15,6 +17,14 @@ const BlockStartPage = () => {
     `blocks/${blockProgressId}`,
     lang
   );
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: blockStartPageMessages.greetingPageBlockStart,
+    pageDataLoadingMessage: blockStartPageMessages.loadingBlockStart,
+    pageDataLoadedMessage: blockStartPageMessages.loadedBlockStart,
+  });
 
   return (
     <div

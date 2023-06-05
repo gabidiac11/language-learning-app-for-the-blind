@@ -2,6 +2,7 @@ import { CardHeader, CardMedia } from "@mui/material";
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
 import { EpilogueProgress } from "../../../context";
+import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import CardBlock from "../../page-components/CardBlock/CardBlock";
 import { ItemProgressSummary } from "../../page-components/ItemProgressSummary";
 import "./StoryPage.scss";
@@ -15,9 +16,11 @@ const EpilogueBlockItem = (props: {
   const navigate = useNavigate();
   const disabled = !epilogueProgress.timeUnlocked;
 
+  const { enqueueCantOpenALockedItemMessage } = useFeedbackAudioQueue();
+
   const navigateToStory = useCallback(() => {
     if (disabled) {
-      //TODO: add audio saying it's diabled because it's locked
+      enqueueCantOpenALockedItemMessage();
       return;
     }
     navigate(`/epilogues/${epilogueProgress.lang}/${epilogueProgress.id}`);
@@ -34,7 +37,6 @@ const EpilogueBlockItem = (props: {
       onClick={navigateToStory}
     >
       <CardHeader
-        tabIndex={0}
         ariaLabel={`Epilgoue title: ${epilogueProgress.epilogue.name}`}
         title={epilogueProgress.epilogue.name}
         subheader={
