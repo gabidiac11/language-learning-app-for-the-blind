@@ -15,3 +15,5 @@ export const environment = process.env.ENV_NAME;
 export const cheatAnswers = process.env.CHEAT === "true";
 
 export const lessonLanguageHeader = "lesson-language";
+
+export const audioStorageBasePath = "something/audio/server";

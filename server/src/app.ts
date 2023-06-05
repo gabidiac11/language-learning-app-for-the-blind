@@ -7,7 +7,10 @@ import express from "express";
 import { Request } from "express";
 import fs from "fs";
 import { log } from "./logger";
-import { executeAuthenticatedAction } from "./ApiSupport/apiActionHelpers";
+import {
+  executeAuthenticatedAction,
+  processResultOfT,
+} from "./ApiSupport/apiActionHelpers";
 import getControllers from "./ApiSupport/getControllers";
 import Seeder from "./Data/Seed/Seeder";
 import morgan from "morgan";
@@ -15,6 +18,8 @@ import swaggerUi from "swagger-ui-express";
 import createContainer from "./diContainer";
 import { acceptedLanguages, Language } from "./Data/ctxTypes/ctx.story.types";
 import { lessonLanguageHeader } from "./constants";
+import Result from "./ApiSupport/Result";
+import { apiMessages } from "./ApiSupport/apiMessages";
 
 if (process.env.ALLOW_SEED === "true") {
   (async () => {
@@ -124,7 +129,7 @@ app.post(
   async (req, res) => {
     const DI = createContainer(lg(req));
     const { blockQuizController: controller } = getControllers(DI);
-    
+
     const [blockProgressId] = controller.getParams(req, ["blockProgressId"]);
     const action = () => controller.requestQuizQuestion(blockProgressId);
     await executeAuthenticatedAction({ req, res, controller, DI }, action);
@@ -163,7 +168,7 @@ app.get(
 app.get("/api/epilogues/:epilogueProgressId", async (req, res) => {
   const DI = createContainer(lg(req));
   const { epilogueController: controller } = getControllers(DI);
-  
+
   const [epilogueProgressId] = controller.getParams(req, [
     "epilogueProgressId",
   ]);
@@ -177,7 +182,7 @@ app.post(
   async (req, res) => {
     const DI = createContainer(lg(req));
     const { epilogueController: controller } = getControllers(DI);
-    
+
     const [epilogueProgressId] = controller.getParams(req, [
       "epilogueProgressId",
     ]);
@@ -235,7 +240,11 @@ app.get(
 );
 
 app.get("/api/*", (req, res) => {
-  return res.status(404).send({ message: "Route not found." });
+  return processResultOfT(
+    Result.Error<any>(apiMessages.notFound, 404),
+    req,
+    res
+  );
 });
 
 app.get("/swagger.json", function (req, res) {

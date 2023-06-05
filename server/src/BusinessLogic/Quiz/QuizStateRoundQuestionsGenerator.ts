@@ -145,7 +145,7 @@ export class QuizStateRoundQuestionsGenerator {
           (i) => i.entityQuestionId === item.templateQId
         );
       if (!templateQuestionItem)
-        throw Error("createOutcomesBasedOnProbability something went wrong.");
+        throw "createOutcomesBasedOnProbability: no template question for some reason.";
 
       if (this.randomBinary(item.prob / 100)) {
         const newOutcome = creator.generateWordOutcomeQuestion(

@@ -13,7 +13,15 @@ export const useContextActions = () => {
     });
   }, []);
 
+  const setIsAudioInteractionOn = useCallback((isAudioInteractionOn?: boolean) => {
+    dispatch({
+      type: StateActionType.SetIsAudioInteractionOn,
+      payload: isAudioInteractionOn,
+    });
+  }, []);
+
   return {
     updateLanguage,
+    setIsAudioInteractionOn
   };
 };

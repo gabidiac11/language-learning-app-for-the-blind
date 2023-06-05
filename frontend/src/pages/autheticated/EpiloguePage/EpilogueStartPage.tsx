@@ -10,6 +10,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { lessonLanguageHeader } from "../../../constants";
 import { WithFocusControls } from "../../../accessibility/WithFocusControls";
+import { PlayableError } from "../../../accessibility/playableMessage";
+import { getPlayableErrorFromUnknown } from "../../../accessibility/apiAppMessages";
 
 const EpilogueStartPage = () => {
   //TODO: should have something explaining what this page is (later)
@@ -21,8 +23,6 @@ const EpilogueStartPage = () => {
     `epilogues/${epilogueProgressId}`,
     lang
   );
-
-  useEffect(() => {}, []);
 
   return (
     <div
@@ -77,7 +77,7 @@ const StoryListener = (props: {
 }) => {
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState<PlayableError>();
   const loadingRef = useRef(false);
   const [, _setLoading] = useState(loadingRef.current);
   const setLoading = (value: boolean) => {
@@ -107,7 +107,8 @@ const StoryListener = (props: {
       );
       props.reload();
     } catch (error) {
-      setError(error);
+      const playableError = getPlayableErrorFromUnknown(error);
+      setError(playableError);
     } finally {
       setLoading(false);
     }

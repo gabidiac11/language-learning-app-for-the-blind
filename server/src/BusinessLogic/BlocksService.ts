@@ -1,4 +1,5 @@
 import { ApiErrorResponse, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { apiMessages } from "../ApiSupport/apiMessages";
 import Result from "../ApiSupport/Result";
 import {
   BuildingBlock,
@@ -39,7 +40,7 @@ export default class BlocksService {
     if (userStoryIdResult.isError())
       return userStoryIdResult.As<BuildingBlockProgress>();
     if (!userStoryIdResult.data) {
-      return Result.Error("Not found.", 404);
+      return Result.Error(apiMessages.notFound, 404);
     }
     const userStoryId = userStoryIdResult.data;
 
@@ -120,7 +121,7 @@ export default class BlocksService {
       return blockResult;
     }
     if (!blockResult.data) {
-      return Result.Error("Not found.", 404);
+      return Result.Error(apiMessages.notFound, 404);
     }
     return blockResult;
   }
@@ -137,7 +138,7 @@ export default class BlocksService {
 
     if (!blockResult.data.timeUnlocked) {
       return Result.Error(
-        "This block summary was not completed because this block is locked.",
+        apiMessages.summaryNotFinishedBecauseBlockIsLocked,
         403
       );
     }

@@ -17,6 +17,7 @@ import { valuesOrdered } from "../utils";
 import { dbRootPathKey } from "../constants";
 import cache from "./CachedDb";
 import { LanguageProvider } from "../BusinessLogic/LanguageProvider";
+import { apiMessages } from "../ApiSupport/apiMessages";
 
 class Database {
   public static inject = [LanguageProvider.name];
@@ -54,7 +55,7 @@ class Database {
       return Result.Success(true);
     } catch (error) {
       log(`[db-exists]: error occured`, error);
-      return Result.Error("Something went wrong.", 500);
+      return Result.Error(apiMessages.somethingWentWrong, 500);
     }
   }
 
@@ -111,7 +112,7 @@ class Database {
         `[db]: error occured at path '${this.decoratedPath(path)}'`,
         getStringifiedError(error)
       );
-      return Result.Error("Something went wrong.", 500);
+      return Result.Error(apiMessages.somethingWentWrong, 500);
     } finally {
       log(
         `DB_GET: '${this.decoratedPath(path)}': [FINISHED] at ${
@@ -129,7 +130,7 @@ class Database {
           path
         )}.`
       );
-      return Result.Error<T>("Resource not found.", 404);
+      return Result.Error<T>(apiMessages.notFound, 404);
     }
     return result;
   }
@@ -159,7 +160,7 @@ class Database {
         )}', byProperty '${byProperty}', byValue '${byValue}'`,
         getStringifiedError(error)
       );
-      return Result.Error("Something went wrong.", 500);
+      return Result.Error(apiMessages.somethingWentWrong, 500);
     } finally {
       log(
         `DB_GET: '${this.decoratedPath(

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +13,7 @@ import { Home, Info, LogoutRounded } from "@mui/icons-material";
 import { useAppStateContext } from "../../context/hooks/useAppStateContext";
 import { LanguageShortcuts } from "./LanguageShortcuts";
 import { SoundInterationPanel } from "./SoundInterationPanel/SoundInterationPanel";
+import { useContextActions } from "../../context/hooks/useContextActions";
 
 export default function Header() {
   const [user] = useAuthState(firebaseAuth);
@@ -23,11 +24,20 @@ export default function Header() {
   });
   const navigate = useNavigate();
   const { language } = useAppStateContext();
-  console.log({user})
+
+  const { setIsAudioInteractionOn } = useContextActions();
+
+  useEffect(() => {
+    return () => {
+      setIsAudioInteractionOn(false);
+    };
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1 }} aria-label="header">
       <AppBar position="static" aria-label="header">
         <Toolbar aria-label="header">
+          <SoundInterationPanel />
           <button
             className="no-btn"
             aria-label="link to instructions page"
@@ -53,8 +63,6 @@ export default function Header() {
 
           <LanguageShortcuts lang={language} />
 
-          <SoundInterationPanel />
-          
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ flexGrow: 0 }}>
@@ -97,7 +105,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      
+
       <Snackbar
         open={snack.open}
         autoHideDuration={12000}
