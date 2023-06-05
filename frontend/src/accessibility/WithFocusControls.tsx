@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { useEffect, useRef } from "react";
 import { KeyboardAlt as InfoIcon } from "@mui/icons-material";
+import { screenReader } from "./appReaders";
 
 const findNodes = (wrapperNode: HTMLElement): Element[] => {
   const nodes = wrapperNode.querySelectorAll(`[tabindex="0"]`);
@@ -38,7 +39,7 @@ export const WithFocusControls = (
   useEffect(() => {
     const onArrowsFocusNext = (event: KeyboardEvent) => {
       // avoid bothering key combinations
-      if(event.altKey || event.ctrlKey || event.shiftKey) {
+      if (event.altKey || event.ctrlKey || event.shiftKey) {
         return;
       }
 
@@ -108,6 +109,13 @@ export const WithFocusControls = (
       if (typeof node?.focus === "function") {
         try {
           node.focus();
+          screenReader.playNodeTarget(node as HTMLElement);
+          
+          const event = new CustomEvent("prematurelyStopPlayableMessages", {
+            detail: {},
+          });
+          window.dispatchEvent(event);
+
         } catch (error) {
           console.log({ error });
         }
@@ -141,12 +149,16 @@ export const WithFocusControls = (
   }, []);
 
   return (
-    <div ref={wrapperNodeRef} aria-label={props.customMessage ?? config[props.direction].description}>
+    <div
+      ref={wrapperNodeRef}
+      aria-label={props.customMessage ?? config[props.direction].description}
+    >
       <div
         className="flex flex-center-column"
         style={{ marginBottom: "25px" }}
         tabIndex={0}
         itemProp="ignore-arrows"
+        aria-label={props.customMessage ?? config[props.direction].description}
       >
         <span style={{ padding: "10px" }}>
           <InfoIcon aria-hidden="true" />

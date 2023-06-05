@@ -1,10 +1,13 @@
 import { Typography } from "@mui/material";
+import { useEffect } from "react";
 import useFetchData, {
   UseFetchDataOptions,
 } from "../../../../api/useFetchData";
 import { BuildingBlockProgress } from "../../../../context";
+import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
+import { blockIntroductionPageMessages } from "./appMessages";
 
 const fetchOptioons: UseFetchDataOptions = {
   method: "POST",
@@ -18,14 +21,27 @@ const BlockWordsSummariesCompleted = (props: {
     props.blockProgress.lang,
     fetchOptioons
   );
-  // TODO: review the text is not ideal for now
+
+  const { enqueuePlayableMessage } = useFeedbackAudioQueue();
+
+  useEffect(() => {
+    enqueuePlayableMessage({
+      key: `${Date.now()}-${
+        blockIntroductionPageMessages.blockSummaryCompleted.uniqueName
+      }`,
+      messages: [blockIntroductionPageMessages.blockSummaryCompleted],
+    });
+  }, []);
 
   return (
     <ErrorBoundary error={error} onRetry={retry} loading={loading}>
       <div aria-label="wrapper for section where you're informed you completed the word introduction">
-        <Typography tabIndex={0} variant="subtitle1" aria-label={`Congratulations! You completed the words introduction, you can start the words quiz.`}>
-          Completed! 🎉
-          <br></br>
+        <Typography
+          tabIndex={0}
+          variant="subtitle1"
+          aria-label={`Congratulations! You completed the words introduction, you can start the words quiz.`}
+        >
+          Completed! 🎉 
           You completed the words introduction, you can start the words quiz.
         </Typography>
         <ButtonContinueToBlockQuiz

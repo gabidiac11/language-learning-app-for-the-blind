@@ -15,8 +15,8 @@ export const LessonLanguagesPage = () => {
     error,
     loading,
     pageGreeting: langPageMessages.greetingPageLanguages,
-    pageDataLoadedMessage: langPageMessages.loadedLanguages,
     pageDataLoadingMessage: langPageMessages.loadingLanguages,
+    pageDataLoadedMessage: langPageMessages.loadedLanguages,
   });
 
   return (

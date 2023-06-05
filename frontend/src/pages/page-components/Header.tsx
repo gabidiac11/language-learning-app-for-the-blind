@@ -38,71 +38,89 @@ export default function Header() {
       <AppBar position="static" aria-label="header">
         <Toolbar aria-label="header">
           <SoundInterationPanel />
-          <button
-            className="no-btn"
-            aria-label="link to instructions page"
-            onClick={() => navigate("/instructions")}
-            style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
-            tabIndex={0}
-          >
-            <Info htmlColor="white" className="outline-none" />
-          </button>
-          <button
-            className="no-btn"
-            aria-label="link to home page"
-            onClick={() => navigate("/home")}
-            style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
-            tabIndex={0}
-          >
-            <Home
-              htmlColor="white"
-              aria-label="link to home page"
-              className="outline-none"
-            />
-          </button>
 
-          <LanguageShortcuts lang={language} />
-
-          <Box sx={{ flexGrow: 1 }} />
-
-          <Box sx={{ flexGrow: 0 }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <Typography
-                variant="h6"
-                noWrap
+          {user && (
+            <>
+              <button
+                className="no-btn"
+                aria-label="link to instructions page"
+                onClick={() => navigate("/instructions")}
+                style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
                 tabIndex={0}
-                aria-label={`text: user ${user?.displayName || user?.email}`}
-                component="div"
-                style={{ lineHeight: "50px", paddingRight: "10px" }}
-                sx={{ display: { xs: "none", sm: "block" } }}
               >
-                {user?.displayName || user?.email}
-              </Typography>
-              <IconButton aria-label="photo user" sx={{ p: 0 }} tabIndex={0}>
-                {!user?.photoURL && <AccountCircle htmlColor="white" />}
-                {user?.photoURL && (
-                  <Avatar
-                    alt={`User button (press enter to open the log out dropdown). Your name is ${
-                      user?.displayName || "... oh wait you don't have one"
+                <Info htmlColor="white" className="outline-none" />
+              </button>
+              <button
+                className="no-btn"
+                aria-label="link to home page"
+                onClick={() => navigate("/home")}
+                style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
+                tabIndex={0}
+              >
+                <Home
+                  htmlColor="white"
+                  aria-label="link to home page"
+                  className="outline-none"
+                />
+              </button>
+
+              <LanguageShortcuts lang={language} />
+
+              <Box sx={{ flexGrow: 1 }} />
+
+              <Box sx={{ flexGrow: 0 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    tabIndex={0}
+                    aria-label={`text: user ${
+                      user?.displayName || user?.email
                     }`}
-                    src={user?.photoURL}
-                  />
-                )}
-              </IconButton>
-              <div aria-label="logout button" tabIndex={0}>
-                <LogoutRounded
-                  onClick={() => logout()}
-                  style={{ color: "white", marginLeft: "10px", fontSize: 20 }}
-                ></LogoutRounded>
-              </div>
-            </div>
-          </Box>
+                    component="div"
+                    style={{ lineHeight: "50px", paddingRight: "10px" }}
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  >
+                    {user?.displayName || user?.email}
+                  </Typography>
+                  <IconButton
+                    aria-label="photo user"
+                    sx={{ p: 0 }}
+                    tabIndex={0}
+                  >
+                    {!user?.photoURL && <AccountCircle htmlColor="white" />}
+                    {user?.photoURL && (
+                      <Avatar
+                        alt={`User button (press enter to open the log out dropdown). Your name is ${
+                          user?.displayName || "... oh wait you don't have one"
+                        }`}
+                        src={user?.photoURL}
+                      />
+                    )}
+                  </IconButton>
+                  <div
+                    onClick={() => logout()}
+                    aria-label="logout button"
+                    tabIndex={0}
+                  >
+                    <LogoutRounded
+                      style={{
+                        color: "white",
+                        marginLeft: "10px",
+                        fontSize: 20,
+                      }}
+                    ></LogoutRounded>
+                  </div>
+                </div>
+              </Box>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 

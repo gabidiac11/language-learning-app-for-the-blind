@@ -12,9 +12,10 @@ import { lessonLanguageHeader } from "../../../constants";
 import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 import { PlayableError } from "../../../accessibility/playableMessage";
 import { getPlayableErrorFromUnknown } from "../../../accessibility/apiAppMessages";
+import { usePageAudioFeedback } from "../../page-components/usePageAudioFeedback";
+import { epilogueOverviewPageMessages } from "./appMessages";
 
 const EpilogueStartPage = () => {
-  //TODO: should have something explaining what this page is (later)
   const { id: epilogueProgressId, lang } = useParams<{
     id: string;
     lang: string;
@@ -23,6 +24,16 @@ const EpilogueStartPage = () => {
     `epilogues/${epilogueProgressId}`,
     lang
   );
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: epilogueOverviewPageMessages.greetingPageEpilogueOverview,
+    pageDataLoadingMessage:
+      epilogueOverviewPageMessages.loadingEpilogueOverview,
+    pageDataLoadedMessage:
+      epilogueOverviewPageMessages.loadedEpilogueOverview,
+  });
 
   return (
     <div
@@ -138,8 +149,9 @@ const StoryListener = (props: {
           tabIndex={0}
           onClick={listenStory}
           variant="contained"
+          aria-label="Play short story button"
           color={isListening ? "secondary" : "primary"}
-          startIcon={<VolumeUpIcon aria-hidden="true" />}
+          startIcon={<VolumeUpIcon />}
         >
           Play story
         </Button>

@@ -1,7 +1,11 @@
 import { AppMessage } from "../../../accessibility/accesibilityTypes";
 import { audioStorageBasePath } from "../../../constants";
 
-export const langPageMessages: { [uniqueName: string]: AppMessage } = {
+export const langPageMessages: {
+  loadingLanguages: AppMessage;
+  loadedLanguages: AppMessage;
+  greetingPageLanguages: AppMessage;
+} = {
   loadingLanguages: {
     uniqueName: "loadingLanguages",
     text: "Loading languages",

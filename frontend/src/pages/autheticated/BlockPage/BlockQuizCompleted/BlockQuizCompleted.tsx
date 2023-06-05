@@ -12,10 +12,11 @@ import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import { Container } from "@mui/system";
 import BuildingBlockItem from "../../StoryPage/BuildingBlockItem";
 import EpilogueBlockItem from "../../StoryPage/EpilogueBlockItem";
 import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { blockQuizCompletedPageMessages } from "./appMessages";
+import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -40,6 +41,16 @@ const BlockQuizCompleted = () => {
       `blocks/${blockProgressId}/quiz/${quizId}/completed`,
       lang
     );
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: blockQuizCompletedPageMessages.greetingPageBlockQuizCompleted,
+    pageDataLoadingMessage:
+      blockQuizCompletedPageMessages.loadingBlockQuizCompleted,
+    pageDataLoadedMessage:
+      blockQuizCompletedPageMessages.loadedBlockQuizCompleted,
+  });
 
   return (
     <div
@@ -71,8 +82,7 @@ const BlockQuizCompleted = () => {
                   </span>
                   <h2 tabIndex={0} style={{ textAlign: "center" }}>
                     {`Coungradulations!`}
-                    <br></br>
-                    {`You finished block '${data.blockCompleted?.block.name}'.`}
+                    {` You finished block '${data.blockCompleted?.block.name}'.`}
                   </h2>
                 </div>
                 {!!data?.blockProgressUnlockedItems?.length && (

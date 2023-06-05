@@ -8,15 +8,18 @@ import { useNavigate } from "react-router";
 import { useCallback } from "react";
 import CardBlock from "../../../page-components/CardBlock/CardBlock";
 import "./StoryCard.scss";
+import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 
 export const StoryCard = (props: { userStory: UserStory }) => {
   const navigate = useNavigate();
   const { userStory } = props;
   const disabled = !userStory.timeUnlocked;
 
+  const { enqueueCantOpenALockedItemMessage } = useFeedbackAudioQueue();
+
   const navigateToStory = useCallback(() => {
     if (disabled) {
-      //TODO: add audio saying it's disabled because it's locked
+      enqueueCantOpenALockedItemMessage();
       return;
     }
     navigate(`/stories/${userStory.lang}/${userStory.id}`);
@@ -60,9 +63,7 @@ export const StoryCard = (props: { userStory: UserStory }) => {
       <CardContent>
         <Typography tabIndex={0} variant="body2" color="text.secondary">
           {`${userStory.numOfBlocksCompleted} completed out of ${userStory.numOfTotalBlocks} building blocks.`}
-          <br></br>
-          {/* TODO: add for all statuses indication: completed, etc. */}
-          {`Epilogue ${
+          {` Epilogue ${
             userStory.epilogueProgress.timeUnlocked ? "unlocked" : "locked"
           }`}
         </Typography>
