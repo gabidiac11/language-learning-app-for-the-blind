@@ -4,6 +4,7 @@ import * as admin from "firebase-admin";
 import { log } from "../logger";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 import { getErrorLogMessage } from "./apiErrorHelpers";
+import { apiMessages } from "./apiMessages";
 
 export class Authenticator {
   constructor() {}
@@ -11,7 +12,7 @@ export class Authenticator {
   public async getAuthUserFromReq(req: Request): Promise<Result<AppUser>> {
     const authHeader = req.headers.authorization;
     if (!(authHeader && authHeader.startsWith("Bearer "))) {
-      return Result.Error<AppUser>("Unauthorized.", 401);
+      return Result.Error<AppUser>(apiMessages.unauthorized, 401);
     }
 
     const token = authHeader.split(" ")[1];
@@ -32,7 +33,7 @@ export class Authenticator {
       );
       log(message);
 
-      return Result.Error<AppUser>("Unauthorised.", 401);
+      return Result.Error<AppUser>(apiMessages.unauthorized, 401);
     }
   }
 }

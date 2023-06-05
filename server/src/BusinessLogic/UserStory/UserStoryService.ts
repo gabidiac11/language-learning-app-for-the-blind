@@ -6,6 +6,7 @@ import { UserStoriesCreator } from "./UserStoriesCreator";
 import { UserStoriesRelationsManager } from "../UserStoryRelations/UserStoriesRelationsManager";
 import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
 import { log } from "../../logger";
+import { apiMessages } from "../../ApiSupport/apiMessages";
 
 export default class UserStoryService {
   private _db: Database;
@@ -68,7 +69,7 @@ export default class UserStoryService {
       return userStoryResult;
     }
     if (!userStoryResult.data) {
-      return Result.Error<UserStory>("Not found.", 404);
+      return Result.Error<UserStory>(apiMessages.notFound, 404);
     }
 
     const lessonResult = await this._db.get<Story>(

@@ -41,7 +41,7 @@ export class UserStoriesCreator {
 
       return Result.Success(userStoriesWithDiverseProgress);
     } catch (err) {
-      return Result.Error<UserStory[]>(getStringifiedError(err));
+      throw getStringifiedError(err);
     }
   }
   private fillInDependencies(

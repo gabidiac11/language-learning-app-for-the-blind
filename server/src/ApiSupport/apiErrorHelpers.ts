@@ -1,3 +1,5 @@
+import { ApiMessage } from "./appErrorMessage";
+import { apiMessages } from "./apiMessages";
 import Result from "./Result";
 
 export function getStringifiedError(
@@ -13,7 +15,6 @@ export function getStringifiedError(
     stringifiedError = Object.entries(error)
       .map((curr) => {
         const [key, value] = curr;
-        // TODO: test this stuff
         if (level < maxLevel) {
           const stringifiedSubValue = getStringifiedError(
             value,
@@ -46,14 +47,16 @@ export function getErrorLogMessage(error: unknown, prefix?: string) {
   return message;
 }
 
-// TODO: search where is thrown and make sure:
-// log 500 errors and make sure the user doesn't see those
-// make sure technical errors are logged and not returned to the user
+// this shortcuits the api execution to return error response visible to the user
+// NOTE: messages should user friendly and not technical (those should be just logged and the visible error is "something went wrong")
 export class ApiErrorResponse<T> {
   public isThisApiError = true;
   public result: Result<T>;
 
-  public static Error<T>(userMessage: string, code?: number): ApiErrorResponse<T> {
+  public static Error<T>(
+    userMessage: ApiMessage,
+    code?: number
+  ): ApiErrorResponse<T> {
     const apiError = new ApiErrorResponse<T>();
     apiError.result = new Result<T>();
     apiError.result.statusCode = code;
@@ -66,7 +69,7 @@ export class ApiErrorResponse<T> {
     const notFoundError = new ApiErrorResponse<T>();
     notFoundError.result = new Result<T>();
     notFoundError.result.statusCode = 404;
-    notFoundError.result.errors = ["Not found."];
+    notFoundError.result.errors = [apiMessages.notFound];
 
     return notFoundError;
   }
@@ -75,12 +78,14 @@ export class ApiErrorResponse<T> {
     const notFoundError = new ApiErrorResponse<T>();
     notFoundError.result = new Result<T>();
     notFoundError.result.statusCode = 500;
-    notFoundError.result.errors = ["Something went wrong."];
+    notFoundError.result.errors = [apiMessages.somethingWentWrong];
 
     return notFoundError;
   }
 
-  public static Forbidden<T>(userMessage: string): ApiErrorResponse<T> {
+  public static Forbidden<T>(
+    userMessage: ApiMessage
+  ): ApiErrorResponse<T> {
     const apiError = new ApiErrorResponse<T>();
     apiError.result = new Result<T>();
     apiError.result.statusCode = 403;
@@ -89,7 +94,9 @@ export class ApiErrorResponse<T> {
     return apiError;
   }
 
-  public static BadRequest<T>(userMessage: string): ApiErrorResponse<T> {
+  public static BadRequest<T>(
+    userMessage: ApiMessage
+  ): ApiErrorResponse<T> {
     const apiError = new ApiErrorResponse<T>();
     apiError.result = new Result<T>();
     apiError.result.statusCode = 400;

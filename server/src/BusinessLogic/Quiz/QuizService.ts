@@ -21,6 +21,7 @@ import { QuizStateCreator } from "./QuizStateCreator";
 import { QuizStateRoundQuestionsGenerator } from "./QuizStateRoundQuestionsGenerator";
 import { QuizableItem } from "./QuizableItem";
 import QuizCompletionChecker from "./QuizCompletionChecker";
+import { apiMessages } from "../../ApiSupport/apiMessages";
 
 export default class QuizService {
   private _db: Database;
@@ -91,7 +92,7 @@ export default class QuizService {
       );
 
       return Result.Error<QuizResponse>(
-        "Can't answer question because the question is not part of any uncompleted quiz.",
+        apiMessages.quizCantAnswerQuestionNotFound,
         400
       );
     }
@@ -112,7 +113,7 @@ export default class QuizService {
         `[${this._trace}]: The question was not found within the current uncompleted quiz."`
       );
       return Result.Error<QuizResponse>(
-        "The question was not found within the current uncompleted quiz.",
+        apiMessages.quizCantAnswerQuestionNotFound,
         400
       );
     }
@@ -163,14 +164,14 @@ export default class QuizService {
 
     if (!quizResult.data) {
       return Result.Error<QuizCompletedStatsResponse>(
-        "Quiz with id requested doesn't exit.",
+        apiMessages.quizNotFound,
         404
       );
     }
 
     if (!quizResult.data.timeCompleted) {
       return Result.Error<QuizCompletedStatsResponse>(
-        "Quiz with id was not yet completed.",
+        apiMessages.quizNotCompletedYet,
         400
       );
     }
@@ -245,7 +246,7 @@ export default class QuizService {
   private getAccessValidatonResult(): Result<any> {
     if (!this._quizableItem.enityTimeUnlocked) {
       return Result.Error(
-        "Block or epilogue is locked. Please complete the other blocks or stories required.",
+        apiMessages.quizCantAccessBlockIsLocked,
         403
       );
     }

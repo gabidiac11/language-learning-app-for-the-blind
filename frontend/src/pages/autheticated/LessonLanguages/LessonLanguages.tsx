@@ -2,12 +2,22 @@ import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { LanguageDataItem } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
+import { usePageAudioFeedback } from "../../page-components/usePageAudioFeedback";
+import { langPageMessages } from "./appMessages";
 import { LanguageCard } from "./LanguageCard";
 import "./LessonLanguages.scss";
 
 export const LessonLanguagesPage = () => {
   const { data, loading, error, retry } =
     useFetchData<LanguageDataItem[]>("lesson-languages");
+
+  usePageAudioFeedback({
+    error,
+    loading,
+    pageGreeting: langPageMessages.greetingPageLanguages,
+    pageDataLoadedMessage: langPageMessages.loadedLanguages,
+    pageDataLoadingMessage: langPageMessages.loadingLanguages,
+  });
 
   return (
     <div

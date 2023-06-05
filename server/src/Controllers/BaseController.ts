@@ -2,6 +2,7 @@ import { AppUser, Authenticator } from "../ApiSupport/authentication";
 import { Request } from "express";
 import { ApiErrorResponse } from "../ApiSupport/apiErrorHelpers";
 import Result from "../ApiSupport/Result";
+import { dynamicMessages } from "../ApiSupport/apiMessages";
 
 export default class BaseController {
   private _user?: AppUser;
@@ -30,7 +31,7 @@ export default class BaseController {
     const value = req.params?.[key];
     if (!value) {
       throw ApiErrorResponse.BadRequest<T>(
-        `Request parameter ${key} should not be null.`
+        dynamicMessages.requestParameterMissing(key)
       );
     }
     /**

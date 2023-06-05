@@ -1,10 +1,18 @@
+import { PlayableMessage } from "../../accessibility/playableMessage";
+
 export type StateType = {
   language?: Language;
+  playableAudiosQueue: PlayableMessage[];
+  isAudioInteractionOn: boolean;
 };
 
 export enum StateActionType {
-  Init,
-  SetLanguage,
+  Init = "Init",
+  SetLanguage = "SetLanguage",
+  EnqueuePlayableMessage = "EnqueuePlayableMessage",
+  PrematurelyStopPlayableMessages = "PrematurelyStopPlayableMessages",
+  DequePlayableMessages = "DequePlayableMessages",
+  SetIsAudioInteractionOn = "SetIsAudioInteractionOn"
 }
 
 export type StateAction =
@@ -14,6 +22,25 @@ export type StateAction =
   | {
       type: StateActionType.SetLanguage;
       payload?: Language;
+    }
+  | {
+      type: StateActionType.EnqueuePlayableMessage;
+      payload: PlayableMessage;
+    }
+  | {
+      type: StateActionType.PrematurelyStopPlayableMessages;
+      payload: {
+        playableKeys: string[];
+      };
+    }
+  | {
+      type: StateActionType.DequePlayableMessages;
+      payload: {
+        playableKey: string
+      };
+    } | {
+      type: StateActionType.SetIsAudioInteractionOn;
+      payload: boolean
     };
 
 export type Language = "ru" | "fr" | "de";

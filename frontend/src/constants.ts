@@ -25,3 +25,5 @@ export const languages: { id: Language; name: string }[] = [
 ];
 
 export const lessonLanguageHeader = "lesson-language";
+
+export const audioStorageBasePath = "https://storage.googleapis.com/big-depth-387415.appspot.com";

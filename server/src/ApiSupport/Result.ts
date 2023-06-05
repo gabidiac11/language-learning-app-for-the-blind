@@ -1,6 +1,8 @@
+import { ApiMessage } from "./appErrorMessage";
+
 export default class Result<T> {
   public data?: T;
-  public errors?: string[];
+  public errors?: ApiMessage[];
   public statusCode?: number;
   // NOTE: update getCopy when adding new properties
 
@@ -15,14 +17,14 @@ export default class Result<T> {
     return !!this.errors;
   }
 
-  public static Error<T>(message: string, statusCode?: number) {
+  public static Error<T>(message: ApiMessage, statusCode?: number) {
     const result = new Result<T>();
     result.errors = [message];
     result.statusCode = statusCode;
     return result;
   }
 
-  public static Errors<T>(messages: string[], statusCode?: number) {
+  public static Errors<T>(messages: ApiMessage[], statusCode?: number) {
     const result = new Result<T>();
     result.errors = messages;
     result.statusCode = statusCode;

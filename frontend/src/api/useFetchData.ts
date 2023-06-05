@@ -1,32 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { getPlayableErrorFromUnknown } from "../accessibility/apiAppMessages";
+import { PlayableError, PlayableMessage } from "../accessibility/playableMessage";
 import axiosInstance from "../axiosInstance";
 import { lessonLanguageHeader } from "../constants";
 import { playTextAudio } from "../utils";
 
-export type UseFetchDataOptions = {
-  method: "GET" | "POST" | "PUT";
-  body?: object;
-};
-
-const computeAxiosPromise = (
-  fetchOptions: UseFetchDataOptions | undefined,
-  url: string,
-  lang?: string
-) => {
-  const config = {
-    headers: {
-      [lessonLanguageHeader]: lang,
-    },
-  };
-
-  if (!fetchOptions) {
-    return axiosInstance.get(url, config);
-  }
-  if (fetchOptions.method === "POST") {
-    return axiosInstance.post(url, fetchOptions.body, config);
-  }
-  return axiosInstance.get(url, config);
-};
 
 const useFetchData = <T>(
   url: string,
@@ -44,7 +22,7 @@ const useFetchData = <T>(
     value: true,
   });
 
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<PlayableError>();
   const [retryFlag, setRetryFlag] = useState<number>();
 
   const urlRef = useRef<string>();
@@ -73,7 +51,8 @@ const useFetchData = <T>(
         },
       });
     } catch (error) {
-      setError(error);
+      const playableError = getPlayableErrorFromUnknown(error);
+      setError(playableError);
     } finally {
       playTextAudio("Loading finished.");
       setLoading(false);
@@ -108,6 +87,31 @@ const useFetchData = <T>(
     error,
     retry,
   };
+};
+
+export type UseFetchDataOptions = {
+  method: "GET" | "POST" | "PUT";
+  body?: object;
+};
+
+function computeAxiosPromise(
+  fetchOptions: UseFetchDataOptions | undefined,
+  url: string,
+  lang?: string
+) {
+  const config = {
+    headers: {
+      [lessonLanguageHeader]: lang,
+    },
+  };
+
+  if (!fetchOptions) {
+    return axiosInstance.get(url, config);
+  }
+  if (fetchOptions.method === "POST") {
+    return axiosInstance.post(url, fetchOptions.body, config);
+  }
+  return axiosInstance.get(url, config);
 };
 
 export default useFetchData;

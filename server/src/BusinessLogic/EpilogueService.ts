@@ -1,4 +1,5 @@
 import { ApiErrorResponse, getStringifiedError } from "../ApiSupport/apiErrorHelpers";
+import { apiMessages } from "../ApiSupport/apiMessages";
 import Result from "../ApiSupport/Result";
 import {
   Epilogue,
@@ -48,7 +49,7 @@ export default class EpilogueService {
           userStoryIdResult.errors
         )}`
       );
-      throw ApiErrorResponse.Error<EpilogueProgress>("Something went wrong.", 500);
+      throw ApiErrorResponse.Error<EpilogueProgress>(apiMessages.somethingWentWrong, 500);
     }
 
     if (!userStoryIdResult.data) {
@@ -72,7 +73,7 @@ export default class EpilogueService {
 
     if (!epilogueProgressResult.data.timeUnlocked)
       return Result.Error<EpilogueProgress>(
-        "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
+        apiMessages.epilogueLocked,
         400
       );
 
@@ -109,8 +110,8 @@ export default class EpilogueService {
 
     if (!epilogueProgressResult.data.timeUnlocked)
       return Result.Error<EpilogueProgress>(
-        "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
-        403
+        apiMessages.epilogueLocked,
+        403 // forbidden
       );
     return epilogueProgressResult;
   }
@@ -201,7 +202,7 @@ export default class EpilogueService {
     const userStoryId = await this.getUserStoryId(userId, epilogueProgressId);
     const timeUnlocked = await this._db.get<number|undefined>(`userStories/${userId}/${userStoryId}/epilogueProgress/timeUnlocked`)
     if(!timeUnlocked.data) {
-      throw ApiErrorResponse.Forbidden("Epilogue is locked. Please complete all building blocks first.");
+      throw ApiErrorResponse.Forbidden(apiMessages.epilogueLocked);
     }
     await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeSummaryCompleted`);
     await this._db.set<number>(Date.now(), `userStories/${userId}/${userStoryId}/epilogueProgress/timeStarted`);
