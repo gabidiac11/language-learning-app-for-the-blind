@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import { generalAppMessages } from "../../accessibility/generalAppMessages";
 import { PlayableMessage } from "../../accessibility/playableMessage";
+import { genKey } from "../../constants";
 import { AppContext } from "../AppContext";
 import { StateActionType } from "../contextTypes/ctxTypes";
 
@@ -9,8 +10,22 @@ export const useFeedbackAudioQueue = () => {
 
   const enqueuePlayableMessage = useCallback(
     (playableMessage: PlayableMessage) => {
+      console.log(`[ENQUE]-${playableMessage.key}`);
+
       dispatch({
         type: StateActionType.EnqueuePlayableMessage,
+        payload: playableMessage,
+      });
+    },
+    [dispatch]
+  );
+
+  const singleEnque = useCallback(
+    (playableMessage: PlayableMessage) => {
+      console.log(`[SING-ENQUE]-${playableMessage.key}`);
+
+      dispatch({
+        type: StateActionType.SingleEnquePlayableMessages,
         payload: playableMessage,
       });
     },
@@ -33,7 +48,9 @@ export const useFeedbackAudioQueue = () => {
 
   const prematurelyStopPlayableMessages = useCallback(
     (playableKeys: string[]) => {
+      
       console.log(`[DEQUE-multiple]-${playableKeys.join(",")}`);
+
       dispatch({
         type: StateActionType.PrematurelyStopPlayableMessages,
         payload: {
@@ -46,7 +63,7 @@ export const useFeedbackAudioQueue = () => {
 
   const enqueueCantOpenALockedItemMessage = useCallback(() => {
     enqueuePlayableMessage({
-      key: `${Date.now()}-${generalAppMessages.cantOpenALockedItem.uniqueName}`,
+      key: `${genKey()}-${generalAppMessages.cantOpenALockedItem.uniqueName}`,
       messages: [generalAppMessages.cantOpenALockedItem],
     });
   }, [enqueuePlayableMessage]);
@@ -55,6 +72,7 @@ export const useFeedbackAudioQueue = () => {
     enqueuePlayableMessage,
     prematurelyStopPlayableMessages,
     dequePlayableMessage,
-    enqueueCantOpenALockedItemMessage
+    enqueueCantOpenALockedItemMessage,
+    singleEnque
   };
 };

@@ -1,4 +1,8 @@
 import { getStringifiedError } from "../../../ApiSupport/apiErrorHelpers";
+import {
+  apiMessages,
+  getApiMessageFrom,
+} from "../../../ApiSupport/apiMessages";
 import Result from "../../../ApiSupport/Result";
 import {
   QuizEntityName,
@@ -21,6 +25,7 @@ import {
   TemplateQuestionItemReference,
 } from "../QuizableItem";
 import QuizService from "../QuizService";
+import { addAudiosToCompletedMessage as addAudiosToCompletedResponse } from "./addAudiosToCompletedMessage";
 
 export class EpilogueQuizServiceFactory {
   public static inject = [
@@ -113,9 +118,89 @@ export class EpilogueQuizServiceFactory {
       userId,
       epilogueProgress
     ).bind(this);
+
+    this.addPlaybleApiMessagesCallbacks(quizableItem, epilogueProgress);
     return quizableItem;
   }
-  
+
+  private addPlaybleApiMessagesCallbacks(
+    quizableItem: QuizableItem,
+    epilogueProgress: EpilogueProgress
+  ) {
+    quizableItem.getPlayableApiMessagesForQuestion = (
+      templateQuestionId: string,
+      optionTemplateIds: string[]
+    ) => {
+      const questionP =
+        epilogueProgress.questionProgressItems[templateQuestionId];
+      if (!questionP) {
+        log(
+          `Didn't found any word with the id using the tempalte question id ${templateQuestionId} at epilogue progress ${epilogueProgress.id}`
+        );
+        return [];
+      }
+
+      const playableApiMessages =
+        // add audio: question
+        [
+          getApiMessageFrom(
+            questionP.question.audioFile,
+            questionP.question.text
+          ),
+        ];
+
+      const choiceAudios = [
+        apiMessages.quizChoiceFour,
+        apiMessages.quizChoiceThree,
+        apiMessages.quizChoiceTwo,
+        apiMessages.quizChoiceOne,
+      ];
+      optionTemplateIds.forEach((id) => {
+        const optionItem = questionP.question.options.find(
+          (option) => option.id === id
+        );
+
+        if (optionItem) {
+          const choiceNumAudio = choiceAudios.pop();
+          if (choiceNumAudio) {
+            playableApiMessages.push(choiceNumAudio);
+          }
+          playableApiMessages.push(
+            getApiMessageFrom(optionItem.audioFile, optionItem.text)
+          );
+        }
+      });
+
+      return playableApiMessages;
+    };
+
+    quizableItem.getPlayableApiMessageForRightAnswer = (
+      templateQuestionId: string,
+      correctTemplateOptionId: string
+    ) => {
+      const questionP =
+        epilogueProgress.questionProgressItems[templateQuestionId];
+      if (!questionP) {
+        log(
+          `Didn't found any word with the id using the tempalte question id ${templateQuestionId} at epilogue progress ${epilogueProgress.id}`
+        );
+        return [];
+      }
+
+      const correctOption = questionP.question.options.find(
+        (i) => i.id === correctTemplateOptionId
+      );
+      if (!correctOption) return [];
+
+      const playableApiMessages = [
+        // add audio: all options read
+        getApiMessageFrom(correctOption.audioFile, correctOption.text),
+      ];
+
+      return playableApiMessages;
+    };
+  }
+
   private createTemplateQuestionItem(
     epilogueQp: EpilogueQuestionProgress,
     epilogueQuestionAnswers: EpilogueQuestionAnswerObj
@@ -126,9 +211,17 @@ export class EpilogueQuizServiceFactory {
       entityText: epilogueQp.question.text,
       questionText: epilogueQp.question.text,
 
+      playableQuestionMessages: [
+        getApiMessageFrom(
+          epilogueQp.question.audioFile,
+          epilogueQp.question.text
+        ),
+      ],
+
       createOptionTexts: () => {
         let correctOptionId =
           epilogueQuestionAnswers[epilogueQp.question.id]?.correctOptionId;
+
         if (!correctOptionId) {
           log(`While creating options for epiloque question(id:${epilogueQp.question.id}, text:${epilogueQp.question.text})
             Couldn't find the right option. This should not happen if data is not compromised.
@@ -148,11 +241,20 @@ export class EpilogueQuizServiceFactory {
         }
 
         const correctOptionText = correctOption.text;
-        const valuesWords = epilogueQp.question.options
-          .filter((i) => i.id !== correctOption.id)
-          .map((wrontOption) => wrontOption.text);
-        const wrongOptionTexts = getShuffledArray(valuesWords).slice(0, 3);
-        return { correctOptionText, wrongOptionTexts };
+        const allWrongOptions = epilogueQp.question.options
+          .filter((i) => i.id !== correctOption.id);
+
+        const wrongOptions = getShuffledArray(allWrongOptions).slice(0, 3);
+        return {
+          correctItem: {
+            templateId: correctOption.id,
+            text: correctOptionText,
+          },
+          wrongItems: wrongOptions.map((option) => ({
+            templateId: option.id,
+            text: option.text,
+          })),
+        };
       },
     };
     return templateQuestion;
@@ -174,7 +276,9 @@ export class EpilogueQuizServiceFactory {
       const responseData: QuizCompletedStatsResponse = {
         blockCompletedStoryRefId: epilogueProgress.userStoryId,
         userStoriesUnlocked: unlockedUserStoriesResult.data,
+        playableApiMessages: [],
       };
+      addAudiosToCompletedResponse(responseData);
       return Result.Success(responseData);
     };
   };

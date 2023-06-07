@@ -12,8 +12,10 @@ import { Link } from "react-router-dom";
 import "../EpilogueQuiz.scss";
 import { StoryCard } from "../../../StoriesOverviewPage/StoryCard/StoryCard";
 import { WithFocusControls } from "../../../../../accessibility/WithFocusControls";
-import { usePageAudioFeedback } from "../../../../page-components/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../../accessibility/usePageAudioFeedback";
 import { epiloqueQuizCompletedPageMessages } from "./appMessages";
+import { useEffect, useState } from "react";
+import { AppMessage } from "../../../../../accessibility/accesibilityTypes";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -39,15 +41,23 @@ const EpilogueQuizCompleted = () => {
       lang
     );
 
-    usePageAudioFeedback({
-      error,
-      loading,
-      pageGreeting: epiloqueQuizCompletedPageMessages.greetingPageEpilogueQuizCompleted,
-      pageDataLoadingMessage:
-        epiloqueQuizCompletedPageMessages.loadingEpilogueQuizCompleted,
-      pageDataLoadedMessage:
-        epiloqueQuizCompletedPageMessages.loadedEpilogueQuizCompleted,
-    });
+  const [pageDataLoadedMessage, setPageDataLoadedMessage] = useState<
+    AppMessage[]
+  >([]);
+
+  usePageAudioFeedback({
+    error,
+    loading: !pageDataLoadedMessage.length,
+    pageGreeting:
+      epiloqueQuizCompletedPageMessages.loadingEpilogueQuizCompleted,
+    pageDataLoadedMessage,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setPageDataLoadedMessage(computeAudioMessageFromResponse(data));
+    }
+  }, [data]);
 
   return (
     <WithFocusControls
@@ -78,7 +88,7 @@ const EpilogueQuizCompleted = () => {
                   </span>
                   <h2
                     tabIndex={0}
-                  >{`Coungradulations! You finished this story.`}</h2>
+                  >{`Congratulations! You finished this story.`}</h2>
                 </div>
 
                 {!!data?.userStoriesUnlocked?.length && (
@@ -117,7 +127,10 @@ const DisplayStoryUnlockedItems = (props: { stories: UserStory[] }) => {
       <Divider aria-label="list of unlocked stories">
         <Chip tabIndex={0} label="Stories unlocked" />
       </Divider>
-      <div className="view-items-section" aria-label="wrapper for unlocked stories section">
+      <div
+        className="view-items-section"
+        aria-label="wrapper for unlocked stories section"
+      >
         {props.stories.map((userStory: UserStory) => (
           <StoryCard key={userStory.id} userStory={userStory} />
         ))}
@@ -125,5 +138,15 @@ const DisplayStoryUnlockedItems = (props: { stories: UserStory[] }) => {
     </div>
   );
 };
+
+function computeAudioMessageFromResponse(
+  quizCompletedResponse: QuizBlockCompletedResponse
+) {
+  const responsePlayables = quizCompletedResponse.playableApiMessages ?? [];
+  const messages = [...responsePlayables];
+
+  messages.push(epiloqueQuizCompletedPageMessages.loadedEpilogueQuizCompleted);
+  return messages;
+}
 
 export default EpilogueQuizCompleted;

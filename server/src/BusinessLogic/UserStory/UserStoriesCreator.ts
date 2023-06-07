@@ -90,6 +90,9 @@ class LessonToUserStoryConvertor {
       idsDependentOnThisUserStory: [], // to be fiiled in
 
       name: this._lessonStory.name,
+      
+      audioFile: this._lessonStory.audioFile,
+
       imageUrl: this._lessonStory.imageUrl,
       imageAlt: this._lessonStory.imageAlt,
 

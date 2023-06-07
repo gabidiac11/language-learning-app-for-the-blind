@@ -24,7 +24,7 @@ const EpilogueQuizQuestion = (props: {
     [props.onChoose]
   );
 
-  const pauseLoadingNextQuestionTimeSeconds = 1;
+  const pauseLoadingNextQuestionTimeSeconds = 3;
 
   return (
     <WithFocusControls direction="vertical">
@@ -42,7 +42,7 @@ const EpilogueQuizQuestion = (props: {
           {/* TODO: see how you wrap the text */}
           <Button
             tabIndex={0}
-            aria-label={`option ${index + 1}: ${option.text}`}
+            aria-label={`option ${index + 1}: ${option.text.replace("->", "")}`}
 
             variant="contained"
             className="quiz-question-option"
@@ -68,7 +68,7 @@ const EpilogueQuizQuestion = (props: {
         <div  aria-label={`Indication: Loading next question in ${pauseLoadingNextQuestionTimeSeconds} seconds.`}>
           <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
             Loading next question in{" "}
-            <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
+            <AppTimerDisplay limit={pauseLoadingNextQuestionTimeSeconds} onTimeOut={props.onNext} />
           </Typography>
         </div>
       )}

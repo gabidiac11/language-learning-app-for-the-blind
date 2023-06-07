@@ -108,14 +108,22 @@ export const WithFocusControls = (
       const node = nodeRefs[canditateIndex] as unknown as { focus: unknown };
       if (typeof node?.focus === "function") {
         try {
+          if (
+            "getAttribute" in node &&
+            (
+              node as unknown as { getAttribute: (key: string) => string }
+            ).getAttribute("playing-key") !==
+              document.activeElement.getAttribute("playing-key")
+          ) {
+            // stop player
+            const event = new CustomEvent("prematurelyStopPlayableMessages", {
+              detail: {},
+            });
+            window.dispatchEvent(event);
+          }
+
           node.focus();
           screenReader.playNodeTarget(node as HTMLElement);
-          
-          const event = new CustomEvent("prematurelyStopPlayableMessages", {
-            detail: {},
-          });
-          window.dispatchEvent(event);
-
         } catch (error) {
           console.log({ error });
         }

@@ -1,3 +1,4 @@
+import { ApiMessage } from "../../ApiSupport/appErrorMessage";
 import Result from "../../ApiSupport/Result";
 import {
   QuizEntityName,
@@ -58,17 +59,28 @@ export class QuizableItem {
   public userId: string;
 
   public getAcheivements: () => Promise<Result<QuizCompletedStatsResponse>>;
+  public getPlayableApiMessagesForQuestion: (templateQuestionId: string, optionTemplateIds: string[]) => ApiMessage[];
+  public getPlayableApiMessageForRightAnswer: (templateQuestionId: string, correctTemplateOptionId: string) => ApiMessage[];
 }
 
+// projection of block words or epilogue questions
 export class TemplateQuestionItemReference {
   entityQuestionId: string;
   parentEntity: QuizEntityName;
   entityText: string;
+
+  playableQuestionMessages: ApiMessage[];
   
   questionText: string;
   createOptionTexts: () => {
-    correctOptionText: string;
-    wrongOptionTexts: string[];
+    correctItem: {
+      text: string;
+      templateId: string;
+    };
+    wrongItems: {
+      text: string;
+      templateId: string;
+    }[];
   };
 }
 

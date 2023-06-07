@@ -1,3 +1,4 @@
+import { uuidv4 } from "@firebase/util";
 import { Language } from "./context";
 
 export const STAGE = process.env.REACT_APP_STAGE;
@@ -27,3 +28,5 @@ export const languages: { id: Language; name: string }[] = [
 export const lessonLanguageHeader = "lesson-language";
 
 export const audioStorageBasePath = "https://storage.googleapis.com/big-depth-387415.appspot.com";
+
+export const genKey = () => uuidv4();

@@ -40,16 +40,17 @@ export class QuizStateCreator {
   public generateQuestion(
     templateQuestion: TemplateQuestionItemReference
   ): QuizQuestion {
-    const { correctOptionText, wrongOptionTexts } =
-      templateQuestion.createOptionTexts();
+    const { correctItem, wrongItems } = templateQuestion.createOptionTexts();
 
     const correctOption: QuizOption = {
       id: genUid(),
-      text: `${cheatAnswers ? "->" : ""}${correctOptionText}`,
+      text: `${cheatAnswers ? "->" : ""}${correctItem.text}`,
+      quizOptionTemplateId: correctItem.templateId,
     };
-    const wrongOptions: QuizOption[] = wrongOptionTexts.map((text) => ({
+    const wrongOptions: QuizOption[] = wrongItems.map((item) => ({
       id: genUid(),
-      text,
+      text: item.text,
+      quizOptionTemplateId: item.templateId,
     }));
     const options = getShuffledArray([correctOption, ...wrongOptions]);
 
@@ -59,6 +60,7 @@ export class QuizStateCreator {
       correctOptionId: correctOption.id,
       options,
       text: templateQuestion.questionText,
+      templateQuestionId: templateQuestion.entityQuestionId,
     };
     return question;
   }

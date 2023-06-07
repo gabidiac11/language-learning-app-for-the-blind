@@ -1,4 +1,9 @@
 import { getStringifiedError } from "../../../ApiSupport/apiErrorHelpers";
+import {
+  apiMessages,
+  getApiMessageFrom,
+} from "../../../ApiSupport/apiMessages";
+
 import Result from "../../../ApiSupport/Result";
 import {
   QuizEntityName,
@@ -9,6 +14,7 @@ import {
   WordProgress,
 } from "../../../Data/ctxTypes/ctx.userStory.types";
 import { Database } from "../../../Data/database";
+import { log } from "../../../logger";
 import { QuizCompletedStatsResponse } from "../../../Models/quiz.models";
 import { getShuffledArray, valuesOrdered } from "../../../utils";
 import BlocksService from "../../BlocksService";
@@ -19,6 +25,7 @@ import {
   TemplateQuestionItemReference,
 } from "../QuizableItem";
 import QuizService from "../QuizService";
+import { addAudiosToCompletedMessage } from "./addAudiosToCompletedMessage";
 
 export class BlockQuizServiceFactory {
   public static inject = [
@@ -91,7 +98,9 @@ export class BlockQuizServiceFactory {
       blockProgress.wordProgressItems
     ).map((wp) => this.createTemplateQuestionItem(wp, blockProgress));
 
-    quizableItem.quizSettings = this.createQuizSettings(Object.values(blockProgress.wordProgressItems).length);
+    quizableItem.quizSettings = this.createQuizSettings(
+      Object.values(blockProgress.wordProgressItems).length
+    );
     quizableItem.dbLocationBasePath = `quizzesBlocks/${userId}/blockProgress-${blockProgress.id}`;
     quizableItem.userId = userId;
     quizableItem.lang = blockProgress.lang;
@@ -99,7 +108,80 @@ export class BlockQuizServiceFactory {
       userId,
       blockProgress
     ).bind(this);
+
+    this.addPlaybleApiMessagesCallbacks(quizableItem, blockProgress);
+
     return quizableItem;
+  }
+
+  addPlaybleApiMessagesCallbacks(
+    quizableItem: QuizableItem,
+    blockProgress: BuildingBlockProgress
+  ) {
+    quizableItem.getPlayableApiMessagesForQuestion = (
+      templateQuestionId: string,
+      optionTemplateIds: string[]
+    ) => {
+      const wp = blockProgress.wordProgressItems[templateQuestionId];
+      if (!wp) {
+        log(
+          `Didn't found any word with the id using the tempalte question id ${templateQuestionId} at blockProgress ${blockProgress.id}, ${blockProgress.block.name}`
+        );
+        return [];
+      }
+
+      const playableApiMessages =
+        // add audio: What is the meaning of...
+        // add audio: ... ${foreign word}
+        [
+          apiMessages.quizBlockWhatIstheMeaningOfWord,
+          getApiMessageFrom(wp.word.audioFile, wp.word.text),
+        ];
+
+      // NOTE: someone can cheat when you look at the audio path, but what can you do?
+      // add audio: each option word's translation
+      const choiceAudios = [
+        apiMessages.quizChoiceFour,
+        apiMessages.quizChoiceThree,
+        apiMessages.quizChoiceTwo,
+        apiMessages.quizChoiceOne,
+      ];
+      optionTemplateIds.forEach((id) => {
+        const wordItem = blockProgress.wordProgressItems[id];
+        if (wordItem) {
+          const choiceNumAudio = choiceAudios.pop();
+          if (choiceNumAudio) {
+            playableApiMessages.push(choiceNumAudio);
+          }
+          playableApiMessages.push(
+            getApiMessageFrom(
+              wordItem.word.audioFileTranslation,
+              `${wordItem.word.shortTranslation} - ${wordItem.word.longTranslation}`
+            )
+          );
+        }
+      });
+
+      return playableApiMessages;
+    };
+    quizableItem.getPlayableApiMessageForRightAnswer = (
+      templateQuestionId: string
+    ) => {
+      const wp = blockProgress.wordProgressItems[templateQuestionId];
+      if (!wp) {
+        log(
+          `Didn't found any word with the id using the tempalte question id ${templateQuestionId} at blockProgress ${blockProgress.id}, ${blockProgress.block.name}`
+        );
+        return [];
+      }
+
+      return [
+        getApiMessageFrom(
+          wp.word.audioFileTranslation,
+          `${wp.word.shortTranslation} - ${wp.word.longTranslation}`
+        ),
+      ];
+    };
   }
 
   createCallbackForAchievements = (
@@ -120,7 +202,10 @@ export class BlockQuizServiceFactory {
         blockCompleted: dependentBlocksResult.data.parentBlock,
         blockProgressUnlockedItems: dependentBlocksResult.data.childBlocks,
         epilogueProgressUnlocked: dependentBlocksResult.data.epilogueUnlocked,
+        playableApiMessages: [],
       };
+
+      addAudiosToCompletedMessage(responseData);
       return Result.Success(responseData);
     };
   };
@@ -133,19 +218,28 @@ export class BlockQuizServiceFactory {
       entityQuestionId: wp.id,
       parentEntity: QuizEntityName.blockProgress,
       entityText: wp.word.text,
-      questionText: `What does '${wp.word.text}' mean?`,
+      questionText: `What is the meaning of the word '${wp.word.text}'?`,
+      playableQuestionMessages: [
+        apiMessages.quizBlockWhatIstheMeaningOfWord,
+        getApiMessageFrom(wp.word.audioFile, wp.word.text),
+      ],
 
       createOptionTexts: () => {
-        const correctOptionText = `${wp.word.shortTranslation} - ${wp.word.longTranslation}`;
-
-        const valuesWords = Object.values(blockProgress.wordProgressItems)
+        const wrongValuesWords = Object.values(blockProgress.wordProgressItems)
           .filter((wpItem) => wpItem.id !== wp.id)
-          .map(
-            (wrongWp) =>
-              `${wrongWp.word.shortTranslation} - ${wrongWp.word.longTranslation}`
-          );
-        const wrongOptionTexts = getShuffledArray(valuesWords).slice(0, 3);
-        return { correctOptionText, wrongOptionTexts };
+          .map((wrongWp) => ({
+            templateId: wrongWp.id,
+            text: `${wrongWp.word.shortTranslation} - ${wrongWp.word.longTranslation}`,
+          }));
+        const wrongItems = getShuffledArray(wrongValuesWords).slice(0, 3);
+
+        return {
+          correctItem: {
+            text: `${wp.word.shortTranslation} - ${wp.word.longTranslation}`,
+            templateId: wp.id,
+          },
+          wrongItems,
+        };
       },
     };
     return templateQuestion;
@@ -155,12 +249,12 @@ export class BlockQuizServiceFactory {
     const s = new QuizSettings();
 
     // TODO: test more and adjust to a final configuration that works best
-    if(numOfWords < 5) {
+    if (numOfWords < 5) {
       s.MISS_PROB_INC = 30;
       s.EXCLUDED_PROB_INC = 10;
       s.HIT_PROB_DEC = 20;
-    } else if(numOfWords < 10) {
-      s.MISS_PROB_INC = 50 ;
+    } else if (numOfWords < 10) {
+      s.MISS_PROB_INC = 50;
       s.EXCLUDED_PROB_INC = 5;
       s.HIT_PROB_DEC = 40;
     } else {
@@ -168,7 +262,6 @@ export class BlockQuizServiceFactory {
       s.EXCLUDED_PROB_INC = 2;
       s.HIT_PROB_DEC = 70;
     }
-
 
     s.NUM_OF_REQUIRED_CONSECUTIVE_HITS = 1;
 

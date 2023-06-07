@@ -4,7 +4,7 @@ import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress } from "../../../../context";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
+import { usePageAudioFeedback, usePreappendLoadedData } from "../../../../accessibility/usePageAudioFeedback";
 import { blockStartPageMessages } from "./appMessages";
 import explanations from "../explanations";
 
@@ -18,12 +18,18 @@ const BlockStartPage = () => {
     lang
   );
 
+  const pageDataLoadedMessage = usePreappendLoadedData(
+    blockStartPageMessages.loadedBlockStart,
+    data?.block?.name,
+    data?.block?.audioFile,
+  );
+
   usePageAudioFeedback({
     error,
     loading,
     pageGreeting: blockStartPageMessages.greetingPageBlockStart,
     pageDataLoadingMessage: blockStartPageMessages.loadingBlockStart,
-    pageDataLoadedMessage: blockStartPageMessages.loadedBlockStart,
+    pageDataLoadedMessage,
   });
 
   return (

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useParams } from "react-router";
-import useFetchData, { UseFetchDataOptions } from "../../../api/useFetchData";
+import useFetchData from "../../../api/useFetchData";
 import { EpilogueProgress } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 import ButtonContinueToEpilogueQuiz from "./EpilogueQuiz/ButtonContinueToEpilogueQuiz";
@@ -12,8 +12,11 @@ import { lessonLanguageHeader } from "../../../constants";
 import { WithFocusControls } from "../../../accessibility/WithFocusControls";
 import { PlayableError } from "../../../accessibility/playableMessage";
 import { getPlayableErrorFromUnknown } from "../../../accessibility/apiAppMessages";
-import { usePageAudioFeedback } from "../../page-components/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
 import { epilogueOverviewPageMessages } from "./appMessages";
+import { useIsPlayingMessage } from "../../../accessibility/useAudioProgress";
+import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
+import { StopCircle as StopIcon } from "@mui/icons-material";
 
 const EpilogueStartPage = () => {
   const { id: epilogueProgressId, lang } = useParams<{
@@ -31,8 +34,7 @@ const EpilogueStartPage = () => {
     pageGreeting: epilogueOverviewPageMessages.greetingPageEpilogueOverview,
     pageDataLoadingMessage:
       epilogueOverviewPageMessages.loadingEpilogueOverview,
-    pageDataLoadedMessage:
-      epilogueOverviewPageMessages.loadedEpilogueOverview,
+    pageDataLoadedMessage: epilogueOverviewPageMessages.loadedEpilogueOverview,
   });
 
   return (
@@ -61,7 +63,7 @@ const EpilogueStartPage = () => {
               <p
                 className="epilogue-txt"
                 tabIndex={0}
-                aria-label={`Short story content: ${data.epilogue.textStoryTale}`}
+                aria-label={`Short story content - use arrow down to navigate to the play button to listen this text.`}
               >
                 {data.epilogue.textStoryTale}
               </p>
@@ -86,7 +88,9 @@ const StoryListener = (props: {
   epilogueProgress: EpilogueProgress;
   reload: () => void;
 }) => {
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const isListening = useIsPlayingMessage(
+    props.epilogueProgress.epilogue.audioFile
+  );
 
   const [error, setError] = useState<PlayableError>();
   const loadingRef = useRef(false);
@@ -96,7 +100,8 @@ const StoryListener = (props: {
     _setLoading(value);
   };
 
-  const [isListening, setIsListening] = useState(false);
+  const { singleEnque, dequePlayableMessage } =
+    useFeedbackAudioQueue();
 
   const markEpilogueAsListened = useCallback(async () => {
     if (props.epilogueProgress.timeSummaryCompleted) {
@@ -126,17 +131,27 @@ const StoryListener = (props: {
   }, [props.epilogueProgress]);
 
   const listenStory = useCallback(() => {
-    setIsListening(true);
-
-    timeoutRef.current = setTimeout(() => {
-      setIsListening(false);
-      markEpilogueAsListened();
-    }, 2000);
-  }, [markEpilogueAsListened]);
+    if (isListening) {
+        dequePlayableMessage(props.epilogueProgress.epilogue.audioFile);
+      return;
+    }
+    singleEnque({
+      key: props.epilogueProgress.epilogue.audioFile,
+      messages: [
+        {
+          filePath: props.epilogueProgress.epilogue.audioFile,
+          text: props.epilogueProgress.epilogue.textStoryTale,
+          uniqueName: props.epilogueProgress.epilogue.audioFile,
+        },
+      ],
+    });
+  }, [singleEnque, isListening]);
 
   useEffect(() => {
-    return () => clearTimeout(timeoutRef.current);
-  }, []);
+    if (isListening === false) {
+      markEpilogueAsListened();
+    }
+  }, [isListening]);
 
   return (
     <ErrorBoundary
@@ -147,13 +162,20 @@ const StoryListener = (props: {
       <div>
         <Button
           tabIndex={0}
-          onClick={listenStory}
+          onClick={(event) => {
+            event.stopPropagation();
+            listenStory();
+          }}
           variant="contained"
+          aria-hidden={isListening ? "true" : "false"}
           aria-label="Play short story button"
           color={isListening ? "secondary" : "primary"}
-          startIcon={<VolumeUpIcon />}
+          startIcon={isListening ? <StopIcon /> : <VolumeUpIcon />}
+
+          // prevent prematurelyStopPlayableMessages if the previous focused element has the same playing-key 
+          playing-key={props.epilogueProgress.epilogue.audioFile}
         >
-          Play story
+          {isListening ? "Playing..." : "Play story"}
         </Button>
       </div>
     </ErrorBoundary>

@@ -13,8 +13,9 @@ export const epiloqueQuizCompletedPageMessages: {
   },
   loadedEpilogueQuizCompleted: {
     uniqueName: "loadedEpilogueQuizCompleted",
-    text: "Coungradulations! You finished the epilgoue block and the whole lesson-story! Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to see the achievements.",
     filePath: `${audioStorageBasePath}/pages/epiloqueQuizCompleted/loadedEpilogueQuizCompleted.mp3`,
+    preventForcedStopOnCurrentPageJustOnce: true
   },
   greetingPageEpilogueQuizCompleted: {
     uniqueName: "greetingPageEpilogueQuizCompleted",

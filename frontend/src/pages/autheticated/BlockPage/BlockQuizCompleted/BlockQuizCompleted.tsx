@@ -16,7 +16,10 @@ import BuildingBlockItem from "../../StoryPage/BuildingBlockItem";
 import EpilogueBlockItem from "../../StoryPage/EpilogueBlockItem";
 import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
 import { blockQuizCompletedPageMessages } from "./appMessages";
-import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { AppMessage } from "../../../../accessibility/accesibilityTypes";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -42,15 +45,22 @@ const BlockQuizCompleted = () => {
       lang
     );
 
+  const [pageDataLoadedMessage, setPageDataLoadedMessage] = useState<
+    AppMessage[]
+  >([]);
+
   usePageAudioFeedback({
     error,
-    loading,
-    pageGreeting: blockQuizCompletedPageMessages.greetingPageBlockQuizCompleted,
-    pageDataLoadingMessage:
-      blockQuizCompletedPageMessages.loadingBlockQuizCompleted,
-    pageDataLoadedMessage:
-      blockQuizCompletedPageMessages.loadedBlockQuizCompleted,
+    loading: !pageDataLoadedMessage.length,
+    pageGreeting: blockQuizCompletedPageMessages.loadingBlockQuizCompleted,
+    pageDataLoadedMessage,
   });
+
+  useEffect(() => {
+    if(data) {
+      setPageDataLoadedMessage(computeAudioMessageFromResponse(data));
+    }
+  }, [data])
 
   return (
     <div
@@ -81,7 +91,7 @@ const BlockQuizCompleted = () => {
                     />
                   </span>
                   <h2 tabIndex={0} style={{ textAlign: "center" }}>
-                    {`Coungradulations!`}
+                    {`Congratulations!`}
                     {` You finished block '${data.blockCompleted?.block.name}'.`}
                   </h2>
                 </div>
@@ -164,5 +174,15 @@ const DisplayBlockEpilogueUnlocked = (props: {
     </div>
   );
 };
+
+function computeAudioMessageFromResponse(quizCompletedResponse: QuizBlockCompletedResponse) {
+  const responsePlayables = quizCompletedResponse.playableApiMessages ?? [];
+  const messages = [
+    ...responsePlayables,
+  ];
+
+  messages.push(blockQuizCompletedPageMessages.loadedBlockQuizCompleted);
+  return messages;
+}
 
 export default BlockQuizCompleted;

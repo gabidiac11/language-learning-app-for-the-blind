@@ -11,11 +11,18 @@ export type QuizQuestion = {
   text: string;
   correctOptionId: string;
   options?: QuizOption[];
-  lang: Language,
+  lang: Language;
+  templateQuestionId: string;
 };
 
 export type QuizOption = {
   // this id is mapped to a word id - to avoid exposing the correct option
+  id: string;
+  text: string;
+  quizOptionTemplateId: string;
+};
+
+export type QuizOptionFrontend = {
   id: string;
   text: string;
 };

@@ -4,12 +4,34 @@ import { Button, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./index.scss";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { WithFocusControls } from "../../accessibility/WithFocusControls";
+import { loginPageMessages } from "./appMessages";
+import { useFeedbackAudioQueue } from "../../context/hooks/useFeedbackAudiQueue";
+import { errorAppMessages } from "../../accessibility/errorAppMessages";
+import { genKey } from "../../constants";
 
 export const Login = () => {
   const authState = useAuthState(firebaseAuth);
   const [user, , error] = authState;
+
+  const { enqueuePlayableMessage } = useFeedbackAudioQueue();
+
+  useEffect(() => {
+    enqueuePlayableMessage({
+      key: `${genKey()}-${loginPageMessages.greetingLoginPage.uniqueName}`,
+      messages: [loginPageMessages.greetingLoginPage],
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+    enqueuePlayableMessage({
+      key: `${genKey()}-${errorAppMessages.somethingWentWrong.uniqueName}`,
+      messages: [errorAppMessages.somethingWentWrong],
+    });
+  }, [error]);
 
   return (
     <div className="view login-page" aria-label="wrapper for login page">
@@ -41,14 +63,16 @@ export const Login = () => {
             >
               Login with Google
             </Button>
-            <Link
+
+            {/* TODO: register with email and password should be finalized */}
+            {/* <Link
               tabIndex={0}
               aria-label="Register with email and password"
               to={"/register"}
               color="primary"
             >
               Or register
-            </Link>
+            </Link> */}
           </div>
 
           {user && <div tabIndex={0}>Loading...</div>}

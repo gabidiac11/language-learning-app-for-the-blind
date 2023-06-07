@@ -12,10 +12,16 @@ import {
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import BlockQuizQuestion from "./BlockQuizQuestion";
 import "./BlockQuiz.scss";
+import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { blockQuizPageMessages } from "./appMessages";
+import { AppMessage } from "../../../../accessibility/accesibilityTypes";
 
 const BlockQuiz = () => {
   const navigate = useNavigate();
-  const { id: blockProgressId, lang } = useParams<{ id: string, lang: string; }>();
+  const { id: blockProgressId, lang } = useParams<{
+    id: string;
+    lang: string;
+  }>();
   const [fetchOptions, setFetchOptions] = useState<{
     url: string;
     options?: UseFetchDataOptionsQuizRequest | UseFetchDataOptions;
@@ -25,21 +31,28 @@ const BlockQuiz = () => {
       method: "POST",
     },
   });
-  
+
   const {
     dataWithHttpResponse: response,
     loading,
     error,
     retry,
-  } = useFetchData<QuizResponse>(
-    fetchOptions.url,
-    lang,
-    fetchOptions.options
-  );
+  } = useFetchData<QuizResponse>(fetchOptions.url, lang, fetchOptions.options);
   const [currentQuestion, setCurrentQuestion] = useState<QuizResponse>();
   const [nextQuestion, setNextQuestion] = useState<QuizResponse>();
   const [quizCompleted, setQuizCompleted] = useState<boolean>();
   const [preserveChildren, setPreserveChildren] = useState<boolean>();
+
+  const [pageDataLoadedMessage, setPageDataLoadedMessage] = useState<
+    AppMessage[]
+  >([]);
+
+  usePageAudioFeedback({
+    error,
+    loading: !pageDataLoadedMessage.length,
+    pageGreeting: blockQuizPageMessages.loadingRequestQuestion,
+    pageDataLoadedMessage,
+  });
 
   const onChoose = useCallback(
     (option: QuizOption) => {
@@ -55,6 +68,8 @@ const BlockQuiz = () => {
         optionId: option.id,
         questionId: currentQuestion.questionId,
       };
+
+      setPageDataLoadedMessage([]);
       setFetchOptions({
         url: `blocks/${blockProgressId}/quiz/answer-question`,
         options: { method: "POST", body: body },
@@ -76,7 +91,6 @@ const BlockQuiz = () => {
     const quizResponse = response.data as QuizResponse;
     if (quizResponse?.quizCompleted) {
       setQuizCompleted(true);
-      // TODO: make sure to play audio on the completion page when is started
       navigate(
         `/blocks/${quizResponse.lang}/${blockProgressId}/quiz/${quizResponse.quizId}/completed`
       );
@@ -85,8 +99,14 @@ const BlockQuiz = () => {
 
     const initialQuestionRequestMade =
       response.httpInfo?.url?.indexOf("/request-question") > -1;
+
+    const audioMessage = computeAudioMessageFromResponse(
+      quizResponse,
+      initialQuestionRequestMade
+    );
+    setPageDataLoadedMessage(audioMessage);
+
     if (initialQuestionRequestMade) {
-      // TODO: make sure to play audio here
       setCurrentQuestion(quizResponse);
       setPreserveChildren(true);
       return;
@@ -119,3 +139,24 @@ const BlockQuiz = () => {
 };
 
 export default BlockQuiz;
+
+function computeAudioMessageFromResponse(
+  quizResponse: QuizResponse,
+  isInitial: boolean
+) {
+  const responsePlayables = quizResponse.playableApiMessages ?? [];
+  const rightOrWrongMessages =
+    quizResponse.previousQuestionOutcomePlaybaleMessages ?? [];
+  const messages = [
+    ...rightOrWrongMessages,
+    ...responsePlayables,
+  ];
+
+  messages.forEach((message) => {
+    message.preventForcedStopOnCurrentPage = true;
+  });
+
+  isInitial &&
+    messages.push(blockQuizPageMessages.instructionsQuizBlockQuestion);
+  return messages;
+}

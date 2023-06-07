@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router";
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress, Word } from "../../../../context";
@@ -10,8 +10,9 @@ import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 import explanations from "../explanations";
 import { BlockWordSummary } from "./BlockWordSummary";
 import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
-import { usePageAudioFeedback } from "../../../page-components/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
 import { blockIntroductionPageMessages } from "./appMessages";
+import { screenReader } from "../../../../accessibility/appReaders";
 
 const BlockIntroduction = () => {
   const { id: blockProgressId, lang } = useParams<{
@@ -29,8 +30,10 @@ const BlockIntroduction = () => {
     error,
     loading,
     pageGreeting: blockIntroductionPageMessages.greetingPageBlockIntroduction,
-    pageDataLoadingMessage: blockIntroductionPageMessages.loadingBlockIntroduction,
-    pageDataLoadedMessage: blockIntroductionPageMessages.loadedBlockIntroduction,
+    pageDataLoadingMessage:
+      blockIntroductionPageMessages.loadingBlockIntroduction,
+    pageDataLoadedMessage:
+      blockIntroductionPageMessages.loadedBlockIntroduction,
   });
 
   const completeSession = useCallback(() => {
@@ -53,6 +56,12 @@ const BlockIntroduction = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    return () => {
+      screenReader.stopIfPlaying();
+    };
+  }, []);
+
   return (
     <div
       className="view block-summary-view"
@@ -62,42 +71,45 @@ const BlockIntroduction = () => {
     >
       <ErrorBoundary error={error} onRetry={retry} loading={loading}>
         {!error && data && blockProgressId && (
-          <WithFocusControls
-            direction="vertical"
-            customMessage="Press arrow up or arrow down to switch between available menu options"
+          <div
+            className="view-content"
+            aria-label={`inner wrapper for summary introduction of building block ${
+              data?.block?.name ?? ""
+            }. ${explanations.summaryBlock}`}
           >
-            <div
-              className="view-content"
-              aria-label={`inner wrapper for summary introduction of building block ${
-                data?.block?.name ?? ""
+            <h1
+              tabIndex={0}
+              aria-label={`Summary page title of building block ${
+                data?.block.name ?? ""
               }. ${explanations.summaryBlock}`}
             >
-              <h1
-                tabIndex={0}
-                aria-label={`Summary page title of building block ${
-                  data?.block.name ?? ""
-                }. ${explanations.summaryBlock}`}
-              >
-                {data.block.name} - building block
-              </h1>
-              {!learningSitCompleted && indexWord !== undefined && (
-                <BlockWordSummary
-                  key={data.block.words[indexWord].id}
-                  word={data.block.words[indexWord]}
-                  next={next}
-                />
-              )}
-              {learningSitCompleted && (
-                <BlockWordsSummariesCompleted blockProgress={data} />
-              )}
-              {!learningSitCompleted && data.timeSummaryCompleted && (
-                <ButtonContinueToBlockQuiz
-                  lang={data.lang}
-                  blockProgressId={data.id}
-                />
-              )}
-            </div>
-          </WithFocusControls>
+              {data.block.name} - building block
+            </h1>
+            <WithFocusControls
+              direction="vertical"
+              customMessage="Press arrow up or arrow down to switch between available menu options"
+            >
+              <>
+                {!learningSitCompleted && indexWord !== undefined && (
+                  <BlockWordSummary
+                    isFirst={indexWord === 0}
+                    key={data.block.words[indexWord].id}
+                    word={data.block.words[indexWord]}
+                    next={next}
+                  />
+                )}
+                {learningSitCompleted && (
+                  <BlockWordsSummariesCompleted blockProgress={data} />
+                )}
+                {!learningSitCompleted && data.timeSummaryCompleted && (
+                  <ButtonContinueToBlockQuiz
+                    lang={data.lang}
+                    blockProgressId={data.id}
+                  />
+                )}
+              </>
+            </WithFocusControls>
+          </div>
         )}
       </ErrorBoundary>
     </div>

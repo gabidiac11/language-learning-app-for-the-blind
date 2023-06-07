@@ -11,6 +11,13 @@ import { langPageMessages } from "../pages/autheticated/LessonLanguages/appMessa
 import { storiesOverviewPageMessages } from "../pages/autheticated/StoriesOverviewPage/appMessages";
 import { storyPageMessages } from "../pages/autheticated/StoryPage/appMessages";
 import { errorAppMessages } from "./../accessibility/errorAppMessages";
+import {
+  loginPageMessages,
+  registerPageMessages,
+} from "../pages/auth-pages/appMessages";
+import { epilogueQuizPageMessages } from "../pages/autheticated/EpiloguePage/EpilogueQuiz/appMessages";
+
+// page which is used as utilitary to generate audio files for the frontend feedback using text to speech later on
 
 const items = [
   ...Object.values(errorAppMessages),
@@ -24,6 +31,9 @@ const items = [
   ...Object.values(blockQuizCompletedPageMessages),
   ...Object.values(epilogueOverviewPageMessages),
   ...Object.values(epiloqueQuizCompletedPageMessages),
+  ...Object.values(loginPageMessages),
+  ...Object.values(registerPageMessages),
+  ...Object.values(epilogueQuizPageMessages),
 ];
 
 const checkDuplicates = () => {
@@ -77,6 +87,9 @@ export const DevAllMessages = () => {
           ...blockQuizCompletedPageMessages,
           ...epilogueOverviewPageMessages,
           ...epiloqueQuizCompletedPageMessages,
+          ...loginPageMessages,
+          ...registerPageMessages,
+          ...epilogueQuizPageMessages
         })
       )}
     />

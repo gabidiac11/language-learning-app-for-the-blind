@@ -1,17 +1,27 @@
-import { genUid } from "../../../../utils";
-import { BuildingBlock } from "../../../ctxTypes/ctx.story.types";
+import { genUid } from "../../../utils";
+import { BuildingBlock } from "../../../Data/ctxTypes/ctx.story.types";
 
 const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
   const familyBlock: BuildingBlock = {
     id: genUid(),
     name: "Family",
     imageAlt: "Russian family at dinner.",
+
     imageUrl:
       "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "семьей",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "family",
         longTranslation:
           "A group consisting of parents and children living together in a household",
@@ -20,6 +30,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "мамой",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "mom",
         longTranslation: "One's mother",
         lang: "ru",
@@ -27,6 +42,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "папа",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "dad",
         longTranslation: "Used when referring to one's father.",
         lang: "ru",
@@ -34,6 +54,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "братом",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "brother",
         longTranslation: "A male sibling",
         lang: "ru",
@@ -42,6 +67,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "зовут",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "called",
         longTranslation: "Used to refer to the name or title of someone",
         lang: "ru",
@@ -49,6 +79,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "младше",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "younger",
         longTranslation: "Being at an earlier age",
         lang: "ru",
@@ -56,6 +91,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "на два года",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "two years younger",
         longTranslation: "Being two years younger than someone else",
         lang: "ru",
@@ -63,6 +103,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "любим",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "favorite",
         longTranslation: "Preferred over all others of the same kind",
         lang: "ru",
@@ -70,6 +115,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "людях",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "people",
         longTranslation: "Human beings in general or considered collectively",
         lang: "ru",
@@ -77,6 +127,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "рада",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "happy",
         longTranslation: "Feeling or showing pleasure or contentment",
         lang: "ru",
@@ -92,10 +147,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "walk of stars with names on it: hollywood walk of fame",
     imageUrl:
       "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "Анна",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "Anna",
         longTranslation: "A female given name",
         lang: "ru",
@@ -103,6 +167,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Катя",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "Katya",
         longTranslation: "A female given name",
         lang: "ru",
@@ -110,6 +179,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Иван",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "Ivan",
         longTranslation: "A male given name",
         lang: "ru",
@@ -117,6 +191,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Александр",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "Alexander",
         longTranslation:
           'A male given name of Greek origin, meaning "defender of the people."',
@@ -133,10 +212,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "blackboard with 'we' text",
     imageUrl:
       "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "Меня",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "me",
         longTranslation:
           "Used when referring to oneself as the object of a verb or preposition.",
@@ -145,6 +233,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Я",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "I",
         longTranslation:
           "Used when referring to oneself as the subject of a verb.",
@@ -153,6 +246,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "со своей",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "with my",
         longTranslation:
           "Used to indicate possession of something by the speaker.",
@@ -161,6 +259,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Моя",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "my",
         longTranslation:
           "Used to indicate possession of something by a female speaker.",
@@ -169,6 +272,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Мой",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "my",
         longTranslation:
           "Used to indicate possession of something by a male speaker.",
@@ -177,6 +285,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "меня",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "me",
         longTranslation:
           "Used when referring to oneself as the object of a verb or preposition.",
@@ -185,6 +298,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Мы",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "we",
         longTranslation:
           "Used when referring to oneself and others as the subject of a verb.",
@@ -193,6 +311,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "мне",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "to me",
         longTranslation:
           "Used when referring to oneself as the recipient of an action.",
@@ -201,6 +324,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "о себе",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "about myself",
         longTranslation: "Used when referring to oneself in a general sense.",
         lang: "ru",
@@ -208,6 +336,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "ты",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "you",
         longTranslation: "Used when addressing one person informally.",
         lang: "ru",
@@ -215,6 +348,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "к брату",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "to brother",
         longTranslation:
           "Used when referring to one's brother in the vocative case.",
@@ -223,6 +361,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "другу",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "to friend",
         longTranslation:
           "Used when referring to a male friend in the vocative case.",
@@ -231,6 +374,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "они",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "they",
         longTranslation:
           "Used when referring to more than one person or thing as the subject of a verb.",
@@ -239,6 +387,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "маме",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "to mom",
         longTranslation:
           "Used when referring to one's mother as the recipient of an action.",
@@ -247,6 +400,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "мы",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "we",
         longTranslation:
           "Used when referring to oneself and others as the subject of a verb.",
@@ -255,6 +413,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "все",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "all",
         longTranslation:
           "Used to refer to the entirety of a group of people or things.",
@@ -263,6 +426,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "ними",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "with them",
         longTranslation: "Used to indicate possession of something by a group.",
         lang: "ru",
@@ -270,6 +438,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "нашем",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "our",
         longTranslation: "Belonging to us",
         lang: "ru",
@@ -277,6 +450,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "мою",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "my",
         longTranslation: "Belonging to me",
         lang: "ru",
@@ -284,6 +462,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "вместе",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "together",
         longTranslation:
           "Indicates a state of being with one or more other people or things",
@@ -301,10 +484,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "sand glas",
     imageUrl:
       "https://images.pexels.com/photos/1095601/pexels-photo-1095601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "Часто",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "often",
         longTranslation: "Frequently; many times",
         lang: "ru",
@@ -312,6 +504,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "года",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "years",
         longTranslation: "A period of 365 or 366 days",
         lang: "ru",
@@ -319,6 +516,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "каждый день",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "every day",
         longTranslation: "Happening or done every day",
 
@@ -327,6 +529,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "Потом",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "then",
         longTranslation: "At a time following an earlier time",
 
@@ -335,6 +542,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "день",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "day",
         longTranslation:
           "A period of 24 hours, starting and ending at midnight",
@@ -344,6 +556,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "дне",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "during the day",
         longTranslation: "Used to indicate a time period during the day",
 
@@ -352,6 +569,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "время",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "time",
         longTranslation:
           "A continuous, measurable quantity in which events occur in a sequence proceeding from the past through the present to the future",
@@ -361,6 +583,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "обычно",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "usually",
         longTranslation: "In the normal or customary manner or order of things",
 
@@ -369,6 +596,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "языку",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "language",
         longTranslation:
           "Refers to the Russian language or any other language being studied or spoken",
@@ -378,6 +610,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "когда",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "when",
         longTranslation: "Used to ask or indicate a time or occasion",
 
@@ -386,6 +623,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "всегда",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "always",
         longTranslation:
           "Indicates that something happens without exception or failure",
@@ -403,10 +645,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "road signs",
     imageUrl:
       "https://images.pexels.com/photos/52526/sign-places-travel-information-52526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "в парке",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "in the park",
 
         lang: "ru",
@@ -416,6 +667,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "на гриле",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "on the grill",
 
         lang: "ru",
@@ -425,6 +681,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "домой",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "home",
 
         lang: "ru",
@@ -434,6 +695,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "за стол",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "at the table",
 
         lang: "ru",
@@ -443,6 +709,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "школе",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "at school",
 
         lang: "ru",
@@ -452,6 +723,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "уроки",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "lessons",
 
         lang: "ru",
@@ -469,10 +745,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "board game with words",
     imageUrl:
       "https://images.pexels.com/photos/9540541/pexels-photo-9540541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "зовут",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "is called",
 
         lang: "ru",
@@ -481,6 +766,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "живу",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "live",
 
         lang: "ru",
@@ -490,6 +780,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "гуляем",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "take a walk",
 
         lang: "ru",
@@ -499,6 +794,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "играем",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "play",
 
         lang: "ru",
@@ -508,6 +808,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "готовим",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "cook",
 
         lang: "ru",
@@ -516,6 +821,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "люблю готовить",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "love to cook",
 
         lang: "ru",
@@ -525,6 +835,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "готовит",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "cooks",
 
         lang: "ru",
@@ -533,6 +848,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "помогает",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "helps",
 
         lang: "ru",
@@ -542,6 +862,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "учусь",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "study",
 
         lang: "ru",
@@ -551,6 +876,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "занимаюсь",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "practice, engage in",
 
         lang: "ru",
@@ -560,6 +890,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "нравится учиться",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "like to learn",
 
         lang: "ru",
@@ -569,6 +904,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "говорю",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "speak",
 
         lang: "ru",
@@ -578,6 +918,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "обращаюсь",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "address",
 
         lang: "ru",
@@ -587,6 +932,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "говорят",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "say, speak",
 
         lang: "ru",
@@ -596,6 +946,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "возвращаюсь",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "return, come back",
 
         lang: "ru",
@@ -605,6 +960,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "делаю",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "do, make",
 
         lang: "ru",
@@ -613,6 +973,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "помогаю",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "help, assist",
 
         lang: "ru",
@@ -622,6 +987,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "садимся",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "sit down",
 
         lang: "ru",
@@ -631,6 +1001,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "едим",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "eat",
 
         lang: "ru",
@@ -639,6 +1014,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "проводить",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "conduct, hold",
 
         lang: "ru",
@@ -647,6 +1027,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "еду",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "go, travel",
 
         lang: "ru",
@@ -656,6 +1041,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "говорят",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "say, speak",
 
         lang: "ru",
@@ -665,6 +1055,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "блины",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "pancakes",
 
         lang: "ru",
@@ -682,10 +1077,19 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
     imageAlt: "puzzle pieces",
     imageUrl:
       "https://images.pexels.com/photos/1586951/pexels-photo-1586951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    
+    // NOTE: gets updated afterwards
+    audioFile: "",
+      
     words: [
       {
         id: genUid(),
         text: "в",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "in, at, to",
 
         lang: "ru",
@@ -694,6 +1098,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "и",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "and",
 
         lang: "ru",
@@ -702,6 +1111,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "или",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "or",
 
         lang: "ru",
@@ -710,6 +1124,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "о",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "about",
 
         lang: "ru",
@@ -719,6 +1138,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "за",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "behind, for",
 
         lang: "ru",
@@ -727,6 +1151,11 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
       {
         id: genUid(),
         text: "с",
+        
+        // NOTE: gets updated afterwards
+        audioFileTranslation: "",
+        audioFile: "",
+
         shortTranslation: "with, from, of",
 
         lang: "ru",

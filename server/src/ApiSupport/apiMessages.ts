@@ -47,7 +47,7 @@ export const apiMessages: ApiMessages = {
     filePath: `${audioStorageBasePath}/server/epilogueLocked.mp3`,
   },
 
-  // quiz:
+  // quiz errors:
   quizCantAnswerQuestionNotFound: {
     uniqueName: "quizCantAnswerQuestionNotFound",
     text:
@@ -85,7 +85,79 @@ export const apiMessages: ApiMessages = {
     uniqueName: "quizRequestQuestionEmpty",
     text: "Question should not be empty.",
     filePath: `${audioStorageBasePath}/server/quizRequestQuestionEmpty.mp3`,
-  }
+  },
+
+  // quiz word question
+  quizBlockWhatIstheMeaningOfWord: {
+    uniqueName: "quizBlockWhatIstheMeaningOfWord",
+    text: "What is the meaning of the following word?",
+    filePath: `${audioStorageBasePath}/server/quizBlockWhatIstheMeaningOfWord.mp3`,
+  },
+
+  // quiz completed - achievements:
+  quizYouCompletedBlock: {
+    uniqueName: "quizYouCompletedBlock",
+    text: "Congratulations! You have completed the building block",
+    filePath: `${audioStorageBasePath}/server/quizYouCompletedBlock.mp3`,
+  },
+  quizCompletedApiMessage: {
+    uniqueName: "quizCompletedApiMessage",
+    text: "Congratulations! Quiz completed.",
+    filePath: `${audioStorageBasePath}/server/quizCompletedApiMessage.mp3`,
+  },
+  quizYouUnlockedBuildingBlocks: {
+    uniqueName: "quizYouUnlockedBuildingBlocks",
+    text: "You've unlocked the following building blocks: ",
+    filePath: `${audioStorageBasePath}/server/quizYouUnlockedBuildingBlocks.mp3`,
+  },
+  quizYouUnlockedEpilogueBlock: {
+    uniqueName: "quizYouUnlockedEpilogueBlock",
+    text: "You've unlocked the epilogue of the story",
+    filePath: `${audioStorageBasePath}/server/quizYouUnlockedEpilogueBlock.mp3`,
+  },
+  
+  quizYouUnlockedStories: {
+    uniqueName: "quizYouUnlockedStories",
+    text: "You've unlocked the following stories: ",
+    filePath: `${audioStorageBasePath}/server/quizYouUnlockedStories.mp3`,
+  },
+  quizYouCompletedEpilogue: {
+    uniqueName: "quizYouCompletedEpilogue",
+    text: "Congratulations! You've completed the epilogue quiz, and the current story.",
+    filePath: `${audioStorageBasePath}/server/quizYouCompletedEpilogue.mp3`,
+  },
+
+  quizYouAnsweredCorrect: {
+    uniqueName: "quizYouAnsweredCorrect",
+    text: "Right answer! ",
+    filePath: `${audioStorageBasePath}/server/quizYouAnsweredCorrect.mp3`,
+  },
+  quizYouAnsweredWrong: {
+    uniqueName: "quizYouAnsweredWrong",
+    text: "Wrong answer! The correct answer was ",
+    filePath: `${audioStorageBasePath}/server/quizYouAnsweredWrong.mp3`,
+  },
+
+  quizChoiceOne: {
+    uniqueName: "quizChoiceOne",
+    text: "Choice 1: ",
+    filePath: `${audioStorageBasePath}/server/quizChoiceOne.mp3`,
+  },
+  quizChoiceTwo: {
+    uniqueName: "quizChoiceTwo",
+    text: "Choice 2: ",
+    filePath: `${audioStorageBasePath}/server/quizChoiceTwo.mp3`,
+  },
+  quizChoiceThree: {
+    uniqueName: "quizChoiceThree",
+    text: "Choice 3: ",
+    filePath: `${audioStorageBasePath}/server/quizChoiceThree.mp3`,
+  },
+  quizChoiceFour: {
+    uniqueName: "quizChoiceFour",
+    text: "Choice 4: ",
+    filePath: `${audioStorageBasePath}/server/quizChoiceFour.mp3`,
+  },
 };
 
 type ApiMessages = {
@@ -105,9 +177,28 @@ type ApiMessages = {
   quizNotFound: ApiMessage;
   quizNotCompletedYet: ApiMessage;
   quizCantAccessBlockIsLocked: ApiMessage;
-  quizRequestBodyEmpty: ApiMessage,
-  quizRequestOptionEmpty: ApiMessage,
-  quizRequestQuestionEmpty: ApiMessage,
+  quizRequestBodyEmpty: ApiMessage;
+  quizRequestOptionEmpty: ApiMessage;
+  quizRequestQuestionEmpty: ApiMessage;
+
+  quizBlockWhatIstheMeaningOfWord: ApiMessage;
+
+  // quiz completed - achievements:
+  quizYouCompletedBlock: ApiMessage;
+  quizCompletedApiMessage: ApiMessage;
+  quizYouUnlockedBuildingBlocks: ApiMessage;
+  quizYouUnlockedEpilogueBlock: ApiMessage;
+  
+  quizYouUnlockedStories: ApiMessage;
+  quizYouCompletedEpilogue: ApiMessage;
+
+  quizYouAnsweredCorrect: ApiMessage;
+  quizYouAnsweredWrong: ApiMessage;
+
+  quizChoiceOne: ApiMessage;
+  quizChoiceTwo: ApiMessage;
+  quizChoiceThree: ApiMessage;
+  quizChoiceFour: ApiMessage;
 };
 
 export const dynamicMessages: DynamicMessages = {
@@ -128,3 +219,11 @@ export const dynamicMessages: DynamicMessages = {
 type DynamicMessages = {
   requestParameterMissing: (key: string) => ApiMessage & { isDynamic: true };
 };
+
+export const getApiMessageFrom = (path: string, text: string):ApiMessage => {
+  return {
+    filePath: path,
+    text,
+    uniqueName: path
+  };
+}
