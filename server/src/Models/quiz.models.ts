@@ -1,4 +1,5 @@
-import { QuizOption } from "../Data/ctxTypes/ctx.quiz.shared.types";
+import { ApiMessage } from "../ApiSupport/appErrorMessage";
+import { QuizOption, QuizOptionFrontend } from "../Data/ctxTypes/ctx.quiz.shared.types";
 import { Language } from "../Data/ctxTypes/ctx.story.types";
 import {
   EpilogueProgress,
@@ -16,10 +17,14 @@ export type QuizRequestBody = {
 export type QuizResponse = {
   questionText: string;
   questionId: string;
-  options: QuizOption[];
+  options: QuizOptionFrontend[];
+
+  playableApiMessages: ApiMessage[];
 
   // id to the correct answer from previous question
   previouslyQuestion_CorrectOptionId?: string;
+
+  previousQuestionOutcomePlaybaleMessages: ApiMessage[];
   
   quizCompleted?: boolean;
   quizId?: string;
@@ -33,6 +38,7 @@ export type QuizBlockCompletedStatsResponse = {
   blockProgressUnlockedItems?: BuildingBlockProgress[];
   blockCompleted?: BuildingBlockProgress;
   blockCompletedStoryRefId: string;
+  playableApiMessages: ApiMessage[];
 };
 
 export type QuizCompletedStatsResponse = {
@@ -41,4 +47,5 @@ export type QuizCompletedStatsResponse = {
   blockCompleted?: BuildingBlockProgress;
   blockCompletedStoryRefId: string;
   userStoriesUnlocked?: UserStoryOutput[];
+  playableApiMessages: ApiMessage[];
 };

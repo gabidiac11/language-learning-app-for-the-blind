@@ -13,7 +13,7 @@ export const epilogueOverviewPageMessages: {
   },
   loadedEpilogueOverview: {
     uniqueName: "loadedEpilogueOverview",
-    text: "Epilogue short story has finished loading. To listen to the story press 'S' or navigate in the page using arrows up or arrow down.",
+    text: "Epilogue short story has finished loading. To listen navigate in the page using arrows up or arrow down to find the paragraph or the play/stop button.",
     filePath: `${audioStorageBasePath}/pages/epilogueOverview/loadedEpilogueOverview.mp3`,
   },
   greetingPageEpilogueOverview: {

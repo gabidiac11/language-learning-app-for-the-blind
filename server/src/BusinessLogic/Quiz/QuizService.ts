@@ -22,6 +22,7 @@ import { QuizStateRoundQuestionsGenerator } from "./QuizStateRoundQuestionsGener
 import { QuizableItem } from "./QuizableItem";
 import QuizCompletionChecker from "./QuizCompletionChecker";
 import { apiMessages } from "../../ApiSupport/apiMessages";
+import { ApiMessage } from "../../ApiSupport/appErrorMessage";
 
 export default class QuizService {
   private _db: Database;
@@ -148,7 +149,29 @@ export default class QuizService {
       previouslyQuestion_CorrectOptionId:
         quizOutcome.quizQuestion.correctOptionId,
     };
+    data.previousQuestionOutcomePlaybaleMessages =
+      this.getPreviousQuestionOutcomePlaybaleMessages(quizOutcome);
     return Result.Success(data);
+  }
+  private getPreviousQuestionOutcomePlaybaleMessages(
+    outcome: QuizOutcome
+  ): ApiMessage[] {
+    if (outcome.outcome === RoundOutcome.Hit) {
+      return [apiMessages.quizYouAnsweredCorrect];
+    }
+
+    const correctOptionTemplateId = outcome.quizQuestion.options.find(
+      (i) => i.id === outcome.quizQuestion.correctOptionId
+    )?.quizOptionTemplateId;
+
+    return [
+      apiMessages.quizYouAnsweredWrong,
+      
+      ...this._quizableItem.getPlayableApiMessageForRightAnswer(
+        outcome.quizQuestion.templateQuestionId,
+        correctOptionTemplateId
+      ),
+    ];
   }
 
   public async getProgressAchievedOfCompletedQuiz(
@@ -224,7 +247,11 @@ export default class QuizService {
         questionText: "",
         quizId: qs.id,
         quizCompleted: true,
-        lang: qs.lang
+        lang: qs.lang,
+        playableApiMessages: [apiMessages.quizCompletedApiMessage],
+        previousQuestionOutcomePlaybaleMessages: [
+          apiMessages.quizYouAnsweredCorrect,
+        ],
       });
     }
 
@@ -245,10 +272,7 @@ export default class QuizService {
 
   private getAccessValidatonResult(): Result<any> {
     if (!this._quizableItem.enityTimeUnlocked) {
-      return Result.Error(
-        apiMessages.quizCantAccessBlockIsLocked,
-        403
-      );
+      return Result.Error(apiMessages.quizCantAccessBlockIsLocked, 403);
     }
     return Result.Success(true);
   }
@@ -426,13 +450,25 @@ export default class QuizService {
   }
 
   private convertQuestionToQuizResponse(question: QuizQuestion): QuizResponse {
+    const templateOptionsIds =
+      question.options?.map((i) => i.quizOptionTemplateId) ?? [];
+    const playableApiMessages =
+      this._quizableItem.getPlayableApiMessagesForQuestion(
+        question.templateQuestionId,
+        templateOptionsIds
+      );
     const data: QuizResponse = {
       questionText: question.text,
       questionId: question.id,
-      options: question.options,
+      options: question.options.map((i) => ({
+        ...i,
+        quizOptionTemplateId: undefined,
+      })), // hide id from the client
       quizCompleted: false,
       previouslyQuestion_CorrectOptionId: undefined,
-      lang: question.lang
+      previousQuestionOutcomePlaybaleMessages: [],
+      lang: question.lang,
+      playableApiMessages,
     };
     return data;
   }

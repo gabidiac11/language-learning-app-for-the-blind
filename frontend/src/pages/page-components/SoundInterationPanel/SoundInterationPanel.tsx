@@ -5,9 +5,14 @@ import {
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { AppAudioPlayer, audioPlayEvents } from "../../../accessibility/appReaders";
+import {
+  AppAudioPlayer,
+  AudioAttributeEventDetail,
+  audioPlayEvents,
+} from "../../../accessibility/appReaders";
 import { generalAppMessages } from "../../../accessibility/generalAppMessages";
 import { PlayableMessage } from "../../../accessibility/playableMessage";
+import { genKey } from "../../../constants";
 import { useAppStateContext } from "../../../context/hooks/useAppStateContext";
 import { useContextActions } from "../../../context/hooks/useContextActions";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
@@ -49,10 +54,11 @@ const Speaker = () => {
       return;
     }
     enqueuePlayableMessage({
-      key: `${Date.now()}-test-interaction-active`,
+      key: `${genKey()}-test-interaction-active`,
       messages: [generalAppMessages.interactionIsOn],
     });
   };
+
   const m = playableAudiosQueue.map((i) => i.key).join(",");
   useEffect(() => {
     console.log(
@@ -98,7 +104,6 @@ const Speaker = () => {
   }, []);
 
   useEffect(() => {
-
     const forceStopAllListener = () => {
       prematurelyStopPlayableMessages(playableAudiosQueue.map((i) => i.key));
     };
@@ -115,6 +120,36 @@ const Speaker = () => {
     };
   }, [playableAudiosQueue]);
 
+  useEffect(() => {
+    const playAudioFromAttributeNode = (
+      e: CustomEvent<AudioAttributeEventDetail>
+    ) => {
+      if (e.detail.audioPath && e.detail.audioText) {
+        enqueuePlayableMessage({
+          key: `${e.detail.audioPath}`,
+          messages: [
+            {
+              filePath: e.detail.audioPath,
+              text: e.detail.audioText,
+              uniqueName: e.detail.audioPath,
+            },
+          ],
+        });
+      }
+    };
+    window.addEventListener(
+      "request-audio-play-from-node-attribute-event",
+      playAudioFromAttributeNode
+    );
+
+    return () => {
+      window.removeEventListener(
+        "request-audio-play-from-node-attribute-event",
+        playAudioFromAttributeNode
+      );
+    };
+  }, [enqueuePlayableMessage]);
+
   return (
     <div className="flex">
       <div
@@ -123,9 +158,7 @@ const Speaker = () => {
         }`}
       >
         <Tooltip
-          title={
-            currentPlayable?.messages.map((i) => i.text).join(". ")
-          }
+          title={audioRef.current.currentTextPlaying}
           open={isPlaying && !!currentPlayable}
         >
           <audio
@@ -134,6 +167,7 @@ const Speaker = () => {
               ? {
                   tabIndex: -1,
                   "aria-hidden": true,
+                  onFocus: (event) => event.target.blur(),
                 }
               : {
                   tabIndex: 0,
@@ -159,10 +193,7 @@ const Speaker = () => {
           />
         )}
       </div>
-      <SpeakerIcon
-        aria-hidden="true"
-        htmlColor={isPlaying ? "red" : "white"}
-      />
+      <SpeakerIcon aria-hidden="true" htmlColor={isPlaying ? "red" : "white"} />
     </div>
   );
 };

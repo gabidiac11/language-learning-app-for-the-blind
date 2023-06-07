@@ -1,11 +1,16 @@
+import { AppMessage } from "./accesibilityTypes";
 import { PlayableMessage } from "./playableMessage";
 
+window.isPlayingUninteruptableAudios = {};
+
 class AppScreenReader {
+  static instance = new AppScreenReader();
+
   private _utterance: SpeechSynthesisUtterance | undefined;
   constructor() {
     this.init();
   }
-  private init() {  
+  private init() {
     document.addEventListener(
       "keyup",
       ((event: KeyboardEvent) => {
@@ -13,7 +18,6 @@ class AppScreenReader {
           return;
         }
         console.log("tab", { event });
-        console.log(document.activeElement?.innerHTML);
         this.playNodeTarget(document.activeElement);
       }).bind(this)
     );
@@ -33,15 +37,51 @@ class AppScreenReader {
       }).bind(this)
     );
   }
-
+  
   public playNodeTarget(target: EventTarget | null) {
-    const text = getNodeText(target as Element);
-    if(text) {
-      this.play(text);
+    const playerIsInCharged = this.playUsingAudioPlayerIfApplicable(target);
+    if (!playerIsInCharged) {
+      const text = getNodeText(target as Element);
+      if (text) {
+        this.play(text);
+      }
     }
   }
 
+  private playUsingAudioPlayerIfApplicable(target: EventTarget | null) {
+    if (!target) return false;
+    const htmlElement = target as HTMLElement;
+    if (!("hasAttribute" in htmlElement)) return false;
+    if (htmlElement.getAttribute("aria-hidden") === "true") return false;
+
+    if (
+      !htmlElement.getAttribute("audio-player-path") ||
+      !htmlElement.getAttribute("audio-player-text")
+    ) {
+      return false;
+    }
+
+    const event = new CustomEvent<AudioAttributeEventDetail>(
+      "request-audio-play-from-node-attribute-event",
+      {
+        detail: {
+          audioPath: htmlElement.getAttribute("audio-player-path"),
+          audioText: htmlElement.getAttribute("audio-player-text"),
+        } as AudioAttributeEventDetail,
+      }
+    );
+    window.dispatchEvent(event);
+    return true;
+  }
+
   private play(text: string) {
+    if (window.isPlayingUninteruptableAudios[window.location.pathname]) {
+      console.log(
+        `Screen reader play() prevented: is playing Uninteruptable audio.`
+      );
+      return;
+    }
+
     this.stopIfPlaying();
     this.stopAudioPlayer();
 
@@ -67,7 +107,7 @@ class AppScreenReader {
   }
 }
 
-export const screenReader = new AppScreenReader();
+export const screenReader = AppScreenReader.instance;
 
 export class AppAudioPlayer {
   public audio: HTMLAudioElement;
@@ -79,10 +119,11 @@ export class AppAudioPlayer {
   private _onEnded = () => {};
   private _onUrlLoaded = () => {};
 
+  private _forceStopAudiosCallbacks: (() => void)[] = [];
+
   public isPlaying: boolean = false;
   public isPaused: boolean = false;
-
-  private playablePromiseEventName = "cancel-any-playable-item-promise";
+  public currentTextPlaying: string = "";
 
   constructor(audio: HTMLAudioElement) {
     this.audio = audio;
@@ -92,68 +133,135 @@ export class AppAudioPlayer {
     screenReader.stopIfPlaying();
     this.stopAnyAudio();
 
+    const currentPage = window.location.pathname;
+
+    // EMIT START: group of messages
+    this.emitMessageStarted(getListenableKeyFromPlayable(currentPlayable));
     for (const message of currentPlayable.messages) {
       let allAborted = false;
 
       try {
+        this.currentTextPlaying = message.text;
+
+        // EMIT START: individual message
+        this.emitMessageStarted(message.uniqueName);
+        this.assesUnstoppableMessage(message, currentPage);
+
         await (async () =>
           new Promise((resolve, reject) => {
             // add this event to force this promise to fail when we want to abort playing this playble item all together
-            document.addEventListener(this.playablePromiseEventName, () => {
+
+            const forceStopListen = (() => {
               console.log("Force stop audio:", currentPlayable.key);
               allAborted = true;
+
               reject({ forcedStopped: true });
-            });
+            }).bind(this);
+            this._forceStopAudiosCallbacks.push(forceStopListen);
 
             // asign all handlers to this class so they can be removed later
-            this._onPlay = () => {
+            this._onPlay = (() => {
               console.log(`[ON-PLAY]: Audio-${currentPlayable.key}`);
 
               this.setIsPlaying(true, currentPlayable.key);
               this.isPaused = false;
-            };
-            this._onPause = () => {
-              console.log(`[ON-PLAY]: Audio-${currentPlayable.key}`);
+            }).bind(this);
+            this._onPause = (() => {
+              console.log(`[ON-PAUSE]: Audio-${currentPlayable.key}`);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = true;
-            };
-            this._onError = (event: any) => {
+            }).bind(this);
+            this._onError = ((event: any) => {
               console.log(`[ERROR]: Audio-${currentPlayable.key}`);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = false;
               reject(event);
-            };
-            this._onEnded = () => {
+            }).bind(this);
+            this._onEnded = (() => {
               console.log(`[ENDED]: Audio-${currentPlayable.key}`);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = false;
               resolve({});
-            };
-            this._onUrlLoaded = () => {
+            }).bind(this);
+            this._onUrlLoaded = (() => {
               console.log(`[URL-LOADED]: Audio-${currentPlayable.key}`);
               this.audio.play();
-            };
+            }).bind(this);
 
             if (allAborted) {
+              reject();
               return;
             }
 
             this.audio.src = message.filePath;
             this.addAudioEventListeners();
           })).bind(this)();
+
+        this.markUninteruptableOnceMessagePlayed_IfApplicable(
+          message,
+          currentPage
+        );
       } catch (e) {
         console.log("audio error", { e, message, currentPlayable });
+      } finally {
+        // EMIT END: individual message
+        this.emitMessageStopped(message.uniqueName);
+        this.assesUninteruptableMessageStop();
       }
       if (allAborted) {
         break;
       }
       this.removeAudioEventListeners();
     }
+    // EMIT END: group of messages
+    this.emitMessageStopped(getListenableKeyFromPlayable(currentPlayable));
 
     this.emitEvent(audioPlayEvents.PlayableFinished, [currentPlayable.key]);
+  }
+  assesUnstoppableMessage(appMessage: AppMessage, currentPage: string) {
+    window.isPlayingUninteruptableAudios = {};
+
+    if (
+      appMessage.preventForcedStopOnCurrentPageJustOnce &&
+      !localStorage.getItem(
+        `playedOnced-${appMessage.uniqueName}-${currentPage}`
+      )
+    ) {
+      window.isPlayingUninteruptableAudios[currentPage] = true;
+      return;
+    }
+
+    if (appMessage.preventForcedStopOnCurrentPage) {
+      window.isPlayingUninteruptableAudios[currentPage] = true;
+    }
+  }
+  assesUninteruptableMessageStop() {
+    window.isPlayingUninteruptableAudios = {};
+  }
+
+  private markUninteruptableOnceMessagePlayed_IfApplicable(
+    appMessage: AppMessage,
+    currentPage: string
+  ) {
+    if (!appMessage.preventForcedStopOnCurrentPageJustOnce) {
+      return;
+    }
+
+    const localStorageKey = `playedOnced-${appMessage.uniqueName}-${currentPage}`;
+    if (localStorage.getItem(localStorageKey)) {
+      console.log(
+        `Message preventForcedStopOnCurrentPageJustOnce already played: ${localStorageKey}`
+      );
+      return;
+    }
+    const dateString = new Date().toUTCString();
+    localStorage.setItem(localStorageKey, dateString);
+    console.log(
+      `Message preventForcedStopOnCurrentPageJustOnce set played at: ${localStorageKey}, ${dateString}`
+    );
   }
 
   private setIsPlaying(value: boolean, playableKey: string) {
@@ -186,30 +294,46 @@ export class AppAudioPlayer {
     } catch (e) {}
   }
 
+  /**
+   * make possible knowning when a certain message has started or stopped playing
+   * @param uniqueName
+   */
+  private emitMessageStarted(uniqueName: string) {
+    const eventName = `started-playing-message-${uniqueName}-app`;
+    const stopAnyOngoingPromise = new CustomEvent(eventName, { detail: {} });
+    document.dispatchEvent(stopAnyOngoingPromise);
+
+    console.log(`Emitted event '${eventName}'`);
+  }
+  private emitMessageStopped(uniqueName: string) {
+    const eventName = `stopped-playing-message-${uniqueName}-app`;
+    const stopAnyOngoingPromise = new CustomEvent(eventName, { detail: {} });
+    document.dispatchEvent(stopAnyOngoingPromise);
+
+    console.log(`Emitted event '${eventName}'`);
+  }
+
   private addAudioEventListeners() {
-    this.audio.addEventListener("loadedmetadata", this._onUrlLoaded.bind(this));
-    this.audio.addEventListener("play", this._onPlay.bind(this));
-    this.audio.addEventListener("pause", this._onPause.bind(this));
-    this.audio.addEventListener("error", this._onError.bind(this));
-    this.audio.addEventListener("ended", this._onEnded.bind(this));
+    this.audio.addEventListener("loadedmetadata", this._onUrlLoaded);
+    this.audio.addEventListener("play", this._onPlay);
+    this.audio.addEventListener("pause", this._onPause);
+    this.audio.addEventListener("error", this._onError);
+    this.audio.addEventListener("ended", this._onEnded);
   }
   private removeAudioEventListeners() {
-    this.audio.removeEventListener(
-      "loadedmetadata",
-      this._onUrlLoaded.bind(this)
-    );
-    this.audio.removeEventListener("play", this._onPlay.bind(this));
-    this.audio.removeEventListener("pause", this._onPause.bind(this));
-    this.audio.removeEventListener("error", this._onError.bind(this));
-    this.audio.removeEventListener("ended", this._onEnded.bind(this));
+    this.audio.removeEventListener("loadedmetadata", this._onUrlLoaded);
+    this.audio.removeEventListener("play", this._onPlay);
+    this.audio.removeEventListener("pause", this._onPause);
+    this.audio.removeEventListener("error", this._onError);
+    this.audio.removeEventListener("ended", this._onEnded);
   }
 
   private stopOngoingAudioPromise = () => {
-    const stopAnyOngoingPromise = new CustomEvent(
-      this.playablePromiseEventName,
-      { detail: {} }
-    );
-    document.dispatchEvent(stopAnyOngoingPromise);
+    let callback = this._forceStopAudiosCallbacks.pop();
+    while (!!callback) {
+      callback();
+      callback = this._forceStopAudiosCallbacks.pop();
+    }
   };
 
   private eventListeners: {
@@ -245,13 +369,11 @@ export const audioPlayEvents = {
   PlayableFinished: "playable-finished",
 };
 
-
 function getNodeText(node: Element) {
   if (!node) return "";
   const htmlElement = node as HTMLElement;
   if (!("hasAttribute" in htmlElement)) return "";
   if (htmlElement.getAttribute("aria-hidden") === "true") return "";
-
 
   if (htmlElement.hasAttribute("aria-label")) {
     const label = htmlElement.getAttribute("aria-label") ?? "";
@@ -264,7 +386,9 @@ function getNodeText(node: Element) {
   }
 
   if (["TEXTAREA", "INPUT"].includes(htmlElement.tagName)) {
-    return `Input text. Value: ${htmlElement.getAttribute("value") ?? "empty"}`;
+    return `Input ${htmlElement.getAttribute("type") ?? "text"}. Value: ${
+      htmlElement.getAttribute("value") ?? "empty"
+    }`;
   }
 
   if (!htmlElement.children?.length && htmlElement.innerText) {
@@ -272,15 +396,42 @@ function getNodeText(node: Element) {
     return `${label}`;
   }
 
-  if(htmlElement.children?.length > 0) {
+  if (htmlElement.children?.length > 0) {
     let text = "";
-    for(let i = 0; i < htmlElement.children.length; i++) {
+    for (let i = 0; i < htmlElement.children.length; i++) {
       const textItem = getNodeText(htmlElement.children[i]);
-      if(textItem) {
+      if (textItem) {
         text += textItem;
       }
     }
     return text;
   }
   return "";
+}
+
+export type AudioAttributeEventDetail = {
+  audioPath: string;
+  audioText: string;
+};
+
+export const getListenableKeyFromPlayable = (
+  currentPlayable: PlayableMessage
+) => {
+  return getListenableKeyFromPlayableKey(currentPlayable.key);
+};
+
+export const getListenableKeyFromPlayableKey = (key: string) => {
+  const m = [key, "-playable-message"].join("-");
+  return m;
+};
+
+declare global {
+  interface GlobalEventHandlersEventMap {
+    "request-audio-play-from-node-attribute-event": CustomEvent<AudioAttributeEventDetail>;
+  }
+  interface Window {
+    isPlayingUninteruptableAudios: {
+      [currentPage: string]: boolean;
+    };
+  }
 }

@@ -13,8 +13,8 @@ export const storiesOverviewPageMessages: {
   },
   loadedStoriesOverview: {
     uniqueName: "loadedStoriesOverview",
-    text: "Stories of your selected language finished loading. Choose what lesson-story you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access story.",
-    filePath: `${audioStorageBasePath}/pages/storiesOverview/loadedStoriesOverview.mp3`,
+    text: "Stories of your selected language finished loading. Choose what lesson-story you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access the story.",
+    filePath: `${audioStorageBasePath}/pages/storiesOverview/loadedStoriesOverview.mp3`
   },
   greetingPageStoriesOverview: {
     uniqueName: "greetingPageStoriesOverview",

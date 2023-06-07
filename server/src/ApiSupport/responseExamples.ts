@@ -31,6 +31,7 @@ export const userStory: UserStoryOutput = {
   timeCompleted: 1684716464631,
   timeStarted: 1684716464631,
   timeUnlocked: 1684716464631,
+  audioFile: ":path-to-storage/stories/:lang/:story.mp3",
   buildingBlocksProgressItems: [
     {
       blockId: "2f1407f7-5d62-43e0-a7ea-1520bebdddf2",
@@ -50,7 +51,13 @@ export const userStory: UserStoryOutput = {
           userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
           wordId: "62364798-e974-4739-ad8e-b3aac079fed5",
           word: {
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             id: "62364798-e974-4739-ad8e-b3aac079fed5",
+
             longTranslation:
               "A group consisting of parents and children living together in a household",
             shortTranslation: "family",
@@ -61,6 +68,7 @@ export const userStory: UserStoryOutput = {
         },
       ],
       block: {
+        audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
         id: "2f1407f7-5d62-43e0-a7ea-1520bebdddf2",
         idsItemsDependentOnThis: [
           "28e74a16-6114-4c50-815e-631cfd7b3a5e",
@@ -73,7 +81,12 @@ export const userStory: UserStoryOutput = {
         name: "Family",
         words: [
           {
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
             id: "62364798-e974-4739-ad8e-b3aac079fed5",
+
             longTranslation:
               "A group consisting of parents and children living together in a household",
             shortTranslation: "family",
@@ -98,27 +111,29 @@ export const userStory: UserStoryOutput = {
         questionId: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
         userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
         question: {
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           id: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
           options: [
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",
@@ -133,33 +148,37 @@ export const userStory: UserStoryOutput = {
     timeUnlocked: 1684716464631,
     userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
     epilogue: {
+      audioFile: ":path-to-storage/stories/:lang/:story/epilogue/epilogue.mp3",
       id: "51c76980-f429-4b41-8300-22af4bee00a3",
       name: "Anna's family",
       imageUrl: "https://dummy-link",
       imageAlt: "Russian family at the dinner table",
+
       questions: [
         {
           id: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           options: [
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",
@@ -198,6 +217,8 @@ export const epilogueQuizRequestQuestionExample: QuizResponse = {
       text: "Anna's mom and dad",
     },
   ],
+  playableApiMessages: [],
+  previousQuestionOutcomePlaybaleMessages: [],
   quizCompleted: false,
   lang: "ru",
 };
@@ -206,16 +227,26 @@ export const epilogueQuizRequestQuestionExampleCompleted: QuizResponse = {
   quizCompleted: true,
   quizId: "aeec4d13-3cc3-429c-bcdd-ef4333eab5d4",
   previouslyQuestion_CorrectOptionId: "94e1ff5c-9e37-4b71-a84a-21916f9c5847",
+  previousQuestionOutcomePlaybaleMessages: [
+    {
+      filePath: "",
+      text: "Right answer. Next question is...",
+      uniqueName: "quizYouAnsweredRight",
+    },
+  ],
 
   options: [],
   questionId: "",
   questionText: "",
   lang: "ru",
+
+  playableApiMessages: [],
 };
 
 export const epilogueCompletedResponse: QuizCompletedStatsResponse = {
   blockCompletedStoryRefId: "e99cf33b-d850-438f-9324-356c4b3f4116",
   userStoriesUnlocked: [userStory],
+  playableApiMessages: [],
 };
 
 export const epilogueProgress: EpilogueProgressOutput = {
@@ -229,27 +260,29 @@ export const epilogueProgress: EpilogueProgressOutput = {
       questionId: "471dff51-c04b-4c76-8c12-ef9aa97d2a8b",
       userStoryId: "aa278c3d-f899-4c19-9a88-a3ff519df1a2",
       question: {
+        audioFile:
+          ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
         id: "471dff51-c04b-4c76-8c12-ef9aa97d2a8b",
         options: [
           {
             id: "91910c90-6458-4938-bf5f-e5dcecbea4ba",
             text: "Anna's mom and dad",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "908c8be1-6915-49f8-b9fd-cbfaa977c66f",
             text: "Anna's brother and sister",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "3fd4e238-90c1-4290-8eb7-46cde353ada8",
             text: "Anna's grandparents",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "d5c34512-dce8-45de-a8f3-40777465e522",
             text: "Anna's aunt and uncle",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
         ],
         text: "Who does Anna live with?",
@@ -264,6 +297,7 @@ export const epilogueProgress: EpilogueProgressOutput = {
   timeUnlocked: 1684716464631,
   userStoryId: "aa278c3d-f899-4c19-9a88-a3ff519df1a2",
   epilogue: {
+    audioFile: ":path-to-storage/stories/:lang/:story/epilogue/epilogue.mp3",
     id: "205cdadc-b1e2-481a-a88a-0fb88cb250ca",
     name: "Anna's family",
     imageUrl: "https://dummy-link",
@@ -271,26 +305,28 @@ export const epilogueProgress: EpilogueProgressOutput = {
     questions: [
       {
         id: "471dff51-c04b-4c76-8c12-ef9aa97d2a8b",
+        audioFile:
+          ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
         options: [
           {
             id: "91910c90-6458-4938-bf5f-e5dcecbea4ba",
             text: "Anna's mom and dad",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "908c8be1-6915-49f8-b9fd-cbfaa977c66f",
             text: "Anna's brother and sister",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "3fd4e238-90c1-4290-8eb7-46cde353ada8",
             text: "Anna's grandparents",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "d5c34512-dce8-45de-a8f3-40777465e522",
             text: "Anna's aunt and uncle",
-            lang: "ru",
+            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
         ],
         text: "Who does Anna live with?",
@@ -322,7 +358,12 @@ export const blockProgress: BuildingBlockProgressOutput = {
       userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
       wordId: "62364798-e974-4739-ad8e-b3aac079fed5",
       word: {
+        audioFileTranslation:
+          ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+        audioFile:
+          ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
         id: "62364798-e974-4739-ad8e-b3aac079fed5",
+
         longTranslation:
           "A group consisting of parents and children living together in a household",
         shortTranslation: "family",
@@ -333,6 +374,7 @@ export const blockProgress: BuildingBlockProgressOutput = {
     },
   ],
   block: {
+    audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
     id: "2f1407f7-5d62-43e0-a7ea-1520bebdddf2",
     idsItemsDependentOnThis: [
       "28e74a16-6114-4c50-815e-631cfd7b3a5e",
@@ -347,73 +389,16 @@ export const blockProgress: BuildingBlockProgressOutput = {
     words: [
       {
         id: "62364798-e974-4739-ad8e-b3aac079fed5",
+
+        audioFileTranslation:
+          ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+        audioFile:
+          ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
         longTranslation:
           "A group consisting of parents and children living together in a household",
         shortTranslation: "family",
         text: "семьей",
-        lang: "ru",
-      },
-      {
-        id: "279f747d-3645-4f65-8d71-f6940fe78a3e",
-        longTranslation: "One's mother",
-        shortTranslation: "mom",
-        text: "мамой",
-        lang: "ru",
-      },
-      {
-        id: "d49a781a-738f-4147-84c1-3fb8c20d9b85",
-        longTranslation: "Used when referring to one's father.",
-        shortTranslation: "dad",
-        text: "папа",
-        lang: "ru",
-      },
-      {
-        id: "02596544-f41a-4fe7-8392-7ebc0aa44427",
-        longTranslation: "A male sibling",
-        shortTranslation: "brother",
-        text: "братом",
-        lang: "ru",
-      },
-      {
-        id: "f14c0b51-9249-428a-95d2-569a47952304",
-        longTranslation: "Used to refer to the name or title of someone",
-        shortTranslation: "called",
-        text: "зовут",
-        lang: "ru",
-      },
-      {
-        id: "22d34d02-8625-4416-b439-80541cf61cc3",
-        longTranslation: "Being at an earlier age",
-        shortTranslation: "younger",
-        text: "младше",
-        lang: "ru",
-      },
-      {
-        id: "c7cfe2ff-8dc6-4d21-9ca4-a3e32fbe465b",
-        longTranslation: "Being two years younger than someone else",
-        shortTranslation: "two years younger",
-        text: "на два года",
-        lang: "ru",
-      },
-      {
-        id: "a7d239a7-3451-4871-8e4c-61e1baa00655",
-        longTranslation: "Preferred over all others of the same kind",
-        shortTranslation: "favorite",
-        text: "любим",
-        lang: "ru",
-      },
-      {
-        id: "19dc3ee2-3d09-4e99-aa9a-536e9eb6577a",
-        longTranslation: "Human beings in general or considered collectively",
-        shortTranslation: "people",
-        text: "людях",
-        lang: "ru",
-      },
-      {
-        id: "49eaae87-a13f-496b-9072-abaae0105eda",
-        longTranslation: "Feeling or showing pleasure or contentment",
-        shortTranslation: "happy",
-        text: "рада",
         lang: "ru",
       },
     ],
@@ -442,6 +427,8 @@ export const blockQuizRequestQuestionExample: QuizResponse = {
   ],
   quizCompleted: false,
   lang: "ru",
+  playableApiMessages: [],
+  previousQuestionOutcomePlaybaleMessages: [],
 };
 
 export const blockQuizRequestQuestionExampleCompleted: QuizResponse = {
@@ -451,7 +438,15 @@ export const blockQuizRequestQuestionExampleCompleted: QuizResponse = {
   quizId: "64c65e06-988b-4964-8acd-cb79c086e44e",
   quizCompleted: true,
   previouslyQuestion_CorrectOptionId: "8c1c3c58-1bb5-408e-ac1d-83daaaa69be5",
+  previousQuestionOutcomePlaybaleMessages: [
+    {
+      filePath: "",
+      text: "Right answer. Next question is...",
+      uniqueName: "quizYouAnsweredRight",
+    },
+  ],
   lang: "ru",
+  playableApiMessages: [],
 };
 
 export const blockCompletedResponse: QuizCompletedStatsResponse = {
@@ -474,7 +469,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
         wordId: "a7d239a7-3451-4871-8e4c-61e1baa00655",
         word: {
+          audioFileTranslation:
+            ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
           id: "a7d239a7-3451-4871-8e4c-61e1baa00655",
+
           longTranslation: "Preferred over all others of the same kind",
           shortTranslation: "favorite",
           text: "любим",
@@ -484,6 +484,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
       },
     },
     block: {
+      audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
       id: "2f1407f7-5d62-43e0-a7ea-1520bebdddf2",
       idsItemsDependentOnThis: [
         "28e74a16-6114-4c50-815e-631cfd7b3a5e",
@@ -497,6 +498,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
       words: [
         {
           id: "62364798-e974-4739-ad8e-b3aac079fed5",
+
+          audioFileTranslation:
+            ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
           longTranslation:
             "A group consisting of parents and children living together in a household",
           shortTranslation: "family",
@@ -528,7 +535,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
           wordId: "d75ba16c-279d-4ee1-9526-297c4fc001e8",
           word: {
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
             id: "d75ba16c-279d-4ee1-9526-297c4fc001e8",
+
             longTranslation: "A female given name",
             shortTranslation: "Katya",
             text: "Катя",
@@ -538,6 +550,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         },
       },
       block: {
+        audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
         id: "28e74a16-6114-4c50-815e-631cfd7b3a5e",
         imageUrl:
           "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -547,6 +560,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         words: [
           {
             id: "4087672f-6426-4db7-a8e9-649282b5e207",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation: "A female given name",
             shortTranslation: "Anna",
             text: "Анна",
@@ -576,7 +595,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
           wordId: "7bd64e35-4f23-4f82-8654-201e5f5b9216",
           word: {
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
             id: "7bd64e35-4f23-4f82-8654-201e5f5b9216",
+
             longTranslation:
               "Used to indicate possession of something by a female speaker.",
             shortTranslation: "my",
@@ -587,6 +611,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         },
       },
       block: {
+        audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
         id: "c22b3077-b670-4ac8-8f21-a0a10125cb9e",
         idsItemsDependentOnThis: ["f876cde3-feaa-41dc-9720-d18f8eb975a9"],
         imageUrl:
@@ -597,6 +622,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         words: [
           {
             id: "b2eaf1ad-1af7-4546-ab28-438a1bf4e0bb",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used when referring to oneself as the object of a verb or preposition.",
             shortTranslation: "me",
@@ -605,6 +636,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "181a2f80-7c69-481c-b841-899cf0de2b20",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used when referring to oneself as the subject of a verb.",
             shortTranslation: "I",
@@ -613,6 +650,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "f1bbebee-3863-42b1-93ac-766d8773811b",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used to indicate possession of something by the speaker.",
             shortTranslation: "with my",
@@ -621,6 +664,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "7bd64e35-4f23-4f82-8654-201e5f5b9216",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used to indicate possession of something by a female speaker.",
             shortTranslation: "my",
@@ -629,6 +678,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "5d8a474c-c8ff-464d-ae5b-a276b23c81b0",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used to indicate possession of something by a male speaker.",
             shortTranslation: "my",
@@ -637,6 +692,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "81d2f1f3-1ff1-4168-8f70-e724bc4e1c21",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used when referring to oneself as the object of a verb or preposition.",
             shortTranslation: "me",
@@ -645,6 +706,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "4fcbf441-dd4c-4776-a862-06afc06893ca",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used when referring to oneself and others as the subject of a verb.",
             shortTranslation: "we",
@@ -653,6 +720,12 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
           },
           {
             id: "4bf66549-6c5a-488d-8f52-972ae91fe426",
+
+            audioFileTranslation:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word-translation.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/:block/words/:word.mp3",
+
             longTranslation:
               "Used when referring to oneself as the recipient of an action.",
             shortTranslation: "to me",
@@ -676,27 +749,29 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         questionId: "d2cc9a07-91a9-4d16-8b1a-1e0ed3f53f7b",
         userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
         question: {
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           id: "d2cc9a07-91a9-4d16-8b1a-1e0ed3f53f7b",
           options: [
             {
               id: "33563cd0-6be8-4c88-b810-62b047150b91",
               text: "Kate",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "779e8dd9-6805-4ef1-ad21-464a092b2dc2",
               text: "Ivan",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d96556b6-deae-4744-b001-abe326fbf86e",
               text: "Alexander",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d7a746b0-373f-404c-be9a-ae7b99ddbffa",
               text: "Anna",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What is Anna's mom's name?",
@@ -710,27 +785,29 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         questionId: "c2f178c3-cbb3-4a6b-8013-8758f1a19fb6",
         userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
         question: {
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           id: "c2f178c3-cbb3-4a6b-8013-8758f1a19fb6",
           options: [
             {
               id: "9fa15979-34fc-445f-b953-a82afcb15e01",
               text: "Meat on the grill",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "25a3d8bf-ce47-4635-9991-3ba189aca8ad",
               text: "Pancakes",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "479c74ff-b6d7-4c19-976e-89bb4123de21",
               text: "Salad",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "1a5d5296-28c0-4e2e-bac1-f15004819f85",
               text: "Pizza",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What does Anna's dad usually cook?",
@@ -744,27 +821,29 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         questionId: "bf346f71-4071-4b13-950f-684442837cc9",
         userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
         question: {
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           id: "bf346f71-4071-4b13-950f-684442837cc9",
           options: [
             {
               id: "d7e8143f-d921-4aea-b161-b15a08a978a6",
               text: "Talk about their day",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "74d26c59-5307-4db1-88f6-7dcef371baeb",
               text: "Watch TV",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d6335d82-64fd-4f4e-a7df-cf9d7b17ad86",
               text: "Play board games",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "2a7634ca-d5a6-48de-8656-7bc99fe67c43",
               text: "Read books",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What do Anna and her family do after they eat dinner?",
@@ -779,6 +858,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
     timeUnlocked: 1685212972217,
     userStoryId: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
     epilogue: {
+      audioFile: ":path-to-storage/stories/:lang/:story/epilogue/epilogue.mp3",
       id: "51c76980-f429-4b41-8300-22af4bee00a3",
       name: "Anna's family",
       imageUrl: "https://dummy-link",
@@ -786,26 +866,28 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
       questions: [
         {
           id: "023ab9c9-0e57-4f89-96a1-8bf6072d59cd",
+          audioFile:
+            ":path-to-storage/stories/:lang/:story/epilogue/:question.mp3",
           options: [
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              lang: "ru",
+              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",
@@ -818,6 +900,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
     },
     lang: "ru",
   },
+  playableApiMessages: [],
 };
 
 export const languages: LanguageDataItem[] = [

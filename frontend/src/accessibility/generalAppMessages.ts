@@ -9,7 +9,7 @@ export const generalAppMessages: AppMessageGeneralSet = {
   },
   tryAgainFetchRequest: {
     uniqueName: "tryAgainFetchRequest",
-    text: "Try again to fetch the request.",
+    text: "Try again to fetch the request by navigating to 'Try again' button using tab.",
     filePath: `${audioStorageBasePath}/frontendGeneral/tryAgainFetchRequest.mp3`,
   },
   interactionIsOn: {

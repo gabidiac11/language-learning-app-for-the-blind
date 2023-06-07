@@ -43,15 +43,6 @@ export default function Header() {
             <>
               <button
                 className="no-btn"
-                aria-label="link to instructions page"
-                onClick={() => navigate("/instructions")}
-                style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}
-                tabIndex={0}
-              >
-                <Info htmlColor="white" className="outline-none" />
-              </button>
-              <button
-                className="no-btn"
                 aria-label="link to home page"
                 onClick={() => navigate("/home")}
                 style={{ flexGrow: 0, padding: 10, boxSizing: "border-box" }}

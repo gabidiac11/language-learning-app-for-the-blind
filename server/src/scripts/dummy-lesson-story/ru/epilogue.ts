@@ -1,291 +1,378 @@
-import { genUid, getShuffledArray } from "../../../../utils";
-import { Epilogue, EpilogueQuestionAnswer } from "../../../ctxTypes/ctx.story.types";
+import { genUid, getShuffledArray } from "../../../utils";
+import {
+  Epilogue,
+  EpilogueQuestionAnswer,
+} from "../../../Data/ctxTypes/ctx.story.types";
 
 const generateEpilogue = async (): Promise<
   [Epilogue, EpilogueQuestionAnswer[]]
 > => {
   const epilogue: Epilogue = {
-    lang: "fr",
+    lang: "ru",
     id: genUid(),
     name: "Anna's family",
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     imageAlt: "Russian family at the dinner table",
-    textStoryTale: `La famille d'Anna
+    textStoryTale: `"Семья Анны"
   
-    Mon nom est Anna. Je vis avec ma famille : maman, papa et frère. Le nom de ma mère est Katya et le nom de mon père est Ivan. Mon frère Alexandre a deux ans de moins que moi.
+      Меня зовут Анна. Я живу вместе со своей семьей: мамой, папой и братом. Моя мама зовут Катя, а папа - Иван. Мой брат Александр младше меня на два года.
+  
+      Мы любим проводить время вместе. Часто мы гуляем в парке, играем в футбол и готовим вкусную еду. Я люблю готовить блины, а папа обычно готовит мясо на гриле. Брат Александр помогает мне смешивать тесто.
+  
+      Я учусь в школе и занимаюсь каждый день. Мне нравится учиться русскому языку. Я говорю "я", когда говорю о себе, и "ты", когда обращаюсь к брату или другу. Моя мама и папа говорят "они" о других людях.
+  
+      Когда я возвращаюсь домой после школы, я обычно делаю уроки и помогаю маме приготовить ужин. Потом мы все вместе садимся за стол и едим вкусную еду, говоря о нашем дне. Я люблю мою семью и всегда рада проводить время вместе с ними.`,
 
-    Nous aimons passer du temps ensemble. Souvent, nous nous promenons dans le parc, jouons au football et cuisinons de délicieux plats. J'aime cuisiner des crêpes et mon père fait habituellement cuire de la viande sur le gril. Frère Alexandre m'aide à pétrir la pâte.
+    // NOTE: gets updated afterwards
+    audioFile: "",
 
-    Je vais à l'école et j'étudie tous les jours. J'aime apprendre le russe. Je dis "je" quand je parle de moi et "tu" quand je parle à un frère ou à un ami. Ma mère et mon père disent "ils" à propos des autres.
-
-    Quand je rentre à la maison après l'école, je fais généralement mes devoirs et j'aide ma mère à préparer le dîner. Ensuite, nous nous asseyons tous ensemble à table et mangeons de délicieux plats, en parlant de notre journée. J'aime ma famille et j'aime toujours passer du temps avec eux.`,
     questions: [
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "Who does Anna live with?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Anna's mom and dad",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Anna's brother and sister",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Anna's grandparents",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Anna's aunt and uncle",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What is Anna's mom's name?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Kate",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Ivan",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Alexander",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Anna",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What does Anna like to cook?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Pancakes",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Meat on the grill",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Salad",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Pizza",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What does Anna's dad usually cook?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Meat on the grill",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Pancakes",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Salad",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Pizza",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What does Anna's brother help her do?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Stir the batter",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Chop vegetables",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Make the salad dressing",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Set the table",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What language does Anna like to study?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Russian",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "English",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Spanish",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "French",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "Who does Anna say 'you' to?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Her brother",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Her mom and dad",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Her friends",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Her teacher",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What pronoun do Anna's mom and dad use to refer to other people?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "They",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "I",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "You",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "We",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What does Anna usually do when she comes home from school?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Do homework and help her mom",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Watch TV",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Play video games",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Go out with friends",
           },
         ],
       },
       {
-        lang: "fr",
+        lang: "ru",
         id: genUid(),
         text: "What do Anna and her family do after they eat dinner?",
+
+        // NOTE: gets updated afterwards
+        audioFile: "",
+
         options: [
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Talk about their day",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Watch TV",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Play board games",
           },
           {
-            lang: "fr",
+            // NOTE: gets updated afterwards
+            audioFile: "",
             id: genUid(),
             text: "Read books",
           },

@@ -1,16 +1,6 @@
-import { apiMessages } from "../../ApiSupport/apiMessages";
-import { ApiMessage } from "../../ApiSupport/appErrorMessage";
-import { audioStorageBasePath } from "../../constants";
+// at http://localhost:3000/dev-messages
 
-const apiMessageClean = Object.values(apiMessages)
-  .map((v) => ({
-    ...v,
-    filePath: v.filePath.replace(`${audioStorageBasePath}`, "BASE_URL"),
-  }))
-  .reduce((prev, curr) => ({ ...prev, [curr.uniqueName]: curr }), {});
-
-// to get these messages go to frontend -> http://localhost:3000/dev-messages
-const frontendMessages = {
+export default {
   somethingWentWrong: {
     uniqueName: "somethingWentWrong",
     text: "Something went wrong. Please try again later.",
@@ -28,7 +18,7 @@ const frontendMessages = {
   },
   tryAgainFetchRequest: {
     uniqueName: "tryAgainFetchRequest",
-    text: "Try again to fetch the request.",
+    text: "Try again to fetch the request by navigating to 'Try again' button using tab.",
     filePath: "BASE_URL/frontendGeneral/tryAgainFetchRequest.mp3",
   },
   interactionIsOn: {
@@ -50,6 +40,7 @@ const frontendMessages = {
     uniqueName: "loadedLanguages",
     text: "Finished loading languages. Choose what language you want to learn from the available options by pressing arrow left or arrow right to switch between options.",
     filePath: "BASE_URL/pages/languages/loadedLanguages.mp3",
+
   },
   greetingPageLanguages: {
     uniqueName: "greetingPageLanguages",
@@ -63,8 +54,9 @@ const frontendMessages = {
   },
   loadedStoriesOverview: {
     uniqueName: "loadedStoriesOverview",
-    text: "Stories of your selected language finished loading. Choose what lesson-story you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access story.",
+    text: "Stories of your selected language finished loading. Choose what lesson-story you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access the story.",
     filePath: "BASE_URL/pages/storiesOverview/loadedStoriesOverview.mp3",
+
   },
   greetingPageStoriesOverview: {
     uniqueName: "greetingPageStoriesOverview",
@@ -73,13 +65,14 @@ const frontendMessages = {
   },
   loadingStoryPage: {
     uniqueName: "loadingStoryPage",
-    text: "Loading lesson-story selected.",
+    text: "Loading the selected lesson-story.",
     filePath: "BASE_URL/pages/storyPage/loadingStoryPage.mp3",
   },
   loadedStoryPage: {
     uniqueName: "loadedStoryPage",
-    text: "The story selected finished loading. Choose what building block or epilogue block you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access.",
+    text: "Finished loading your selected story. Choose what building block or epilogue you want to access by pressing arrow left or arrow right to switch between story card information elements then press enter to enter any block focused.",
     filePath: "BASE_URL/pages/storyPage/loadedStoryPage.mp3",
+
   },
   greetingPageStoryPage: {
     uniqueName: "greetingPageStoryPage",
@@ -88,23 +81,23 @@ const frontendMessages = {
   },
   loadingBlockIntroduction: {
     uniqueName: "loadingBlockIntroduction",
-    text: "Loading words summaries of the selected building block.",
+    text: "Loading words summary of your selected building block.",
     filePath: "BASE_URL/pages/blockIntroduction/loadingBlockIntroduction.mp3",
   },
   loadedBlockIntroduction: {
     uniqueName: "loadedBlockIntroduction",
-    text: "Finished loading words summaries of the selected building block. The summary page is where each word of the block is displayed and read. It's recommended that you repeat to yourself those words. You can revisit this page each time you need to. Access page by pressing arrow up or arrow down to switch between options.",
+    text: "Finished loading. The summary page is where each word of the block is displayed and read. It's recommended that you repeat to yourself those words. You can revisit this page each time you need to. Access page by pressing arrow up or arrow down to switch between options.",
     filePath: "BASE_URL/pages/blockIntroduction/loadedBlockIntroduction.mp3",
   },
   greetingPageBlockIntroduction: {
     uniqueName: "greetingPageBlockIntroduction",
-    text: "Page: Building block word summaries.",
+    text: "Page: Building block words summaries.",
     filePath:
       "BASE_URL/pages/blockIntroduction/greetingPageBlockIntroduction.mp3",
   },
   blockSummaryCompleted: {
     uniqueName: "blockSummaryCompleted",
-    text: "Completed! You completed the words introduction, you can start the words quiz.",
+    text: "Congratulations! You completed the words introduction, you can start the words quiz.",
     filePath: "BASE_URL/pages/blockIntroduction/blockSummaryCompleted.mp3",
   },
   loadingBlockStart: {
@@ -116,6 +109,7 @@ const frontendMessages = {
     uniqueName: "loadedBlockStart",
     text: "Finished loading your selected building block. Start or continue practicing the words using the introduction module or the quiz module. Once both are completed the block is completed. Access page by pressing arrow up or arrow down to switch between options.",
     filePath: "BASE_URL/pages/blockStart/loadedBlockStart.mp3",
+
   },
   greetingPageBlockStart: {
     uniqueName: "greetingPageBlockStart",
@@ -124,18 +118,29 @@ const frontendMessages = {
   },
   loadingRequestQuestion: {
     uniqueName: "loadingRequestQuestion",
-    text: "Loading request question for quiz.",
+    text: "Loading quiz.",
     filePath: "BASE_URL/pages/blockQuiz/loadingRequestQuestion.mp3",
+  },
+  loadedRequestQuestion: {
+    uniqueName: "loadedRequestQuestion",
+    text: "Quiz loaded.",
+    filePath: "BASE_URL/pages/blockQuiz/loadedRequestQuestion.mp3",
+  },
+  instructionsQuizBlockQuestion: {
+    uniqueName: "instructionsQuizBlockQuestion",
+    text: "Navigate using up or down arrows to  replay these questions and answers, and use enter to choose the correct answer.",
+    filePath: "BASE_URL/pages/blockQuiz/instructionsQuizBlockQuestion.mp3",
   },
   loadingBlockQuizCompleted: {
     uniqueName: "loadingBlockQuizCompleted",
-    text: "Loading quiz status.",
+    text: "Loading quiz achievements.",
     filePath: "BASE_URL/pages/blockQuizCompleted/loadingBlockQuizCompleted.mp3",
   },
   loadedBlockQuizCompleted: {
     uniqueName: "loadedBlockQuizCompleted",
-    text: "Coungradulations! You finished block! Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to see the achievements.",
     filePath: "BASE_URL/pages/blockQuizCompleted/loadedBlockQuizCompleted.mp3",
+
   },
   greetingPageBlockQuizCompleted: {
     uniqueName: "greetingPageBlockQuizCompleted",
@@ -150,8 +155,9 @@ const frontendMessages = {
   },
   loadedEpilogueOverview: {
     uniqueName: "loadedEpilogueOverview",
-    text: "Finished loading epilogue short story.",
+    text: "Epilogue short story has finished loading. To listen navigate in the page using arrows up or arrow down to find the paragraph or the play/stop button.",
     filePath: "BASE_URL/pages/epilogueOverview/loadedEpilogueOverview.mp3",
+
   },
   greetingPageEpilogueOverview: {
     uniqueName: "greetingPageEpilogueOverview",
@@ -167,9 +173,10 @@ const frontendMessages = {
   },
   loadedEpilogueQuizCompleted: {
     uniqueName: "loadedEpilogueQuizCompleted",
-    text: "Coungradulations! You finished the epilgoue block and the whole lesson-story! Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to see the achievements.",
     filePath:
       "BASE_URL/pages/epiloqueQuizCompleted/loadedEpilogueQuizCompleted.mp3",
+
   },
   greetingPageEpilogueQuizCompleted: {
     uniqueName: "greetingPageEpilogueQuizCompleted",
@@ -177,9 +184,40 @@ const frontendMessages = {
     filePath:
       "BASE_URL/pages/epiloqueQuizCompleted/greetingPageEpilogueQuizCompleted.mp3",
   },
+  greetingLoginPage: {
+    uniqueName: "greetingLoginPage",
+    text: "Page: Login page. Login or register with google.",
+    filePath: "BASE_URL/pages/login/greetingLoginPage.mp3",
+  },
+  invalidEmailRegisterPage: {
+    uniqueName: "invalidEmailRegisterPage",
+    text: "Invalid email error occured while trying to register.",
+    filePath: "BASE_URL/pages/register/invalidEmailRegisterPage.mp3",
+  },
+  emailAlreadyUsedRegisterPage: {
+    uniqueName: "emailAlreadyUsedRegisterPage",
+    text: "Invalid email error occured while trying to register.",
+    filePath: "BASE_URL/pages/register/emailAlreadyUsedRegisterPage.mp3",
+  },
+  invalidPasswordRegisterPage: {
+    uniqueName: "invalidPasswordRegisterPage",
+    text: "Invalid password occured while trying to register. Make sure to include capital letters, lowercase letters, and use a password between 8 and 16 characters.",
+    filePath: "BASE_URL/pages/register/invalidPasswordRegisterPage.mp3",
+  },
+  greetingRegisterPage: {
+    uniqueName: "greetingRegisterPage",
+    text: "Page: Register with email and password.",
+    filePath: "BASE_URL/pages/register/greetingRegisterPage.mp3",
+  },
+  loadedRequestQuestionEpiloue: {
+    uniqueName: "loadedRequestQuestionEpiloue",
+    text: "Quiz loaded.",
+    filePath: "BASE_URL/pages/epilogueQuiz/loadedRequestQuestionEpiloue.mp3",
+  },
+  instructionsQuizepilogueQuestion: {
+    uniqueName: "instructionsQuizepilogueQuestion",
+    text: "Navigate using up or down arrows to  replay these questions and answers, and use enter to choose the correct answer.",
+    filePath:
+      "BASE_URL/pages/epilogueQuiz/instructionsQuizepilogueQuestion.mp3",
+  },
 };
-
-export default [
-  ...Object.values(frontendMessages),
-  ...Object.values(apiMessageClean),
-] as ApiMessage[];

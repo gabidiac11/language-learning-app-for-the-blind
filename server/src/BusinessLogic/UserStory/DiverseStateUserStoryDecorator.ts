@@ -109,9 +109,6 @@ export class DiverseStateUserStoryDecorator {
       lockedStory,
     ];
 
-    stories.forEach((item, index) => {
-      item.name += ` #${index + 1}`;
-    });
     this.updateDependentNames(stories);
 
     return stories;

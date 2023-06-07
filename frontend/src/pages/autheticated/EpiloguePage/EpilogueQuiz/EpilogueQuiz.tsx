@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import useFetchData, { UseFetchDataOptions } from "../../../../api/useFetchData";
+import useFetchData, {
+  UseFetchDataOptions,
+} from "../../../../api/useFetchData";
 import {
   UseFetchDataOptionsQuizRequest,
   QuizResponse,
@@ -10,10 +12,16 @@ import {
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import EpilogueQuizQuestion from "./EpilogueQuizQuestion";
 import "./EpilogueQuiz.scss";
+import { AppMessage } from "../../../../accessibility/accesibilityTypes";
+import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { epilogueQuizPageMessages } from "./appMessages";
 
 const EpilogueQuiz = () => {
   const navigate = useNavigate();
-  const { id: epilogueProgressId, lang } = useParams<{ id: string, lang: string; }>();
+  const { id: epilogueProgressId, lang } = useParams<{
+    id: string;
+    lang: string;
+  }>();
   const [fetchOptions, setFetchOptions] = useState<{
     url: string;
     options?: UseFetchDataOptionsQuizRequest | UseFetchDataOptions;
@@ -34,6 +42,17 @@ const EpilogueQuiz = () => {
   const [quizCompleted, setQuizCompleted] = useState<boolean>();
   const [preserveChildren, setPreserveChildren] = useState<boolean>();
 
+  const [pageDataLoadedMessage, setPageDataLoadedMessage] = useState<
+    AppMessage[]
+  >([]);
+
+  usePageAudioFeedback({
+    error,
+    loading: !pageDataLoadedMessage.length,
+    pageGreeting: epilogueQuizPageMessages.loadedRequestQuestionEpiloue,
+    pageDataLoadedMessage,
+  });
+
   const onChoose = useCallback(
     (option: QuizOption) => {
       // TODO: play audio file here
@@ -48,6 +67,8 @@ const EpilogueQuiz = () => {
         optionId: option.id,
         questionId: currentQuestion.questionId,
       };
+
+      setPageDataLoadedMessage([]);
       setFetchOptions({
         url: `epilogues/${epilogueProgressId}/quiz/answer-question`,
         options: { method: "POST", body: body },
@@ -77,6 +98,13 @@ const EpilogueQuiz = () => {
 
     const initialQuestionRequestMade =
       response.httpInfo?.url?.indexOf("/request-question") > -1;
+
+    const audioMessage = computeAudioMessageFromResponse(
+      quizResponse,
+      initialQuestionRequestMade
+    );
+    setPageDataLoadedMessage(audioMessage);
+
     if (initialQuestionRequestMade) {
       setCurrentQuestion(quizResponse);
       setPreserveChildren(true);
@@ -110,3 +138,26 @@ const EpilogueQuiz = () => {
 };
 
 export default EpilogueQuiz;
+
+function computeAudioMessageFromResponse(
+  quizResponse: QuizResponse,
+  isInitial: boolean
+) {
+  const responsePlayables = quizResponse.playableApiMessages ?? [];
+  const rightOrWrongMessages =
+    quizResponse.previousQuestionOutcomePlaybaleMessages ?? [];
+  const messages = [
+    ...rightOrWrongMessages,
+    ...responsePlayables,
+  ];
+
+  messages.forEach((message) => {
+    message.preventForcedStopOnCurrentPage = true;
+  });
+
+  isInitial &&
+    messages.push(epilogueQuizPageMessages.instructionsQuizepilogueQuestion);
+
+  console.log({messages})
+  return messages;
+}

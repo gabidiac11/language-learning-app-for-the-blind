@@ -23,7 +23,7 @@ const BlockQuizQuestion = (props: {
     [props.onChoose]
   );
 
-  const pauseLoadingNextQuestionTimeSeconds = 1;
+  const pauseLoadingNextQuestionTimeSeconds = 3;
 
   return (
     <WithFocusControls direction="vertical">
@@ -42,7 +42,7 @@ const BlockQuizQuestion = (props: {
           <div key={option.id} aria-label="question's options wrapper">
             <Button
               tabIndex={0}
-              aria-label={`option ${index + 1}: ${option.text}`}
+              aria-label={`option ${index + 1}: ${option.text.replace("->", "")}`}
               variant="contained"
               className="quiz-question-option"
               disabled={!!selected}
@@ -70,7 +70,7 @@ const BlockQuizQuestion = (props: {
           >
             <Typography fontSize={16} mt={2} variant="caption" paragraph={true}>
               Loading next question in{" "}
-              <AppTimerDisplay limit={1} onTimeOut={props.onNext} />
+              <AppTimerDisplay limit={pauseLoadingNextQuestionTimeSeconds} onTimeOut={props.onNext} />
             </Typography>
           </div>
         )}

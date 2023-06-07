@@ -1,6 +1,6 @@
-import { genUid } from "../../../../utils";
-import { Story } from "../../../ctxTypes/ctx.story.types";
-import guardStories from "../../storiesValidationGuard";
+import { genUid } from "../../../utils";
+import { Story } from "../../../Data/ctxTypes/ctx.story.types";
+import guardStories from "../../../Data/Seed/storiesValidationGuard";
 import generateBuildingBlocks from "./buidingBlocks";
 import generateEpilogue from "./epilogue";
 
@@ -8,14 +8,18 @@ import generateEpilogue from "./epilogue";
  * this script is a utility script to generate the story json used for seeding lessons
  */
 
-async function generateDummyStory(): Promise<Story> {
+async function generateDummyStory(index: number): Promise<Story> {
   const buildingBlocks = await generateBuildingBlocks();
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
   const story: Story = {
     id: genUid(),
     lang: "ru",
-    order: 0,
-    name: "My family",
+    order: index,
+
+    name: `My family #${index + 1}`,
+    
+    audioFile: "", // it's updated later
+
     //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -33,8 +37,7 @@ export async function generateClonedStories() {
   const storiesCount = 6;
   const stories: Story[] = [];
   for (let i = 0; i < storiesCount; i++) {
-    const storyItem = await generateDummyStory();
-    storyItem.order = stories.length;
+    const storyItem = await generateDummyStory(i);
     stories.push(storyItem);
   }
 

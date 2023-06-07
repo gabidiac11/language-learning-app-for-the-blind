@@ -20,6 +20,11 @@ export default (state: StateType, action: StateAction): StateType => {
           action.payload,
         ],
       };
+      case StateActionType.SingleEnquePlayableMessages:
+        return {
+          ...state,
+          playableAudiosQueue: [action.payload],
+        };
 
     case StateActionType.DequePlayableMessages:
       return {

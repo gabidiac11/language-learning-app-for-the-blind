@@ -53,13 +53,8 @@ const logInWithEmailAndPassword = async (email:string, password: string) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
-  try {
-    await createUserWithEmailAndPassword(firebaseAuth, email, password);
-  } catch (err) {
-    console.error(err);
-    alertError(err);
-  }
+const registerWithEmailAndPassword = async (email: string, password: string) => {
+  return await createUserWithEmailAndPassword(firebaseAuth, email, password);
 };
 
 const sendPasswordReset = async (email: string) => {

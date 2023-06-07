@@ -1,21 +1,24 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { getPlayableErrorFromUnknown } from "../accessibility/apiAppMessages";
-import { PlayableError, PlayableMessage } from "../accessibility/playableMessage";
+import {
+  PlayableError,
+  PlayableMessage,
+} from "../accessibility/playableMessage";
 import axiosInstance from "../axiosInstance";
 import { lessonLanguageHeader } from "../constants";
 import { playTextAudio } from "../utils";
 
-
 const useFetchData = <T>(
   url: string,
   lang?: string,
-  fetchOptions?: UseFetchDataOptions,
+  fetchOptions?: UseFetchDataOptions
 ) => {
   const [data, setData] = useState<T>();
-  const [dataWithHttpResponse, setDataWithHttpResponse] = useState<{
-    data: T;
-    httpInfo: { options?: UseFetchDataOptions; url: string };
-  }>();
+
+  const [, _setDataWithHttpResponse] = useState<DataWithHttpResponse<T>>();
+  // used ref because it's important for the loading finished and data to be updated at the same time or data before loading:
+  const dataWithHttpResponseRef = useRef<DataWithHttpResponse<T>>();
+
   const [, setLoadingKey] = useState<number>(0);
   const loadingRef = useRef<{ key: number; value: boolean }>({
     key: 0,
@@ -28,6 +31,14 @@ const useFetchData = <T>(
   const urlRef = useRef<string>();
   const optionsRef = useRef<UseFetchDataOptions>();
 
+  const setDataWithHttpResponse = useCallback(
+    (value: DataWithHttpResponse<T>) => {
+      dataWithHttpResponseRef.current = value;
+      _setDataWithHttpResponse(dataWithHttpResponseRef.current);
+    },
+    []
+  );
+
   const setLoading = useCallback((value: boolean) => {
     loadingRef.current.value = value;
     loadingRef.current.key++;
@@ -36,7 +47,6 @@ const useFetchData = <T>(
 
   const fetchData = useCallback(async () => {
     try {
-      // TODO: play audio message when starts and ends request
       setLoading(true);
       const _fetchOptions = fetchOptions;
       const _url = url;
@@ -82,7 +92,7 @@ const useFetchData = <T>(
 
   return {
     data,
-    dataWithHttpResponse,
+    dataWithHttpResponse: dataWithHttpResponseRef.current,
     loading: loadingRef.current.value,
     error,
     retry,
@@ -94,11 +104,21 @@ export type UseFetchDataOptions = {
   body?: object;
 };
 
-function computeAxiosPromise(
+async function computeAxiosPromise(
   fetchOptions: UseFetchDataOptions | undefined,
   url: string,
   lang?: string
 ) {
+  // delay for dev env to observe how it handles on desired loading duration
+  if (window.location.host.indexOf("localhost:") > -1) {
+    await (async () =>
+      new Promise((resolve) =>
+        setTimeout(() => {
+          resolve({});
+        }, 0)
+      ))();
+  }
+
   const config = {
     headers: {
       [lessonLanguageHeader]: lang,
@@ -112,6 +132,11 @@ function computeAxiosPromise(
     return axiosInstance.post(url, fetchOptions.body, config);
   }
   return axiosInstance.get(url, config);
+}
+
+export type DataWithHttpResponse<T> = {
+  data: T;
+  httpInfo: { options?: UseFetchDataOptions; url: string };
 };
 
 export default useFetchData;

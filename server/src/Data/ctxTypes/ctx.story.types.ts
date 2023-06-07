@@ -14,6 +14,8 @@ export type Story = {
   // Obs: each building block (as you will see by reading further) has bunch of words in Russian related with the building-block's associated ontology
   name: string;
 
+  audioFile: string;
+
   imageUrl: string;
   imageAlt: string;
 
@@ -33,6 +35,9 @@ export type BuildingBlock = {
   lang: Language;
 
   name: string;
+
+  audioFile: string;
+
   imageUrl: string;
   imageAlt: string;
 
@@ -54,6 +59,9 @@ export type Word = {
 
   // the text is the actual word in Russian
   text: string;
+
+  audioFile: string;
+  audioFileTranslation: string;
 
   // short translation is in English and has at least 1, and at most 1 to 3 words between comma
   shortTranslation: string;
@@ -78,6 +86,8 @@ export type Epilogue = {
   // Attention: it needs to make sure to include almost all the words from the current story, and prefere those words
   textStoryTale: string;
 
+  audioFile: string;
+
   // the questions asked are about what is happening in the story tale
   questions: EpilogueQuestion[];
 
@@ -89,6 +99,8 @@ export type EpilogueQuestion = {
   id: string;
 
   lang: Language;
+
+  audioFile: string;
 
   // the questions are asked in English and the options are in English
   // the questions asked are about what is happening in the story tale
@@ -105,7 +117,8 @@ export type EpilogueQuestionAnswer = {
 export type EpilogueOption = {
   id: string;
   text: string;
-  lang: Language;
+
+  audioFile: string;
 };
 
 export type LanguageDataItem = {

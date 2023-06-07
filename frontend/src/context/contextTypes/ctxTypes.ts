@@ -12,7 +12,8 @@ export enum StateActionType {
   EnqueuePlayableMessage = "EnqueuePlayableMessage",
   PrematurelyStopPlayableMessages = "PrematurelyStopPlayableMessages",
   DequePlayableMessages = "DequePlayableMessages",
-  SetIsAudioInteractionOn = "SetIsAudioInteractionOn"
+  SetIsAudioInteractionOn = "SetIsAudioInteractionOn",
+  SingleEnquePlayableMessages = "SingleEnquePlayableMessages",
 }
 
 export type StateAction =
@@ -28,6 +29,10 @@ export type StateAction =
       payload: PlayableMessage;
     }
   | {
+      type: StateActionType.SingleEnquePlayableMessages;
+      payload: PlayableMessage;
+    }
+  | {
       type: StateActionType.PrematurelyStopPlayableMessages;
       payload: {
         playableKeys: string[];
@@ -36,11 +41,12 @@ export type StateAction =
   | {
       type: StateActionType.DequePlayableMessages;
       payload: {
-        playableKey: string
+        playableKey: string;
       };
-    } | {
+    }
+  | {
       type: StateActionType.SetIsAudioInteractionOn;
-      payload: boolean
+      payload: boolean;
     };
 
 export type Language = "ru" | "fr" | "de";
@@ -49,6 +55,8 @@ export type UserStory = {
   id: string;
 
   lang: Language;
+
+  audioFile: string;
 
   // the name is a domain; it describes a big ontology which comprises smaller ontologies
   // each building block of a story is a smaller ontology which is related to the big ontology of the story
@@ -103,6 +111,8 @@ export type BuildingBlock = {
   id: string;
   name: string;
 
+  audioFile: string;
+
   lang: Language;
 
   imageUrl: string;
@@ -124,6 +134,9 @@ export type Word = {
   // the text is the actual word in Russian
   text: string;
 
+  audioFile: string;
+  audioFileTranslation: string;
+
   // short translation is in English and has at least 1, and at most 1 to 3 words between comma
   shortTranslation: string;
 
@@ -139,6 +152,8 @@ export type Epilogue = {
 
   // the name of the story tale; short and descriptive - needs to be a word from the building blocks completed from the current and the previous stories
   name: string;
+
+  audioFile: string;
 
   // a short story tale that have only words from the current blocks; each block has a set of words grouped by ontology
   // this short story must use only the words from the building blocks belonging to this story and the stories completed to far

@@ -18,8 +18,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .ts",
     "build": "npm ci && rimraf ./dist && tsc && copyfiles -u 1 \"src/**/*.json\" dist/",
-    "dummy-stories": "tsc && node dist/Data/Seed/dummy-lesson-story/initializeDummyStories.js",
-    "text-to-speech": "tsc && node dist/scripts/generateTextToSpeech/updateCloudStorage.js"
+    "dummy-stories": "tsc && node dist/scripts/dummy-lesson-story/initializeDummyStories.js",
+    "text-to-speech": "tsc && node dist/scripts/generate-audio-messages/updateCloudStorage.js"
   },
   "keywords": [],
   "author": "",

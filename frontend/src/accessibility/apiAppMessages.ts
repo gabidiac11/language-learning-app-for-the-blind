@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { genKey } from "../constants";
 import { AppMessage } from "./accesibilityTypes";
 import { errorAppMessages } from "./errorAppMessages";
 import { PlayableError } from "./playableMessage";
@@ -30,7 +31,7 @@ const getPlayableFromAppMessage = (
   isAppPlayableError: true,
   originalError,
   message: {
-    key: `${Date.now()}:${appMessage.uniqueName}`,
+    key: `${genKey()}:${appMessage.uniqueName}`,
     messages: [appMessage],
   },
 });
@@ -68,7 +69,7 @@ function getPlayableErrorFromAxiosError(axiosError: AxiosError): PlayableError {
   }));
 
   const playableMessage = {
-    key: `${Date.now()}:${messages.map((i) => i.uniqueName).join("-")}`,
+    key: `${genKey()}:${messages.map((i) => i.uniqueName).join("-")}`,
     messages,
   };
   const playableError: PlayableError = {

@@ -1,3 +1,4 @@
+import { AppMessage } from "../../accessibility/accesibilityTypes";
 import { UseFetchDataOptions } from "../../api/useFetchData";
 import {
   BuildingBlockProgress,
@@ -31,9 +32,12 @@ export type QuizResponse = {
 
   // id to the correct answer from previous question
   previouslyQuestion_CorrectOptionId?: string;
-
+  
   quizCompleted?: boolean;
   quizId?: string;
+  
+  playableApiMessages: AppMessage[]
+  previousQuestionOutcomePlaybaleMessages: AppMessage[];
 };
 
 // quiz REQUEST
@@ -53,4 +57,5 @@ export type QuizBlockCompletedResponse = {
   blockCompleted?: BuildingBlockProgress;
   blockCompletedStoryRefId: string;
   userStoriesUnlocked?: UserStory[];
+  playableApiMessages: AppMessage[];
 };

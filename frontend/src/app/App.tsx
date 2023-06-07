@@ -134,7 +134,7 @@ const App = () => {
                         </WithLanguage>
                       }
                     />
-                    <Route
+                    <Route      
                       path="/epilogues/:lang/:id"
                       element={
                         <WithLanguage>
@@ -165,7 +165,6 @@ const App = () => {
                       }
                     />
                   </Routes>
-                  )
                 </WithTokenRefreshInterval>
               </WithToken>
             )}

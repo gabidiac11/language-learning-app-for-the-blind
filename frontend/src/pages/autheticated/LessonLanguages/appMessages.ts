@@ -14,7 +14,7 @@ export const langPageMessages: {
   loadedLanguages: {
     uniqueName: "loadedLanguages",
     text: "Finished loading languages. Choose what language you want to learn from the available options by pressing arrow left or arrow right to switch between options.",
-    filePath: `${audioStorageBasePath}/pages/languages/loadedLanguages.mp3`,
+    filePath: `${audioStorageBasePath}/pages/languages/loadedLanguages.mp3`
   },
   greetingPageLanguages: {
     uniqueName: "greetingPageLanguages",
