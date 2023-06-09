@@ -16,7 +16,7 @@ import BuildingBlockItem from "../../StoryPage/BuildingBlockItem";
 import EpilogueBlockItem from "../../StoryPage/EpilogueBlockItem";
 import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
 import { blockQuizCompletedPageMessages } from "./appMessages";
-import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 import { useState } from "react";
 import { useEffect } from "react";

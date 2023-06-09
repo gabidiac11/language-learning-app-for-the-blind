@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import "../EpilogueQuiz.scss";
 import { StoryCard } from "../../../StoriesOverviewPage/StoryCard/StoryCard";
 import { WithFocusControls } from "../../../../page-components/accessibility/WithFocusControls";
-import { usePageAudioFeedback } from "../../../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { epiloqueQuizCompletedPageMessages } from "./appMessages";
 import { useEffect, useState } from "react";
 import { AppMessage } from "../../../../../accessibility/types/appMessage.type";

@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { logAudioQueue } from "../../accessibility/audioSpeaker/logAudioQueue";
 import { generalAppMessages } from "../../accessibility/staticAppMessages/generalAppMessages";
 import { PlayableMessage } from "../../accessibility/types/playableMessage.type";
 import { genKey } from "../../constants";
@@ -10,7 +11,7 @@ export const useFeedbackAudioQueue = () => {
 
   const enqueuePlayableMessage = useCallback(
     (playableMessage: PlayableMessage) => {
-      console.log(`[ENQUE]-${playableMessage.key}`);
+      logAudioQueue(`ENQUE(${playableMessage.key})`);
 
       dispatch({
         type: StateActionType.EnqueuePlayableMessage,
@@ -22,7 +23,7 @@ export const useFeedbackAudioQueue = () => {
 
   const singleEnque = useCallback(
     (playableMessage: PlayableMessage) => {
-      console.log(`[SING-ENQUE]-${playableMessage.key}`);
+      logAudioQueue(`SINGLE_ENQUEUE(${playableMessage.key})`);
 
       dispatch({
         type: StateActionType.SingleEnquePlayableMessages,
@@ -34,7 +35,7 @@ export const useFeedbackAudioQueue = () => {
 
   const dequePlayableMessage = useCallback(
     (playableKey: string) => {
-      console.log(`[DEQUE]-${playableKey}`);
+      logAudioQueue(`DEQUE(${playableKey})`);
 
       dispatch({
         type: StateActionType.DequePlayableMessages,
@@ -48,8 +49,10 @@ export const useFeedbackAudioQueue = () => {
 
   const prematurelyStopPlayableMessages = useCallback(
     (playableKeys: string[]) => {
-      
-      console.log(`[DEQUE-multiple]-${playableKeys.join(",")}`);
+      if(!playableKeys.length) {
+        return;
+      }
+      console.log(`DEQUEUE_MULTIPLE(${playableKeys.join(",")})`);
 
       dispatch({
         type: StateActionType.PrematurelyStopPlayableMessages,
@@ -73,6 +76,6 @@ export const useFeedbackAudioQueue = () => {
     prematurelyStopPlayableMessages,
     dequePlayableMessage,
     enqueueCantOpenALockedItemMessage,
-    singleEnque
+    singleEnque,
   };
 };

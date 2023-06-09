@@ -1,6 +1,7 @@
-import { genKey } from "../constants";
-import { AppMessage } from "./types/appMessage.type";
-import { PlayableMessage } from "./types/playableMessage.type";
+import { genKey } from "../../constants";
+import { AppMessage } from "../types/appMessage.type";
+import { PlayableMessage } from "../types/playableMessage.type";
+
 
 export const createPlayable = (
   messageOrMessages: AppMessage | AppMessage[]

@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { Typography } from "@mui/material";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import { storiesOverviewPageMessages } from "./appMessages";
-import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 
 export const StoriesOverviewPage = () => {
   const { lang } = useParams<{ lang: string }>();

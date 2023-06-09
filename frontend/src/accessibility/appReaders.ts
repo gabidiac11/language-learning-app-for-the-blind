@@ -1,7 +1,15 @@
 import { AppMessage } from "./types/appMessage.type";
 import { PlayableMessage } from "./types/playableMessage.type";
+import { audioPlayEvents } from "./audioSpeaker/audioEvents";
+import { getListenableKeyFromPlayable } from "./audioSpeaker/getListenableKeyFromPlayable";
+import { getReadableTextFromHtmlElement } from "./screenReader/getReadableTextFromHtmlElement";
+import { emitEventPlayNodeAttribute } from "./audioSpeaker/htmlAttributeAudio/htmlAttributeAudioEvent";
+import { emitPrematurStopAudio } from "./audioSpeaker/hooks/usePrematureStopAudioListener";
+import { logScreenReader } from "./screenReader/logScreenReader";
 
 window.isPlayingUninteruptableAudios = {};
+
+// NOTE: this 2 classes need to be together in this file (didn't investigate why)
 
 class AppScreenReader {
   static instance = new AppScreenReader();
@@ -17,7 +25,7 @@ class AppScreenReader {
         if (event.key !== "Tab") {
           return;
         }
-        console.log("tab", { event });
+        logScreenReader("tab", { event });
         this.playNodeTarget(document.activeElement);
       }).bind(this)
     );
@@ -25,7 +33,7 @@ class AppScreenReader {
     document.addEventListener(
       "focus",
       ((event: FocusEvent) => {
-        console.log("focus", { event });
+        logScreenReader("focus", { event });
         this.playNodeTarget(event.target);
       }).bind(this)
     );
@@ -37,11 +45,11 @@ class AppScreenReader {
       }).bind(this)
     );
   }
-  
+
   public playNodeTarget(target: EventTarget | null) {
     const playerIsInCharged = this.playUsingAudioPlayerIfApplicable(target);
     if (!playerIsInCharged) {
-      const text = getNodeText(target as Element);
+      const text = getReadableTextFromHtmlElement(target as Element);
       if (text) {
         this.play(text);
       }
@@ -61,41 +69,25 @@ class AppScreenReader {
       return false;
     }
 
-    const event = new CustomEvent<AudioAttributeEventDetail>(
-      "request-audio-play-from-node-attribute-event",
-      {
-        detail: {
-          audioPath: htmlElement.getAttribute("audio-player-path"),
-          audioText: htmlElement.getAttribute("audio-player-text"),
-        } as AudioAttributeEventDetail,
-      }
-    );
-    window.dispatchEvent(event);
+    emitEventPlayNodeAttribute(htmlElement);
     return true;
   }
 
   private play(text: string) {
     if (window.isPlayingUninteruptableAudios[window.location.pathname]) {
-      console.log(
+      logScreenReader(
         `Screen reader play() prevented: is playing Uninteruptable audio.`
       );
       return;
     }
 
     this.stopIfPlaying();
-    this.stopAudioPlayer();
+    emitPrematurStopAudio();
 
     this._utterance = new SpeechSynthesisUtterance(text);
     this._utterance.lang = "en-US";
 
     window.speechSynthesis.speak(this._utterance);
-  }
-
-  private stopAudioPlayer() {
-    const event = new CustomEvent("prematurelyStopPlayableMessages", {
-      detail: {},
-    });
-    window.dispatchEvent(event);
   }
 
   public stopIfPlaying() {
@@ -112,7 +104,6 @@ export const screenReader = AppScreenReader.instance;
 export class AppAudioPlayer {
   public audio: HTMLAudioElement;
 
-  // NOTE: take care to bind() in case this is involved
   private _onPlay = () => {};
   private _onPause = () => {};
   private _onError = (event: any) => {};
@@ -129,6 +120,15 @@ export class AppAudioPlayer {
     this.audio = audio;
   }
 
+  private log(value: any, obj?: any) {
+    if (obj) {
+      // Note: no stringify - (for events might have circular structure)
+      console.log(`AppAudioPlayer-${value}`, obj);
+      return;
+    }
+    console.log(`AppAudioPlayer-${value}`);
+  }
+
   public async playAudio(currentPlayable: PlayableMessage) {
     screenReader.stopIfPlaying();
     this.stopAnyAudio();
@@ -137,8 +137,15 @@ export class AppAudioPlayer {
 
     // EMIT START: group of messages
     this.emitMessageStarted(getListenableKeyFromPlayable(currentPlayable));
+
     for (const message of currentPlayable.messages) {
       let allAborted = false;
+      const logPayload = {
+        p: {
+          playableKey: currentPlayable.key,
+          appMessageUniqueName: message.uniqueName,
+        },
+      };
 
       try {
         this.currentTextPlaying = message.text;
@@ -152,7 +159,7 @@ export class AppAudioPlayer {
             // add this event to force this promise to fail when we want to abort playing this playble item all together
 
             const forceStopListen = (() => {
-              console.log("Force stop audio:", currentPlayable.key);
+              this.log("[ON-FORCE-STOP-PLAYABLE]", logPayload);
               allAborted = true;
 
               reject({ forcedStopped: true });
@@ -161,33 +168,33 @@ export class AppAudioPlayer {
 
             // asign all handlers to this class so they can be removed later
             this._onPlay = (() => {
-              console.log(`[ON-PLAY]: Audio-${currentPlayable.key}`);
+              this.log(`[ON-PLAY]:`, logPayload);
 
               this.setIsPlaying(true, currentPlayable.key);
               this.isPaused = false;
             }).bind(this);
             this._onPause = (() => {
-              console.log(`[ON-PAUSE]: Audio-${currentPlayable.key}`);
+              this.log(`[ON-PAUSE]:`, logPayload);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = true;
             }).bind(this);
             this._onError = ((event: any) => {
-              console.log(`[ERROR]: Audio-${currentPlayable.key}`);
+              this.log(`[ERROR]:`, logPayload);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = false;
               reject(event);
             }).bind(this);
             this._onEnded = (() => {
-              console.log(`[ENDED]: Audio-${currentPlayable.key}`);
+              this.log(`[ENDED]:`, logPayload);
 
               this.setIsPlaying(false, currentPlayable.key);
               this.isPaused = false;
               resolve({});
             }).bind(this);
             this._onUrlLoaded = (() => {
-              console.log(`[URL-LOADED]: Audio-${currentPlayable.key}`);
+              this.log(`[URL-LOADED]:`, logPayload);
               this.audio.play();
             }).bind(this);
 
@@ -205,7 +212,7 @@ export class AppAudioPlayer {
           currentPage
         );
       } catch (e) {
-        console.log("audio error", { e, message, currentPlayable });
+        this.log("[ON-AUDIO-ERROR]", { e, message, currentPlayable });
       } finally {
         // EMIT END: individual message
         this.emitMessageStopped(message.uniqueName);
@@ -216,57 +223,30 @@ export class AppAudioPlayer {
       }
       this.removeAudioEventListeners();
     }
+
     // EMIT END: group of messages
     this.emitMessageStopped(getListenableKeyFromPlayable(currentPlayable));
 
     this.emitEvent(audioPlayEvents.PlayableFinished, [currentPlayable.key]);
   }
-  assesUnstoppableMessage(appMessage: AppMessage, currentPage: string) {
-    window.isPlayingUninteruptableAudios = {};
-
-    if (
-      appMessage.preventForcedStopOnCurrentPageJustOnce &&
-      !localStorage.getItem(
-        `playedOnced-${appMessage.uniqueName}-${currentPage}`
-      )
-    ) {
-      window.isPlayingUninteruptableAudios[currentPage] = true;
-      return;
-    }
-
-    if (appMessage.preventForcedStopOnCurrentPage) {
-      window.isPlayingUninteruptableAudios[currentPage] = true;
-    }
-  }
-  assesUninteruptableMessageStop() {
-    window.isPlayingUninteruptableAudios = {};
-  }
-
-  private markUninteruptableOnceMessagePlayed_IfApplicable(
-    appMessage: AppMessage,
-    currentPage: string
-  ) {
-    if (!appMessage.preventForcedStopOnCurrentPageJustOnce) {
-      return;
-    }
-
-    const localStorageKey = `playedOnced-${appMessage.uniqueName}-${currentPage}`;
-    if (localStorage.getItem(localStorageKey)) {
-      console.log(
-        `Message preventForcedStopOnCurrentPageJustOnce already played: ${localStorageKey}`
-      );
-      return;
-    }
-    const dateString = new Date().toUTCString();
-    localStorage.setItem(localStorageKey, dateString);
-    console.log(
-      `Message preventForcedStopOnCurrentPageJustOnce set played at: ${localStorageKey}, ${dateString}`
-    );
-  }
 
   private setIsPlaying(value: boolean, playableKey: string) {
     this.isPlaying = value;
     this.emitEvent(audioPlayEvents.PlayingStateChange, [playableKey]);
+  }
+  private addAudioEventListeners() {
+    this.audio.addEventListener("loadedmetadata", this._onUrlLoaded);
+    this.audio.addEventListener("play", this._onPlay);
+    this.audio.addEventListener("pause", this._onPause);
+    this.audio.addEventListener("error", this._onError);
+    this.audio.addEventListener("ended", this._onEnded);
+  }
+  private removeAudioEventListeners() {
+    this.audio.removeEventListener("loadedmetadata", this._onUrlLoaded);
+    this.audio.removeEventListener("play", this._onPlay);
+    this.audio.removeEventListener("pause", this._onPause);
+    this.audio.removeEventListener("error", this._onError);
+    this.audio.removeEventListener("ended", this._onEnded);
   }
 
   public stopAnyAudio() {
@@ -276,7 +256,6 @@ export class AppAudioPlayer {
     this.setIsPlaying(false, "");
     this.isPaused = false;
   }
-
   public resumeAudio() {
     if (!this.isPaused) {
       return;
@@ -294,6 +273,14 @@ export class AppAudioPlayer {
     } catch (e) {}
   }
 
+  private stopOngoingAudioPromise = () => {
+    let callback = this._forceStopAudiosCallbacks.pop();
+    while (!!callback) {
+      callback();
+      callback = this._forceStopAudiosCallbacks.pop();
+    }
+  };
+
   /**
    * make possible knowning when a certain message has started or stopped playing
    * @param uniqueName
@@ -303,135 +290,94 @@ export class AppAudioPlayer {
     const stopAnyOngoingPromise = new CustomEvent(eventName, { detail: {} });
     document.dispatchEvent(stopAnyOngoingPromise);
 
-    console.log(`Emitted event '${eventName}'`);
+    this.log(`Emitted event`, { p: { eventName } });
   }
   private emitMessageStopped(uniqueName: string) {
     const eventName = `stopped-playing-message-${uniqueName}-app`;
     const stopAnyOngoingPromise = new CustomEvent(eventName, { detail: {} });
     document.dispatchEvent(stopAnyOngoingPromise);
 
-    console.log(`Emitted event '${eventName}'`);
+    this.log(`Emitted event`, { p: { eventName } });
   }
 
-  private addAudioEventListeners() {
-    this.audio.addEventListener("loadedmetadata", this._onUrlLoaded);
-    this.audio.addEventListener("play", this._onPlay);
-    this.audio.addEventListener("pause", this._onPause);
-    this.audio.addEventListener("error", this._onError);
-    this.audio.addEventListener("ended", this._onEnded);
+  /**
+   * the user can be forced to listen to an audio all the way through just once using localStorage to marked as listened
+   */
+  private assesUninteruptableMessageStop() {
+    window.isPlayingUninteruptableAudios = {};
   }
-  private removeAudioEventListeners() {
-    this.audio.removeEventListener("loadedmetadata", this._onUrlLoaded);
-    this.audio.removeEventListener("play", this._onPlay);
-    this.audio.removeEventListener("pause", this._onPause);
-    this.audio.removeEventListener("error", this._onError);
-    this.audio.removeEventListener("ended", this._onEnded);
-  }
-
-  private stopOngoingAudioPromise = () => {
-    let callback = this._forceStopAudiosCallbacks.pop();
-    while (!!callback) {
-      callback();
-      callback = this._forceStopAudiosCallbacks.pop();
+  private markUninteruptableOnceMessagePlayed_IfApplicable(
+    appMessage: AppMessage,
+    currentPage: string
+  ) {
+    if (!appMessage.preventForcedStopOnCurrentPageJustOnce) {
+      return;
     }
-  };
 
-  private eventListeners: {
+    const localStorageKey = `playedOnced-${appMessage.uniqueName}-${currentPage}`;
+    if (localStorage.getItem(localStorageKey)) {
+      this.log(
+        `Message preventForcedStopOnCurrentPageJustOnce already played: ${localStorageKey}`
+      );
+      return;
+    }
+    const dateString = new Date().toUTCString();
+    localStorage.setItem(localStorageKey, dateString);
+    this.log(
+      `Message preventForcedStopOnCurrentPageJustOnce set played at: ${localStorageKey}, ${dateString}`
+    );
+  }
+  private assesUnstoppableMessage(appMessage: AppMessage, currentPage: string) {
+    window.isPlayingUninteruptableAudios = {};
+
+    if (
+      appMessage.preventForcedStopOnCurrentPageJustOnce &&
+      !localStorage.getItem(
+        `playedOnced-${appMessage.uniqueName}-${currentPage}`
+      )
+    ) {
+      window.isPlayingUninteruptableAudios[currentPage] = true;
+      return;
+    }
+
+    if (appMessage.preventForcedStopOnCurrentPage) {
+      window.isPlayingUninteruptableAudios[currentPage] = true;
+    }
+  }
+
+  /**
+   * use the observer pattern to call handlers when things change in this class:
+   * - assignments to isPlaying variable
+   * - assignmnets to isPaused variable
+   * etc.
+   */
+  private innerEventsListeners: {
     [eventName: string]: ((values: string[]) => void)[];
   } = {};
-
-  addEventListener(eventName: string, listener: (values: string[]) => void) {
-    if (!this.eventListeners[eventName]) {
-      this.eventListeners[eventName] = [];
+  public addEventListener(
+    eventName: string,
+    listener: (values: string[]) => void
+  ) {
+    if (!this.innerEventsListeners[eventName]) {
+      this.innerEventsListeners[eventName] = [];
     }
-    this.eventListeners[eventName].push(listener);
+    this.innerEventsListeners[eventName].push(listener);
   }
-
-  removeEventListener(eventName: string, listener: (values: string[]) => void) {
-    if (this.eventListeners[eventName]) {
-      this.eventListeners[eventName] = this.eventListeners[eventName].filter(
-        (l) => l !== listener
-      );
+  public removeEventListener(
+    eventName: string,
+    listener: (values: string[]) => void
+  ) {
+    if (this.innerEventsListeners[eventName]) {
+      this.innerEventsListeners[eventName] = this.innerEventsListeners[
+        eventName
+      ].filter((l) => l !== listener);
     }
   }
-
   private emitEvent(eventName: string, values: string[]) {
-    if (this.eventListeners[eventName]) {
-      this.eventListeners[eventName].forEach((listener) => {
+    if (this.innerEventsListeners[eventName]) {
+      this.innerEventsListeners[eventName].forEach((listener) => {
         listener(values);
       });
     }
-  }
-}
-
-export const audioPlayEvents = {
-  PlayingStateChange: "playing-state-change",
-  PlayableFinished: "playable-finished",
-};
-
-function getNodeText(node: Element) {
-  if (!node) return "";
-  const htmlElement = node as HTMLElement;
-  if (!("hasAttribute" in htmlElement)) return "";
-  if (htmlElement.getAttribute("aria-hidden") === "true") return "";
-
-  if (htmlElement.hasAttribute("aria-label")) {
-    const label = htmlElement.getAttribute("aria-label") ?? "";
-    return `${label}`;
-  }
-
-  if (htmlElement.hasAttribute("alt")) {
-    const label = htmlElement.getAttribute("alt") ?? "";
-    return label;
-  }
-
-  if (["TEXTAREA", "INPUT"].includes(htmlElement.tagName)) {
-    return `Input ${htmlElement.getAttribute("type") ?? "text"}. Value: ${
-      htmlElement.getAttribute("value") ?? "empty"
-    }`;
-  }
-
-  if (!htmlElement.children?.length && htmlElement.innerText) {
-    const label = htmlElement.innerText;
-    return `${label}`;
-  }
-
-  if (htmlElement.children?.length > 0) {
-    let text = "";
-    for (let i = 0; i < htmlElement.children.length; i++) {
-      const textItem = getNodeText(htmlElement.children[i]);
-      if (textItem) {
-        text += textItem;
-      }
-    }
-    return text;
-  }
-  return "";
-}
-
-export type AudioAttributeEventDetail = {
-  audioPath: string;
-  audioText: string;
-};
-
-export const getListenableKeyFromPlayable = (
-  currentPlayable: PlayableMessage
-) => {
-  return getListenableKeyFromPlayableKey(currentPlayable.key);
-};
-
-export const getListenableKeyFromPlayableKey = (key: string) => {
-  const m = [key, "-playable-message"].join("-");
-  return m;
-};
-
-declare global {
-  interface GlobalEventHandlersEventMap {
-    "request-audio-play-from-node-attribute-event": CustomEvent<AudioAttributeEventDetail>;
-  }
-  interface Window {
-    isPlayingUninteruptableAudios: {
-      [currentPage: string]: boolean;
-    };
   }
 }

@@ -2,7 +2,7 @@ import { WithFocusControls } from "../../page-components/accessibility/WithFocus
 import useFetchData from "../../../api/useFetchData";
 import { LanguageDataItem } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { langPageMessages } from "./appMessages";
 import { LanguageCard } from "./LanguageCard";
 import "./LessonLanguages.scss";

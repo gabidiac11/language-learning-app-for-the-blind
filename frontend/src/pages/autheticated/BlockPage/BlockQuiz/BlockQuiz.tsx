@@ -12,7 +12,7 @@ import {
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import BlockQuizQuestion from "./BlockQuizQuestion";
 import "./BlockQuiz.scss";
-import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { blockQuizPageMessages } from "./appMessages";
 import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 

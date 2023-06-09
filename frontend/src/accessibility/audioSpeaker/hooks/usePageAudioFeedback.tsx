@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef } from "react";
-import { AppMessage } from "./types/appMessage.type";
-import { apiErrorsAppMessages } from "./staticAppMessages/apiErrorsAppMessages";
-import { generalAppMessages } from "./staticAppMessages/generalAppMessages";
-import { PlayableError, PlayableMessage } from "./types/playableMessage.type";
-import { useFeedbackAudioQueue } from "../context/hooks/useFeedbackAudiQueue";
-import { genKey } from "../constants";
+import { genKey } from "../../../constants";
+import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
+import { generalAppMessages } from "../../staticAppMessages/generalAppMessages";
+import { AppMessage } from "../../types/appMessage.type";
+import { PlayableError, PlayableMessage } from "../../types/playableMessage.type";
 
 export const usePageAudioFeedback = (props: {
   error: PlayableError | undefined;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router";
 import useFetchData from "../../../../api/useFetchData";
-import { BuildingBlockProgress, Word } from "../../../../context";
+import { BuildingBlockProgress } from "../../../../context";
 import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
@@ -10,9 +10,9 @@ import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 import explanations from "../explanations";
 import { BlockWordSummary } from "./BlockWordSummary";
 import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
-import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
 import { blockIntroductionPageMessages } from "./appMessages";
 import { screenReader } from "../../../../accessibility/appReaders";
+import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 
 const BlockIntroduction = () => {
   const { id: blockProgressId, lang } = useParams<{

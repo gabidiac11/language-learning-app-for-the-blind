@@ -1,14 +1,11 @@
 import {
   Speaker as SpeakerIcon,
-  WarningSharp as WarningIcon
+  WarningSharp as WarningIcon,
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import {
-  AppAudioPlayer,
-  AudioAttributeEventDetail,
-  audioPlayEvents
-} from "../../../../accessibility/appReaders";
+import { AppAudioPlayer } from "../../../../accessibility/appReaders";
+import { audioPlayEvents } from "../../../../accessibility/audioSpeaker/audioEvents";
 import { generalAppMessages } from "../../../../accessibility/staticAppMessages/generalAppMessages";
 import { PlayableMessage } from "../../../../accessibility/types/playableMessage.type";
 import { genKey } from "../../../../constants";
@@ -17,20 +14,24 @@ import { useContextActions } from "../../../../context/hooks/useContextActions";
 import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 
 import "./Speaker.scss";
+import { useListenToPlayFromHtmlAttributes } from "../../../../accessibility/audioSpeaker/htmlAttributeAudio/useListenToPlayFromHtmlAttributes";
+import { usePrematureStopAudioListener } from "../../../../accessibility/audioSpeaker/hooks/usePrematureStopAudioListener";
+import { logAudioQueue } from "../../../../accessibility/audioSpeaker/logAudioQueue";
 
 export function Speaker() {
   const audioRef = useRef<AppAudioPlayer>(new AppAudioPlayer(new Audio()));
 
   const [currentPlayable, setCurrentPlayable] = useState<PlayableMessage>();
-  const currentPlayingKeyRef = useRef<string>();
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const {
-    dequePlayableMessage, enqueuePlayableMessage, prematurelyStopPlayableMessages,
-  } = useFeedbackAudioQueue();
+  const { dequePlayableMessage, enqueuePlayableMessage } =
+    useFeedbackAudioQueue();
   const { setIsAudioInteractionOn } = useContextActions();
   const { isAudioInteractionOn, playableAudiosQueue } = useAppStateContext();
+
+  useListenToPlayFromHtmlAttributes();
+  usePrematureStopAudioListener();
 
   const setInteractionActive = () => {
     if (isAudioInteractionOn) {
@@ -44,24 +45,21 @@ export function Speaker() {
 
   const m = playableAudiosQueue.map((i) => i.key).join(",");
   useEffect(() => {
-    console.log(
-      `[PLAYABLES]: `,
-      JSON.parse(JSON.stringify(playableAudiosQueue))
-    );
+    logAudioQueue(`QUEUE-CHANGE`, playableAudiosQueue);
+
     if (playableAudiosQueue.length === 0) {
-      currentPlayingKeyRef.current = undefined;
       setCurrentPlayable(undefined);
       return;
     }
     const first = playableAudiosQueue[0];
 
     if (first.key !== currentPlayable?.key) {
-      currentPlayingKeyRef.current = first.key;
       setCurrentPlayable(first);
     }
   }, [m]);
 
   useEffect(() => {
+    // all playable items have been dequeued -> stop any currently playing
     if (!currentPlayable) {
       audioRef.current.stopAnyAudio();
       return;
@@ -71,72 +69,50 @@ export function Speaker() {
   }, [currentPlayable]);
 
   useEffect(() => {
+    const onPlayingStateChange = () => {
+      if (audioRef.current.isPlaying) {
+        setIsAudioInteractionOn(true);
+      }
+      setIsPlaying(audioRef.current.isPlaying);
+    };
+
     audioRef.current.addEventListener(
       audioPlayEvents.PlayingStateChange,
-      () => {
-        if (audioRef.current.isPlaying) {
-          setIsAudioInteractionOn(true);
-        }
-        setIsPlaying(audioRef.current.isPlaying);
-      }
+      onPlayingStateChange
     );
-    audioRef.current.addEventListener(audioPlayEvents.PlayableFinished, (v) => {
-      const [playableKey] = v;
-      dequePlayableMessage(playableKey);
-    });
+    return () => {
+      audioRef.current.removeEventListener(
+        audioPlayEvents.PlayingStateChange,
+        onPlayingStateChange
+      );
+    };
   }, []);
 
   useEffect(() => {
-    const forceStopAllListener = () => {
-      prematurelyStopPlayableMessages(playableAudiosQueue.map((i) => i.key));
+    const onPlayableFinished = (v: string[]) => {
+      const [playableKey] = v;
+      dequePlayableMessage(playableKey);
     };
-    window.addEventListener(
-      "prematurelyStopPlayableMessages",
-      forceStopAllListener
+
+    audioRef.current.addEventListener(
+      audioPlayEvents.PlayableFinished,
+      onPlayableFinished
     );
 
     return () => {
-      window.removeEventListener(
-        "prematurelyStopPlayableMessages",
-        forceStopAllListener
+      audioRef.current.removeEventListener(
+        audioPlayEvents.PlayableFinished,
+        onPlayableFinished
       );
     };
-  }, [playableAudiosQueue]);
-
-  useEffect(() => {
-    const playAudioFromAttributeNode = (
-      e: CustomEvent<AudioAttributeEventDetail>
-    ) => {
-      if (e.detail.audioPath && e.detail.audioText) {
-        enqueuePlayableMessage({
-          key: `${e.detail.audioPath}`,
-          messages: [
-            {
-              filePath: e.detail.audioPath,
-              text: e.detail.audioText,
-              uniqueName: e.detail.audioPath,
-            },
-          ],
-        });
-      }
-    };
-    window.addEventListener(
-      "request-audio-play-from-node-attribute-event",
-      playAudioFromAttributeNode
-    );
-
-    return () => {
-      window.removeEventListener(
-        "request-audio-play-from-node-attribute-event",
-        playAudioFromAttributeNode
-      );
-    };
-  }, [enqueuePlayableMessage]);
+  }, []);
 
   return (
     <div className="flex speaker-container">
       <div
-        className={`audioPlayer ${!isAudioInteractionOn ? "audio-no-interaction" : ""}`}
+        className={`audioPlayer ${
+          !isAudioInteractionOn ? "audio-no-interaction" : ""
+        }`}
       >
         <Tooltip
           title={audioRef.current.currentTextPlaying}
@@ -146,13 +122,13 @@ export function Speaker() {
             id="play-audio"
             {...(isAudioInteractionOn
               ? {
-                tabIndex: -1,
-                "aria-hidden": true,
-                onFocus: (event) => event.target.blur(),
-              }
+                  tabIndex: -1,
+                  "aria-hidden": true,
+                  onFocus: (event) => event.target.blur(),
+                }
               : {
-                tabIndex: 0,
-              })}
+                  tabIndex: 0,
+                })}
             onClick={setInteractionActive}
             onFocus={setInteractionActive}
             onKeyDown={setInteractionActive}
@@ -161,7 +137,8 @@ export function Speaker() {
               if (audioNode) {
                 audioRef.current.audio = audioNode;
               }
-            }} />
+            }}
+          />
         </Tooltip>
 
         {!isAudioInteractionOn && (
@@ -169,7 +146,8 @@ export function Speaker() {
             fontSize={"large"}
             color="warning"
             aria-hidden="true"
-            className="warning-icon" />
+            className="warning-icon"
+          />
         )}
       </div>
       <SpeakerIcon aria-hidden="true" htmlColor={isPlaying ? "red" : "white"} />

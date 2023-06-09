@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { useFeedbackAudioQueue } from "../context/hooks/useFeedbackAudiQueue";
-import { AppMessage } from "./types/appMessage.type";
-import { getListenableKeyFromPlayableKey } from "./appReaders";
-import { createPlayable } from "./createPlayable";
+import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
+import { AppMessage } from "../../types/appMessage.type";
+import { createPlayable } from "../createPlayable";
+import { getListenableKeyFromPlayableKey } from "../getListenableKeyFromPlayable";
 
 /**
  * create waitable callback that wraps start/end audio events within a promise
@@ -16,7 +16,7 @@ export const usePlayAppMessageFactory = () => {
     async (appMessageOrMessages: AppMessage | AppMessage[]) => {
       const playable = createPlayable(appMessageOrMessages);
 
-      // establish listename event names specifically for whole group of app messages
+      // establish listenable event names specifically for whole group of app messages
       const listenablePlayableKey = getListenableKeyFromPlayableKey(
         playable.key
       );
