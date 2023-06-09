@@ -14,10 +14,10 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import BuildingBlockItem from "../../StoryPage/BuildingBlockItem";
 import EpilogueBlockItem from "../../StoryPage/EpilogueBlockItem";
-import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
 import { blockQuizCompletedPageMessages } from "./appMessages";
 import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
-import { AppMessage } from "../../../../accessibility/accesibilityTypes";
+import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 import { useState } from "react";
 import { useEffect } from "react";
 

@@ -1,5 +1,5 @@
-import { audioStorageBasePath } from "../constants";
-import { AppMessage } from "./accesibilityTypes";
+import { audioStorageBasePath } from "../../constants";
+import { AppMessage } from "../types/appMessage.type";
 
 export const generalAppMessages: AppMessageGeneralSet = {
   readAvailableCommands: {

@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
-import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
 import {
   QuizOption,
   QuizResponse,

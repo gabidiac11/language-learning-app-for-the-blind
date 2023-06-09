@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import React, { useEffect } from "react";
-import { errorAppMessages } from "../../../accessibility/errorAppMessages";
-import { generalAppMessages } from "../../../accessibility/generalAppMessages";
+import { apiErrorsAppMessages } from "../../../accessibility/staticAppMessages/apiErrorsAppMessages";
+import { generalAppMessages } from "../../../accessibility/staticAppMessages/generalAppMessages";
 import {
   PlayableError,
   PlayableMessage,
-} from "../../../accessibility/playableMessage";
+} from "../../../accessibility/types/playableMessage.type";
 import { Loader, OverLayLoader } from "../Loader";
 
 import "./ErrorBoundary.scss";

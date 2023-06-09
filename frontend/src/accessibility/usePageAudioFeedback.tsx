@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
-import { AppMessage } from "./accesibilityTypes";
-import { errorAppMessages } from "./errorAppMessages";
-import { generalAppMessages } from "./generalAppMessages";
-import { PlayableError, PlayableMessage } from "./playableMessage";
+import { AppMessage } from "./types/appMessage.type";
+import { apiErrorsAppMessages } from "./staticAppMessages/apiErrorsAppMessages";
+import { generalAppMessages } from "./staticAppMessages/generalAppMessages";
+import { PlayableError, PlayableMessage } from "./types/playableMessage.type";
 import { useFeedbackAudioQueue } from "../context/hooks/useFeedbackAudiQueue";
 import { genKey } from "../constants";
 

@@ -1,8 +1,8 @@
 import { Divider, Chip, Typography, Container } from "@mui/material";
 import { useRef } from "react";
 import { useParams } from "react-router";
-import { AppMessage } from "../../../accessibility/accesibilityTypes";
-import { WithFocusControls } from "../../../accessibility/WithFocusControls";
+import { AppMessage } from "../../../accessibility/types/appMessage.type";
+import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";

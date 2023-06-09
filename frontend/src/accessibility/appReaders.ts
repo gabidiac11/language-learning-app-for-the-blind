@@ -1,5 +1,5 @@
-import { AppMessage } from "./accesibilityTypes";
-import { PlayableMessage } from "./playableMessage";
+import { AppMessage } from "./types/appMessage.type";
+import { PlayableMessage } from "./types/playableMessage.type";
 
 window.isPlayingUninteruptableAudios = {};
 

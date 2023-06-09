@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { useEffect, useRef } from "react";
 import { KeyboardAlt as InfoIcon } from "@mui/icons-material";
-import { screenReader } from "./appReaders";
+import { screenReader } from "../../../accessibility/appReaders";
 
 const findNodes = (wrapperNode: HTMLElement): Element[] => {
   const nodes = wrapperNode.querySelectorAll(`[tabindex="0"]`);

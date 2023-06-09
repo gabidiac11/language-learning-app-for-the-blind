@@ -8,10 +8,10 @@ import {
 import GoogleIcon from "@mui/icons-material/Google";
 import { withEnter } from "./../../utils";
 import "./index.scss";
-import { WithFocusControls } from "../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../page-components/accessibility/WithFocusControls";
 import { useFeedbackAudioQueue } from "../../context/hooks/useFeedbackAudiQueue";
 import { registerPageMessages } from "./appMessages";
-import { errorAppMessages } from "../../accessibility/errorAppMessages";
+import { apiErrorsAppMessages } from "../../accessibility/staticAppMessages/apiErrorsAppMessages";
 import { genKey } from "../../constants";
 
 export const Register = () => {
@@ -58,8 +58,8 @@ export const Register = () => {
       }
 
       enqueuePlayableMessage({
-        key: `${genKey()}-${errorAppMessages.somethingWentWrong.uniqueName}`,
-        messages: [errorAppMessages.somethingWentWrong],
+        key: `${genKey()}-${apiErrorsAppMessages.somethingWentWrong.uniqueName}`,
+        messages: [apiErrorsAppMessages.somethingWentWrong],
       });
     }
   };

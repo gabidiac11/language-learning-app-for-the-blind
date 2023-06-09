@@ -1,5 +1,5 @@
 import { Word } from "../../../../context";
-import { PlayableMessage } from "../../../../accessibility/playableMessage";
+import { PlayableMessage } from "../../../../accessibility/types/playableMessage.type";
 import { genKey } from "../../../../constants";
 
 export function createPlayableGroupFromWord(word: Word): PlayableMessage {

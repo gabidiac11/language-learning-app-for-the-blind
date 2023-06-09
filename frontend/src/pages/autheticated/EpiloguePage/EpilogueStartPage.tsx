@@ -9,12 +9,12 @@ import "./EpiloguePage.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { lessonLanguageHeader } from "../../../constants";
-import { WithFocusControls } from "../../../accessibility/WithFocusControls";
-import { PlayableError } from "../../../accessibility/playableMessage";
-import { getPlayableErrorFromUnknown } from "../../../accessibility/apiAppMessages";
+import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
+import { PlayableError } from "../../../accessibility/types/playableMessage.type";
+import { getPlayableErrorFromUnknown } from "../../../accessibility/api/getPlayableErrorFromUnknown";
 import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
 import { epilogueOverviewPageMessages } from "./appMessages";
-import { useIsPlayingMessage } from "../../../accessibility/useAudioProgress";
+import { useIsPlayingAudioMessage } from "../../../accessibility/useIsPlayingAudioMessage";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import { StopCircle as StopIcon } from "@mui/icons-material";
 
@@ -88,7 +88,7 @@ const StoryListener = (props: {
   epilogueProgress: EpilogueProgress;
   reload: () => void;
 }) => {
-  const isListening = useIsPlayingMessage(
+  const isListening = useIsPlayingAudioMessage(
     props.epilogueProgress.epilogue.audioFile
   );
 

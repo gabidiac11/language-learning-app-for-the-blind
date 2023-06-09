@@ -1,4 +1,4 @@
-import { AppMessage } from "../../accessibility/accesibilityTypes";
+import { AppMessage } from "../../accessibility/types/appMessage.type";
 import { UseFetchDataOptions } from "../../api/useFetchData";
 import {
   BuildingBlockProgress,

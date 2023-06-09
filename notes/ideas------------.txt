@@ -1,8 +1,0 @@
-- helpere pe pagina de login
-- fixat register + helpere pagina
-- generat pentru demo file path-uri
-- facut quiz-urile/summurierile pentru block si epilogue
-
-Teste:
-- verfic login greeting and something went wrong
-- verific textele sa sune omenesc

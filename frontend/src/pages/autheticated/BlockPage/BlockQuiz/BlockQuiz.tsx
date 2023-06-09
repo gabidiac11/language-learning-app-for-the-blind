@@ -14,7 +14,7 @@ import BlockQuizQuestion from "./BlockQuizQuestion";
 import "./BlockQuiz.scss";
 import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
 import { blockQuizPageMessages } from "./appMessages";
-import { AppMessage } from "../../../../accessibility/accesibilityTypes";
+import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 
 const BlockQuiz = () => {
   const navigate = useNavigate();

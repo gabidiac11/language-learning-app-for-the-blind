@@ -5,7 +5,7 @@ import { UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
 import { useParams } from "react-router";
 import { Typography } from "@mui/material";
-import { WithFocusControls } from "../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import { storiesOverviewPageMessages } from "./appMessages";
 import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
 

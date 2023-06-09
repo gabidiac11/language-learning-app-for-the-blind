@@ -4,10 +4,10 @@ import { Button, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./index.scss";
 import { useEffect } from "react";
-import { WithFocusControls } from "../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../page-components/accessibility/WithFocusControls";
 import { loginPageMessages } from "./appMessages";
 import { useFeedbackAudioQueue } from "../../context/hooks/useFeedbackAudiQueue";
-import { errorAppMessages } from "../../accessibility/errorAppMessages";
+import { apiErrorsAppMessages } from "../../accessibility/staticAppMessages/apiErrorsAppMessages";
 import { genKey } from "../../constants";
 
 export const Login = () => {
@@ -28,8 +28,8 @@ export const Login = () => {
       return;
     }
     enqueuePlayableMessage({
-      key: `${genKey()}-${errorAppMessages.somethingWentWrong.uniqueName}`,
-      messages: [errorAppMessages.somethingWentWrong],
+      key: `${genKey()}-${apiErrorsAppMessages.somethingWentWrong.uniqueName}`,
+      messages: [apiErrorsAppMessages.somethingWentWrong],
     });
   }, [error]);
 

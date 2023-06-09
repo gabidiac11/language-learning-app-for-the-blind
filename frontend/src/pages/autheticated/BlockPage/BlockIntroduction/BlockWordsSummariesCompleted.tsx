@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
-import { getPlayableErrorFromUnknown } from "../../../../accessibility/apiAppMessages";
+import { getPlayableErrorFromUnknown } from "../../../../accessibility/api/getPlayableErrorFromUnknown";
 import { screenReader } from "../../../../accessibility/appReaders";
 import useFetchData, {
   UseFetchDataOptions,

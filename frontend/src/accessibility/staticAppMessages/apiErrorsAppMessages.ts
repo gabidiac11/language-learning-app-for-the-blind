@@ -1,7 +1,7 @@
-import { audioStorageBasePath } from "../constants";
-import { AppMessage } from "./accesibilityTypes";
+import { audioStorageBasePath } from "../../constants";
+import { AppMessage } from "../types/appMessage.type";
 
-export const errorAppMessages: AppMessageErrorSet = {
+export const apiErrorsAppMessages: AppMessageErrorSet = {
   somethingWentWrong: {
     uniqueName: "somethingWentWrong",
     text: "Something went wrong. Please try again later.",

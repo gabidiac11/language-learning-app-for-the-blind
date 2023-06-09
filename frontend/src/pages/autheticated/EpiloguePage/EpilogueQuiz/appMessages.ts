@@ -1,4 +1,4 @@
-import { AppMessage } from "../../../../accessibility/accesibilityTypes";
+import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 import { audioStorageBasePath } from "../../../../constants";
 
 export const epilogueQuizPageMessages: {
