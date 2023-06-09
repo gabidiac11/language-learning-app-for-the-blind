@@ -13,7 +13,7 @@ import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary"
 import EpilogueQuizQuestion from "./EpilogueQuizQuestion";
 import "./EpilogueQuiz.scss";
 import { AppMessage } from "../../../../accessibility/types/appMessage.type";
-import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { epilogueQuizPageMessages } from "./appMessages";
 
 const EpilogueQuiz = () => {

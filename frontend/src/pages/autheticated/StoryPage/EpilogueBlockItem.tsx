@@ -37,7 +37,7 @@ const EpilogueBlockItem = (props: {
       onClick={navigateToStory}
     >
       <CardHeader
-        ariaLabel={`Epilgoue title: ${epilogueProgress.epilogue.name}`}
+        aria-label={`Epilgoue title: ${epilogueProgress.epilogue.name}`}
         title={epilogueProgress.epilogue.name}
         subheader={
           <ItemProgressSummary

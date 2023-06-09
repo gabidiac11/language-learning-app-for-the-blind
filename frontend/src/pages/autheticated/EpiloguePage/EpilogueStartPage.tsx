@@ -12,9 +12,9 @@ import { lessonLanguageHeader } from "../../../constants";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import { PlayableError } from "../../../accessibility/types/playableMessage.type";
 import { getPlayableErrorFromUnknown } from "../../../accessibility/api/getPlayableErrorFromUnknown";
-import { usePageAudioFeedback } from "../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { epilogueOverviewPageMessages } from "./appMessages";
-import { useIsPlayingAudioMessage } from "../../../accessibility/useIsPlayingAudioMessage";
+import { useIsPlayingAudioMessage } from "../../../accessibility/audioSpeaker/hooks/useIsPlayingAudioMessage";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import { StopCircle as StopIcon } from "@mui/icons-material";
 

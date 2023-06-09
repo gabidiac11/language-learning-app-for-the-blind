@@ -2,7 +2,7 @@ import { MicRounded as Mic } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { usePlayAppMessageFactory } from "../../../../accessibility/usePlayAppMessageFactory";
+import { usePlayAppMessageFactory } from "../../../../accessibility/audioSpeaker/hooks/usePlayAppMessageFactory";
 
 import { RecState, EventMediaListeners, MicPermissionStatus } from "./microphone.types";
 

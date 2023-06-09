@@ -4,7 +4,7 @@ import { WithFocusControls } from "../../../page-components/accessibility/WithFo
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress } from "../../../../context";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import { usePageAudioFeedback, usePreappendLoadedData } from "../../../../accessibility/usePageAudioFeedback";
+import { usePageAudioFeedback, usePreappendLoadedData } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { blockStartPageMessages } from "./appMessages";
 import explanations from "../explanations";
 

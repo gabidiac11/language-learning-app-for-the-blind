@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import { useEffect, useRef } from "react";
 import { KeyboardAlt as InfoIcon } from "@mui/icons-material";
 import { screenReader } from "../../../accessibility/appReaders";
+import { emitPrematurStopAudio } from "../../../accessibility/audioSpeaker/hooks/usePrematureStopAudioListener";
 
 const findNodes = (wrapperNode: HTMLElement): Element[] => {
   const nodes = wrapperNode.querySelectorAll(`[tabindex="0"]`);
@@ -108,18 +109,11 @@ export const WithFocusControls = (
       const node = nodeRefs[canditateIndex] as unknown as { focus: unknown };
       if (typeof node?.focus === "function") {
         try {
-          if (
-            "getAttribute" in node &&
-            (
-              node as unknown as { getAttribute: (key: string) => string }
-            ).getAttribute("playing-key") !==
-              document.activeElement.getAttribute("playing-key")
-          ) {
+          const currentNodeIsPlayingTheSameThing =
+            isCurrentNodeIsPlayingTheSameThing(node);
+          if (currentNodeIsPlayingTheSameThing) {
             // stop player
-            const event = new CustomEvent("prematurelyStopPlayableMessages", {
-              detail: {},
-            });
-            window.dispatchEvent(event);
+            emitPrematurStopAudio();
           }
 
           node.focus();
@@ -177,3 +171,12 @@ export const WithFocusControls = (
     </div>
   );
 };
+
+function isCurrentNodeIsPlayingTheSameThing(node: { focus: unknown }) {
+  return (
+    "getAttribute" in node &&
+    (node as unknown as { getAttribute: (key: string) => string }).getAttribute(
+      "playing-key"
+    ) !== document.activeElement?.getAttribute("playing-key")
+  );
+}

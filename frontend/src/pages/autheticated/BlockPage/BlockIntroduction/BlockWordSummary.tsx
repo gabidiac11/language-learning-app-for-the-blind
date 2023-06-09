@@ -3,13 +3,11 @@ import { useRef, useEffect, useCallback, useState } from "react";
 import { Word } from "../../../../context";
 import { VolumeUp as PlayIcon } from "@mui/icons-material";
 import { StopCircle as StopIcon } from "@mui/icons-material";
-import { useIsPlayingAudioMessage } from "../../../../accessibility/useIsPlayingAudioMessage";
 import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
-import {
-  getListenableKeyFromPlayableKey,
-} from "../../../../accessibility/appReaders";
 import { createPlayableGroupFromWord } from "./createPlayableGroup";
 import { languages } from "../../../../constants";
+import { getListenableKeyFromPlayableKey } from "../../../../accessibility/audioSpeaker/getListenableKeyFromPlayable";
+import { useIsPlayingAudioMessage } from "../../../../accessibility/audioSpeaker/hooks/useIsPlayingAudioMessage";
 
 export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: () => void }> = (
   props
