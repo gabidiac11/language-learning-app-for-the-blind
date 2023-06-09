@@ -11,11 +11,11 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import "../EpilogueQuiz.scss";
 import { StoryCard } from "../../../StoriesOverviewPage/StoryCard/StoryCard";
-import { WithFocusControls } from "../../../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../../../page-components/accessibility/WithFocusControls";
 import { usePageAudioFeedback } from "../../../../../accessibility/usePageAudioFeedback";
 import { epiloqueQuizCompletedPageMessages } from "./appMessages";
 import { useEffect, useState } from "react";
-import { AppMessage } from "../../../../../accessibility/accesibilityTypes";
+import { AppMessage } from "../../../../../accessibility/types/appMessage.type";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",

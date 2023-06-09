@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback, useState } from "react";
 import { Word } from "../../../../context";
 import { VolumeUp as PlayIcon } from "@mui/icons-material";
 import { StopCircle as StopIcon } from "@mui/icons-material";
-import { useIsPlayingMessage } from "../../../../accessibility/useAudioProgress";
+import { useIsPlayingAudioMessage } from "../../../../accessibility/useIsPlayingAudioMessage";
 import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 import {
   getListenableKeyFromPlayableKey,
@@ -21,7 +21,7 @@ export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: ()
   const playableKeyRef = useRef<string>();
   const [playableKey, _setPlayableKey] = useState<string>("");
 
-  const isListening = useIsPlayingMessage(playableKey);
+  const isListening = useIsPlayingAudioMessage(playableKey);
   const { enqueuePlayableMessage, singleEnque, dequePlayableMessage } =
     useFeedbackAudioQueue();
 

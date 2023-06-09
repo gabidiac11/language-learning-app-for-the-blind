@@ -1,4 +1,4 @@
-import { PlayableMessage } from "../../accessibility/playableMessage";
+import { PlayableMessage } from "../../accessibility/types/playableMessage.type";
 
 export type StateType = {
   language?: Language;

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export const useIsPlayingMessage = (messageUniqueName: string) => {
+export const useIsPlayingAudioMessage = (messageUniqueName: string) => {
   const [isPlaying, setIsPlaying] = useState<boolean>();
 
   useEffect(() => {

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 import { Home, Info, LogoutRounded } from "@mui/icons-material";
 import { useAppStateContext } from "../../context/hooks/useAppStateContext";
 import { LanguageShortcuts } from "./LanguageShortcuts";
-import { SoundInterationPanel } from "./SoundInterationPanel/SoundInterationPanel";
+import { SoundInterationPanel } from "./accessibility/SoundInterationPanel/SoundInterationPanel";
 import { useContextActions } from "../../context/hooks/useContextActions";
 
 export default function Header() {
@@ -88,9 +88,7 @@ export default function Header() {
                     {!user?.photoURL && <AccountCircle htmlColor="white" />}
                     {user?.photoURL && (
                       <Avatar
-                        alt={`User button (press enter to open the log out dropdown). Your name is ${
-                          user?.displayName || "... oh wait you don't have one"
-                        }`}
+                        alt={`User photo`}
                         src={user?.photoURL}
                       />
                     )}

@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
 import useFetchData from "../../../../api/useFetchData";
 import { BuildingBlockProgress } from "../../../../context";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";

@@ -1,4 +1,4 @@
-import { WithFocusControls } from "../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { LanguageDataItem } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";

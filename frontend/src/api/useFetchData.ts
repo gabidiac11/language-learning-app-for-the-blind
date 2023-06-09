@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { getPlayableErrorFromUnknown } from "../accessibility/apiAppMessages";
+import { getPlayableErrorFromUnknown } from "../accessibility/api/getPlayableErrorFromUnknown";
 import {
   PlayableError,
   PlayableMessage,
-} from "../accessibility/playableMessage";
+} from "../accessibility/types/playableMessage.type";
 import axiosInstance from "../axiosInstance";
 import { lessonLanguageHeader } from "../constants";
 import { playTextAudio } from "../utils";

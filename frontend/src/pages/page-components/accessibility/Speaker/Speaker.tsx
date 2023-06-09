@@ -1,39 +1,24 @@
 import {
-  MicRounded as Mic,
   Speaker as SpeakerIcon,
-  WarningSharp as WarningIcon,
+  WarningSharp as WarningIcon
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import {
   AppAudioPlayer,
   AudioAttributeEventDetail,
-  audioPlayEvents,
-} from "../../../accessibility/appReaders";
-import { generalAppMessages } from "../../../accessibility/generalAppMessages";
-import { PlayableMessage } from "../../../accessibility/playableMessage";
-import { genKey } from "../../../constants";
-import { useAppStateContext } from "../../../context/hooks/useAppStateContext";
-import { useContextActions } from "../../../context/hooks/useContextActions";
-import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
-import "./SoundInterationPanel.scss";
+  audioPlayEvents
+} from "../../../../accessibility/appReaders";
+import { generalAppMessages } from "../../../../accessibility/staticAppMessages/generalAppMessages";
+import { PlayableMessage } from "../../../../accessibility/types/playableMessage.type";
+import { genKey } from "../../../../constants";
+import { useAppStateContext } from "../../../../context/hooks/useAppStateContext";
+import { useContextActions } from "../../../../context/hooks/useContextActions";
+import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 
-export const SoundInterationPanel = () => {
-  return (
-    <div aria-label="Sound controls" className="flex sound-interaction-panel">
-      <Speaker />
-      <button
-        tabIndex={0}
-        className="no-btn mic-btn"
-        aria-label="Mic, Click to record your command"
-      >
-        <Mic htmlColor="white" />
-      </button>
-    </div>
-  );
-};
+import "./Speaker.scss";
 
-const Speaker = () => {
+export function Speaker() {
   const audioRef = useRef<AppAudioPlayer>(new AppAudioPlayer(new Audio()));
 
   const [currentPlayable, setCurrentPlayable] = useState<PlayableMessage>();
@@ -42,9 +27,7 @@ const Speaker = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const {
-    dequePlayableMessage,
-    enqueuePlayableMessage,
-    prematurelyStopPlayableMessages,
+    dequePlayableMessage, enqueuePlayableMessage, prematurelyStopPlayableMessages,
   } = useFeedbackAudioQueue();
   const { setIsAudioInteractionOn } = useContextActions();
   const { isAudioInteractionOn, playableAudiosQueue } = useAppStateContext();
@@ -151,11 +134,9 @@ const Speaker = () => {
   }, [enqueuePlayableMessage]);
 
   return (
-    <div className="flex">
+    <div className="flex speaker-container">
       <div
-        className={`audioPlayer ${
-          !isAudioInteractionOn ? "audio-no-interaction" : ""
-        }`}
+        className={`audioPlayer ${!isAudioInteractionOn ? "audio-no-interaction" : ""}`}
       >
         <Tooltip
           title={audioRef.current.currentTextPlaying}
@@ -165,13 +146,13 @@ const Speaker = () => {
             id="play-audio"
             {...(isAudioInteractionOn
               ? {
-                  tabIndex: -1,
-                  "aria-hidden": true,
-                  onFocus: (event) => event.target.blur(),
-                }
+                tabIndex: -1,
+                "aria-hidden": true,
+                onFocus: (event) => event.target.blur(),
+              }
               : {
-                  tabIndex: 0,
-                })}
+                tabIndex: 0,
+              })}
             onClick={setInteractionActive}
             onFocus={setInteractionActive}
             onKeyDown={setInteractionActive}
@@ -180,8 +161,7 @@ const Speaker = () => {
               if (audioNode) {
                 audioRef.current.audio = audioNode;
               }
-            }}
-          />
+            }} />
         </Tooltip>
 
         {!isAudioInteractionOn && (
@@ -189,11 +169,10 @@ const Speaker = () => {
             fontSize={"large"}
             color="warning"
             aria-hidden="true"
-            className="warning-icon"
-          />
+            className="warning-icon" />
         )}
       </div>
       <SpeakerIcon aria-hidden="true" htmlColor={isPlaying ? "red" : "white"} />
     </div>
   );
-};
+}

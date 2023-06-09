@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
-import { generalAppMessages } from "../../accessibility/generalAppMessages";
-import { PlayableMessage } from "../../accessibility/playableMessage";
+import { generalAppMessages } from "../../accessibility/staticAppMessages/generalAppMessages";
+import { PlayableMessage } from "../../accessibility/types/playableMessage.type";
 import { genKey } from "../../constants";
 import { AppContext } from "../AppContext";
 import { StateActionType } from "../contextTypes/ctxTypes";

@@ -9,7 +9,7 @@ import "./BlockIntroduction.scss";
 import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
 import explanations from "../explanations";
 import { BlockWordSummary } from "./BlockWordSummary";
-import { WithFocusControls } from "../../../../accessibility/WithFocusControls";
+import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
 import { usePageAudioFeedback } from "../../../../accessibility/usePageAudioFeedback";
 import { blockIntroductionPageMessages } from "./appMessages";
 import { screenReader } from "../../../../accessibility/appReaders";

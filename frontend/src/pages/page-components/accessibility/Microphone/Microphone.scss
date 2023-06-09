@@ -1,0 +1,20 @@
+.page-mic {
+  .mic-btn {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+  }
+  .feedbackMic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em !important;
+    height: 1em !important;
+    .spinner-mic {
+      width: 1em !important;
+      height: 1em !important;
+    }
+  }
+}

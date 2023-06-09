@@ -1,5 +1,5 @@
-import { AppMessage } from "../accessibility/accesibilityTypes";
-import { generalAppMessages } from "../accessibility/generalAppMessages";
+import { AppMessage } from "../accessibility/types/appMessage.type";
+import { generalAppMessages } from "../accessibility/staticAppMessages/generalAppMessages";
 import { audioStorageBasePath } from "../constants";
 import { blockIntroductionPageMessages } from "../pages/autheticated/BlockPage/BlockIntroduction/appMessages";
 import { blockStartPageMessages } from "../pages/autheticated/BlockPage/BlockOverview/appMessages";
@@ -10,7 +10,7 @@ import { epiloqueQuizCompletedPageMessages } from "../pages/autheticated/Epilogu
 import { langPageMessages } from "../pages/autheticated/LessonLanguages/appMessages";
 import { storiesOverviewPageMessages } from "../pages/autheticated/StoriesOverviewPage/appMessages";
 import { storyPageMessages } from "../pages/autheticated/StoryPage/appMessages";
-import { errorAppMessages } from "./../accessibility/errorAppMessages";
+import { apiErrorsAppMessages } from "../accessibility/staticAppMessages/apiErrorsAppMessages";
 import {
   loginPageMessages,
   registerPageMessages,
@@ -20,7 +20,7 @@ import { epilogueQuizPageMessages } from "../pages/autheticated/EpiloguePage/Epi
 // page which is used as utilitary to generate audio files for the frontend feedback using text to speech later on
 
 const items = [
-  ...Object.values(errorAppMessages),
+  ...Object.values(apiErrorsAppMessages),
   ...Object.values(generalAppMessages),
   ...Object.values(langPageMessages),
   ...Object.values(storiesOverviewPageMessages),
@@ -76,7 +76,7 @@ export const DevAllMessages = () => {
       style={{ width: "90vw", height: "90vh" }}
       value={JSON.stringify(
         withRemovedBaseUrl({
-          ...errorAppMessages,
+          ...apiErrorsAppMessages,
           ...generalAppMessages,
           ...langPageMessages,
           ...storiesOverviewPageMessages,
