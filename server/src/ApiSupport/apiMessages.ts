@@ -158,6 +158,18 @@ export const apiMessages: ApiMessages = {
     text: "Choice 4: ",
     filePath: `${audioStorageBasePath}/server/quizChoiceFour.mp3`,
   },
+
+  // voice commands
+  speechNotRecognised: {
+    uniqueName: "speechNotRecognised",
+    text: "Speech not recognised",
+    filePath: `${audioStorageBasePath}/server/speechNotRecognised.mp3`,
+  },
+  voiceCommandNotIdentified: {
+    uniqueName: "voiceCommandNotIdentified",
+    text: "Could not match you speech to any command.",
+    filePath: `${audioStorageBasePath}/server/voiceCommandNotIdentified.mp3`,
+  },
 };
 
 type ApiMessages = {
@@ -199,6 +211,10 @@ type ApiMessages = {
   quizChoiceTwo: ApiMessage;
   quizChoiceThree: ApiMessage;
   quizChoiceFour: ApiMessage;
+
+  // voice commands:
+  speechNotRecognised: ApiMessage;
+  voiceCommandNotIdentified: ApiMessage;
 };
 
 export const dynamicMessages: DynamicMessages = {

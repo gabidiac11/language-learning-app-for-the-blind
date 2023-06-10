@@ -20,11 +20,11 @@ export default (state: StateType, action: StateAction): StateType => {
           action.payload,
         ],
       };
-      case StateActionType.SingleEnquePlayableMessages:
-        return {
-          ...state,
-          playableAudiosQueue: [action.payload],
-        };
+    case StateActionType.SingleEnquePlayableMessages:
+      return {
+        ...state,
+        playableAudiosQueue: [action.payload],
+      };
 
     case StateActionType.DequePlayableMessages:
       return {
@@ -54,6 +54,32 @@ export default (state: StateType, action: StateAction): StateType => {
         isAudioInteractionOn: action.payload,
       };
 
+    // voice commands:
+    case StateActionType.SingleEnqueVoiceCommand:
+      return {
+        ...state,
+        voiceCommandsQueue: [action.payload],
+      };
+    case StateActionType.DequeueVoiceCommand:
+      return {
+        ...state,
+        voiceCommandsQueue: state.voiceCommandsQueue.filter(
+          (i) => i.key !== action.payload.key
+        ),
+      };
+    case StateActionType.AddActiveVoiceHandler:
+      return {
+        ...state,
+        voiceHandlers: [...state.voiceHandlers, action.payload],
+      };
+
+    case StateActionType.RemoveActiveVoiceHandler:
+      return {
+        ...state,
+        voiceHandlers: state.voiceHandlers.filter(
+          (i) => i.key !== action.payload.key
+        ),
+      };
     default:
       return state;
   }

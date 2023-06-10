@@ -8,9 +8,13 @@ import { getPlayableFromAppMessage } from "./apiAppMessages";
 import { getIsApiErrorResponseData } from "./getIsApiErrorResponseData";
 
 
-export function getPlayableErrorFromUnknown(error: unknown): PlayableError | undefined {
-  if (!error)
-    return undefined;
+export function getPlayableErrorFromUnknown(error: unknown): PlayableError {
+  if (!error) {
+    return getPlayableFromAppMessage(
+      undefined,
+      apiErrorsAppMessages.somethingWentWrong
+    );
+  }
 
   const errorAsAxios = error as AxiosError;
   if (errorAsAxios?.isAxiosError) {

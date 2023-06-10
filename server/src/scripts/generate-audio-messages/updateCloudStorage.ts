@@ -11,8 +11,12 @@ const allMessages = [
   ...Object.values(apiMessageClean),
 ] as ApiMessage[];
 
+const filter = (appMessage: ApiMessage) => {
+  return appMessage.uniqueName === "noVoiceCommandsOnThisPage";
+};
+
 (async () => {
-  for (const apiMessage of allMessages) {
+  for (const apiMessage of allMessages.filter(filter)) {
     log(`Generating text to speech from ${apiMessage.uniqueName}`);
     let buffer: Buffer;
     try {

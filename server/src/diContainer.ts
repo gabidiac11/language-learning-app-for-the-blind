@@ -8,12 +8,17 @@ import { BlockQuizServiceFactory } from "./BusinessLogic/Quiz/QuizServiceFactori
 import { EpilogueQuizServiceFactory } from "./BusinessLogic/Quiz/QuizServiceFactories/EpilogueQuizServiceFactory";
 import UserStoryService from "./BusinessLogic/UserStory/UserStoryService";
 import { UserStoriesRelationsManager } from "./BusinessLogic/UserStoryRelations/UserStoriesRelationsManager";
+import { SpeechToTextService } from "./BusinessLogic/VoiceCommands/SpeechToTextService";
+import { VoiceIntentService } from "./BusinessLogic/VoiceCommands/VoiceIntentService";
+import { CloudCredentials } from "./Configuration/CloudCredentials";
+import { DialogflowSessionString } from "./Configuration/DialogflowSessionString";
 import { BlockQuizControllerFactory } from "./Controllers/BlockQuizController";
 import { BlocksControllerFactory } from "./Controllers/BlocksController";
 import { EpilogueControllerFactory } from "./Controllers/EpilogueController";
 import { EpilogueQuizControllerFactory } from "./Controllers/EpilogueQuizController";
 import { LessonLanguagesControllerFactory } from "./Controllers/LessonLanguagesController";
 import { UserStoriesControllerFactory } from "./Controllers/UserStoriesController";
+import { VoiceCommandsControllerFactory } from "./Controllers/VoiceCommandsController";
 import { Language } from "./Data/ctxTypes/ctx.story.types";
 import { Database } from "./Data/database";
 import Seeder from "./Data/Seed/Seeder";
@@ -50,8 +55,13 @@ const createContainer = (lang?: Language | "") => {
   diContainer.factory(EpilogueControllerFactory.name, EpilogueControllerFactory);
   diContainer.factory(EpilogueQuizControllerFactory.name, EpilogueQuizControllerFactory);
   diContainer.factory(LessonLanguagesControllerFactory.name, LessonLanguagesControllerFactory);
+  diContainer.factory(VoiceCommandsControllerFactory.name, VoiceCommandsControllerFactory);
 
+  // Scoped dependency instance for user language
   diContainer.register(LanguageProvider.name, new LanguageProvider(lang));
+  
+  // Singleton services
+  diContainer.register(VoiceIntentService.name, VoiceIntentService.getInstance());
 
   return diContainer;
 }

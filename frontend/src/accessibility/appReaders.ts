@@ -6,6 +6,7 @@ import { getReadableTextFromHtmlElement } from "./screenReader/getReadableTextFr
 import { emitEventPlayNodeAttribute } from "./audioSpeaker/htmlAttributeAudio/htmlAttributeAudioEvent";
 import { emitPrematurStopAudio } from "./audioSpeaker/hooks/usePrematureStopAudioListener";
 import { logScreenReader } from "./screenReader/logScreenReader";
+import { isMicOnOffKeyboardEvent } from "./keyboardShortcuts";
 
 window.isPlayingUninteruptableAudios = {};
 
@@ -22,6 +23,8 @@ class AppScreenReader {
     document.addEventListener(
       "keyup",
       ((event: KeyboardEvent) => {
+        if (isMicOnOffKeyboardEvent(event)) return;
+
         if (event.key !== "Tab") {
           return;
         }

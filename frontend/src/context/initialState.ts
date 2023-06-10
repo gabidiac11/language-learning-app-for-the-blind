@@ -3,5 +3,7 @@ import { StateType } from "./contextTypes/ctxTypes";
 export default {
   language: undefined,
   playableAudiosQueue: [], 
-  isAudioInteractionOn: false
+  voiceCommandsQueue: [],
+  isAudioInteractionOn: false,
+  voiceHandlers: []
 } as StateType;

@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import { AppMessage } from "../../types/appMessage.type";
+import { PlayableMessage } from "../../types/playableMessage.type";
 import { createPlayable } from "../createPlayable";
 import { getListenableKeyFromPlayableKey } from "../getListenableKeyFromPlayable";
 
@@ -10,11 +11,10 @@ import { getListenableKeyFromPlayableKey } from "../getListenableKeyFromPlayable
  * @returns
  */
 export const usePlayAppMessageFactory = () => {
-  const { enqueuePlayableMessage } = useFeedbackAudioQueue();
+  const { singleEnque } = useFeedbackAudioQueue();
 
-  const playAppMessageAsync = useCallback(
-    async (appMessageOrMessages: AppMessage | AppMessage[]) => {
-      const playable = createPlayable(appMessageOrMessages);
+  const playMessagePlayableAsync = useCallback(
+    async (playable: PlayableMessage) => {
 
       // establish listenable event names specifically for whole group of app messages
       const listenablePlayableKey = getListenableKeyFromPlayableKey(
@@ -35,7 +35,7 @@ export const usePlayAppMessageFactory = () => {
 
         document.addEventListener(eventNameStart, listenerStart);
         document.addEventListener(eventNameEnd, listenerEnd);
-        enqueuePlayableMessage(playable);
+        singleEnque(playable);
 
         // to avoid getting stuck at the lost resort will add timeout limit
         timeout = setTimeout(() => {
@@ -50,10 +50,19 @@ export const usePlayAppMessageFactory = () => {
         document.removeEventListener(l.eventName, l.listener);
       });
     },
-    [enqueuePlayableMessage]
+    [singleEnque]
+  );
+
+  const playAppMessageAsync = useCallback(
+    async (appMessageOrMessages: AppMessage | AppMessage[]) => {
+      const playable = createPlayable(appMessageOrMessages);
+      await playMessagePlayableAsync(playable);
+    },
+    [playMessagePlayableAsync]
   );
 
   return {
     playAppMessageAsync,
+    playMessagePlayableAsync
   };
 };

@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import path from "path";
-import { environment } from "../../constants";
+import { environment, seedFileCloudBasePath } from "../../constants";
 import { log } from "../../logger";
 import {
   Language,
@@ -13,6 +13,7 @@ import { Database } from "../database";
 import guardStories from "./storiesValidationGuard";
 import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
 import { arrayToObj } from "../../utils";
+import axios from "axios";
 
 export default class Seeder {
   static get inject() {
@@ -31,7 +32,7 @@ export default class Seeder {
       return;
     }
 
-    const { lessonData, languages } = await this.readSeedData();
+    const { lessonData, languages } = await this.readJsonCloudStorage();
     for (const data of Object.values(lessonData)) {
       guardStories(data);
     }
@@ -81,12 +82,28 @@ export default class Seeder {
     return !existsResult.data;
   }
 
+  // not applicable for the time being
   private async readSeedData(): Promise<LessonJsonData> {
     const jsonPath = path.join(__dirname, `lesson-stories.${environment}.json`);
     log(`[Seeder]: starting reading lessons from '${jsonPath}'`);
 
     const storiesString = await readFileSync(jsonPath, "utf-8");
     const lessonJsonData: LessonJsonData = JSON.parse(storiesString);
+
+    log(`[Seeder]: read lessons`);
+    return lessonJsonData;
+  }
+
+  private async readJsonCloudStorage(): Promise<LessonJsonData> {
+    const jsonUrl = `${seedFileCloudBasePath}/lesson-stories.${environment}.json`;
+
+    log(`[Seeder]: starting reading lessons from '${jsonUrl}'`);
+
+    const response = await axios.get(jsonUrl);
+    if (!response.data) {
+      throw `No data found at ${jsonUrl}`;
+    }
+    const lessonJsonData: LessonJsonData = response.data;
 
     log(`[Seeder]: read lessons`);
     return lessonJsonData;

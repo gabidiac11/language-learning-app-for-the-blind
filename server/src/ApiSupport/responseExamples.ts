@@ -11,6 +11,10 @@ import {
   QuizCompletedStatsResponse,
   QuizResponse,
 } from "../Models/quiz.models";
+import {
+  AudioUserCommandType,
+  UserVoiceCommandResponse,
+} from "../Models/voiceCommand.types";
 
 export const userStory: UserStoryOutput = {
   id: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
@@ -118,22 +122,26 @@ export const userStory: UserStoryOutput = {
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",
@@ -163,22 +171,26 @@ export const userStory: UserStoryOutput = {
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",
@@ -267,22 +279,26 @@ export const epilogueProgress: EpilogueProgressOutput = {
           {
             id: "91910c90-6458-4938-bf5f-e5dcecbea4ba",
             text: "Anna's mom and dad",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "908c8be1-6915-49f8-b9fd-cbfaa977c66f",
             text: "Anna's brother and sister",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "3fd4e238-90c1-4290-8eb7-46cde353ada8",
             text: "Anna's grandparents",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "d5c34512-dce8-45de-a8f3-40777465e522",
             text: "Anna's aunt and uncle",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
         ],
         text: "Who does Anna live with?",
@@ -311,22 +327,26 @@ export const epilogueProgress: EpilogueProgressOutput = {
           {
             id: "91910c90-6458-4938-bf5f-e5dcecbea4ba",
             text: "Anna's mom and dad",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "908c8be1-6915-49f8-b9fd-cbfaa977c66f",
             text: "Anna's brother and sister",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "3fd4e238-90c1-4290-8eb7-46cde353ada8",
             text: "Anna's grandparents",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
           {
             id: "d5c34512-dce8-45de-a8f3-40777465e522",
             text: "Anna's aunt and uncle",
-            audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+            audioFile:
+              ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
           },
         ],
         text: "Who does Anna live with?",
@@ -756,22 +776,26 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
             {
               id: "33563cd0-6be8-4c88-b810-62b047150b91",
               text: "Kate",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "779e8dd9-6805-4ef1-ad21-464a092b2dc2",
               text: "Ivan",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d96556b6-deae-4744-b001-abe326fbf86e",
               text: "Alexander",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d7a746b0-373f-404c-be9a-ae7b99ddbffa",
               text: "Anna",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What is Anna's mom's name?",
@@ -792,22 +816,26 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
             {
               id: "9fa15979-34fc-445f-b953-a82afcb15e01",
               text: "Meat on the grill",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "25a3d8bf-ce47-4635-9991-3ba189aca8ad",
               text: "Pancakes",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "479c74ff-b6d7-4c19-976e-89bb4123de21",
               text: "Salad",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "1a5d5296-28c0-4e2e-bac1-f15004819f85",
               text: "Pizza",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What does Anna's dad usually cook?",
@@ -828,22 +856,26 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
             {
               id: "d7e8143f-d921-4aea-b161-b15a08a978a6",
               text: "Talk about their day",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "74d26c59-5307-4db1-88f6-7dcef371baeb",
               text: "Watch TV",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "d6335d82-64fd-4f4e-a7df-cf9d7b17ad86",
               text: "Play board games",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "2a7634ca-d5a6-48de-8656-7bc99fe67c43",
               text: "Read books",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "What do Anna and her family do after they eat dinner?",
@@ -872,22 +904,26 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
             {
               id: "39d5eda3-8a0e-45aa-9d4d-a52f4d8b5e8c",
               text: "Anna's mom and dad",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "553d4c68-44fc-4b5c-ada8-c3d78873a886",
               text: "Anna's brother and sister",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "48a32a2d-a0fb-42a6-87a4-e2f8014fa3c1",
               text: "Anna's grandparents",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
             {
               id: "31bb47d5-141a-4bd5-a0d0-b5a5956c5162",
               text: "Anna's aunt and uncle",
-              audioFile: ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
+              audioFile:
+                ":path-to-storage/stories/:lang/:story/epilogue/:question-option:name.mp3",
             },
           ],
           text: "Who does Anna live with?",

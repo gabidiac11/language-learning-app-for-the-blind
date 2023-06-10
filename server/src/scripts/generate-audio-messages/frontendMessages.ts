@@ -31,6 +31,31 @@ export default {
     text: "Entering this item is forbidden because the item is in the locked state.",
     filePath: "BASE_URL/frontendGeneral/cantOpenALockedItem.mp3",
   },
+  cantNavigateToNonExistentItem: {
+    uniqueName: "cantNavigateToNonExistentItem",
+    text: "Can't navigate to the item because it doesn't exist on this page.",
+    filePath: "BASE_URL/frontendGeneral/cantNavigateToNonExistentItem.mp3",
+  },
+  cantLogoutBecauseAlreadyLogout: {
+    uniqueName: "cantLogoutBecauseAlreadyLogout",
+    text: "Cannot logout, because you're already logged out.",
+    filePath: "BASE_URL/frontendGeneral/cantLogoutBecauseAlreadyLogout.mp3",
+  },
+  cantLoginBecauseAlreadyLogin: {
+    uniqueName: "cantLoginBecauseAlreadyLogin",
+    text: "Cannot login, because you're already logged in.",
+    filePath: "BASE_URL/frontendGeneral/cantLoginBecauseAlreadyLogin.mp3",
+  },
+  couldNotMatchVoiceCommand: {
+    uniqueName: "couldNotMatchVoiceCommand",
+    text: "Voice command not found.",
+    filePath: "BASE_URL/frontendGeneral/couldNotMatchVoiceCommand.mp3",
+  },
+  voiceCommandNotAvailableOnThisPage: {
+    uniqueName: "voiceCommandNotAvailableOnThisPage",
+    text: "Voice command not allowed on this page.",
+    filePath: "BASE_URL/frontendGeneral/voiceCommandNotAvailableOnThisPage.mp3",
+  },
   loadingLanguages: {
     uniqueName: "loadingLanguages",
     text: "Loading languages",
@@ -40,7 +65,6 @@ export default {
     uniqueName: "loadedLanguages",
     text: "Finished loading languages. Choose what language you want to learn from the available options by pressing arrow left or arrow right to switch between options.",
     filePath: "BASE_URL/pages/languages/loadedLanguages.mp3",
-
   },
   greetingPageLanguages: {
     uniqueName: "greetingPageLanguages",
@@ -56,7 +80,6 @@ export default {
     uniqueName: "loadedStoriesOverview",
     text: "Stories of your selected language finished loading. Choose what lesson-story you want to access by pressing arrow left or arrow right to switch between story card information then press enter to access the story.",
     filePath: "BASE_URL/pages/storiesOverview/loadedStoriesOverview.mp3",
-
   },
   greetingPageStoriesOverview: {
     uniqueName: "greetingPageStoriesOverview",
@@ -72,7 +95,6 @@ export default {
     uniqueName: "loadedStoryPage",
     text: "Finished loading your selected story. Choose what building block or epilogue you want to access by pressing arrow left or arrow right to switch between story card information elements then press enter to enter any block focused.",
     filePath: "BASE_URL/pages/storyPage/loadedStoryPage.mp3",
-
   },
   greetingPageStoryPage: {
     uniqueName: "greetingPageStoryPage",
@@ -109,7 +131,6 @@ export default {
     uniqueName: "loadedBlockStart",
     text: "Finished loading your selected building block. Start or continue practicing the words using the introduction module or the quiz module. Once both are completed the block is completed. Access page by pressing arrow up or arrow down to switch between options.",
     filePath: "BASE_URL/pages/blockStart/loadedBlockStart.mp3",
-
   },
   greetingPageBlockStart: {
     uniqueName: "greetingPageBlockStart",
@@ -140,7 +161,7 @@ export default {
     uniqueName: "loadedBlockQuizCompleted",
     text: "Navigate with arrow up or arrow down to see the achievements.",
     filePath: "BASE_URL/pages/blockQuizCompleted/loadedBlockQuizCompleted.mp3",
-
+    preventForcedStopOnCurrentPageJustOnce: true,
   },
   greetingPageBlockQuizCompleted: {
     uniqueName: "greetingPageBlockQuizCompleted",
@@ -157,7 +178,6 @@ export default {
     uniqueName: "loadedEpilogueOverview",
     text: "Epilogue short story has finished loading. To listen navigate in the page using arrows up or arrow down to find the paragraph or the play/stop button.",
     filePath: "BASE_URL/pages/epilogueOverview/loadedEpilogueOverview.mp3",
-
   },
   greetingPageEpilogueOverview: {
     uniqueName: "greetingPageEpilogueOverview",
@@ -176,7 +196,7 @@ export default {
     text: "Navigate with arrow up or arrow down to see the achievements.",
     filePath:
       "BASE_URL/pages/epiloqueQuizCompleted/loadedEpilogueQuizCompleted.mp3",
-
+    preventForcedStopOnCurrentPageJustOnce: true,
   },
   greetingPageEpilogueQuizCompleted: {
     uniqueName: "greetingPageEpilogueQuizCompleted",
@@ -219,5 +239,35 @@ export default {
     text: "Navigate using up or down arrows to  replay these questions and answers, and use enter to choose the correct answer.",
     filePath:
       "BASE_URL/pages/epilogueQuiz/instructionsQuizepilogueQuestion.mp3",
+  },
+  micOn: {
+    uniqueName: "micOn",
+    text: "Mic on",
+    filePath: "BASE_URL/pages/blockIntroduction/micOn.mp3",
+  },
+  micOff: {
+    uniqueName: "micOff",
+    text: "Mic off.",
+    filePath: "BASE_URL/pages/blockIntroduction/micOff.mp3",
+  },
+  micRequested: {
+    uniqueName: "micRequested",
+    text: "Mic requested.",
+    filePath: "BASE_URL/pages/blockIntroduction/micRequested.mp3",
+  },
+  popupAllowMicMightOpen: {
+    uniqueName: "popupAllowMicMightOpen",
+    text: "Chrome might show a prompt. Please allow mic by pressing tab twice then press enter to allow.",
+    filePath: "BASE_URL/pages/blockIntroduction/popupAllowMicMightOpen.mp3",
+  },
+  micPermissionDenied: {
+    uniqueName: "micPermissionDenied",
+    text: "Mic blocked. Please allow media from your chrome settings to use the mic interactions.",
+    filePath: "BASE_URL/pages/blockIntroduction/micPermissionDenied.mp3",
+  },
+  noVoiceCommandsOnThisPage: {
+    uniqueName: "noVoiceCommandsOnThisPage",
+    text: "Mic disabled. No available voice commands on this page.",
+    filePath: "BASE_URL/pages/blockIntroduction/noVoiceCommandsOnThisPage.mp3",
   },
 };
