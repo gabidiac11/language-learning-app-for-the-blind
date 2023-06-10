@@ -23,6 +23,10 @@ import {
   UserStoriesController,
   UserStoriesControllerFactory,
 } from "../Controllers/UserStoriesController";
+import {
+  VoiceCommandsController,
+  VoiceCommandsControllerFactory,
+} from "../Controllers/VoiceCommandsController";
 
 export default function getControllers(DI: Injector): {
   userStoriesController: UserStoriesController;
@@ -31,6 +35,7 @@ export default function getControllers(DI: Injector): {
   epilogueController: EpilogueController;
   epilogueQuizController: EpilogueQuizController;
   lessonLanguagesController: LessonLanguagesController;
+  voiceCommandsController: VoiceCommandsController;
 } {
   return {
     userStoriesController: (
@@ -59,6 +64,12 @@ export default function getControllers(DI: Injector): {
       DI.get(
         LessonLanguagesControllerFactory.name
       ) as LessonLanguagesControllerFactory
+    ).create(),
+    
+    voiceCommandsController: (
+      DI.get(
+        VoiceCommandsControllerFactory.name
+      ) as VoiceCommandsControllerFactory
     ).create(),
   };
 }

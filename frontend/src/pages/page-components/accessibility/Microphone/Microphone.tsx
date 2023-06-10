@@ -1,12 +1,24 @@
 import { MicRounded as Mic } from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Tooltip } from "@mui/material";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePlayAppMessageFactory } from "../../../../accessibility/audioSpeaker/hooks/usePlayAppMessageFactory";
 
-import { RecState, EventMediaListeners, MicPermissionStatus } from "./microphone.types";
+import {
+  RecState,
+  EventMediaListeners,
+  MicPermissionStatus,
+} from "./microphone.types";
 
 import "./Microphone.scss";
+import { useKeyboardMicControls } from "./useKeyboardMicControls";
+import { micMessages } from "./appMessages";
+import { useVoiceCommandRequest } from "./useVoiceCommandRequest";
+import { useAppStateContext } from "../../../../context/hooks/useAppStateContext";
+import {
+  CommandInstructionSet,
+  createCommandInstructionSet,
+} from "../../../../accessibility/voiceCommandTypesStringUtils/commandInstructionSet";
 
 export const Microphone = () => {
   const [recState, setRecState] = useState<RecState>(RecState.NotRecording);
@@ -16,17 +28,33 @@ export const Microphone = () => {
   );
   const [audioBlob, setAudioBlob] = useState<Blob>();
 
+  const [commandText, setCommandText] = useState<string>();
+  const commandTextTimeoutRef = useRef<NodeJS.Timeout>();
+
   const recorderRef = useRef<MediaRecorder>();
   const listeners = useRef<EventMediaListeners>();
   const beforeDialogRef = useRef<(event: BeforeUnloadEvent) => void>();
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const { playAppMessageAsync } = usePlayAppMessageFactory();
+  const [commandInstrSet, setCommandInstrSet] =
+    useState<CommandInstructionSet>();
+  const [allowInstructionToolTip, setAllowInstructionTooltip] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const informUserPermissionDenied = useCallback(() => {
-    // TODO:
-    console.log("Media denied. Please allow media from chrome settings.");
-  }, []);
+  const sendVoiceCommandRequest = useVoiceCommandRequest({
+    setRecState: (newRecState: RecState) => setRecState(newRecState),
+    setCommandText: (value: string) => {
+      setCommandText(value);
+      clearTimeout(commandTextTimeoutRef.current);
+      commandTextTimeoutRef.current = setTimeout(() => {
+        setCommandText(undefined);
+      }, 3000);
+    },
+  });
+
+  const { voiceHandlers } = useAppStateContext();
+
+  const { playAppMessageAsync } = usePlayAppMessageFactory();
 
   const removeMediaEventListeners = useCallback(() => {
     if (listeners.current) {
@@ -61,17 +89,27 @@ export const Microphone = () => {
   // TODO: review the usage of useCallback
   // TODO: make this not vissible untill audio interactions is on
 
+  const stopRecording = useCallback(async () => {
+    recorderRef.current?.stop();
+  }, []);
+
   const startRecording = useCallback(async () => {
+    let currentPermisson = permission;
     if (permission === MicPermissionStatus.Unknown) {
-      const knownPermission = await getMediaPermission();
-      setPermission(knownPermission);
-      if (knownPermission === MicPermissionStatus.Denied) {
-        informUserPermissionDenied();
-        return;
-      }
+      currentPermisson = await getMediaPermission();
+      setPermission(currentPermisson);
+    }
+    if (currentPermisson === MicPermissionStatus.Denied) {
+      await playAppMessageAsync(micMessages.micPermissionDenied);
+      return;
+    }
+    if (voiceHandlers.length === 0) {
+      await playAppMessageAsync(micMessages.noVoiceCommandsOnThisPage);
+      return;
     }
 
     setRecState(RecState.Recording);
+    await playAppMessageAsync(micMessages.micOn);
     setAudioBlob(undefined);
 
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -82,9 +120,14 @@ export const Microphone = () => {
       dataavailable: (event) => {
         chunks.push(event.data);
       },
-      stop: () => {
+      stop: async () => {
         const audioBlob = new Blob(chunks, { type: "audio/webm" });
         setAudioBlob(audioBlob);
+
+        sendVoiceCommandRequest(audioBlob);
+
+        clearTimeout(timeoutRef.current);
+        removeMediaEventListeners();
       },
     };
 
@@ -98,17 +141,9 @@ export const Microphone = () => {
     timeoutRef.current = setTimeout(() => {
       stopRecording();
     }, 30000);
-  }, [informUserPermissionDenied]);
+  }, [playAppMessageAsync, stopRecording, voiceHandlers]);
 
-  const stopRecording = useCallback(() => {
-    recorderRef.current?.stop();
-
-    clearTimeout(timeoutRef.current);
-    removeMediaEventListeners();
-
-    setRecState(RecState.FetchingCommand);
-    // TODO: send to server the command
-  }, [removeMediaEventListeners]);
+  useKeyboardMicControls({ recState, startRecording, stopRecording });
 
   useEffect(() => {
     return () => {
@@ -120,12 +155,87 @@ export const Microphone = () => {
     };
   }, []);
 
+  useEffect(() => {
+    return () => clearTimeout(commandTextTimeoutRef.current);
+  }, []);
+
+  useEffect(() => {
+    const instance = createCommandInstructionSet(voiceHandlers);
+    setCommandInstrSet(instance);
+  }, [voiceHandlers]);
+
+  useEffect(() => {
+    const setAllowTrue = () => {
+      setAllowInstructionTooltip(true);
+    };
+    const setAllowFalse = () => {
+      setAllowInstructionTooltip(false);
+    };
+    buttonRef.current &&
+      buttonRef.current.addEventListener("focus", setAllowTrue);
+    buttonRef.current &&
+      buttonRef.current.addEventListener("blur", setAllowFalse);
+
+    buttonRef.current &&
+      buttonRef.current.addEventListener("mouseover", setAllowTrue);
+    buttonRef.current &&
+      buttonRef.current.addEventListener("mouseleave", setAllowFalse);
+    return () => {
+      buttonRef.current &&
+        buttonRef.current.removeEventListener("focus", setAllowTrue);
+      buttonRef.current &&
+        buttonRef.current.removeEventListener("blur", setAllowFalse);
+
+      buttonRef.current &&
+        buttonRef.current.addEventListener("mouseover", setAllowTrue);
+      buttonRef.current &&
+        buttonRef.current.addEventListener("mouseleave", setAllowFalse);
+    };
+  }, [setAllowInstructionTooltip]);
+
+  const ariaLabel =
+    voiceHandlers.length === 0
+      ? micMessages.noVoiceCommandsOnThisPage.text
+      : !permission
+      ? micMessages.micPermissionDenied.text
+      : "Mic, Enter/click or control + space to record your command. " +
+        (!!commandInstrSet ? commandInstrSet.getAriaLabel() : "");
+
+  const toolTipValue = (() => {
+    if (commandText) {
+      return commandText;
+    }
+
+    if (!!commandInstrSet && allowInstructionToolTip) {
+      return (
+        <div className="voice-commands-instructions">
+          <h5>Available commands: </h5>
+          {commandInstrSet.getInstructionItems().map((instruction, index) => (
+            <div className="instruction-group" key={index}>
+              <p className="instruction-tittle">{instruction.label}</p>
+              <ul>
+                {instruction.phrases.map((phrase, indexChild) => (
+                  <li key={indexChild}>{phrase}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <h5>Ctrl + space to record/stop</h5>
+        </div>
+      );
+    }
+    return undefined;
+  })();
+
   return (
     <div className="page-mic">
       <button
+        ref={buttonRef}
         tabIndex={0}
-        className="no-btn mic-btn"
-        aria-label="Mic, Enter/click to record your command"
+        className={`no-btn mic-btn ${
+          !permission || voiceHandlers.length === 0 ? "is-disabled" : ""
+        }`}
+        aria-label={ariaLabel}
         onClick={
           recState === RecState.Recording
             ? stopRecording
@@ -133,13 +243,18 @@ export const Microphone = () => {
             ? () => {}
             : startRecording
         }
-        disabled={!permission}
       >
         {recState !== RecState.FetchingCommand && (
-          <Mic
-            className="feedbackMic"
-            htmlColor={recState === RecState.Recording ? "red" : "white"}
-          />
+          <Tooltip
+            placement="right-end"
+            title={toolTipValue}
+            open={!!toolTipValue}
+          >
+            <Mic
+              className="feedbackMic"
+              htmlColor={recState === RecState.Recording ? "red" : "white"}
+            />
+          </Tooltip>
         )}
         {recState === RecState.FetchingCommand && (
           <div className="feedbackMic">
@@ -151,7 +266,7 @@ export const Microphone = () => {
           </div>
         )}
       </button>
-      {audioBlob && (
+      {window.showMicOutput === true && audioBlob && (
         <audio controls>
           <source
             key={audioBlob.size}

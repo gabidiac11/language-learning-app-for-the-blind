@@ -30,3 +30,9 @@ export const lessonLanguageHeader = "lesson-language";
 export const audioStorageBasePath = "https://storage.googleapis.com/big-depth-387415.appspot.com";
 
 export const genKey = () => uuidv4();
+
+declare global {
+  interface Window {
+    showMicOutput?: boolean
+  }
+}

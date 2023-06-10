@@ -17,22 +17,21 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import createContainer from "./diContainer";
 import { acceptedLanguages, Language } from "./Data/ctxTypes/ctx.story.types";
-import { lessonLanguageHeader } from "./constants";
+import { lessonLanguageHeader, skipSeed } from "./constants";
 import Result from "./ApiSupport/Result";
 import { apiMessages } from "./ApiSupport/apiMessages";
 
-if (process.env.ALLOW_SEED === "true") {
+import multer from "multer";
+const upload = multer();
+
+if (!skipSeed) {
   (async () => {
     const seeder = (await createContainer(undefined).get("Seeder")) as Seeder;
     seeder.seedIfNeeded();
   })();
 } else {
-  log("No seed tried for this environment.");
+  log("No seed tried for this environment because skipped seed is enabled.");
 }
-
-// TODO:
-// prioritize what message will pre-recorded for the user, some might not appear to him if the app is working from a good actor
-// you can use the fallback text to speech for messages that might not apepar for the user that much if is not activetly messing with the API
 
 // TODO: make json imports for seeding data is done from cloud storage
 
@@ -135,7 +134,6 @@ app.post(
     await executeAuthenticatedAction({ req, res, controller, DI }, action);
   }
 );
-
 app.post(
   "/api/blocks/:blockProgressId/quiz/answer-question",
   async (req, res) => {
@@ -176,7 +174,6 @@ app.get("/api/epilogues/:epilogueProgressId", async (req, res) => {
 
   await executeAuthenticatedAction({ req, res, controller, DI }, action);
 });
-
 app.post(
   "/api/epilogues/:epilogueProgressId/complete-summary",
   async (req, res) => {
@@ -234,6 +231,20 @@ app.get(
     ]);
     const action = () =>
       controller.getProgressAchievedOfCompletedQuiz(epilogueProgressId, quizId);
+
+    await executeAuthenticatedAction({ req, res, controller, DI }, action);
+  }
+);
+
+app.post(
+  "/api/voice-commands",
+  upload.single("audioFile"),
+  async (req, res) => {
+    const DI = createContainer("");
+    const { voiceCommandsController: controller } = getControllers(DI);
+
+    const file = req.file;
+    const action = () => controller.getCommandFromSpeech(file);
 
     await executeAuthenticatedAction({ req, res, controller, DI }, action);
   }

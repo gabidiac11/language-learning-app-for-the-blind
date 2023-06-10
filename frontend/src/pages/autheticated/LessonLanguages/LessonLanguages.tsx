@@ -6,6 +6,7 @@ import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/
 import { langPageMessages } from "./appMessages";
 import { LanguageCard } from "./LanguageCard";
 import "./LessonLanguages.scss";
+import { useHandleVoicePageLanguage } from "./useHandleVoicePageLanguage";
 
 export const LessonLanguagesPage = () => {
   const { data, loading, error, retry } =
@@ -18,6 +19,8 @@ export const LessonLanguagesPage = () => {
     pageDataLoadingMessage: langPageMessages.loadingLanguages,
     pageDataLoadedMessage: langPageMessages.loadedLanguages,
   });
+
+  useHandleVoicePageLanguage(data);
 
   return (
     <div

@@ -16,28 +16,34 @@ import {
   registerPageMessages,
 } from "../pages/auth-pages/appMessages";
 import { epilogueQuizPageMessages } from "../pages/autheticated/EpiloguePage/EpilogueQuiz/appMessages";
+import { micMessages } from "../pages/page-components/accessibility/Microphone/appMessages";
 
 // page which is used as utilitary to generate audio files for the frontend feedback using text to speech later on
 
-const items = [
-  ...Object.values(apiErrorsAppMessages),
-  ...Object.values(generalAppMessages),
-  ...Object.values(langPageMessages),
-  ...Object.values(storiesOverviewPageMessages),
-  ...Object.values(storyPageMessages),
-  ...Object.values(blockIntroductionPageMessages),
-  ...Object.values(blockStartPageMessages),
-  ...Object.values(blockQuizPageMessages),
-  ...Object.values(blockQuizCompletedPageMessages),
-  ...Object.values(epilogueOverviewPageMessages),
-  ...Object.values(epiloqueQuizCompletedPageMessages),
-  ...Object.values(loginPageMessages),
-  ...Object.values(registerPageMessages),
-  ...Object.values(epilogueQuizPageMessages),
+const objects = [
+  apiErrorsAppMessages,
+  generalAppMessages,
+  langPageMessages,
+  storiesOverviewPageMessages,
+  storyPageMessages,
+  blockIntroductionPageMessages,
+  blockStartPageMessages,
+  blockQuizPageMessages,
+  blockQuizCompletedPageMessages,
+  epilogueOverviewPageMessages,
+  epiloqueQuizCompletedPageMessages,
+  loginPageMessages,
+  registerPageMessages,
+  epilogueQuizPageMessages,
+  micMessages,
 ];
 
-const checkDuplicates = () => {
-  const counts = items.reduce((prev, curr) => {
+const allAppMessages = objects
+  .map((o) => Object.values(o))
+  .flatMap((items) => items);
+
+const throwIfDuplicateKeys = () => {
+  const counts = allAppMessages.reduce((prev, curr) => {
     if (prev[curr.uniqueName]) {
       prev[curr.uniqueName] += 1;
     } else {
@@ -70,27 +76,17 @@ const withRemovedBaseUrl = (obj: { [key: string]: AppMessage }) => {
 };
 
 export const DevAllMessages = () => {
-  checkDuplicates();
+  throwIfDuplicateKeys();
   return (
     <textarea
       style={{ width: "90vw", height: "90vh" }}
       value={JSON.stringify(
-        withRemovedBaseUrl({
-          ...apiErrorsAppMessages,
-          ...generalAppMessages,
-          ...langPageMessages,
-          ...storiesOverviewPageMessages,
-          ...storyPageMessages,
-          ...blockIntroductionPageMessages,
-          ...blockStartPageMessages,
-          ...blockQuizPageMessages,
-          ...blockQuizCompletedPageMessages,
-          ...epilogueOverviewPageMessages,
-          ...epiloqueQuizCompletedPageMessages,
-          ...loginPageMessages,
-          ...registerPageMessages,
-          ...epilogueQuizPageMessages
-        })
+        withRemovedBaseUrl(
+          objects.reduce(
+            (acc, curr) => ({ ...acc, ...curr }),
+            {} as { [key: string]: AppMessage }
+          )
+        )
       )}
     />
   );

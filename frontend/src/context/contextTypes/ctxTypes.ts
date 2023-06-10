@@ -1,19 +1,39 @@
 import { PlayableMessage } from "../../accessibility/types/playableMessage.type";
+import { VoiceHandler } from "../../accessibility/voiceHandlers/VoiceHandler.types";
+import {
+  AudioUserCommandType,
+  UserVoiceCommandCtxItem,
+} from "./voiceCommand.types";
+
+export type VoicePageHandler = {
+  key: string;
+  pageAvailableCommands: AudioUserCommandType[];
+};
 
 export type StateType = {
   language?: Language;
   playableAudiosQueue: PlayableMessage[];
   isAudioInteractionOn: boolean;
+  voiceCommandsQueue: UserVoiceCommandCtxItem[];
+  voiceHandlers: VoicePageHandler[];
 };
 
 export enum StateActionType {
   Init = "Init",
   SetLanguage = "SetLanguage",
+
+  // audio queue
   EnqueuePlayableMessage = "EnqueuePlayableMessage",
   PrematurelyStopPlayableMessages = "PrematurelyStopPlayableMessages",
   DequePlayableMessages = "DequePlayableMessages",
   SetIsAudioInteractionOn = "SetIsAudioInteractionOn",
   SingleEnquePlayableMessages = "SingleEnquePlayableMessages",
+
+  // voice commands
+  SingleEnqueVoiceCommand = "SingEnqueVoiceCommand",
+  DequeueVoiceCommand = "DequeueVoiceCommand",
+  AddActiveVoiceHandler = "AddActiveVoiceHandler",
+  RemoveActiveVoiceHandler = "RemoveActiveVoiceHandler",
 }
 
 export type StateAction =
@@ -47,6 +67,26 @@ export type StateAction =
   | {
       type: StateActionType.SetIsAudioInteractionOn;
       payload: boolean;
+    }
+  | {
+      type: StateActionType.SingleEnqueVoiceCommand;
+      payload: UserVoiceCommandCtxItem;
+    }
+  | {
+      type: StateActionType.DequeueVoiceCommand;
+      payload: {
+        key: string;
+      };
+    }
+  | {
+      type: StateActionType.AddActiveVoiceHandler;
+      payload: VoicePageHandler;
+    }
+  | {
+      type: StateActionType.RemoveActiveVoiceHandler;
+      payload: {
+        key: string;
+      };
     };
 
 export type Language = "ru" | "fr" | "de";
@@ -212,4 +252,5 @@ export type LanguageDataItem = {
   imageUrl: string;
   alt: string;
   order: number;
+  audioFile: string;
 };

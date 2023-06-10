@@ -38,6 +38,13 @@ export default class Result<T> {
     return result;
   }
 
+  public static ErrorBadGateway<T>(message: ApiMessage) {
+    const result = new Result<T>();
+    result.errors = [message];
+    result.statusCode = 502;
+    return result;
+  }
+
   public As<T2>() {
     const resultNew = new Result<T2>();
     resultNew.errors = this.errors;

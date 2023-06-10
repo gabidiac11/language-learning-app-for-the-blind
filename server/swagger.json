@@ -813,6 +813,362 @@
 						"type": "object"
 					}
 				]
+			},
+			"AudioUserCommandType.DescribePage": {
+				"enum": [
+					"general-describe-page"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.NavigateBack": {
+				"enum": [
+					"navigate-back"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.Logout": {
+				"enum": [
+					"logout"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.Login": {
+				"enum": [
+					"login"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.ReadLanguages": {
+				"enum": [
+					"read-languages"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.AcessLanguage": {
+				"enum": [
+					"access-language"
+				],
+				"type": "string"
+			},
+			"AcessLanguageCommandPayload": {
+				"properties": {
+					"language": {
+						"type": "string"
+					},
+					"commandType": {
+						"$ref": "#/components/schemas/AudioUserCommandType.AcessLanguage"
+					}
+				},
+				"required": [
+					"language",
+					"commandType"
+				],
+				"type": "object"
+			},
+			"AudioUserCommandType.NavigateToBlock": {
+				"enum": [
+					"navigate-to-block"
+				],
+				"type": "string"
+			},
+			"NavigateToBlockCommandPaylod": {
+				"properties": {
+					"buildingBlockOrEpilogueName": {
+						"type": "string"
+					},
+					"commandType": {
+						"$ref": "#/components/schemas/AudioUserCommandType.NavigateToBlock"
+					}
+				},
+				"required": [
+					"buildingBlockOrEpilogueName",
+					"commandType"
+				],
+				"type": "object"
+			},
+			"AudioUserCommandType.ReadWhatBlocks": {
+				"enum": [
+					"read-what-blocks"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.ReadThecurrentWord": {
+				"enum": [
+					"read-the-current-word"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.GoToNextWord": {
+				"enum": [
+					"go-to-next-word"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.AccessWordsSummary": {
+				"enum": [
+					"access-words-summary"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.AccessQuiz": {
+				"enum": [
+					"access-quiz"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.RespondQuiz": {
+				"enum": [
+					"respond-quiz"
+				],
+				"type": "string"
+			},
+			"RespondQuizPaylod": {
+				"properties": {
+					"answerOptionNumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"answerOptionName": {
+						"type": "string"
+					},
+					"commandType": {
+						"$ref": "#/components/schemas/AudioUserCommandType.RespondQuiz"
+					}
+				},
+				"required": [
+					"commandType"
+				],
+				"type": "object"
+			},
+			"AudioUserCommandType.ReadAchievements": {
+				"enum": [
+					"read-achievements"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.EpilogueReadShortStory": {
+				"enum": [
+					"epilogue-read-short-story"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.ReadLessonStories": {
+				"enum": [
+					"read-lesson-stories"
+				],
+				"type": "string"
+			},
+			"AudioUserCommandType.AcessLessonStory": {
+				"enum": [
+					"access-lesson-story"
+				],
+				"type": "string"
+			},
+			"AcessLessonStoryPaylod": {
+				"properties": {
+					"storyName": {
+						"type": "string"
+					},
+					"commandType": {
+						"$ref": "#/components/schemas/AudioUserCommandType.AcessLessonStory"
+					}
+				},
+				"required": [
+					"storyName",
+					"commandType"
+				],
+				"type": "object"
+			},
+			"AudioUserCommandType.CommandUnidentified": {
+				"enum": [
+					"CommandUnidentified"
+				],
+				"type": "string"
+			},
+			"AudioUserCommand": {
+				"anyOf": [
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.DescribePage"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.NavigateBack"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.Logout"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.Login"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.ReadLanguages"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"$ref": "#/components/schemas/AcessLanguageCommandPayload"
+					},
+					{
+						"$ref": "#/components/schemas/NavigateToBlockCommandPaylod"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.ReadWhatBlocks"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.ReadThecurrentWord"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.GoToNextWord"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.AccessWordsSummary"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.AccessQuiz"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"$ref": "#/components/schemas/RespondQuizPaylod"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.ReadAchievements"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.EpilogueReadShortStory"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.ReadLessonStories"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					},
+					{
+						"$ref": "#/components/schemas/AcessLessonStoryPaylod"
+					},
+					{
+						"properties": {
+							"commandType": {
+								"$ref": "#/components/schemas/AudioUserCommandType.CommandUnidentified"
+							}
+						},
+						"required": [
+							"commandType"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"UserVoiceCommandResponse": {
+				"properties": {
+					"userSpeechText": {
+						"type": "string"
+					},
+					"command": {
+						"$ref": "#/components/schemas/AudioUserCommand"
+					}
+				},
+				"required": [
+					"userSpeechText",
+					"command"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {
@@ -2672,6 +3028,72 @@
 					}
 				]
 			}
+		},
+		"/api/voice-commands": {
+			"post": {
+				"operationId": "GetCommandFromSpeech",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserVoiceCommandResponse"
+								},
+								"examples": {
+									"access-quiz": {},
+									"general-describe-page": {},
+									"read-languages": {},
+									"access-language": {},
+									"logout": {},
+									"navigate-back": {},
+									"navigate-to-block": {},
+									"respond-quiz": {},
+									"go-to-next-word": {},
+									"read-achievements": {},
+									"login": {},
+									"access-lesson-story": {},
+									"read-what-blocks": {},
+									"read-lesson-stories": {},
+									"access-words-summary": {},
+									"read-the-current-word": {},
+									"epilogue-read-short-story": {},
+									"CommandUnidentified": {}
+								}
+							}
+						}
+					}
+				},
+				"description": "Receives an audio file, gets the text from the speech and matches that text to an intention (command) that the frontend can use to change things on the page",
+				"tags": [
+					"Voice commands"
+				],
+				"security": [
+					{
+						"BearerAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string",
+										"format": "binary"
+									}
+								},
+								"required": [
+									"file"
+								]
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"servers": [
@@ -2703,6 +3125,10 @@
 		{
 			"name": "Quiz - Epilogue blocks",
 			"description": "Start / Continue quiz about an epilogue block of a story chapter. It tests user understanding of the text-story by providing repeated questions about what the short-story describes. The quiz stops when all the questions are answered consistently, indicating learning. When such quiz is finished, the user story is considered completed and the dependent locked stories are unlocked."
+		},
+		{
+			"name": "Voice commands",
+			"description": "Receives an audio file, gets the text from the speech and matches that text to an intention (command) that the frontend can use to change things on the page"
 		}
 	]
 }

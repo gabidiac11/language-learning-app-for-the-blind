@@ -109,37 +109,50 @@ export function Speaker() {
 
   return (
     <div className="flex speaker-container">
+      <Tooltip
+        title={audioRef.current.currentTextPlaying}
+        open={isPlaying && !!currentPlayable}
+      >
+        <SpeakerIcon
+          aria-hidden="true"
+          htmlColor={isPlaying ? "red" : "white"}
+        />
+      </Tooltip>
+
       <div
         className={`audioPlayer ${
-          !isAudioInteractionOn ? "audio-no-interaction" : ""
+          !isAudioInteractionOn
+            ? "audio-no-interaction"
+            : "audio-interaction-on"
         }`}
       >
-        <Tooltip
-          title={audioRef.current.currentTextPlaying}
-          open={isPlaying && !!currentPlayable}
-        >
-          <audio
-            id="play-audio"
-            {...(isAudioInteractionOn
-              ? {
-                  tabIndex: -1,
-                  "aria-hidden": true,
-                  onFocus: (event) => event.target.blur(),
-                }
-              : {
-                  tabIndex: 0,
-                })}
-            onClick={setInteractionActive}
-            onFocus={setInteractionActive}
-            onKeyDown={setInteractionActive}
-            controls={true}
-            ref={(audioNode) => {
-              if (audioNode) {
-                audioRef.current.audio = audioNode;
+        {isAudioInteractionOn && (
+          <div aria-hidden="true" tabIndex={-1} className={`audio-state-text ${isPlaying ? "txt-is-playing" : ""}`}>
+            <p>{isPlaying ? "Playing ..." : "Not playing"}</p>
+          </div>
+        )}
+        <audio
+          style={{ visibility: isAudioInteractionOn ? "hidden" : "visible" }}
+          id="play-audio"
+          {...(isAudioInteractionOn
+            ? {
+                tabIndex: -1,
+                "aria-hidden": true,
+                onFocus: (event) => event.target.blur(),
               }
-            }}
-          />
-        </Tooltip>
+            : {
+                tabIndex: 0,
+              })}
+          onClick={setInteractionActive}
+          onFocus={setInteractionActive}
+          onKeyDown={setInteractionActive}
+          controls={true}
+          ref={(audioNode) => {
+            if (audioNode) {
+              audioRef.current.audio = audioNode;
+            }
+          }}
+        />
 
         {!isAudioInteractionOn && (
           <WarningIcon
@@ -150,7 +163,6 @@ export function Speaker() {
           />
         )}
       </div>
-      <SpeakerIcon aria-hidden="true" htmlColor={isPlaying ? "red" : "white"} />
     </div>
   );
 }
