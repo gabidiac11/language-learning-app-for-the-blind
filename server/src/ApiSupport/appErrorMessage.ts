@@ -3,7 +3,6 @@ export type ApiMessage = {
     filePath: string|"not applicable";
     uniqueName: string;
 
-    // needs the text to speech service to be generated (TODO: use moization)
     isDynamic?: boolean,
 }
 

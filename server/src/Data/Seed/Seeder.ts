@@ -12,7 +12,7 @@ import {
 import { Database } from "../database";
 import guardStories from "./storiesValidationGuard";
 import { getStringifiedError } from "../../ApiSupport/apiErrorHelpers";
-import { arrayToObj } from "../../utils";
+import { arrayToObj, genUid } from "../../utils";
 import axios from "axios";
 
 export default class Seeder {
@@ -95,7 +95,7 @@ export default class Seeder {
   }
 
   private async readJsonCloudStorage(): Promise<LessonJsonData> {
-    const jsonUrl = `${seedFileCloudBasePath}/lesson-stories.${environment}.json`;
+    const jsonUrl = `${seedFileCloudBasePath}/lesson-stories.${environment}.json?cache-avoid=${genUid()}`;
 
     log(`[Seeder]: starting reading lessons from '${jsonUrl}'`);
 

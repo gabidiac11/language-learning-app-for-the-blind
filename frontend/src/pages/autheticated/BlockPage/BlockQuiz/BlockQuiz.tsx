@@ -63,7 +63,6 @@ const BlockQuiz = () => {
 
   const onChoose = useCallback(
     (option: QuizOption) => {
-      // TODO: play audio for this
       if (!currentQuestion) {
         throw new Error(
           "Contact admin: this should not happen - current question is null."

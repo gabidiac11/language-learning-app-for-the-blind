@@ -28,7 +28,6 @@ export const registerPageMessages: {
     filePath: `${audioStorageBasePath}/pages/register/greetingRegisterPage.mp3`,
   },
 };
-//   TODO: reference in all messages
 
 export const loginPageMessages: {
     greetingLoginPage: AppMessage;

@@ -8,6 +8,17 @@ import generateEpilogue from "./epilogue";
  * this script is a utility script to generate the story json used for seeding lessons
  */
 
+const names = [
+  "Family",
+  "Dinning",
+  "John's family",
+  "School items",
+  "Computer science",
+  "Jobs",
+  "Medicine",
+  "People",
+  "Buildings"
+]
 async function generateDummyStory(index: number): Promise<Story> {
   const buildingBlocks = await generateBuildingBlocks();
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
@@ -16,11 +27,9 @@ async function generateDummyStory(index: number): Promise<Story> {
     lang: "ru",
     order: index,
 
-    name: `My family #${index + 1}`,
+    name: names?.[index] ?? names[0],
     
     audioFile: "", // it's updated later
-
-    //TODO: add license info for all the free images - maybe use storage somewhere or see if is cool to reference them like this
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     imageAlt: "Russian family at the dinner table",

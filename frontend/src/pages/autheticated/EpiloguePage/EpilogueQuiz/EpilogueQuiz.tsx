@@ -61,7 +61,6 @@ const EpilogueQuiz = () => {
 
   const onChoose = useCallback(
     (option: QuizOption) => {
-      // TODO: play audio file here
       if (!currentQuestion) {
         throw new Error(
           "Contact admin: this should not happen - current question is null."

@@ -169,7 +169,6 @@ const DisplayBlockEpilogueUnlocked = (props: {
       >
         <EpilogueBlockItem
           epilogueProgress={props.epilogue}
-          // TODO:
           storyImgUrl={props.epilogue.epilogue.imageUrl}
           storyImgAlt={props.epilogue.epilogue.imageAlt}
         />

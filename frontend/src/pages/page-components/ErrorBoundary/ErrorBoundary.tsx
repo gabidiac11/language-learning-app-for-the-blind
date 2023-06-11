@@ -49,7 +49,6 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
   return <>{children}</>;
 };
 
-// TODO: add some @mui materials here for a prettier look
 const ErrorDisplay = (props: { error: PlayableError; onRetry: () => void }) => {
   return (
     <div>

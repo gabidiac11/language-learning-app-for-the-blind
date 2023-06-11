@@ -285,7 +285,6 @@ export class EpilogueQuizServiceFactory {
 
   private createQuizSettings(questionCount: number): QuizSettings {
     const s = new QuizSettings();
-    // TODO: test more and adjust to a final configuration that works best
     if (questionCount < 5) {
       s.MISS_PROB_INC = 30;
       s.EXCLUDED_PROB_INC = 10;

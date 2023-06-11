@@ -49,10 +49,10 @@ on:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: big-depth-387415 # TODO: update Google Cloud project id
-  GAR_LOCATION: europe-west1 # TODO: update Artifact Registry location
-  SERVICE: my-docker # TODO: update Cloud Run service name
-  REGION: europe-west1 # TODO: update Cloud Run service region
+  PROJECT_ID: big-depth-387415 # update Google Cloud project id
+  GAR_LOCATION: europe-west1 # update Artifact Registry location
+  SERVICE: my-docker # update Cloud Run service name
+  REGION: europe-west1 # update Cloud Run service region
 
 jobs:
   deploy:

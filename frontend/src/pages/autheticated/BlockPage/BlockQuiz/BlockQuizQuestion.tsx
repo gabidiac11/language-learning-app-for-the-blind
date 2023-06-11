@@ -20,7 +20,6 @@ const BlockQuizQuestion = (props: {
   return (
     <WithFocusControls direction="vertical">
       <div aria-label="wrapper for quiz page">
-        {/* TODO: play audio for this question when is focused / clicked */}
         <Typography
           tabIndex={0}
           aria-label={`question: ${props.currentQuestion.questionText}`}

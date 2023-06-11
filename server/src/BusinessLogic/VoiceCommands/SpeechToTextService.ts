@@ -71,9 +71,6 @@ export class SpeechToTextService {
 
       return Result.Success(text);
     } catch (err) {
-      // TODO: see if there are error type could be processed as BadRequest or something else
-      console.log("text to speech", { err }); /// ... then delete this line
-
       log(
         `[SpeechToTextService]: error while generating speech`,
         getStringifiedError(err)

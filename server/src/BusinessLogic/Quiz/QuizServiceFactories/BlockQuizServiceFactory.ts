@@ -248,7 +248,6 @@ export class BlockQuizServiceFactory {
   private createQuizSettings(numOfWords: number): QuizSettings {
     const s = new QuizSettings();
 
-    // TODO: test more and adjust to a final configuration that works best
     if (numOfWords < 5) {
       s.MISS_PROB_INC = 30;
       s.EXCLUDED_PROB_INC = 10;

@@ -60,7 +60,6 @@ const EpilogueStartPage = () => {
                 Epilogue: {data.epilogue.name}
               </h1>
 
-              {/* TODO: implement reading of story */}
               <p
                 className="epilogue-txt"
                 tabIndex={0}

@@ -25,7 +25,7 @@ export function useHandleVoicePageNavigateToQuizFromBlock(
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
         return true;
       }
-      // TODO: test this:
+      
       if (!buildingBlockProgress.timeSummaryCompleted) {
         playAppMessageAsync(generalAppMessages.cantOpenALockedItem);
         return true;

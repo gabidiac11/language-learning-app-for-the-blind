@@ -69,8 +69,6 @@ export const Microphone = () => {
 
   const getMediaPermission =
     useCallback(async (): Promise<MicPermissionStatus> => {
-      // TODO:
-      // await playAppMessageAsync();
       console.log(
         "Playing - media popup might open. Pless tab twice then enter to allow."
       );
@@ -86,8 +84,6 @@ export const Microphone = () => {
         return MicPermissionStatus.Denied;
       }
     }, []);
-  // TODO: review the usage of useCallback
-  // TODO: make this not vissible untill audio interactions is on
 
   const stopRecording = useCallback(async () => {
     recorderRef.current?.stop();

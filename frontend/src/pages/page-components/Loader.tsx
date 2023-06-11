@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 export const Loader = () => {
   useEffect(() => {
-    // TODO: play sound: loading something
   }, [])
   return (
     <Box tabIndex={0} aria-label="Loading" sx={{ width: "100%" }}>
@@ -13,7 +12,6 @@ export const Loader = () => {
 };
 
 export const OverLayLoader = () => {
-  // TODO: play sound: loading something
   return (
     <div
       tabIndex={0}

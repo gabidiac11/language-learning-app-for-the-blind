@@ -56,6 +56,18 @@ export default {
     text: "Voice command not allowed on this page.",
     filePath: "BASE_URL/frontendGeneral/voiceCommandNotAvailableOnThisPage.mp3",
   },
+  couldntMatchNumberToAvailableOptionsQuiz: {
+    uniqueName: "couldntMatchToAvailableOptionsQuiz",
+    text: "Could not match your choice number to one of the options.",
+    filePath:
+      "BASE_URL/pages/blockQuiz/couldntMatchNumberToAvailableOptionsQuiz.mp3",
+  },
+  couldntMatchResponseToAvailableOptionsQuiz: {
+    uniqueName: "couldntMatchResponseToAvailableOptionsQuiz",
+    text: "Could not match your choice value to one of the options.",
+    filePath:
+      "BASE_URL/pages/blockQuiz/couldntMatchResponseToAvailableOptionsQuiz.mp3",
+  },
   loadingLanguages: {
     uniqueName: "loadingLanguages",
     text: "Loading languages",
@@ -159,7 +171,7 @@ export default {
   },
   loadedBlockQuizCompleted: {
     uniqueName: "loadedBlockQuizCompleted",
-    text: "Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to access these lessons that you've achieved.",
     filePath: "BASE_URL/pages/blockQuizCompleted/loadedBlockQuizCompleted.mp3",
     preventForcedStopOnCurrentPageJustOnce: true,
   },
@@ -193,7 +205,7 @@ export default {
   },
   loadedEpilogueQuizCompleted: {
     uniqueName: "loadedEpilogueQuizCompleted",
-    text: "Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to access these lessons that you've achieved.",
     filePath:
       "BASE_URL/pages/epiloqueQuizCompleted/loadedEpilogueQuizCompleted.mp3",
     preventForcedStopOnCurrentPageJustOnce: true,

@@ -58,7 +58,6 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
         audioFileTranslation: "",
         audioFile: "",
       },
-      //TODO: add more words for uncle, sister and stuff
       {
         id: genUid(),
         text: "nom",

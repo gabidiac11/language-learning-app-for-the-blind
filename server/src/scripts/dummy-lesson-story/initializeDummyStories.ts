@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { LessonJsonData, Story } from "../../Data/ctxTypes/ctx.story.types";
 import fs from "fs";
 import path from "path";
@@ -11,6 +14,7 @@ import { addAudioFilePathsToStories } from "../utils/addAudioFilePathsToStories"
 import { generateSpeechAndUploadDemoData } from "./generateSpeechAndUploadDemoData";
 
 const baseAudioDemoStorageUrl = `${audioStorageBasePath}/lessons/stories/demo/lang`;
+
 
 /**
  * see package json scripts

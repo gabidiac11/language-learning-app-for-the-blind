@@ -12,7 +12,12 @@ const allMessages = [
 ] as ApiMessage[];
 
 const filter = (appMessage: ApiMessage) => {
-  return appMessage.uniqueName === "noVoiceCommandsOnThisPage";
+  // return appMessage.uniqueName === "noVoiceCommandsOnThisPage";
+  return (
+    ["langRussian", "langFrench", "langGerman"].indexOf(appMessage.uniqueName) >
+    -1
+  );
+  // return true;
 };
 
 (async () => {

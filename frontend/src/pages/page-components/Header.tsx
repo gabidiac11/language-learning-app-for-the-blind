@@ -121,7 +121,6 @@ export default function Header() {
       >
         <Alert
           onClose={() => setSnack({ ...snack, open: false })}
-          //TODO: repairt here stuff
           severity={"error"}
           sx={{ width: "100%" }}
         >

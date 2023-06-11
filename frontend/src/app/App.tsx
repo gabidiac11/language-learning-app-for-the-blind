@@ -24,8 +24,6 @@ import { useAppStateContext } from "../context/hooks/useAppStateContext";
 import { ActivateUserInteractionPage } from "./ActivateUserInteractionPage";
 import { DevAllMessages } from "./DevAllMessages";
 
-// TODO: on-off button for voice navigation
-
 const App = () => {
   const { user, isVerifying } = useAuthInit();
   const { isAudioInteractionOn } = useAppStateContext();
