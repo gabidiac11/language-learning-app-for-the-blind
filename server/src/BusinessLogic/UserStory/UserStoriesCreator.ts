@@ -25,8 +25,18 @@ export class UserStoriesCreator {
         );
         const userStoryItem = convertor.GetCookedUserStory();
         userStoryItem.order = userStories.length;
-        userStories.push(userStoryItem);
 
+        // unlock the story and its block if these items are "starter"
+        if (lessonStory.isStarter) {
+          userStoryItem.timeUnlocked = Date.now();
+          Object.values(userStoryItem.buildingBlocksProgressItems).forEach(blockProgress => {
+            if(blockProgress.isStarter) {
+              blockProgress.timeUnlocked = Date.now();
+            }
+          })
+        }
+
+        userStories.push(userStoryItem);
         pairsUserAndLesson.push({
           userStory: userStoryItem,
           lessonStory: lessonStory,
@@ -34,12 +44,13 @@ export class UserStoriesCreator {
       }
       this.fillInDependencies(pairsUserAndLesson);
 
-      // TODO: add conditions for this
-      // DEMO: add state changes to the user story progress to emulate each state
-      const decorator = new DiverseStateUserStoryDecorator(userStories);
-      const userStoriesWithDiverseProgress = decorator.generateDiverseStories();
+      let userStorisFinal = userStories;
+      // // TODO: add conditions for this
+      // // DEMO: add state changes to the user story progress to emulate each state
+      // const decorator = new DiverseStateUserStoryDecorator(userStories);
+      // userStorisFinal = decorator.generateDiverseStories();
 
-      return Result.Success(userStoriesWithDiverseProgress);
+      return Result.Success(userStorisFinal);
     } catch (err) {
       throw getStringifiedError(err);
     }
@@ -50,7 +61,9 @@ export class UserStoriesCreator {
     for (const { userStory, lessonStory } of pairsUserAndLesson) {
       const idsDependentOnThisUserStory: string[] = [];
       lessonStory.idsItemsDependentOnThis?.forEach((depLessonStoryId) => {
-        const pair = pairsUserAndLesson.find((pair) => pair.lessonStory.id === depLessonStoryId);
+        const pair = pairsUserAndLesson.find(
+          (pair) => pair.lessonStory.id === depLessonStoryId
+        );
         if (pair) {
           idsDependentOnThisUserStory.push(pair.userStory.id);
         }
@@ -90,7 +103,7 @@ class LessonToUserStoryConvertor {
       idsDependentOnThisUserStory: [], // to be fiiled in
 
       name: this._lessonStory.name,
-      
+
       audioFile: this._lessonStory.audioFile,
 
       imageUrl: this._lessonStory.imageUrl,
