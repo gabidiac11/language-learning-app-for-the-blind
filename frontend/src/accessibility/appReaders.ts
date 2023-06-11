@@ -124,12 +124,12 @@ export class AppAudioPlayer {
   }
 
   private log(value: any, obj?: any) {
-    if (obj) {
-      // Note: no stringify - (for events might have circular structure)
-      console.log(`AppAudioPlayer-${value}`, obj);
-      return;
-    }
-    console.log(`AppAudioPlayer-${value}`);
+    // if (obj) {
+    //   // Note: no stringify - (for events might have circular structure)
+    //   console.log(`AppAudioPlayer-${value}`, obj);
+    //   return;
+    // }
+    // console.log(`AppAudioPlayer-${value}`);
   }
 
   public async playAudio(currentPlayable: PlayableMessage) {

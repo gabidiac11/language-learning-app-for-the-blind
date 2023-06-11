@@ -61,7 +61,7 @@ const ErrorDisplay = (props: { error: PlayableError; onRetry: () => void }) => {
       <div>
         <Button
           tabIndex={0}
-          aria-label={generalAppMessages.tryAgainFetchRequest.text}
+          aria-label={`Button: Try again to fetch the request.`}
           onClick={props.onRetry}
         >
           Try again

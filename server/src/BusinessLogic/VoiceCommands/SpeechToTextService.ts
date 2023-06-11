@@ -54,7 +54,9 @@ export class SpeechToTextService {
           content: file.buffer,
         },
         config: {
-          languageCode: "en-US",
+          // use language code for non-native English speakers -> en-IN Indian should work better than en-US
+          // use language code for non-native English speakers -> en-GB Indian should work better than en-US 
+          languageCode: "en-GB",
         },
       });
 

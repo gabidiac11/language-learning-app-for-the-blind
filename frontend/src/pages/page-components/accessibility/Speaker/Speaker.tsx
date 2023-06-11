@@ -1,5 +1,6 @@
 import {
   Speaker as SpeakerIcon,
+  StopCircle as StopIcon,
   WarningSharp as WarningIcon,
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
@@ -25,7 +26,7 @@ export function Speaker() {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const { dequePlayableMessage, enqueuePlayableMessage } =
+  const { dequePlayableMessage, enqueuePlayableMessage, emptyQueue } =
     useFeedbackAudioQueue();
   const { setIsAudioInteractionOn } = useContextActions();
   const { isAudioInteractionOn, playableAudiosQueue } = useAppStateContext();
@@ -127,8 +128,31 @@ export function Speaker() {
         }`}
       >
         {isAudioInteractionOn && (
-          <div aria-hidden="true" tabIndex={-1} className={`audio-state-text ${isPlaying ? "txt-is-playing" : ""}`}>
-            <p>{isPlaying ? "Playing..." : "Not playing"}</p>
+          <div
+            aria-hidden="true"
+            tabIndex={-1}
+            className={`audio-state-text ${isPlaying ? "txt-is-playing" : ""}`}
+          >
+            <div
+              aria-hidden="true"
+              tabIndex={-1}
+              style={isPlaying ? { cursor: "pointer" } : {}}
+              onClick={
+                isPlaying
+                  ? () => {
+                      emptyQueue();
+                    }
+                  : () => {}
+              }
+            >
+              {isPlaying ? (
+                <div aria-hidden="true" className="flex playing-message-board">
+                  <StopIcon /> <span>PLAYING...</span>
+                </div>
+              ) : (
+                <span>Not playing</span>
+              )}
+            </div>
           </div>
         )}
         <audio

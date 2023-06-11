@@ -41,6 +41,8 @@ export const Microphone = () => {
   const [allowInstructionToolTip, setAllowInstructionTooltip] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  const stoptimeoutRef = useRef<NodeJS.Timeout>();
+
   const sendVoiceCommandRequest = useVoiceCommandRequest({
     setRecState: (newRecState: RecState) => setRecState(newRecState),
     setCommandText: (value: string) => {
@@ -86,7 +88,10 @@ export const Microphone = () => {
     }, []);
 
   const stopRecording = useCallback(async () => {
+    clearTimeout(stoptimeoutRef.current);
+    stoptimeoutRef.current = setTimeout(() => {
     recorderRef.current?.stop();
+   }, 500); 
   }, []);
 
   const startRecording = useCallback(async () => {
@@ -104,8 +109,8 @@ export const Microphone = () => {
       return;
     }
 
+    playAppMessageAsync(micMessages.micOn);
     setRecState(RecState.Recording);
-    await playAppMessageAsync(micMessages.micOn);
     setAudioBlob(undefined);
 
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -206,6 +211,10 @@ export const Microphone = () => {
       window.addEventListener("click", hideCommandText);
     };
   }, []);
+
+  useEffect(() => {
+    return () => clearTimeout(stoptimeoutRef.current);
+  }, [])
 
   const ariaLabel =
     voiceHandlers.length === 0

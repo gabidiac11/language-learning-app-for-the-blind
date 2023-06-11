@@ -33,6 +33,7 @@ export const genKey = () => uuidv4();
 
 declare global {
   interface Window {
-    showMicOutput?: boolean
+    showMicOutput?: boolean,
+    appCurrentVoiceHanlderId: string | undefined;
   }
 }

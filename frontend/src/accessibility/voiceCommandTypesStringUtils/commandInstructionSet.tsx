@@ -11,8 +11,9 @@ export type InstructionItem = {
 const voicCommandPhrases: {
   [key in AudioUserCommandType]: string[];
 } = {
-  [AudioUserCommandType.AccessQuiz]: ["go to quiz", "navigate to quiz"],
+  [AudioUserCommandType.AccessQuiz]: ["navigate to quiz", "go to the quiz",],
   [AudioUserCommandType.DescribePage]: [
+    "describe this page",
     "read me all the information from this page",
     "what can I do in this page",
   ],
@@ -21,6 +22,7 @@ const voicCommandPhrases: {
     "what languages are on this page?",
   ],
   [AudioUserCommandType.AcessLanguage]: [
+    "go to German",
     "take me to German",
     "I want to learn German",
   ],
@@ -28,16 +30,19 @@ const voicCommandPhrases: {
   [AudioUserCommandType.Logout]: ["log out", "take me out of my account"],
   [AudioUserCommandType.NavigateBack]: ["go back", "navigate back"],
   [AudioUserCommandType.NavigateToBlock]: [
-    "take me to the block family",
-    "take me to the block epilogue",
+    "select block family",
+    "I want to go to block family",
+    "navigate to go to block epilogue",
   ],
   [AudioUserCommandType.RespondQuiz]: [
     "I choose the option 1",
-    "my answer is happy",
+    "my answer is option number 1",
+    "my answer is a piece of cake",
   ],
   [AudioUserCommandType.GoToNextWord]: [
-    "go to the next word",
-    "read me the next word",
+    "play the next word",
+    "read the next word",
+    "next word",
   ],
   [AudioUserCommandType.ReadAchievements]: [
     "what have I achieved",
@@ -57,21 +62,23 @@ const voicCommandPhrases: {
   ],
 
   [AudioUserCommandType.ReadLessonStories]: [
-    "tell what stories I can learn",
-    "read me what stories are here",
+    "what stories can I learn",
+    "what stories are here",
   ],
   [AudioUserCommandType.AccessWordsSummary]: [
     "take me to words summary",
-    "I want to learn the words of this building block",
+    "navigate to words summary",
   ],
   [AudioUserCommandType.ReadThecurrentWord]: [
-    "play the word again",
+    "play the current word",
+    "play the current word again",
     "read me the current word",
+    "current word",
   ],
   [AudioUserCommandType.EpilogueReadShortStory]: [
     "read me the short story",
     "I want to hear again the short story",
-    " please play the audio with the short story",
+    "please play the audio with the short story",
   ],
   [AudioUserCommandType.CommandUnidentified]: [],
 };

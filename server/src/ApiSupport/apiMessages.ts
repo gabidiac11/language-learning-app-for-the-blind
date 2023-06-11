@@ -40,6 +40,7 @@ export const apiMessages: ApiMessages = {
 
   // epilogue:
   epilogueLocked: {
+    // Note: this is also in the frontend
     uniqueName: "epilogueLocked",
     text: "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
     filePath: `${audioStorageBasePath}/server/epilogueLocked.mp3`,

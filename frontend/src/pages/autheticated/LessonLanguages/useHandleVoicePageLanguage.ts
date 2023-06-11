@@ -14,6 +14,7 @@ import {
   AudioUserCommandType,
 } from "../../../context/contextTypes/voiceCommand.types";
 import { langPageMessages } from "./appMessages";
+import { LanguageNavigateToStoriesState } from "./LanguageNavigateToStoriesState";
 
 export const useHandleVoiceNavigateToLanguage = (
   languages: LanguageDataItem[] | undefined
@@ -44,8 +45,12 @@ export const useHandleVoiceNavigateToLanguage = (
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
         return true;
       }
-
-      navigate(`/stories/${languageItem.id}`);
+      const navigationState: LanguageNavigateToStoriesState = {
+        lessonLanguage: languageItem,
+      };
+      navigate(`/stories/${languageItem.id}`, {
+        state: navigationState,
+      });
       return true;
     },
     [languages, playAppMessageAsync]

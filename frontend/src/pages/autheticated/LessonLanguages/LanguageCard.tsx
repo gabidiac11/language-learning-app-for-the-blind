@@ -5,19 +5,27 @@ import { useCallback } from "react";
 import "./LessonLanguages.scss";
 import { LanguageDataItem } from "../../../context";
 import CardBlock from "../../page-components/CardBlock/CardBlock";
+import { LanguageNavigateToStoriesState } from "./LanguageNavigateToStoriesState";
 
 export const LanguageCard = (props: {
   lessonLanguage: LanguageDataItem;
-  index: number
+  index: number;
 }) => {
   const navigate = useNavigate();
   const { lessonLanguage } = props;
 
   const navigateToLessonSets = useCallback(() => {
-    navigate(`/stories/${lessonLanguage.id}`);
+    const navigationState: LanguageNavigateToStoriesState = {
+      lessonLanguage,
+    };
+    navigate(`/stories/${lessonLanguage.id}`, {
+      state: navigationState,
+    });
   }, [lessonLanguage]);
 
-  const cardAriaLabel = `${props.index + 1} ${props.lessonLanguage.name}: Go to lessons in ${props.lessonLanguage.name}, press enter.`;
+  const cardAriaLabel = `${props.index + 1} ${
+    props.lessonLanguage.name
+  }: Go to lessons in ${props.lessonLanguage.name}, press enter.`;
 
   return (
     <CardBlock ariaLabel={cardAriaLabel} onClick={navigateToLessonSets}>

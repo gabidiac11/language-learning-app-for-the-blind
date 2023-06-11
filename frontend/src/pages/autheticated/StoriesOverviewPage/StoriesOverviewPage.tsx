@@ -1,31 +1,40 @@
 import { StoryCard } from "./StoryCard/StoryCard";
 import "./StoriesOverviewPage.scss";
 import useFetchData from "../../../api/useFetchData";
-import { UserStory } from "../../../context";
+import { LanguageDataItem, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import { useParams } from "react-router";
+import { useLocation, useParams, Location } from "react-router";
 import { Typography } from "@mui/material";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import { storiesOverviewPageMessages } from "./appMessages";
 import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
-import { useHandleVoicePageLanguage } from "./useHandleVoicePageStoriesOverview";
+import { useHandleVoicePageStoriesOverview } from "./useHandleVoicePageStoriesOverview";
+import { useState } from "react";
+import { LanguageNavigateToStoriesState } from "../LessonLanguages/LanguageNavigateToStoriesState";
+import { AppMessage } from "../../../accessibility/types/appMessage.type";
+import { genKey } from "../../../constants";
 
 export const StoriesOverviewPage = () => {
   const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const [languageAppMessage] = useState<AppMessage | undefined>(
+    getLanguageAppMessage(location)
+  );
   const { data, loading, error, retry } = useFetchData<UserStory[]>(
     `userStories`,
     lang
   );
-  
+
   usePageAudioFeedback({
     error,
     loading,
+    pageGreetingAppend: languageAppMessage ? [languageAppMessage] : undefined,
     pageGreeting: storiesOverviewPageMessages.greetingPageStoriesOverview,
     pageDataLoadingMessage: storiesOverviewPageMessages.loadingStoriesOverview,
     pageDataLoadedMessage: storiesOverviewPageMessages.loadedStoriesOverview,
   });
 
-  useHandleVoicePageLanguage(data);
+  useHandleVoicePageStoriesOverview(data);
 
   return (
     <div
@@ -47,7 +56,11 @@ export const StoriesOverviewPage = () => {
                 <StoryCard key={userStory.id} userStory={userStory} />
               ))}
             {!error && data && data.length === 0 && (
-              <Typography variant="h5" tabIndex={0} aria-label="No lessons available.">
+              <Typography
+                variant="h5"
+                tabIndex={0}
+                aria-label="No lessons available."
+              >
                 No lessons.
               </Typography>
             )}
@@ -57,3 +70,19 @@ export const StoriesOverviewPage = () => {
     </div>
   );
 };
+function getLanguageAppMessage(location: Location): AppMessage | undefined {
+  if (!location.state) {
+    return undefined;
+  }
+
+  const languageParamsState = location.state as LanguageNavigateToStoriesState;
+  if (languageParamsState.lessonLanguage) {
+    return {
+      uniqueName: genKey(),
+      filePath: languageParamsState.lessonLanguage.audioFile,
+      text: languageParamsState.lessonLanguage.name,
+    };
+  }
+
+  return undefined;
+}
