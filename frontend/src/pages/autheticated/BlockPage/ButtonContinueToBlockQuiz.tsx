@@ -11,7 +11,7 @@ const ButtonContinueToBlockQuiz = (props: {
         tabIndex={0}
         to={`/blocks/${props.lang}/${props.blockProgressId}/quiz`}
       >
-        Go to quiz
+        Navigate to quiz
       </Link>
     </div>
   );

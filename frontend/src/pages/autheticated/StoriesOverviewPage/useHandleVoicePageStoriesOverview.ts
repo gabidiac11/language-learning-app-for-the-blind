@@ -15,6 +15,7 @@ import {
 } from "../../../context/contextTypes/voiceCommand.types";
 import { storiesOverviewPageMessages } from "./appMessages";
 import { getMatchUsingNumber } from "../../../accessibility/voiceHandlers/getMatchUsingNumber";
+import { AppMessage } from "../../../accessibility/types/appMessage.type";
 
 type MatchNumbersItem = {
   number: number;
@@ -45,7 +46,7 @@ export const getNumOfMatchesWithInnerTexts = (
   return max;
 };
 
-export const useHandleVoicePageStoriesOverview = (
+export const useHandleVoicePageAccessStory = (
   userStories: UserStory[] | undefined
 ): VoiceHandler => {
   const { playAppMessageAsync } = usePlayAppMessageFactory();
@@ -56,38 +57,24 @@ export const useHandleVoicePageStoriesOverview = (
       if (command.commandType !== AudioUserCommandType.AcessLessonStory) {
         return false;
       }
-
       if (!userStories) {
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
         return true;
       }
-
       const storyName = (command.storyName?.toLocaleLowerCase() ?? "").trim();
-      const numOfMatches = getNumOfMatchesWithInnerTexts(
-        userStories.map((i) => ({ id: i.id, name: i.name })),
-        storyName
+
+      let item = userStories.find(
+        (userStory) =>
+          userStory.name.toLocaleLowerCase().indexOf(storyName) > -1
       );
-      let item: UserStory | undefined;
-      if (numOfMatches.number > 1) {
-        item = userStories.find((i) => i.id === numOfMatches.item?.id);
-        console.log(`Matched by parts ${item?.name}`);
-      }
 
-      if (item) {
-        item = userStories.find(
-          (userStory) =>
-            userStory.name.toLocaleLowerCase().indexOf(storyName) > -1
-        );
-      }
-
-      if (!item) {
-        item = getMatchUsingNumber(userStories, storyName, command.number) as
-          | UserStory
-          | undefined;
-      }
-
+      
       if (!item) {
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
+        return true;
+      }
+      if(!item.timeUnlocked) {
+        playAppMessageAsync(generalAppMessages.cantOpenALockedItem);
         return true;
       }
 
@@ -103,7 +90,7 @@ export const useHandleVoicePageStoriesOverview = (
   };
 };
 
-export const useHandleVoicePageLanguage = (
+export const useHandleVoicePageStoriesOverview = (
   userStories: UserStory[] | undefined
 ) => {
   const [describlePageProps, setDescriblePageProps] =
@@ -114,11 +101,11 @@ export const useHandleVoicePageLanguage = (
       otherDescribables: [AudioUserCommandType.ReadLessonStories],
     });
 
-  const navigateToLangHander = useHandleVoicePageStoriesOverview(userStories);
+  const navigateToStoryHander = useHandleVoicePageAccessStory(userStories);
 
   usePageVoiceCommands({
     describlePageProps,
-    otherHandlers: [navigateToLangHander],
+    otherHandlers: [navigateToStoryHander],
   });
 
   // set audio messages that will play when read items is requested:

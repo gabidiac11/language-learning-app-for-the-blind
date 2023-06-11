@@ -29,10 +29,10 @@ export const BlockWordSummary: React.FC<{
   useHandleVoicePageBlockIntroduction(
     props.blockProgress,
     () => {
-      playBtnRef.current?.click();
+      props.next();
     },
     () => {
-      props.next();
+      playBtnRef.current?.click();
     }
   );
 

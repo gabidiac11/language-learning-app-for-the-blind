@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { PlayableMessage } from "../types/playableMessage.type";
 import {
   DescribePageVoiceHandlerProps,
   useDescribePageVoiceHandler,
@@ -10,7 +9,6 @@ import { VoiceHandler } from "./VoiceHandler.types";
 import { useAppStateContext } from "../../context/hooks/useAppStateContext";
 import { useVoiceCommandQueue } from "../../context/hooks/useVoiceCommandQueue";
 import { genKey } from "../../constants";
-import { AudioUserCommandType } from "../../context/contextTypes/voiceCommand.types";
 
 export function usePageVoiceCommands(props: {
   describlePageProps: DescribePageVoiceHandlerProps;
@@ -20,7 +18,7 @@ export function usePageVoiceCommands(props: {
   const { voiceCommandsQueue } = useAppStateContext();
   const genericHandler = useGenericAudioHandlers();
   const notAllowedHanlder = useNotAllowedVoiceHandler();
-  const handerKeyRef = useRef(genKey());
+  const handlerKeyRef = useRef(genKey());
 
   const describeHanlder = useDescribePageVoiceHandler(props.describlePageProps);
 
@@ -35,14 +33,17 @@ export function usePageVoiceCommands(props: {
       .map((h) => h.avaiableCommands)
       .flatMap((h) => h);
 
-    addVoiceHandler({ key: handerKeyRef.current, pageAvailableCommands });
+    addVoiceHandler({ key: handlerKeyRef.current, pageAvailableCommands });
     return () => {
-      removeVoiceHandler(handerKeyRef.current);
+      removeVoiceHandler(handlerKeyRef.current);
     };
   }, [addVoiceHandler, removeVoiceHandler]);
 
   useEffect(() => {
     if (!voiceCommandsQueue.length) {
+      return;
+    }
+    if(handlerKeyRef.current !== window.appCurrentVoiceHanlderId) {
       return;
     }
 

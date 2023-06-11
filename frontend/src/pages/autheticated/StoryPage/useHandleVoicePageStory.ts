@@ -17,7 +17,7 @@ import {
 import { storyPageMessages } from "./appMessages";
 
 export const useHandleVoicePageNavigateToItem = (
-  userStory: UserStory|undefined
+  userStory: UserStory | undefined
 ): VoiceHandler => {
   const { playAppMessageAsync } = usePlayAppMessageFactory();
   const navigate = useNavigate();
@@ -63,10 +63,20 @@ export const useHandleVoicePageNavigateToItem = (
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
         return true;
       }
+      
+      if(!item.timeUnlocked && itemName === "epilogue") {
+        playAppMessageAsync(generalAppMessages.epilogueLockedFrontend);
+        return true;
+      }
+      if(!item.timeUnlocked) {
+        playAppMessageAsync(generalAppMessages.cantOpenALockedItem);
+        return true;
+      }
+
       if (itemName === "epilogue") {
         navigate(`/epilogues/${item.lang}/${item.id}`);
       } else {
-        navigate(`/block/${item.lang}/${item.id}`);
+        navigate(`/blocks/${item.lang}/${item.id}`);
       }
       return true;
     },
@@ -79,7 +89,9 @@ export const useHandleVoicePageNavigateToItem = (
   };
 };
 
-export const useHandleVoicePageLanguage = (userStory: UserStory|undefined) => {
+export const useHandleVoicePageLanguage = (
+  userStory: UserStory | undefined
+) => {
   const [describlePageProps, setDescriblePageProps] =
     useState<DescribePageVoiceHandlerProps>({
       playable: createPlayable(storyPageMessages.greetingPageStoryPage),

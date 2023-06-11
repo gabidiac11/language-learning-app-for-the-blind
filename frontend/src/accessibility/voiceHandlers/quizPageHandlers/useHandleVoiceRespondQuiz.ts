@@ -9,7 +9,19 @@ import {
 import {
   AudioUserCommand,
   AudioUserCommandType,
+  RespondQuizPaylod,
 } from "../../../context/contextTypes/voiceCommand.types";
+
+function matchWithCasing(
+  command: RespondQuizPaylod,
+  quizResponse: QuizResponse
+): QuizOption | undefined {
+  const answerOptionName = command.answerOptionName ?? "";
+  const option = quizResponse.options.find(
+    (i) => i.text.replace(" - ", " ").indexOf(answerOptionName) > -1
+  );
+  return option;
+}
 
 export function useHandleVoiceRespondQuiz(
   quizResponse: QuizResponse | undefined,
@@ -28,7 +40,9 @@ export function useHandleVoiceRespondQuiz(
       }
       const answerOptionName =
         command.answerOptionName?.toLocaleLowerCase() ?? "";
-      const answerOptionNumber = command.answerOptionNumber;
+      const answerOptionNumber =
+        command.answerOptionNumber ??
+        (answerOptionName.endsWith("number for") ? 4 : undefined);
 
       if (answerOptionNumber) {
         const index = answerOptionNumber - 1;
@@ -54,9 +68,15 @@ export function useHandleVoiceRespondQuiz(
         return true;
       }
 
-      const option = quizResponse.options.find(
-        (i) => i.text.toLocaleLowerCase().replace(" - ", " ").indexOf(answerOptionName) > -1
-      );
+      const option =
+        matchWithCasing(command, quizResponse) ??
+        quizResponse.options.find(
+          (i) =>
+            i.text
+              .toLocaleLowerCase()
+              .replace(" - ", " ")
+              .indexOf(answerOptionName) > -1
+        );
       if (!option) {
         playAppMessageAsync(
           generalAppMessages.couldntMatchResponseToAvailableOptionsQuiz

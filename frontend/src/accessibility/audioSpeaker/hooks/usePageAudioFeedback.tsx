@@ -3,24 +3,29 @@ import { genKey } from "../../../constants";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import { generalAppMessages } from "../../staticAppMessages/generalAppMessages";
 import { AppMessage } from "../../types/appMessage.type";
-import { PlayableError, PlayableMessage } from "../../types/playableMessage.type";
+import {
+  PlayableError,
+  PlayableMessage,
+} from "../../types/playableMessage.type";
 
 export const usePageAudioFeedback = (props: {
   error: PlayableError | undefined;
   loading: boolean;
 
   pageGreeting: AppMessage;
+  pageGreetingAppend?: AppMessage[];
   pageDataLoadingMessage?: AppMessage;
   pageDataLoadedMessage: AppMessage | AppMessage[];
 }) => {
-  const { enqueuePlayableMessage, singleEnque, prematurelyStopPlayableMessages } =
-    useFeedbackAudioQueue();
+  const {
+    enqueuePlayableMessage,
+    singleEnque,
+    prematurelyStopPlayableMessages,
+  } = useFeedbackAudioQueue();
   const loadingTimeoutRef = useRef<NodeJS.Timeout>();
 
   const playingMessageKeysRef = useRef<string[]>([]);
-  const greetingKeyRef = useRef(
-    `${genKey()}-${props.pageGreeting.uniqueName}`
-  );
+  const greetingKeyRef = useRef(`${genKey()}-${props.pageGreeting.uniqueName}`);
 
   const loadingRef = useRef(props.loading);
   loadingRef.current = props.loading;
@@ -38,13 +43,12 @@ export const usePageAudioFeedback = (props: {
     // enqueue page greeting
     const playableMessage: PlayableMessage = {
       key: greetingKeyRef.current,
-      messages: [props.pageGreeting],
+      messages: [props.pageGreeting, ...(props.pageGreetingAppend ?? [])],
     };
     singleEnque(playableMessage);
   }, []);
 
   useEffect(() => {
-
     if (props.loading) {
       // delay showing the loading message only if it takes too little to load
       clearTimeout(loadingTimeoutRef.current);
@@ -52,7 +56,7 @@ export const usePageAudioFeedback = (props: {
         if (!loadingRef.current) {
           return;
         }
-        if(!props.pageDataLoadingMessage) {
+        if (!props.pageDataLoadingMessage) {
           return;
         }
         const playableMessage: PlayableMessage = {
@@ -128,25 +132,22 @@ export const usePreappendLoadedData = (
       filePath: audioFile,
       text: text,
       uniqueName: text,
-      preventForcedStopOnCurrentPageJustOnce: uninteruptableJustOnce
+      preventForcedStopOnCurrentPageJustOnce: uninteruptableJustOnce,
     };
   }
 
   return loadedMessagesRef.current;
 };
 
-
 export const useAppendLoadedData = (
   mainMessage: AppMessage,
   tooltipLabel: string,
   audioFiles?: string[]
 ) => {
-  const loadedMessagesRef = useRef<AppMessage[]>([
-    mainMessage,
-  ]);
+  const loadedMessagesRef = useRef<AppMessage[]>([mainMessage]);
 
   if (audioFiles && loadedMessagesRef.current.length === 1) {
-    audioFiles.forEach(path => {
+    audioFiles.forEach((path) => {
       loadedMessagesRef.current[0] = {
         filePath: path,
         text: tooltipLabel,

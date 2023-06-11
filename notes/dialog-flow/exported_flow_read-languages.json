@@ -1,0 +1,3538 @@
+{
+  "flow": {
+    "flow": {
+      "flowId": "3cb40398-d5dc-4233-8c71-d35c6f7f26f7",
+      "displayName": "read-languages",
+      "transitionEvents": [ {
+        "triggerIntentId": "0cdac08e-2584-4075-b497-e3975ebd1fd5",
+        "transitionEventHandler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "payload": {
+                    "command": "READ_LANGUAGES"
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "e154e4f2-1707-41d3-a87d-44038c2dc091"
+      }, {
+        "triggerIntentId": "516e7bfb-4ec8-4119-abf5-a16f73fc704b",
+        "transitionEventHandler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "payload": {
+                    "command": "GO_TO_LANGUAGE"
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "aff5db97-513a-42c8-9266-12db31808313"
+      }, {
+        "triggerIntentId": "0b24b82b-1f7b-4e99-aca7-d6e29226847f",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "9dfe11b2-e534-443d-9c62-6f8989c86ef1"
+      }, {
+        "triggerIntentId": "60c1e001-3b02-447e-97e2-07cb9e2c183d",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "ac867002-787e-4815-ae2b-523e0dd07340"
+      }, {
+        "triggerIntentId": "607d4b18-efb4-4768-8a1b-5645ffc2ad8b",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "c5d4ad90-df24-4941-b94d-eb8fee651f3c"
+      }, {
+        "triggerIntentId": "7ea908ba-3b20-4fd2-b143-a01ec5ebfc54",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "c7a8ac4f-e83f-4c36-86a3-d12d9609bd19"
+      }, {
+        "triggerIntentId": "656fc3d2-5790-4f61-8ea0-3e15efacfcbc",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "6b5d26c1-7bb7-43a1-a082-933021e68d73"
+      }, {
+        "triggerIntentId": "93efac63-ffb1-4d25-bbe2-b658e8ccd6bc",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "e675ef4f-ccd9-431a-8c97-7da0ea9bbe6b"
+      }, {
+        "triggerIntentId": "f406920a-1602-4283-8e0c-a602a17f4708",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "3431f15f-801a-4419-95ba-f518bb98a188"
+      }, {
+        "triggerIntentId": "7872dcfe-88af-4a7e-80a9-34cc86363ca6",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "57213028-10a6-4dee-b861-52d43ac148ed"
+      }, {
+        "triggerIntentId": "cbdfd435-7499-4a6c-9d71-c8e4c138292b",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "42fd1ed9-4eb0-4a27-8372-d891baf3ffee"
+      }, {
+        "triggerIntentId": "073aed90-466c-4a21-bdeb-135c744799ec",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "4efddb15-741c-42d5-a604-39560267313b"
+      }, {
+        "triggerIntentId": "77231d7d-6098-4810-b838-505e3aa3cea6",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "82e64806-9bdc-43dd-a72c-3d77d8beb176"
+      }, {
+        "triggerIntentId": "7c8d20f9-ff8f-430e-8650-84c4f8dac32b",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "564e5de0-ef8f-4d5c-a214-bec0d4cece98"
+      }, {
+        "triggerIntentId": "f997f288-740f-422b-a8a3-7496f6554fb6",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "5d250e9b-f594-461a-934e-8d9521e45aeb"
+      }, {
+        "triggerIntentId": "9afd4ab6-7519-4d77-9876-4984511a1ebb",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "b6af916b-e5fc-444b-976f-88439a1bf3ba"
+      }, {
+        "triggerIntentId": "81ae4c0d-1b18-4893-87c5-e2858bee5edd",
+        "transitionEventHandler": {
+          "beforeTransition": {
+          
+          }
+        },
+        "name": "7c03e7c9-7ef5-4296-b5aa-ad06d56b00e2"
+      } ],
+      "modelIdentifier": {
+        "modelId": "b25702b1-2480-49ec-b6b0-56f6b59f40da"
+      },
+      "conversationEvents": [ {
+        "event": "sys.no-match-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "73f21655-7f5a-489b-bdcb-f35745ee10c1"
+      }, {
+        "event": "sys.no-input-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "a9311169-1181-4e89-9b86-c517609022f2"
+      } ],
+      "nluSettings": {
+        "classificationThreshold": 0.30000001,
+        "modelType": "MODEL_TYPE_STANDARD",
+        "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+        "customConfigKey": "a105d499-462b-48d6-9278-fd9faa2dac95"
+      },
+      "etag": "64846ed1"
+    },
+    "intents": [ {
+      "meta": {
+        "id": "60c1e001-3b02-447e-97e2-07cb9e2c183d",
+        "displayName": "navigate-back",
+        "priority": 500000,
+        "etag": "6481ffec"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please go back"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go back from here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go back to the previous page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to the previous page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to the previous page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to the previous page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "77231d7d-6098-4810-b838-505e3aa3cea6",
+        "displayName": "respond-quiz",
+        "priority": 500000,
+        "parameters": [ {
+          "id": "number",
+          "displayName": "number",
+          "value": "$number",
+          "entityTypeDisplayName": "@sys.number"
+        }, {
+          "id": "any",
+          "displayName": "any",
+          "value": "$any",
+          "entityTypeDisplayName": "@sys.any"
+        } ],
+        "labels": [ {
+          "key": "quiz-page",
+          "value": "quiz-page"
+        } ],
+        "etag": "648589a8"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "fifteen",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "fourteen",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "thirteen",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "twelve",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "eleven",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "ten",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "nine",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "eight",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "seven",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "six",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "five",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "four",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option ",
+          "userDefined": true
+        }, {
+          "text": "three",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 3,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "two",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option ",
+          "userDefined": true
+        }, {
+          "text": "one",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 2,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "fifteen",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "fourteen",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number ",
+          "userDefined": true
+        }, {
+          "text": "thirteen",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "twelve",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number ",
+          "userDefined": true
+        }, {
+          "text": "eleven",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "ten",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number ",
+          "userDefined": true
+        }, {
+          "text": "nine",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "eight",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "seven",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "six",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "five",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "four",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "three",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number "
+        }, {
+          "text": "two",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is option number ",
+          "userDefined": true
+        }, {
+          "text": "one",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "illustrate",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "foaming at the mouth",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "cut to the chase",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "surprise",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "concentration",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "profit characteristic",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "aunt",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "a lemon",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "a home bird",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "a piece of cake",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "happy as a clam",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "the answer is number "
+        }, {
+          "text": "five",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option number ",
+          "userDefined": true
+        }, {
+          "text": "one",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose choice ",
+          "userDefined": true
+        }, {
+          "text": "seven",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose choice number ",
+          "userDefined": true
+        }, {
+          "text": "three",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is choice ",
+          "userDefined": true
+        }, {
+          "text": "four",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is choice ",
+          "userDefined": true
+        }, {
+          "text": "one",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is choice number "
+        }, {
+          "text": "two",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my answer is ",
+          "userDefined": true
+        }, {
+          "text": "bed - word that describes where you sleep",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "My answer is ",
+          "userDefined": true
+        }, {
+          "text": "she is at home",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "My answer is option ",
+          "userDefined": true
+        }, {
+          "text": "three",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option ",
+          "userDefined": true
+        }, {
+          "text": "three",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option "
+        }, {
+          "text": "4",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "the answer is option number "
+        }, {
+          "text": "4",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "my choice is option number ",
+          "userDefined": true
+        }, {
+          "text": "one",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "the response is ",
+          "userDefined": true
+        }, {
+          "text": "years",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I response with option number ",
+          "userDefined": true
+        }, {
+          "text": "2",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose answer ",
+          "userDefined": true
+        }, {
+          "text": "often - Frequently; many times",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "the answer is ",
+          "userDefined": true
+        }, {
+          "text": "she is learning russian",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I respond with choice number ",
+          "userDefined": true
+        }, {
+          "text": "3",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "answer is ",
+          "userDefined": true
+        }, {
+          "text": "younger - Being at an earlier age",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the answer ",
+          "userDefined": true
+        }, {
+          "text": "father - a person with delicate hands",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose the option number ",
+          "userDefined": true
+        }, {
+          "text": "1",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "the answer is ",
+          "userDefined": true
+        }, {
+          "text": "ana is a magician",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "607d4b18-efb4-4768-8a1b-5645ffc2ad8b",
+        "displayName": "logout",
+        "priority": 500000,
+        "labels": [ {
+          "key": "general-navigation",
+          "value": "general-navigation"
+        } ],
+        "etag": "6486071f"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "log me out of this"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "sign out",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "out of my account",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to log out from my account"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to sign out"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "would you log me out"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "log out"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please log me out"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "656fc3d2-5790-4f61-8ea0-3e15efacfcbc",
+        "displayName": "navigate-to-block",
+        "priority": 500000,
+        "parameters": [ {
+          "id": "any",
+          "displayName": "any",
+          "value": "$any",
+          "entityTypeDisplayName": "@sys.any"
+        }, {
+          "id": "epilogue-mention",
+          "displayName": "epilogue-mention",
+          "value": "$epilogue-mention",
+          "entityTypeDisplayName": "@epilogue-mention"
+        } ],
+        "etag": "64858c9f"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "epilogue",
+          "entityType": "@epilogue-mention",
+          "alias": "epilogue-mention",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "population",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "extraterrestrial",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "humor",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "radio",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "spokesperson",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "report",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "remunerate",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "concentration",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "heads up",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "jaws of death",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "there's no i in team",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "two down, one to go",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "Ride Him, Cowboy!",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to block ",
+          "userDefined": true
+        }, {
+          "text": "On Cloud Nine",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "epilogue",
+          "entityType": "@epilogue-mention",
+          "alias": "epilogue-mention",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "population",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "extraterrestrial",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "humor",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "radio",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "spokesperson",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "report",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "remunerate",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "concentration",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "heads up",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "jaws of death",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "there's no i in team",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "two down, one to go",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "Ride Him, Cowboy!",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to block ",
+          "userDefined": true
+        }, {
+          "text": "On Cloud Nine",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "epilogue",
+          "entityType": "@epilogue-mention",
+          "alias": "epilogue-mention",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 2,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "population",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "humor",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "radio",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "spokesperson",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "report",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "remunerate",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "concentration",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "heads up",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "jaws of death",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "there's no i in team",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "two down, one to go",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "Ride Him, Cowboy!",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "On Cloud Nine",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to the lesson block named ",
+          "userDefined": true
+        }, {
+          "text": "time",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to lesson block ",
+          "userDefined": true
+        }, {
+          "text": "house",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select lesson block ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block with name ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select building block ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select block ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select building block ",
+          "userDefined": true
+        }, {
+          "text": "pronons",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": " building block",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to the ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": " block",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me the the ",
+          "userDefined": true
+        }, {
+          "text": "epilogue",
+          "entityType": "@epilogue-mention",
+          "alias": "epilogue-mention",
+          "userDefined": true
+        }, {
+          "text": " block",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "81ae4c0d-1b18-4893-87c5-e2858bee5edd",
+        "displayName": "access-lesson-story",
+        "priority": 500000,
+        "parameters": [ {
+          "id": "any",
+          "displayName": "any",
+          "value": "$any",
+          "entityTypeDisplayName": "@sys.any"
+        }, {
+          "id": "number",
+          "displayName": "number",
+          "value": "$number",
+          "entityTypeDisplayName": "@sys.number"
+        } ],
+        "labels": [ {
+          "key": "lesson-story",
+          "value": "lesson-story"
+        } ],
+        "etag": "64858592"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "protection and safety",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "manager affair",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "how to coock",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "protect",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "insure",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "bray",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "boot",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "stick",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "requirement",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "movie",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "championship",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "freedom awareness",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "protection and safety",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "manager affair",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "how to coock",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "protect",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "insure",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "bray",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "boot",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "stick",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "requirement",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "movie",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "championship",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "freedom and awareness",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to page with the lesson named ",
+          "userDefined": true
+        }, {
+          "text": "house number",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": " ",
+          "userDefined": true
+        }, {
+          "text": "six",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me story  ",
+          "userDefined": true
+        }, {
+          "text": "places number",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": " ",
+          "userDefined": true
+        }, {
+          "text": "two",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story with the name ",
+          "userDefined": true
+        }, {
+          "text": "house work number",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": " ",
+          "userDefined": true
+        }, {
+          "text": "six",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story family number "
+        }, {
+          "text": "four",
+          "entityType": "@sys.number",
+          "alias": "number"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to story ",
+          "userDefined": true
+        }, {
+          "text": "places",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to use story ",
+          "userDefined": true
+        }, {
+          "text": "people",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to page with the lesson named ",
+          "userDefined": true
+        }, {
+          "text": "house",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to lesson story ",
+          "userDefined": true
+        }, {
+          "text": "place",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select story ",
+          "userDefined": true
+        }, {
+          "text": "places",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select story ",
+          "userDefined": true
+        }, {
+          "text": "house",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        }, {
+          "text": "#2",
+          "entityType": "@sys.number",
+          "alias": "number",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "adjectives",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to story ",
+          "userDefined": true
+        }, {
+          "text": "family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to lesson ",
+          "userDefined": true
+        }, {
+          "text": "story family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to lesson story ",
+          "userDefined": true
+        }, {
+          "text": "Family",
+          "entityType": "@sys.any",
+          "alias": "any",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "9afd4ab6-7519-4d77-9876-4984511a1ebb",
+        "displayName": "read-lesson-stories",
+        "priority": 500000,
+        "etag": "6481fbd4"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "inform me what stories are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell what stories are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "describe to me what stories are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell what stories I can learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "show me what stories are here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "enumerate each story from this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read the story items"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me what stories are here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what are the stories from this page?"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me the name of the stories from this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what lesson-stories are on this page?"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "7c8d20f9-ff8f-430e-8650-84c4f8dac32b",
+        "displayName": "read-achievements",
+        "priority": 500000,
+        "etag": "648204ca"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what have I achieved"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what I've achieved",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what are the building blocks unlocked"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what are the stories unlocked"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what are the blocks unlocked"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what are the items unlocked"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me again what I've items I've unlocked"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me the achievements"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what stories or block or epilogues I achieved"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "displayName": "Default Negative Intent",
+        "priority": 500000,
+        "isFallback": true
+      }
+    }, {
+      "meta": {
+        "id": "7ea908ba-3b20-4fd2-b143-a01ec5ebfc54",
+        "displayName": "login",
+        "priority": 500000,
+        "etag": "6481ff2d"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please log in"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "log into my account"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "log me in"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "log me in with google"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "0b24b82b-1f7b-4e99-aca7-d6e29226847f",
+        "displayName": "general-describe-page",
+        "priority": 500000,
+        "etag": "6482053c"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what is the content of this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what is in this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what can I do in this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "describe this page I'm in"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me all the information from this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what information is in this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "inform me what is this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "show me what is on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me what is on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what page is this and what are the contents of this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "f997f288-740f-422b-a8a3-7496f6554fb6",
+        "displayName": "epilogue-read-short-story",
+        "priority": 500000,
+        "parameters": [ {
+          "id": "language",
+          "displayName": "language",
+          "value": "$language",
+          "entityTypeDisplayName": "@sys.language"
+        } ],
+        "labels": [ {
+          "key": "epilogue-start-page",
+          "value": "epilogue-start-page"
+        } ],
+        "etag": "6482045c"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play audio with short story"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please play the audio with the short story"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to hear again the short story"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read the short story again"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me the story in "
+        }, {
+          "text": "Russian",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me the short story"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "0cdac08e-2584-4075-b497-e3975ebd1fd5",
+        "displayName": "read-languages",
+        "priority": 500000,
+        "labels": [ {
+          "key": "lesson-languages-available",
+          "value": "lesson-languages-available"
+        }, {
+          "key": "navigation",
+          "value": "navigation"
+        } ],
+        "description": "This command helps the user to request to play an audio in which is described what languages are on the page. The languages refer to the language learning modules available on the application. The user can select on of them to go the page with the lesson in the language he wants to learn.",
+        "etag": "64820563"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play an audio about what languages can I learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play an audio describing what languages are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please show me what language I can learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me what language items there are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what languages can I learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "show me what languages there are here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what languages are on the page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me the names of the languages there are on the page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me what languages are displayed"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me what languages can I learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me what languages can I learn"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "516e7bfb-4ec8-4119-abf5-a16f73fc704b",
+        "displayName": "access-language",
+        "priority": 500000,
+        "parameters": [ {
+          "id": "language",
+          "displayName": "language",
+          "value": "$language",
+          "entityTypeDisplayName": "@sys.language"
+        } ],
+        "labels": [ {
+          "key": "languages",
+          "value": "languages"
+        } ],
+        "description": "The user can select on of them to go the page with the lesson in the language he wants to learn. Languages can be Russian, etc. The user wants to go the page with lessons in that language. This command helps the frontend redirect to page with lessons in the specified language.",
+        "etag": "6481f851"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select the language "
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "select ",
+          "userDefined": true
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        }, {
+          "text": " please",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to ",
+          "userDefined": true
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to show me the ",
+          "userDefined": true
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        }, {
+          "text": " learning module",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to see the lessons in "
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "Take me to "
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "Take me to the ",
+          "userDefined": true
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        }, {
+          "text": " language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "can I have the ",
+          "userDefined": true
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        }, {
+          "text": " language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want the ",
+          "userDefined": true
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        }, {
+          "text": " language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I would like ",
+          "userDefined": true
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "let's learn "
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I think I want to learn "
+        }, {
+          "text": "Russian",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I choose ",
+          "userDefined": true
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to choose ",
+          "userDefined": true
+        }, {
+          "text": "Russian",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what lessons are in ",
+          "userDefined": true
+        }, {
+          "text": "Russian",
+          "entityType": "@sys.language",
+          "alias": "language",
+          "userDefined": true
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what lessons are in "
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to lessons in "
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to learn "
+        }, {
+          "text": "German",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to learn "
+        }, {
+          "text": "English",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to learn "
+        }, {
+          "text": "Russian",
+          "entityType": "@sys.language",
+          "alias": "language"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "073aed90-466c-4a21-bdeb-135c744799ec",
+        "displayName": "access-quiz",
+        "priority": 500000,
+        "labels": [ {
+          "key": "block-start-page",
+          "value": "block-start-page"
+        } ],
+        "etag": "6486073f"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "got to quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "got to the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please go to quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "please navigate to the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "show me the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to start the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to do the epilogue quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to do the words quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to start doing the quiz"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "7872dcfe-88af-4a7e-80a9-34cc86363ca6",
+        "displayName": "go-to-next-word",
+        "priority": 500000,
+        "etag": "648203e1"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "next word please"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play the next word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to the next word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to the next word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "i want to hear the next word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to the next word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "f406920a-1602-4283-8e0c-a602a17f4708",
+        "displayName": "read-the-current-word",
+        "priority": 500000,
+        "labels": [ {
+          "key": "words-summary-page",
+          "value": "words-summary-page"
+        } ],
+        "etag": "648203a2"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "could you please play the word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to hear the word again"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play the word again"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what is the current word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "play audio for the current word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me the current word"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "93efac63-ffb1-4d25-bbe2-b658e8ccd6bc",
+        "displayName": "read-what-blocks",
+        "priority": 500000,
+        "labels": [ {
+          "key": "story-overview",
+          "value": "story-overview"
+        } ],
+        "etag": "64858dbc"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what block lessons are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what blocks are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "read me the names of the building blocks"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell me what building blocks this story has"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "can you tell me what building blocks are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "describe what building blocks are here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what building block lessons are here"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "tell what building block are available on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what building blocks has this story"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "what building blocks are on this page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    }, {
+      "meta": {
+        "id": "cbdfd435-7499-4a6c-9d71-c8e4c138292b",
+        "displayName": "access-words-summary",
+        "priority": 500000,
+        "labels": [ {
+          "key": "block-start-page",
+          "value": "block-start-page"
+        } ],
+        "etag": "64858d90"
+      },
+      "trainingPhrases": [ {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "go to the words summary"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "navigate to the words summary"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take me to words summary"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to learn the words of this block"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to practice the words of this block"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "take to the words summary page"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      }, {
+        "type": "EXAMPLE",
+        "parts": [ {
+          "text": "I want to learn the words of this building block"
+        } ],
+        "timesAddedCount": 1,
+        "lang": "en"
+      } ]
+    } ],
+    "entities": [ {
+      "id": "5d38d24a-5fc5-4ec0-9077-c8e2a34b4eab",
+      "displayName": "epilogue-mention",
+      "kind": "KIND_MAP",
+      "nluSettings": {
+      
+      }
+    } ],
+    "transitionRouteGroups": [ {
+      "key": "7ea4f828-c6a1-45ab-8451-9408eb6af3a8",
+      "value": {
+        "displayName": "rrr",
+        "etag": "6483aad0"
+      }
+    } ]
+  }
+}

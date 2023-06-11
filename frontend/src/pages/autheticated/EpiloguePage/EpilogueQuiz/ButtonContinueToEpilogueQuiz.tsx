@@ -10,7 +10,7 @@ const ButtonContinueToEpilogueQuiz = (props: {
         tabIndex={0}
         to={`/epilogues/${props.lang}/${props.epilogueProgressId}/quiz`}
       >
-        Go to quiz
+        Navigate to quiz
       </Link>
     </div>
   );

@@ -12,7 +12,6 @@ export const useFeedbackAudioQueue = () => {
   const enqueuePlayableMessage = useCallback(
     (playableMessage: PlayableMessage) => {
       logAudioQueue(`ENQUE(${playableMessage.key})`);
-      console.trace("enq")
       dispatch({
         type: StateActionType.EnqueuePlayableMessage,
         payload: playableMessage,
@@ -73,7 +72,7 @@ export const useFeedbackAudioQueue = () => {
 
   const emptyQueue = useCallback(
     () => {
-      console.log(`EMPTY_QUEUE()`);
+      logAudioQueue(`EMPTY_QUEUE()`);
 
       dispatch({
         type: StateActionType.EmptyAudioQueue,

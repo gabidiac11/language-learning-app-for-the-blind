@@ -17,8 +17,11 @@ export const useVoiceCommandRequest = (props: {
   const { playMessagePlayableAsync } = usePlayAppMessageFactory();
   const { singleEnque } = useVoiceCommandQueue();
 
+
   const sendVoiceCommandRequest = useCallback(
     async (blob: Blob) => {
+      const targetHandler = window.appCurrentVoiceHanlderId;
+
       props.setRecState(RecState.FetchingCommand);
 
       try {
@@ -36,7 +39,11 @@ export const useVoiceCommandRequest = (props: {
             response.data.userSpeechText
           }"`
         );
-        singleEnque(response.data);
+
+        // if the page (that means also the handler) changed in the meanwhile -> abort command
+        if(targetHandler === window.appCurrentVoiceHanlderId) {
+          singleEnque(response.data);
+        }
       } catch (error) {
         const playableError = getPlayableErrorFromUnknown(error);
         playMessagePlayableAsync(playableError.message);

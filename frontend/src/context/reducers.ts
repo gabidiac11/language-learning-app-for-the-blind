@@ -2,6 +2,7 @@ import {
   StateAction,
   StateActionType,
   StateType,
+  VoicePageHandler,
 } from "./contextTypes/ctxTypes";
 import initialState from "./initialState";
 
@@ -74,17 +75,31 @@ export default (state: StateType, action: StateAction): StateType => {
     case StateActionType.AddActiveVoiceHandler:
       return {
         ...state,
-        voiceHandlers: [...state.voiceHandlers, action.payload],
+        voiceHandlers: withUpdateCurrentVoiceHanlderId([
+          ...state.voiceHandlers,
+          action.payload,
+        ]),
       };
 
     case StateActionType.RemoveActiveVoiceHandler:
       return {
         ...state,
-        voiceHandlers: state.voiceHandlers.filter(
-          (i) => i.key !== action.payload.key
+        voiceHandlers: withUpdateCurrentVoiceHanlderId(
+          state.voiceHandlers.filter((i) => i.key !== action.payload.key)
         ),
       };
     default:
       return state;
   }
 };
+
+function withUpdateCurrentVoiceHanlderId(
+  items: VoicePageHandler[]
+): VoicePageHandler[] {
+  if (!items.length) {
+    window.appCurrentVoiceHanlderId = undefined;
+  } else {
+    window.appCurrentVoiceHanlderId = items[items.length - 1].key;
+  }
+  return items;
+}

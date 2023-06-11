@@ -51,8 +51,11 @@ export function getMatchedCommand(
     case AudioUserCommandType.NavigateToBlock:
       return {
         commandType,
-        buildingBlockOrEpilogueName: getFieldValue(),
-        number: getNumberValue()
+        buildingBlockOrEpilogueName:
+          getFieldValue("epilogue-mention") === "epilogue"
+            ? "epilogue"
+            : getFieldValue(),
+        number: getNumberValue(),
       };
     case AudioUserCommandType.RespondQuiz:
       return {
@@ -61,7 +64,11 @@ export function getMatchedCommand(
         answerOptionNumber: getNumberValue(),
       };
     case AudioUserCommandType.AcessLessonStory:
-      return { commandType, storyName: getFieldValue(), number: getNumberValue() };
+      return {
+        commandType,
+        storyName: getFieldValue(),
+        number: getNumberValue(),
+      };
     default:
       return {
         commandType,

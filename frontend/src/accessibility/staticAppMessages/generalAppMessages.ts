@@ -57,6 +57,12 @@ export const generalAppMessages: AppMessageGeneralSet = {
     text: "Could not match your choice value to one of the options.",
     filePath: `${audioStorageBasePath}/pages/blockQuiz/couldntMatchResponseToAvailableOptionsQuiz.mp3`,
   },
+
+  epilogueLockedFrontend: {
+    uniqueName: "epilogueLockedFrontend",
+    text: "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
+    filePath: `${audioStorageBasePath}/frontendGeneral/epilogueLockedFrontend.mp3`,
+  },
 };
 
 export type AppMessageGeneralSet = {
@@ -73,4 +79,6 @@ export type AppMessageGeneralSet = {
   voiceCommandNotAvailableOnThisPage: AppMessage;
   couldntMatchNumberToAvailableOptionsQuiz: AppMessage;
   couldntMatchResponseToAvailableOptionsQuiz: AppMessage;
+
+  epilogueLockedFrontend: AppMessage;
 };
