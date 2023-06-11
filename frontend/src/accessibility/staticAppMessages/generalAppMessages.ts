@@ -47,6 +47,16 @@ export const generalAppMessages: AppMessageGeneralSet = {
     text: "Voice command not allowed on this page.",
     filePath: `${audioStorageBasePath}/frontendGeneral/voiceCommandNotAvailableOnThisPage.mp3`,
   },
+  couldntMatchNumberToAvailableOptionsQuiz: {
+    uniqueName: "couldntMatchToAvailableOptionsQuiz",
+    text: "Could not match your choice number to one of the options.",
+    filePath: `${audioStorageBasePath}/pages/blockQuiz/couldntMatchNumberToAvailableOptionsQuiz.mp3`,
+  },
+  couldntMatchResponseToAvailableOptionsQuiz: {
+    uniqueName: "couldntMatchResponseToAvailableOptionsQuiz",
+    text: "Could not match your choice value to one of the options.",
+    filePath: `${audioStorageBasePath}/pages/blockQuiz/couldntMatchResponseToAvailableOptionsQuiz.mp3`,
+  },
 };
 
 export type AppMessageGeneralSet = {
@@ -57,8 +67,10 @@ export type AppMessageGeneralSet = {
 
   // voice commands
   cantNavigateToNonExistentItem: AppMessage;
-  cantLogoutBecauseAlreadyLogout: AppMessage,
+  cantLogoutBecauseAlreadyLogout: AppMessage;
   cantLoginBecauseAlreadyLogin: AppMessage;
   couldNotMatchVoiceCommand: AppMessage;
   voiceCommandNotAvailableOnThisPage: AppMessage;
+  couldntMatchNumberToAvailableOptionsQuiz: AppMessage;
+  couldntMatchResponseToAvailableOptionsQuiz: AppMessage;
 };

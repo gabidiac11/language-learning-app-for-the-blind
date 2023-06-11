@@ -28,6 +28,7 @@ export enum StateActionType {
   DequePlayableMessages = "DequePlayableMessages",
   SetIsAudioInteractionOn = "SetIsAudioInteractionOn",
   SingleEnquePlayableMessages = "SingleEnquePlayableMessages",
+  EmptyAudioQueue = "EmptyAudioQueue",
 
   // voice commands
   SingleEnqueVoiceCommand = "SingEnqueVoiceCommand",
@@ -63,6 +64,10 @@ export type StateAction =
       payload: {
         playableKey: string;
       };
+    }
+  | {
+      type: StateActionType.EmptyAudioQueue;
+      payload: {};
     }
   | {
       type: StateActionType.SetIsAudioInteractionOn;

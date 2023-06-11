@@ -33,7 +33,11 @@ export default (state: StateType, action: StateAction): StateType => {
           (i) => i.key !== action.payload.playableKey
         ),
       };
-
+    case StateActionType.EmptyAudioQueue:
+      return {
+        ...state,
+        playableAudiosQueue: [],
+      };
     case StateActionType.PrematurelyStopPlayableMessages:
       return {
         ...state,

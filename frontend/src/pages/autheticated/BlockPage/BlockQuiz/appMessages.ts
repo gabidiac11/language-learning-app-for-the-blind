@@ -20,5 +20,5 @@ export const blockQuizPageMessages: {
     uniqueName: "instructionsQuizBlockQuestion",
     text: "Navigate using up or down arrows to  replay these questions and answers, and use enter to choose the correct answer.",
     filePath: `${audioStorageBasePath}/pages/blockQuiz/instructionsQuizBlockQuestion.mp3`,
-  },
+  }
 };

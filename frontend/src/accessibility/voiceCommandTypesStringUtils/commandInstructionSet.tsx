@@ -32,8 +32,8 @@ const voicCommandPhrases: {
     "take me to the block epilogue",
   ],
   [AudioUserCommandType.RespondQuiz]: [
-    "the answer is choice number 1",
-    "the answer is he is at school",
+    "I choose the option 1",
+    "my answer is happy",
   ],
   [AudioUserCommandType.GoToNextWord]: [
     "go to the next word",
@@ -87,14 +87,31 @@ export class CommandInstructionSet {
     this.init();
   }
   private init() {
-    this._instructionItems = this._availableCommandTypes.map((type) => {
-      const phrases = voicCommandPhrases[type];
-      const label = commandLabels[type];
-      return {
-        label,
-        phrases,
-      };
-    });
+    this._instructionItems = this._availableCommandTypes
+      .reverse()
+      .sort((i1, i2) => {
+        const describleables = [
+          AudioUserCommandType.DescribePage,
+          AudioUserCommandType.ReadLessonStories,
+          AudioUserCommandType.ReadAchievements,
+          AudioUserCommandType.ReadLanguages,
+          AudioUserCommandType.ReadWhatBlocks,
+          AudioUserCommandType.EpilogueReadShortStory,
+        ];
+        const isD1 = describleables.indexOf(i1) > -1;
+        const isD2 = describleables.indexOf(i2) > -1;
+        if (isD1 === isD2) return 0;
+        if (isD1) return -1;
+        return 1;
+      })
+      .map((type) => {
+        const phrases = voicCommandPhrases[type];
+        const label = commandLabels[type];
+        return {
+          label,
+          phrases,
+        };
+      });
 
     const instructionsToText = this._instructionItems
       .map((instr, i) => {

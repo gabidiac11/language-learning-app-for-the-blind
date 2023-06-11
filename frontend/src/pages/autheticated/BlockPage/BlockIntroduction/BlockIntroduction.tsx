@@ -6,7 +6,7 @@ import { getShuffledArray } from "../../../../utils";
 import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
 import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
 import "./BlockIntroduction.scss";
-import BlockWordsSummariesCompleted from "./BlockWordsSummariesCompleted";
+import BlockWordsSummariesCompleted from "./BlockIntroductionCompleted/BlockWordsSummariesCompleted";
 import explanations from "../explanations";
 import { BlockWordSummary } from "./BlockWordSummary";
 import { WithFocusControls } from "../../../page-components/accessibility/WithFocusControls";
@@ -96,6 +96,7 @@ const BlockIntroduction = () => {
                     key={data.block.words[indexWord].id}
                     word={data.block.words[indexWord]}
                     next={next}
+                    blockProgress={data}
                   />
                 )}
                 {learningSitCompleted && (

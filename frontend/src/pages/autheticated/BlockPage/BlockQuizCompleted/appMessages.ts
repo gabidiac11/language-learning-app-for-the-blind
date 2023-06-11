@@ -13,7 +13,7 @@ export const blockQuizCompletedPageMessages: {
   },
   loadedBlockQuizCompleted: {
     uniqueName: "loadedBlockQuizCompleted",
-    text: "Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to access these lessons that you've achieved.",
     filePath: `${audioStorageBasePath}/pages/blockQuizCompleted/loadedBlockQuizCompleted.mp3`,
     preventForcedStopOnCurrentPageJustOnce: true
   },

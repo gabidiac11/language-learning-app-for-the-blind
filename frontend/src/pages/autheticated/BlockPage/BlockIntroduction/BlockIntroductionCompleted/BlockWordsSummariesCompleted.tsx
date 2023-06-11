@@ -1,16 +1,17 @@
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
-import { getPlayableErrorFromUnknown } from "../../../../accessibility/api/getPlayableErrorFromUnknown";
-import { screenReader } from "../../../../accessibility/appReaders";
+import { getPlayableErrorFromUnknown } from "../../../../../accessibility/api/getPlayableErrorFromUnknown";
+import { screenReader } from "../../../../../accessibility/appReaders";
 import useFetchData, {
   UseFetchDataOptions,
-} from "../../../../api/useFetchData";
-import { genKey } from "../../../../constants";
-import { BuildingBlockProgress } from "../../../../context";
-import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
-import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary";
-import ButtonContinueToBlockQuiz from "../ButtonContinueToBlockQuiz";
-import { blockIntroductionPageMessages } from "./appMessages";
+} from "../../../../../api/useFetchData";
+import { genKey } from "../../../../../constants";
+import { BuildingBlockProgress } from "../../../../../context";
+import { useFeedbackAudioQueue } from "../../../../../context/hooks/useFeedbackAudiQueue";
+import ErrorBoundary from "../../../../page-components/ErrorBoundary/ErrorBoundary";
+import ButtonContinueToBlockQuiz from "../../ButtonContinueToBlockQuiz";
+import { blockIntroductionPageMessages } from "../appMessages";
+import { useHandleVoicePageSummaryCompleted } from "./useHandleVoicePageSummaryCompleted";
 
 const fetchOptioons: UseFetchDataOptions = {
   method: "POST",
@@ -27,8 +28,13 @@ const BlockWordsSummariesCompleted = (props: {
 
   const { enqueuePlayableMessage } = useFeedbackAudioQueue();
 
+  useHandleVoicePageSummaryCompleted({
+    ...props.blockProgress,
+    timeSummaryCompleted: Date.now(),
+  });
+
   useEffect(() => {
-    if(loading || error) {
+    if (loading || error) {
       return;
     }
     enqueuePlayableMessage({

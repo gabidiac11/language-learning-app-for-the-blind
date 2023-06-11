@@ -32,9 +32,13 @@ export const useHandleVoiceNavigateToLanguage = (
         return true;
       }
 
-      const languageText = command.language?.toLocaleLowerCase() ?? "";
-      const languageItem = languages.find(
-        (item) => item.name.toLocaleLowerCase().indexOf(languageText) > -1
+      const languageTexts = (command.language?.toLocaleLowerCase() ?? "").split(
+        " "
+      );
+      const languageItem = languages.find((item) =>
+        languageTexts.some(
+          (text) => item.name.toLocaleLowerCase().indexOf(text) > -1
+        )
       );
       if (!languageItem) {
         playAppMessageAsync(generalAppMessages.cantNavigateToNonExistentItem);
@@ -69,7 +73,7 @@ export const useHandleVoicePageLanguage = (
     otherHandlers: [navigateToLangHander],
   });
 
-  // set audio messages that will play when read languages is requested:
+  // set audio messages that will play when read items is requested:
   useEffect(() => {
     if (!languages) {
       return;

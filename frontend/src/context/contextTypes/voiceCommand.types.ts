@@ -28,6 +28,7 @@ export type AcessLanguageCommandPayload = {
 export type NavigateToBlockCommandPaylod = {
   commandType: AudioUserCommandType.NavigateToBlock;
   buildingBlockOrEpilogueName: string;
+  number?: number;
 };
 export type RespondQuizPaylod = {
   commandType: AudioUserCommandType.RespondQuiz;
@@ -37,6 +38,7 @@ export type RespondQuizPaylod = {
 export type AcessLessonStoryPaylod = {
   commandType: AudioUserCommandType.AcessLessonStory;
   storyName: string;
+  number?: number;
 };
 
 export type AudioUserCommand =

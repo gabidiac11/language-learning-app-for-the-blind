@@ -128,7 +128,7 @@ export function Speaker() {
       >
         {isAudioInteractionOn && (
           <div aria-hidden="true" tabIndex={-1} className={`audio-state-text ${isPlaying ? "txt-is-playing" : ""}`}>
-            <p>{isPlaying ? "Playing ..." : "Not playing"}</p>
+            <p>{isPlaying ? "Playing..." : "Not playing"}</p>
           </div>
         )}
         <audio

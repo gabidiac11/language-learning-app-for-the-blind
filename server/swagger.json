@@ -873,6 +873,10 @@
 			},
 			"NavigateToBlockCommandPaylod": {
 				"properties": {
+					"number": {
+						"type": "number",
+						"format": "double"
+					},
 					"buildingBlockOrEpilogueName": {
 						"type": "string"
 					},
@@ -966,6 +970,10 @@
 			},
 			"AcessLessonStoryPaylod": {
 				"properties": {
+					"number": {
+						"type": "number",
+						"format": "double"
+					},
 					"storyName": {
 						"type": "string"
 					},

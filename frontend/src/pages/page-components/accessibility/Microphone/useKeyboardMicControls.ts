@@ -13,7 +13,6 @@ export const useKeyboardMicControls = (props: {
   startRecording: () => Promise<void>;
   stopRecording: () => void;
 }) => {
-  const { playAppMessageAsync } = usePlayAppMessageFactory();
   useEffect(() => {
     const onSpaceKey = async (event: KeyboardEvent) => {
       if (!isMicOnOffKeyboardEvent(event)) {
@@ -29,7 +28,6 @@ export const useKeyboardMicControls = (props: {
         props.stopRecording();
         return;
       }
-      await playAppMessageAsync(micMessages.micRequested);
       props.startRecording();
     };
     document.addEventListener("keydown", onSpaceKey);

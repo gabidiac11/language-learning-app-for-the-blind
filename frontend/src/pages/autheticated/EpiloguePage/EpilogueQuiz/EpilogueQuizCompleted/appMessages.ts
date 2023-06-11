@@ -13,7 +13,7 @@ export const epiloqueQuizCompletedPageMessages: {
   },
   loadedEpilogueQuizCompleted: {
     uniqueName: "loadedEpilogueQuizCompleted",
-    text: "Navigate with arrow up or arrow down to see the achievements.",
+    text: "Navigate with arrow up or arrow down to access these lessons that you've achieved.",
     filePath: `${audioStorageBasePath}/pages/epiloqueQuizCompleted/loadedEpilogueQuizCompleted.mp3`,
     preventForcedStopOnCurrentPageJustOnce: true
   },

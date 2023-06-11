@@ -12,7 +12,7 @@ export const useFeedbackAudioQueue = () => {
   const enqueuePlayableMessage = useCallback(
     (playableMessage: PlayableMessage) => {
       logAudioQueue(`ENQUE(${playableMessage.key})`);
-
+      console.trace("enq")
       dispatch({
         type: StateActionType.EnqueuePlayableMessage,
         payload: playableMessage,
@@ -71,11 +71,24 @@ export const useFeedbackAudioQueue = () => {
     });
   }, [enqueuePlayableMessage]);
 
+  const emptyQueue = useCallback(
+    () => {
+      console.log(`EMPTY_QUEUE()`);
+
+      dispatch({
+        type: StateActionType.EmptyAudioQueue,
+        payload: {},
+      });
+    },
+    [dispatch]
+  );
+
   return {
     enqueuePlayableMessage,
     prematurelyStopPlayableMessages,
     dequePlayableMessage,
     enqueueCantOpenALockedItemMessage,
     singleEnque,
+    emptyQueue
   };
 };
