@@ -53,8 +53,8 @@ const voicCommandPhrases: {
   [AudioUserCommandType.Login]: ["log me in with google", "login"],
 
   [AudioUserCommandType.AcessLessonStory]: [
-    "go to story family",
-    "navigate to story places",
+    "navigate to lesson story places",
+    "go to lesson story family",
   ],
   [AudioUserCommandType.ReadWhatBlocks]: [
     "read me the names of the building blocks",
