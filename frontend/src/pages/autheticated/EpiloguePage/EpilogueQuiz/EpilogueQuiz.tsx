@@ -15,6 +15,8 @@ import "./EpilogueQuiz.scss";
 import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { epilogueQuizPageMessages } from "./appMessages";
+import { useHandleVoicePageQuiz } from "../../../../accessibility/voiceHandlers/quizPageHandlers/useHandleVoicePageQuiz";
+import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
 
 const EpilogueQuiz = () => {
   const navigate = useNavigate();
@@ -46,6 +48,10 @@ const EpilogueQuiz = () => {
     AppMessage[]
   >([]);
 
+  const { emptyQueue } = useFeedbackAudioQueue();
+
+  const [selected, setSelected] = useState<QuizOption>();
+
   usePageAudioFeedback({
     error,
     loading: !pageDataLoadedMessage.length,
@@ -62,6 +68,8 @@ const EpilogueQuiz = () => {
         );
       }
 
+      setSelected(option);
+
       // new request is triggered by changing these fetch options
       const body: QuizRequestBody = {
         optionId: option.id,
@@ -77,9 +85,19 @@ const EpilogueQuiz = () => {
     [currentQuestion]
   );
 
+  useHandleVoicePageQuiz(
+    pageDataLoadedMessage.length === 0
+      ? epilogueQuizPageMessages.loadedRequestQuestionEpiloue
+      : pageDataLoadedMessage,
+    epilogueQuizPageMessages.instructionsQuizepilogueQuestion,
+    currentQuestion,
+    onChoose
+  );
+
   const getToNextQuestion = useCallback(() => {
     setCurrentQuestion(nextQuestion);
     setNextQuestion(undefined);
+    setSelected(undefined);
   }, [nextQuestion, currentQuestion]);
 
   useEffect(() => {
@@ -99,6 +117,7 @@ const EpilogueQuiz = () => {
     const initialQuestionRequestMade =
       response.httpInfo?.url?.indexOf("/request-question") > -1;
 
+    emptyQueue();
     const audioMessage = computeAudioMessageFromResponse(
       quizResponse,
       initialQuestionRequestMade
@@ -129,6 +148,7 @@ const EpilogueQuiz = () => {
               correctOptionId={nextQuestion?.previouslyQuestion_CorrectOptionId}
               onChoose={onChoose}
               onNext={getToNextQuestion}
+              selected={selected}
             />
           )}
         </div>
@@ -146,10 +166,7 @@ function computeAudioMessageFromResponse(
   const responsePlayables = quizResponse.playableApiMessages ?? [];
   const rightOrWrongMessages =
     quizResponse.previousQuestionOutcomePlaybaleMessages ?? [];
-  const messages = [
-    ...rightOrWrongMessages,
-    ...responsePlayables,
-  ];
+  const messages = [...rightOrWrongMessages, ...responsePlayables];
 
   messages.forEach((message) => {
     message.preventForcedStopOnCurrentPage = true;
@@ -158,6 +175,6 @@ function computeAudioMessageFromResponse(
   isInitial &&
     messages.push(epilogueQuizPageMessages.instructionsQuizepilogueQuestion);
 
-  console.log({messages})
+  console.log({ messages });
   return messages;
 }

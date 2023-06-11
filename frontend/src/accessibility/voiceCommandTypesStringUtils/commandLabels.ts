@@ -11,13 +11,13 @@ export const commandLabels: {
   [AudioUserCommandType.NavigateBack]: "Navigate back",
   [AudioUserCommandType.NavigateToBlock]: "Navigate to block",
   [AudioUserCommandType.RespondQuiz]: "Respond to quiz",
-  [AudioUserCommandType.GoToNextWord]: "Listen next word from sumamry",
+  [AudioUserCommandType.GoToNextWord]: "Listen next word from the summary",
   [AudioUserCommandType.ReadAchievements]: "Listen quiz achievements",
   [AudioUserCommandType.Login]: "Login",
   [AudioUserCommandType.AcessLessonStory]: "Access lesson story",
   [AudioUserCommandType.ReadWhatBlocks]: "Describe what blocks are on the page",
   [AudioUserCommandType.ReadLessonStories]:
-    "Read languages",
+    "List all the lesson stories",
   [AudioUserCommandType.AccessWordsSummary]:
     "Access building block words summary",
   [AudioUserCommandType.ReadThecurrentWord]: "Read the current word summary",

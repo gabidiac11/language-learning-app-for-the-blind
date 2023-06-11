@@ -4,5 +4,6 @@ import {
 
 export type VoiceHandler = {
   handle: (command: AudioUserCommand) => boolean;
-  avaiableCommands: AudioUserCommandType[]
+  avaiableCommands: AudioUserCommandType[];
+  order?: number;
 };

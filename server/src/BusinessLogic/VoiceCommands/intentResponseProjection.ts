@@ -52,6 +52,7 @@ export function getMatchedCommand(
       return {
         commandType,
         buildingBlockOrEpilogueName: getFieldValue(),
+        number: getNumberValue()
       };
     case AudioUserCommandType.RespondQuiz:
       return {
@@ -60,7 +61,7 @@ export function getMatchedCommand(
         answerOptionNumber: getNumberValue(),
       };
     case AudioUserCommandType.AcessLessonStory:
-      return { commandType, storyName: getFieldValue() };
+      return { commandType, storyName: getFieldValue(), number: getNumberValue() };
     default:
       return {
         commandType,

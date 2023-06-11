@@ -20,6 +20,7 @@ import { usePageAudioFeedback } from "../../../../accessibility/audioSpeaker/hoo
 import { AppMessage } from "../../../../accessibility/types/appMessage.type";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useHandleVoicePageQuizCompleted } from "../../../../accessibility/voiceHandlers/quizPageHandlers/useHandleVoicePageQuizCompleted";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -55,6 +56,8 @@ const BlockQuizCompleted = () => {
     pageGreeting: blockQuizCompletedPageMessages.loadingBlockQuizCompleted,
     pageDataLoadedMessage,
   });
+
+  useHandleVoicePageQuizCompleted(pageDataLoadedMessage);
 
   useEffect(() => {
     if(data) {

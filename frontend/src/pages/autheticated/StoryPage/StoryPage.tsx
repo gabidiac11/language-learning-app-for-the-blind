@@ -1,15 +1,17 @@
 import { Divider, Chip, Typography, Container } from "@mui/material";
-import { useRef } from "react";
 import { useParams } from "react-router";
-import { AppMessage } from "../../../accessibility/types/appMessage.type";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import useFetchData from "../../../api/useFetchData";
 import { BuildingBlockProgress, UserStory } from "../../../context";
 import ErrorBoundary from "../../page-components/ErrorBoundary/ErrorBoundary";
-import { usePageAudioFeedback, usePreappendLoadedData } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
+import {
+  usePageAudioFeedback,
+  usePreappendLoadedData,
+} from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { storyPageMessages } from "./appMessages";
 import BuildingBlockItem from "./BuildingBlockItem";
 import EpilogueBlockItem from "./EpilogueBlockItem";
+import { useHandleVoicePageLanguage } from "./useHandleVoicePageStory";
 
 export const StoryPage = () => {
   const { id, lang } = useParams<{ id: string; lang: string }>();
@@ -32,6 +34,8 @@ export const StoryPage = () => {
     pageDataLoadingMessage: storyPageMessages.loadingStoryPage,
     pageDataLoadedMessage,
   });
+
+  useHandleVoicePageLanguage(data);
 
   return (
     <div

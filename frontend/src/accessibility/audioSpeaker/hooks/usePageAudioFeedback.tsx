@@ -13,7 +13,7 @@ export const usePageAudioFeedback = (props: {
   pageDataLoadingMessage?: AppMessage;
   pageDataLoadedMessage: AppMessage | AppMessage[];
 }) => {
-  const { enqueuePlayableMessage, prematurelyStopPlayableMessages } =
+  const { enqueuePlayableMessage, singleEnque, prematurelyStopPlayableMessages } =
     useFeedbackAudioQueue();
   const loadingTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -40,11 +40,10 @@ export const usePageAudioFeedback = (props: {
       key: greetingKeyRef.current,
       messages: [props.pageGreeting],
     };
-    enqueuePlayableMessage(playableMessage);
+    singleEnque(playableMessage);
   }, []);
 
   useEffect(() => {
-    clearPlayingMessages();
 
     if (props.loading) {
       // delay showing the loading message only if it takes too little to load

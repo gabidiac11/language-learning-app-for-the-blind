@@ -16,6 +16,7 @@ import { usePageAudioFeedback } from "../../../../../accessibility/audioSpeaker/
 import { epiloqueQuizCompletedPageMessages } from "./appMessages";
 import { useEffect, useState } from "react";
 import { AppMessage } from "../../../../../accessibility/types/appMessage.type";
+import { useHandleVoicePageQuizCompleted } from "../../../../../accessibility/voiceHandlers/quizPageHandlers/useHandleVoicePageQuizCompleted";
 
 const StyleWrapper = styled("div")(({ theme }) => ({
   width: "100%",
@@ -45,6 +46,8 @@ const EpilogueQuizCompleted = () => {
     AppMessage[]
   >([]);
 
+  useHandleVoicePageQuizCompleted(pageDataLoadedMessage);
+
   usePageAudioFeedback({
     error,
     loading: !pageDataLoadedMessage.length,
@@ -52,6 +55,8 @@ const EpilogueQuizCompleted = () => {
       epiloqueQuizCompletedPageMessages.loadingEpilogueQuizCompleted,
     pageDataLoadedMessage,
   });
+
+  useHandleVoicePageQuizCompleted(pageDataLoadedMessage);
 
   useEffect(() => {
     if (data) {

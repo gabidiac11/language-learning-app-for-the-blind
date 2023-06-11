@@ -42,6 +42,6 @@ export function useDescribePageVoiceHandler(
     handle,
     avaiableCommands: props.otherDescribables ?? [
       AudioUserCommandType.DescribePage,
-    ],
+    ]
   };
 }

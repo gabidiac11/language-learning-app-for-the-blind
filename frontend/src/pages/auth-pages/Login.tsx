@@ -14,10 +14,10 @@ export const Login = () => {
   const authState = useAuthState(firebaseAuth);
   const [user, , error] = authState;
 
-  const { enqueuePlayableMessage } = useFeedbackAudioQueue();
+  const { singleEnque } = useFeedbackAudioQueue();
 
   useEffect(() => {
-    enqueuePlayableMessage({
+    singleEnque({
       key: `${genKey()}-${loginPageMessages.greetingLoginPage.uniqueName}`,
       messages: [loginPageMessages.greetingLoginPage],
     });
@@ -27,7 +27,7 @@ export const Login = () => {
     if (!error) {
       return;
     }
-    enqueuePlayableMessage({
+    singleEnque({
       key: `${genKey()}-${apiErrorsAppMessages.somethingWentWrong.uniqueName}`,
       messages: [apiErrorsAppMessages.somethingWentWrong],
     });

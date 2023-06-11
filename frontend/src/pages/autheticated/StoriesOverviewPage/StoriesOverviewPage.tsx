@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
 import { storiesOverviewPageMessages } from "./appMessages";
 import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
+import { useHandleVoicePageLanguage } from "./useHandleVoicePageStoriesOverview";
 
 export const StoriesOverviewPage = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -23,6 +24,8 @@ export const StoriesOverviewPage = () => {
     pageDataLoadingMessage: storiesOverviewPageMessages.loadingStoriesOverview,
     pageDataLoadedMessage: storiesOverviewPageMessages.loadedStoriesOverview,
   });
+
+  useHandleVoicePageLanguage(data);
 
   return (
     <div

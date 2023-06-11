@@ -1,18 +1,21 @@
 import { Button } from "@mui/material";
 import { useRef, useEffect, useCallback, useState } from "react";
-import { Word } from "../../../../context";
+import { BuildingBlockProgress, Word } from "../../../../context";
 import { VolumeUp as PlayIcon } from "@mui/icons-material";
 import { StopCircle as StopIcon } from "@mui/icons-material";
 import { useFeedbackAudioQueue } from "../../../../context/hooks/useFeedbackAudiQueue";
-import { createPlayableGroupFromWord } from "./createPlayableGroup";
+import { createPlayableGroupFromWord } from "./createPlayableGroupFromWord";
 import { languages } from "../../../../constants";
 import { getListenableKeyFromPlayableKey } from "../../../../accessibility/audioSpeaker/getListenableKeyFromPlayable";
 import { useIsPlayingAudioMessage } from "../../../../accessibility/audioSpeaker/hooks/useIsPlayingAudioMessage";
+import { useHandleVoicePageBlockIntroduction } from "./useHandleVoicePageBlockIntroduction";
 
-export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: () => void }> = (
-  props
-) => {
-
+export const BlockWordSummary: React.FC<{
+  word: Word;
+  blockProgress: BuildingBlockProgress;
+  isFirst: boolean;
+  next: () => void;
+}> = (props) => {
   const playBtnRef = useRef<HTMLButtonElement>(null);
   const playBtnTriggeredRef = useRef<boolean>();
 
@@ -22,6 +25,16 @@ export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: ()
   const isListening = useIsPlayingAudioMessage(playableKey);
   const { enqueuePlayableMessage, singleEnque, dequePlayableMessage } =
     useFeedbackAudioQueue();
+
+  useHandleVoicePageBlockIntroduction(
+    props.blockProgress,
+    () => {
+      playBtnRef.current?.click();
+    },
+    () => {
+      props.next();
+    }
+  );
 
   const setPlayableKey = useCallback((value: string) => {
     playableKeyRef.current = value;
@@ -44,7 +57,7 @@ export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: ()
   );
 
   useEffect(() => {
-    if(playBtnRef.current) {
+    if (playBtnRef.current) {
       playBtnTriggeredRef.current = true;
       playBtnRef.current.focus();
     }
@@ -66,7 +79,8 @@ export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: ()
         aria-label={`text: Word translation: ${props.word.shortTranslation} - ${
           props.word.longTranslation
         }. Press tab to go to play the word in ${
-          languages.find((l) => l.id === props.word.lang)?.name ?? "the foreign language"
+          languages.find((l) => l.id === props.word.lang)?.name ??
+          "the foreign language"
         }`}
       >
         {props.word.shortTranslation} - {props.word.longTranslation}
@@ -78,17 +92,15 @@ export const BlockWordSummary: React.FC<{ word: Word; isFirst: boolean, next: ()
             tabIndex={0}
             aria-label="button: Play the word. Press enter to stop."
             aria-hidden={isListening ? "true" : "false"}
-
             ref={playBtnRef}
-
             color={isListening ? "secondary" : "primary"}
             startIcon={isListening ? <StopIcon /> : <PlayIcon />}
             style={{ marginBottom: "20px" }}
             variant="contained"
             onFocus={() => {
-              if(playBtnTriggeredRef.current) {
+              if (playBtnTriggeredRef.current) {
                 listenWord(props.isFirst);
-                playBtnTriggeredRef.current = false; 
+                playBtnTriggeredRef.current = false;
               }
             }}
             onClick={(event) => {

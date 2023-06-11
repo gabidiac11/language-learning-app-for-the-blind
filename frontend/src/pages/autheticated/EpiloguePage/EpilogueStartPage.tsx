@@ -10,13 +10,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../axiosInstance";
 import { lessonLanguageHeader } from "../../../constants";
 import { WithFocusControls } from "../../page-components/accessibility/WithFocusControls";
-import { PlayableError } from "../../../accessibility/types/playableMessage.type";
+import { PlayableError, PlayableMessage } from "../../../accessibility/types/playableMessage.type";
 import { getPlayableErrorFromUnknown } from "../../../accessibility/api/getPlayableErrorFromUnknown";
 import { usePageAudioFeedback } from "../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { epilogueOverviewPageMessages } from "./appMessages";
 import { useIsPlayingAudioMessage } from "../../../accessibility/audioSpeaker/hooks/useIsPlayingAudioMessage";
 import { useFeedbackAudioQueue } from "../../../context/hooks/useFeedbackAudiQueue";
 import { StopCircle as StopIcon } from "@mui/icons-material";
+import { useHandleVoicePageEpilogueStart } from "./useHandleVoicePageEpilogueStart";
 
 const EpilogueStartPage = () => {
   const { id: epilogueProgressId, lang } = useParams<{
@@ -100,8 +101,20 @@ const StoryListener = (props: {
     _setLoading(value);
   };
 
-  const { singleEnque, dequePlayableMessage } =
-    useFeedbackAudioQueue();
+  const { singleEnque, dequePlayableMessage } = useFeedbackAudioQueue();
+
+  const [pageDataLoadedMessagePlayable] = useState<PlayableMessage>({
+    key: props.epilogueProgress.epilogue.audioFile,
+    messages: [
+      {
+        filePath: props.epilogueProgress.epilogue.audioFile,
+        text: props.epilogueProgress.epilogue.textStoryTale,
+        uniqueName: props.epilogueProgress.epilogue.audioFile,
+      },
+    ],
+  });
+
+  useHandleVoicePageEpilogueStart(pageDataLoadedMessagePlayable, props.epilogueProgress);
 
   const markEpilogueAsListened = useCallback(async () => {
     if (props.epilogueProgress.timeSummaryCompleted) {
@@ -132,20 +145,11 @@ const StoryListener = (props: {
 
   const listenStory = useCallback(() => {
     if (isListening) {
-        dequePlayableMessage(props.epilogueProgress.epilogue.audioFile);
+      dequePlayableMessage(props.epilogueProgress.epilogue.audioFile);
       return;
     }
-    singleEnque({
-      key: props.epilogueProgress.epilogue.audioFile,
-      messages: [
-        {
-          filePath: props.epilogueProgress.epilogue.audioFile,
-          text: props.epilogueProgress.epilogue.textStoryTale,
-          uniqueName: props.epilogueProgress.epilogue.audioFile,
-        },
-      ],
-    });
-  }, [singleEnque, isListening]);
+    singleEnque(pageDataLoadedMessagePlayable);
+  }, [singleEnque, isListening, pageDataLoadedMessagePlayable]);
 
   useEffect(() => {
     if (isListening === false) {
@@ -171,8 +175,7 @@ const StoryListener = (props: {
           aria-label="Play short story button"
           color={isListening ? "secondary" : "primary"}
           startIcon={isListening ? <StopIcon /> : <VolumeUpIcon />}
-
-          // prevent prematurelyStopPlayableMessages if the previous focused element has the same playing-key 
+          // prevent prematurelyStopPlayableMessages if the previous focused element has the same playing-key
           playing-key={props.epilogueProgress.epilogue.audioFile}
         >
           {isListening ? "Playing..." : "Play story"}

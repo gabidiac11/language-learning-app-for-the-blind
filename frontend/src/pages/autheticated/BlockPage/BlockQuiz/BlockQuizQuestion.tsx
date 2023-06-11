@@ -12,16 +12,8 @@ const BlockQuizQuestion = (props: {
   correctOptionId?: string;
   onNext: () => void;
   onChoose: (option: QuizOption) => void;
+  selected?: QuizOption;
 }) => {
-  const [selected, setSelected] = useState<QuizOption>();
-
-  const onChoose = useCallback(
-    (option: QuizOption) => {
-      setSelected(option);
-      props.onChoose(option);
-    },
-    [props.onChoose]
-  );
 
   const pauseLoadingNextQuestionTimeSeconds = 3;
 
@@ -45,17 +37,17 @@ const BlockQuizQuestion = (props: {
               aria-label={`option ${index + 1}: ${option.text.replace("->", "")}`}
               variant="contained"
               className="quiz-question-option"
-              disabled={!!selected}
-              onClick={() => onChoose(option)}
+              disabled={!!props.selected}
+              onClick={() => props.onChoose(option)}
             >
               {(() => {
-                if (!selected || !props.correctOptionId) {
+                if (!props.selected || !props.correctOptionId) {
                   return "";
                 }
                 if (option.id === props.correctOptionId) {
                   return <Typography className="mark">✔️</Typography>;
                 }
-                if (option.id === selected.id) {
+                if (option.id === props.selected.id) {
                   return <Typography className="mark">❌</Typography>;
                 }
               })()}

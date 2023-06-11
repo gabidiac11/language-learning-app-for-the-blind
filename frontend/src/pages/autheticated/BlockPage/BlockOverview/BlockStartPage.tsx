@@ -7,6 +7,7 @@ import ErrorBoundary from "../../../page-components/ErrorBoundary/ErrorBoundary"
 import { usePageAudioFeedback, usePreappendLoadedData } from "../../../../accessibility/audioSpeaker/hooks/usePageAudioFeedback";
 import { blockStartPageMessages } from "./appMessages";
 import explanations from "../explanations";
+import { useHandleVoicePageBlockOverview } from "./useHandleVoicePageBlockOverview";
 
 const BlockStartPage = () => {
   const { id: blockProgressId, lang } = useParams<{
@@ -31,6 +32,8 @@ const BlockStartPage = () => {
     pageDataLoadingMessage: blockStartPageMessages.loadingBlockStart,
     pageDataLoadedMessage,
   });
+
+  useHandleVoicePageBlockOverview(data);
 
   return (
     <div

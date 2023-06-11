@@ -48,7 +48,7 @@ export const Microphone = () => {
       clearTimeout(commandTextTimeoutRef.current);
       commandTextTimeoutRef.current = setTimeout(() => {
         setCommandText(undefined);
-      }, 3000);
+      }, 7000);
     },
   });
 
@@ -171,27 +171,45 @@ export const Microphone = () => {
     const setAllowFalse = () => {
       setAllowInstructionTooltip(false);
     };
-    buttonRef.current &&
+
+    if (buttonRef.current) {
       buttonRef.current.addEventListener("focus", setAllowTrue);
-    buttonRef.current &&
       buttonRef.current.addEventListener("blur", setAllowFalse);
 
-    buttonRef.current &&
       buttonRef.current.addEventListener("mouseover", setAllowTrue);
-    buttonRef.current &&
       buttonRef.current.addEventListener("mouseleave", setAllowFalse);
+
+      window.addEventListener("click", setAllowFalse);
+    }
     return () => {
-      buttonRef.current &&
+      if (buttonRef.current) {
         buttonRef.current.removeEventListener("focus", setAllowTrue);
-      buttonRef.current &&
         buttonRef.current.removeEventListener("blur", setAllowFalse);
 
-      buttonRef.current &&
         buttonRef.current.addEventListener("mouseover", setAllowTrue);
-      buttonRef.current &&
         buttonRef.current.addEventListener("mouseleave", setAllowFalse);
+      }
+      window.addEventListener("click", setAllowFalse);
     };
-  }, [setAllowInstructionTooltip]);
+  }, []);
+
+  useEffect(() => {
+    const hideCommandText = () => {
+      setCommandText(undefined);
+      clearTimeout(commandTextTimeoutRef.current);
+    };
+
+    buttonRef.current &&
+      buttonRef.current.addEventListener("mouseover", hideCommandText);
+
+    window.addEventListener("click", hideCommandText);
+    return () => {
+      buttonRef.current &&
+        buttonRef.current.addEventListener("mouseover", hideCommandText);
+
+      window.addEventListener("click", hideCommandText);
+    };
+  }, []);
 
   const ariaLabel =
     voiceHandlers.length === 0
