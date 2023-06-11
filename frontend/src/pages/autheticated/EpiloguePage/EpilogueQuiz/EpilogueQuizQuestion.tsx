@@ -31,7 +31,6 @@ const EpilogueQuizQuestion = (props: {
       </Typography>
       {props.currentQuestion.options.map((option, index) => (
         <div key={option.id} aria-label="question's options wrapper">
-          {/* TODO: see how you wrap the text */}
           <Button
             tabIndex={0}
             aria-label={`option ${index + 1}: ${option.text.replace("->", "")}`}

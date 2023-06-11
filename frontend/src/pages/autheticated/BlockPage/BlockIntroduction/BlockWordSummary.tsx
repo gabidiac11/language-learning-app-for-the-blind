@@ -113,7 +113,6 @@ export const BlockWordSummary: React.FC<{
           </Button>
         </div>
         <div>
-          {/* TODO: play something after new word is retrieved and displayed */}
           <Button
             tabIndex={0}
             aria-label="Next word button"

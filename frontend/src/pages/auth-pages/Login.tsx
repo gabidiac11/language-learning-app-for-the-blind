@@ -63,16 +63,6 @@ export const Login = () => {
             >
               Login with Google
             </Button>
-
-            {/* TODO: register with email and password should be finalized */}
-            {/* <Link
-              tabIndex={0}
-              aria-label="Register with email and password"
-              to={"/register"}
-              color="primary"
-            >
-              Or register
-            </Link> */}
           </div>
 
           {user && <div tabIndex={0}>Loading...</div>}

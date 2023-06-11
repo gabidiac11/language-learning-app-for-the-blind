@@ -29,8 +29,7 @@ export const apiMessages: ApiMessages = {
   // building blocks:
   summaryNotFinishedBecauseBlockIsLocked: {
     uniqueName: "summaryNotFinishedBecauseBlockIsLocked",
-    text:
-      "This block summary was not completed because this block is locked.",
+    text: "This block summary was not completed because this block is locked.",
     filePath: `${audioStorageBasePath}/server/summaryNotFinishedBecauseBlockIsLocked.mp3`,
   },
   blockSummaryNotFinished: {
@@ -42,16 +41,14 @@ export const apiMessages: ApiMessages = {
   // epilogue:
   epilogueLocked: {
     uniqueName: "epilogueLocked",
-    text:
-      "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
+    text: "Epilogue is locked. Please complete all building blocks to unlock the epilogue block.",
     filePath: `${audioStorageBasePath}/server/epilogueLocked.mp3`,
   },
 
   // quiz errors:
   quizCantAnswerQuestionNotFound: {
     uniqueName: "quizCantAnswerQuestionNotFound",
-    text:
-      "Can't answer question because the question is not part of any uncompleted quiz.",
+    text: "Can't answer question because the question is not part of any uncompleted quiz.",
     filePath: `${audioStorageBasePath}/server/quizCantAnswerQuestionNotFound.mp3`,
   },
   quizNotFound: {
@@ -67,8 +64,7 @@ export const apiMessages: ApiMessages = {
   quizCantAccessBlockIsLocked: {
     uniqueName: "quizCantAccessBlockIsLocked",
     // NOTE: block refers to both building block and epilogue block
-    text:
-      "Block is locked. Please complete the other blocks or stories required to access the quiz.",
+    text: "Block is locked. Please complete the other blocks or stories required to access the quiz.",
     filePath: `${audioStorageBasePath}/server/quizNotCompletedYet.mp3`,
   },
   quizRequestBodyEmpty: {
@@ -115,7 +111,7 @@ export const apiMessages: ApiMessages = {
     text: "You've unlocked the epilogue of the story",
     filePath: `${audioStorageBasePath}/server/quizYouUnlockedEpilogueBlock.mp3`,
   },
-  
+
   quizYouUnlockedStories: {
     uniqueName: "quizYouUnlockedStories",
     text: "You've unlocked the following stories: ",
@@ -170,6 +166,21 @@ export const apiMessages: ApiMessages = {
     text: "Could not match you speech to any command.",
     filePath: `${audioStorageBasePath}/server/voiceCommandNotIdentified.mp3`,
   },
+  langRussian: {
+    uniqueName: "langRussian",
+    text: "Russian",
+    filePath: `${audioStorageBasePath}/server/languages-audio/langRussian.mp3`,
+  },
+  langFrench: {
+    uniqueName: "langFrench",
+    text: "French",
+    filePath: `${audioStorageBasePath}/server/languages-audio/langFrench.mp3`,
+  },
+  langGerman: {
+    uniqueName: "langGerman",
+    text: "German",
+    filePath: `${audioStorageBasePath}/server/languages-audio/langGerman.mp3`,
+  },
 };
 
 type ApiMessages = {
@@ -178,10 +189,9 @@ type ApiMessages = {
   unauthorized: ApiMessage;
 
   languageNotSet: ApiMessage;
-  
+
   summaryNotFinishedBecauseBlockIsLocked: ApiMessage;
   blockSummaryNotFinished: ApiMessage;
-
 
   epilogueLocked: ApiMessage;
 
@@ -200,7 +210,7 @@ type ApiMessages = {
   quizCompletedApiMessage: ApiMessage;
   quizYouUnlockedBuildingBlocks: ApiMessage;
   quizYouUnlockedEpilogueBlock: ApiMessage;
-  
+
   quizYouUnlockedStories: ApiMessage;
   quizYouCompletedEpilogue: ApiMessage;
 
@@ -215,6 +225,11 @@ type ApiMessages = {
   // voice commands:
   speechNotRecognised: ApiMessage;
   voiceCommandNotIdentified: ApiMessage;
+
+  // languages
+  langRussian: ApiMessage;
+  langFrench: ApiMessage;
+  langGerman: ApiMessage;
 };
 
 export const dynamicMessages: DynamicMessages = {
@@ -236,10 +251,10 @@ type DynamicMessages = {
   requestParameterMissing: (key: string) => ApiMessage & { isDynamic: true };
 };
 
-export const getApiMessageFrom = (path: string, text: string):ApiMessage => {
+export const getApiMessageFrom = (path: string, text: string): ApiMessage => {
   return {
     filePath: path,
     text,
-    uniqueName: path
+    uniqueName: path,
   };
-}
+};

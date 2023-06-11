@@ -27,7 +27,6 @@ export function processResultOfT<T>(
       result.errors && result.errors?.length
         ? { messages: result.errors, isApiErrorResponseData: true }
         : { messages: [apiMessages.somethingWentWrong], isApiErrorResponseData: true };
-    // TODO: make sure to verify dynamic errors!
   } else {
     statusCode = result.statusCode ?? 200;
     data = result.data ?? ({} as T);

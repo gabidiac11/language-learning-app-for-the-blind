@@ -128,6 +128,7 @@ export type LanguageDataItem = {
   imageUrl: string;
   alt: string;
   order: number;
+  audioFile: string;
 };
 
 export type LanguageData = {

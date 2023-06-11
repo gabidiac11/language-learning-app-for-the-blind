@@ -1,7 +1,4 @@
-import {
-  LanguageData,
-  LanguageDataItem,
-} from "../Data/ctxTypes/ctx.story.types";
+import { LanguageDataItem } from "../Data/ctxTypes/ctx.story.types";
 import {
   BuildingBlockProgressOutput,
   EpilogueProgressOutput,
@@ -11,10 +8,6 @@ import {
   QuizCompletedStatsResponse,
   QuizResponse,
 } from "../Models/quiz.models";
-import {
-  AudioUserCommandType,
-  UserVoiceCommandResponse,
-} from "../Models/voiceCommand.types";
 
 export const userStory: UserStoryOutput = {
   id: "c0afe77d-8cbe-4a16-9e71-efb4a3a01b82",
@@ -25,7 +18,7 @@ export const userStory: UserStoryOutput = {
     "cf315d89-e763-41fb-a111-8d43bc8e0b96",
   ],
   imageUrl:
-    "some url/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "some url/3807395/3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   imageAlt: "image alt",
   name: "My family #1",
   numOfBlocksCompleted: 7,
@@ -79,7 +72,7 @@ export const userStory: UserStoryOutput = {
           "c22b3077-b670-4ac8-8f21-a0a10125cb9e",
         ],
         imageUrl:
-          "some url/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "some url/3807561/3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         imageAlt: "image alt",
         isStarter: true,
         name: "Family",
@@ -401,8 +394,7 @@ export const blockProgress: BuildingBlockProgressOutput = {
       "c22b3077-b670-4ac8-8f21-a0a10125cb9e",
     ],
     imageUrl:
-      // TODO: remove all image references
-      "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "photo-path/3807561/3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     imageAlt: "image alt",
     isStarter: true,
     name: "Family",
@@ -511,7 +503,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         "c22b3077-b670-4ac8-8f21-a0a10125cb9e",
       ],
       imageUrl:
-        "https://images.pexels.com/photos/3807561/pexels-photo-3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "photo-path/3807561/3807561.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       imageAlt: "image alt",
       isStarter: true,
       name: "Family",
@@ -573,7 +565,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         audioFile: ":path-to-storage/stories/:lang/:story/:block.mp3",
         id: "28e74a16-6114-4c50-815e-631cfd7b3a5e",
         imageUrl:
-          "https://images.pexels.com/photos/4700108/pexels-photo-4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "photo-path/4700108/4700108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         imageAlt: "image alt",
         isStarter: false,
         name: "Names",
@@ -635,7 +627,7 @@ export const blockCompletedResponse: QuizCompletedStatsResponse = {
         id: "c22b3077-b670-4ac8-8f21-a0a10125cb9e",
         idsItemsDependentOnThis: ["f876cde3-feaa-41dc-9720-d18f8eb975a9"],
         imageUrl:
-          "https://images.pexels.com/photos/5912615/pexels-photo-5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "photo-path/5912615/5912615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         imageAlt: "image alt",
         isStarter: false,
         name: "Pronouns",
@@ -945,26 +937,29 @@ export const languages: LanguageDataItem[] = [
     name: "Russian",
     active: true,
     imageUrl:
-      "https://images.pexels.com/photos/3810971/pexels-photo-3810971.jpeg",
+      "photo-path/3810971/3810971.jpeg",
     alt: "Russian church image.",
     order: 0,
+    audioFile: "path-to-audio",
   },
   {
     id: "fr",
     name: "French",
     active: true,
     imageUrl:
-      "https://images.pexels.com/photos/4983083/pexels-photo-4983083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "photo-path/4983083/4983083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     alt: "French Eiffel Tower and a flower by.",
     order: 1,
+    audioFile: "path-to-audio",
   },
   {
     id: "de",
     name: "German",
     active: true,
     imageUrl:
-      "https://images.pexels.com/photos/109629/pexels-photo-109629.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "photo-path/109629/109629.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     alt: "German flag image.",
     order: 2,
+    audioFile: "path-to-audio",
   },
 ];

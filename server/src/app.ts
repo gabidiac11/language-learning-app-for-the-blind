@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // TODO: see if this affects the build from react and its variables
+dotenv.config();
 
 import bodyParser from "body-parser";
 import path from "path";
@@ -32,8 +32,6 @@ if (!skipSeed) {
 } else {
   log("No seed tried for this environment because skipped seed is enabled.");
 }
-
-// TODO: make json imports for seeding data is done from cloud storage
 
 const app = express();
 

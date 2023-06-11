@@ -63,7 +63,6 @@ const generateBuildingBlocks = async (): Promise<BuildingBlock[]> => {
         longTranslation: "A male sibling",
         lang: "ru",
       },
-      //TODO: add more words for uncle, sister and stuff
       {
         id: genUid(),
         text: "зовут",
