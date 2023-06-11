@@ -8,8 +8,18 @@ import generateEpilogue from "./epilogue";
 /**
  * this script is a utility script to generate the story json used for seeding lessons
  */
-const lang = "fr";
 
+const names = [
+  "Family",
+  "Dinning",
+  "John's family",
+  "School items",
+  "Computer science",
+  "Jobs",
+  "Medicine",
+  "People",
+  "Buildings"
+]
 async function generateDummyStory(index: number): Promise<Story> {
   const buildingBlocks = await generateBuildingBlocks();
   const [epilogue, epilogueQuestionAnswers] = await generateEpilogue();
@@ -22,7 +32,7 @@ async function generateDummyStory(index: number): Promise<Story> {
     // these are updated at a later stage:
     audioFile: "",
     
-    name: `My family #${index + 1}`,
+    name: names?.[index] ?? names[0],
 
     imageUrl:
       "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
