@@ -3,6 +3,8 @@
 ## Swagger
 [Swagger](https://my-app-service-name-cloud-run-aisxmhvkkq-ew.a.run.app/api/docs/#/)
 
+`TODO: MAKE SURE YOU DELETE THIS LINK TO THE CLOUD APP - IF THIS REPO IS PUBLISHED, so as to not let the bots overwhelm my cloud services`
+
 ## Example of .env
 
 ````.env 
