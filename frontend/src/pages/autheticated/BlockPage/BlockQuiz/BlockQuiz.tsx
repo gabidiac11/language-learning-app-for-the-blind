@@ -169,7 +169,7 @@ function computeAudioMessageFromResponse(
   const messages = [...rightOrWrongMessages, ...responsePlayables];
 
   messages.forEach((message) => {
-    message.preventForcedStopOnCurrentPage = true;
+    // message.preventForcedStopOnCurrentPage = true;
   });
 
   isInitial &&
