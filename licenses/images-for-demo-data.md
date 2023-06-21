@@ -1,0 +1,1 @@
+All the images used for the lessons are commercially free licensed from https://www.pexels.com/.
