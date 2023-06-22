@@ -2,8 +2,6 @@ import { VoicePageHandler } from "../../context/contextTypes/ctxTypes";
 import { AudioUserCommandType } from "../../context/contextTypes/voiceCommand.types";
 import { commandLabels } from "./commandLabels";
 
-// TODO: make sure each indication works:
-
 export type InstructionItem = {
   label: string;
   phrases: string[];

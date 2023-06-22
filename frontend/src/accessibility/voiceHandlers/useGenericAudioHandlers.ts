@@ -44,6 +44,6 @@ export const useGenericAudioHandlers = (): VoiceHandler => {
       logoutHandler,
       navigateBackHandler,
       loginHandler,
-    ].flatMap((i) => i.avaiableCommands),
+    ].filter(i => !i.isForbidden).flatMap((i) => i.avaiableCommands),
   };
 };

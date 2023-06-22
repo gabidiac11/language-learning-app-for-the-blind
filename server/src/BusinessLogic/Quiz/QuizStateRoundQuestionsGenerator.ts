@@ -23,7 +23,10 @@ export class QuizStateRoundQuestionsGenerator {
   public async addNextRoundOfQuestionsToQuiz() {
     this.throwErrorIfRoundOfQuestionCantBeGenerated();
 
-    log(`<comute-next-round>: start generating next round of questions. Quiz setttings:`, this._quizableItem.quizSettings);
+    log(
+      `<comute-next-round>: start generating next round of questions. Quiz setttings:`,
+      this._quizableItem.quizSettings
+    );
 
     const templateQIdToProbability: { templateQId: string; prob: number }[] =
       this.calculateTemplateQuestionProbabilies();
@@ -55,7 +58,7 @@ export class QuizStateRoundQuestionsGenerator {
           `<comute-next-round>: Increasing all probabilities by ${this._quizSettings.PROBABILITY_INC_ON_EMPTY_ROUND} and one will try to regenerate outcomes again.`
         );
         templateQIdToProbability.forEach((item) => {
-          item.prob =+ this._quizSettings.PROBABILITY_INC_ON_EMPTY_ROUND;
+          item.prob = +this._quizSettings.PROBABILITY_INC_ON_EMPTY_ROUND;
         });
       }
     } while (
@@ -78,7 +81,9 @@ export class QuizStateRoundQuestionsGenerator {
       throw ApiErrorResponse.InternalError();
     }
     if (this._qs.quizOutcomes?.some((o) => o.outcome === RoundOutcome.Unset)) {
-      log(`<comute-next-round>: This method should be called only with all the outcomes decided.`);
+      log(
+        `<comute-next-round>: This method should be called only with all the outcomes decided.`
+      );
       throw ApiErrorResponse.InternalError();
     }
   }
@@ -100,14 +105,17 @@ export class QuizStateRoundQuestionsGenerator {
         templateQId,
         prob: 0,
       }));
-      log(`<comute-next-round>: Generated default probabilities.`);
+    log(`<comute-next-round>: Generated default probabilities.`);
 
     const evenProb = 50;
     templateQIdToProbability.forEach((probabilityItem) => {
       const consecutives = this.getLastConsecutiveOutcomeSequenceOfQuestion(
         probabilityItem.templateQId
-        );
-      log(`<comute-next-round>: consecutives for ${probabilityItem.prob}`, consecutives);
+      );
+      log(
+        `<comute-next-round>: consecutives for ${probabilityItem.prob}`,
+        consecutives
+      );
 
       // increase probability based on consecutive misses for a question
       if (consecutives.outcome === RoundOutcome.Miss) {
@@ -177,7 +185,8 @@ export class QuizStateRoundQuestionsGenerator {
   private getLastConsecutiveOutcomeSequenceOfQuestion(
     entityQuestionId: string
   ) {
-    const outcomes = (this._qs.quizOutcomes ?? []).filter((q) => q.entityQuestionId == q.entityQuestionId)
+    const outcomes = (this._qs.quizOutcomes ?? [])
+      .filter((q) => q.entityQuestionId == q.entityQuestionId)
       .map((q) => q.outcome);
 
     if (outcomes.length == 0) {

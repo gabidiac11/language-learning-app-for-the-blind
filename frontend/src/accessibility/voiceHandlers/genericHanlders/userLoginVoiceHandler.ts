@@ -31,6 +31,7 @@ export function userLoginVoiceHandler():VoiceHandler {
   );
   return {
     handle,
+    isForbidden: !!user,
     avaiableCommands: [AudioUserCommandType.Login]
   };
 }

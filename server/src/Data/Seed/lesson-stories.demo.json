@@ -1181,7 +1181,7 @@
         "id": "ec234026-48d9-489d-88c8-41a0bbbcedb6",
         "lang": "ru",
         "order": 1,
-        "name": "Dinning",
+        "name": "Dining",
         "audioFile": "https://storage.googleapis.com/big-depth-387415.appspot.com/lessons/stories/demo/lang/ru/story-1-Dinning/story-1-Dinning.mp3",
         "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "imageAlt": "Russian family at the dinner table",
@@ -8217,7 +8217,7 @@
         "lang": "fr",
         "order": 1,
         "audioFile": "https://storage.googleapis.com/big-depth-387415.appspot.com/lessons/stories/demo/lang/fr/story-1-Dinning/story-1-Dinning.mp3",
-        "name": "Dinning",
+        "name": "Dining",
         "imageUrl": "https://images.pexels.com/photos/3807395/pexels-photo-3807395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "imageAlt": "Russian family at the dinner table",
         "idsItemsDependentOnThis": [

@@ -11,7 +11,7 @@ import generateEpilogue from "./epilogue";
 
 const names = [
   "Family",
-  "Dinning",
+  "Dining",
   "John's family",
   "School items",
   "Computer science",

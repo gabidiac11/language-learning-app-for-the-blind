@@ -1,10 +1,5 @@
 # language-learning-app-for-the-blind
 
-## Swagger
-[Swagger](https://my-app-service-name-cloud-run-aisxmhvkkq-ew.a.run.app/api/docs/#/)
-
-`TODO: MAKE SURE YOU DELETE THIS LINK TO THE CLOUD APP - IF THIS REPO IS PUBLISHED, so as to not let the bots overwhelm my cloud services`
-
 ## Example of .env
 
 ````.env 
@@ -41,3 +36,9 @@ PORT=5001
 <!-- will show something next to the correct answer -->
 CHEAT=true|false
 ````
+
+### Setup the Dialog Flow API by using [this file](./notes/dialog-flow/exported_flow_read-languages.json)
+
+More on this at [dialogflow.md](./notes/dialog-flow/dialogflow.md)
+
+### Structure of a story at [story-1.md](./notes/story-1.md)

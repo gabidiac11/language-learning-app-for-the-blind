@@ -1,1 +1,31 @@
-All the images used for the lessons are commercially free licensed from https://www.pexels.com/.
+All the images used for dummy data within the lessons are commercially free and licensed from https://www.pexels.com/.
+
+
+[Terms](https://www.pexels.com/license/)
+
+Quote from the site (<i>June 22th 2023</i>):
+
+```
+Legal Simplicity
+
+All photos and videos on Pexels can be downloaded and used for free.
+
+## What is allowed? 👌
+
+- All photos and videos on Pexels are free to use.
+
+- Attribution is not required. Giving credit to the photographer or Pexels is not necessary but always appreciated.
+
+- You can modify the photos and videos from Pexels. Be creative and edit them as you like.
+
+## What is not allowed? 👎
+
+- Identifiable people may not appear in a bad light or in a way that is offensive.
+
+- Don't sell unaltered copies of a photo or video, e.g. as a poster, print or on a physical product without modifying it first.
+
+- Don't imply endorsement of your product by people or brands on the imagery.
+
+- Don't redistribute or sell the photos and videos on other stock photo or wallpaper platforms.
+
+```

@@ -34,6 +34,7 @@ export function useLogoutVoiceHandler():VoiceHandler {
   );
   return {
     handle,
+    isForbidden: !user,
     avaiableCommands: [AudioUserCommandType.Logout]
   };
 }

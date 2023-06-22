@@ -6,4 +6,5 @@ export type VoiceHandler = {
   handle: (command: AudioUserCommand) => boolean;
   avaiableCommands: AudioUserCommandType[];
   order?: number;
+  isForbidden?: boolean;
 };
