@@ -54,7 +54,7 @@ export const Login = () => {
             </Typography>
             <Button
               tabIndex={0}
-              aria-label="Login with Google"
+              aria-label="Login with Google. You will be redirected to google authentication website. Wait 3 to 5 seconds then press tab to navigate on the google website then press enter to log to your Google account."
               variant="contained"
               color="primary"
               className="button"
