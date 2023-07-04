@@ -42,3 +42,7 @@ CHEAT=true|false
 More on this at [dialogflow.md](./notes/dialog-flow/dialogflow.md)
 
 ### Structure of a story at [story-1.md](./notes/story-1.md)
+
+### [Demo video](https://drive.google.com/file/d/13vfQTdL_l-1CA5UpNwOUYIT8KhQcNWNj/view?usp=sharing)
+
+### 
